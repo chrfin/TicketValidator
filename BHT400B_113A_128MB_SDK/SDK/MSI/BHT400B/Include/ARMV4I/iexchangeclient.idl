@@ -1,0 +1,353 @@
+//
+// Copyright (c) Microsoft Corporation.  All rights reserved.
+//
+//
+// Use of this source code is subject to the terms of the Microsoft end-user
+// license agreement (EULA) under which you licensed this SOFTWARE PRODUCT.
+// If you did not accept the terms of the EULA, you are not authorized to use
+// this source code. For a copy of the EULA, please see the LICENSE.RTF on your
+// install media.
+//
+import "oaidl.idl";
+import "ocidl.idl";
+#include "winerror.h"
+
+    //Custom HRESULT's for this dll
+    #define FACILITY_OWAEXCHANGECLIENT 0xbb
+
+    //The client was called into without being initialized
+    const HRESULT OWAEC_E_NOTINITIALIZED = MAKE_HRESULT(SEVERITY_ERROR, FACILITY_OWAEXCHANGECLIENT, 0x0001);
+
+    //There is no server to send requests to
+    const HRESULT OWAEC_E_NOSERVER       = MAKE_HRESULT(SEVERITY_ERROR, FACILITY_OWAEXCHANGECLIENT, 0x0002);
+
+    //There is no user registered with the client
+    const HRESULT OWAEC_E_NOUSER         = MAKE_HRESULT(SEVERITY_ERROR, FACILITY_OWAEXCHANGECLIENT, 0x0003);
+
+    //Invalid search criteria 
+    const HRESULT OWAEC_E_INVALIDSEARCH  = MAKE_HRESULT(SEVERITY_ERROR, FACILITY_OWAEXCHANGECLIENT, 0x0004);
+
+    //No data because the request failed
+    const HRESULT OWAEC_E_NODATA         = MAKE_HRESULT(SEVERITY_ERROR, FACILITY_OWAEXCHANGECLIENT, 0x0005);
+
+    //IExchangeClient::Initialize called when the client is already initialized
+    const HRESULT OWAEC_E_ALREADYINITIALIZED   = MAKE_HRESULT(SEVERITY_ERROR, FACILITY_OWAEXCHANGECLIENT, 0x0006);
+
+    //Value pertaining to the status of the request
+    enum ExchangeClientRequestStatus
+    {
+        e_ecrsPending = 0,       //In the request queue - not running
+        e_ecrsInProgress,        //Being processed
+        e_ecrsSending,           //In progress, sending the http request
+        e_ecrsBypassingOWAPage,  //In progress, posting to the OWA auth page
+        e_ecrsSucceeded,         //Success - send/receive/parse complete
+        e_ecrsOutOfMemory,       //Memory allocation failed
+        e_ecrsParseFailed,       //Send/receive succeeded, parsing failed
+        e_ecrsHttpFailure,       //Send succeeded, but receive got an invalid http response code (e.g. 401)
+        e_ecrsFailedToSend,      //Send failed - check proxy/server settings
+        e_ecrsFailedToBypassAuthPage, //Send ran into the OWA login page, and couldn't bypass the screen with a POST
+        e_ecrsCancelled,         //The request started running but was cancelled before it completed
+        e_ecrsNoCredentials,     //There are no credentials on the system to use for the request
+    };
+
+    //Type of request
+    enum ExchangeClientRequestType
+    {
+        e_ecrtInvalid = 0,
+        e_ecrtContacts,     //Get my contacts
+        e_ecrtGALSearch,    //Perform GAL Search
+        e_ecrtFreeBusy,     //get free-busy data
+        //e_ecrtCalendar     //<--CUT--> Get my calendar
+    };
+
+    //Criteria for performing a GAL search
+    struct GALSearchCriteria
+    {
+        WCHAR *wszAlias;     //Alias to search on
+        WCHAR *wszFirstName; //FirstName to search on
+        WCHAR *wszLastName;  //LastName to search on
+    };
+
+    struct FreeBusyCriteria
+    {
+        WCHAR *wszAlias; //Alias to get FBD for
+        SYSTEMTIME *pstStart; //System time to start getting the data
+        
+        ///TODO: Add support for more aliases?
+    };
+
+    struct ContactsSearchCriteria
+    {
+        WCHAR *wszFirstName;
+        WCHAR *wszLastName;
+    };
+
+    //Forward declarations
+    interface IExchangeClientRequestCallback;
+    interface IExchangeClientRequest;
+    interface IExchangeClientDataItemArray;
+
+    //IExchangeClient - main interface that carry's out all requests
+    [
+        object,
+        uuid(C8747796-A963-438f-A5B7-0EE3383B4997),
+        helpstring("IExchangeClient Interface"),
+        pointer_default(unique)
+    ]
+    interface IExchangeClient : IUnknown
+    {
+        //Register the asyncronous callback
+        HRESULT Initialize(
+            [in] IExchangeClientRequestCallback     *piCallback
+            );
+
+        //Set the name of the exchange server's OWA URL
+        HRESULT SetServer(
+            [in]    const WCHAR *c_wszServername
+            );
+
+        HRESULT GetServer(
+            [out]   WCHAR *wszBuffer, 
+            [in]    UINT   cchBuffer
+            );
+
+        //Set this user's username/password - happens syncronously 
+        //this will only affect future requests - not requests made up until now
+        HRESULT SetCredentials(
+            [in]    const WCHAR *c_wszUsername,
+            [in]    const WCHAR *c_wszPassword
+            );
+
+        //Request contacts for the registered user - results will be posted 
+        //in the callback
+        HRESULT RequestContacts(
+            [in] struct ContactsSearchCriteria     *pCriteria,
+            [out, retval] IExchangeClientRequest    **ppiRequest
+            );
+
+        //Begin the GALSearch with the specified criteria
+        HRESULT RequestGALSearch(
+            [in] struct GALSearchCriteria *pCriteria,
+            [out, retval] IExchangeClientRequest    **ppiRequest
+            );
+
+        //Get Free Busy Data
+        HRESULT RequestFreeBusyData(
+            [in] struct FreeBusyCriteria *pCriteria,
+            [out, retval] IExchangeClientRequest    **ppiRequest
+            );
+
+        //Cancel all outstanding (unprocessed) requests
+        HRESULT CancelPendingRequests();
+
+        //Begin asyncronous uninitialization - the currently processing request will finish
+        //processing and all other requests will be aborted. Completion will be posted
+        //to the callback interface
+        HRESULT Uninitialize();
+    };
+
+    //IExchangeClientRequest - the request object which can be used as a cookie
+    //to track requests, get Http status and get the requested data
+    [
+        object,
+        uuid(F701C86E-A8D0-4e1b-9E5D-5E6F5522D56B),
+        helpstring("IExchangeClientRequest Interface"),
+        pointer_default(unique)
+    ]
+    interface IExchangeClientRequest : IUnknown
+    {
+        //What is the status of this request?
+        HRESULT     GetStatus(
+            [out, retval] enum ExchangeClientRequestStatus *pStatus
+            );
+
+        //If the request succeeded, this API gets the data
+        HRESULT     GetDataItemArray(
+            [out, retval] IExchangeClientDataItemArray **ppiArray
+            );
+
+        //what is the http status associated with the send request
+        HRESULT     GetHttpStatus(
+            [out, retval] LONG *plHttpStatus
+            );
+
+        //Get the request type
+        HRESULT     GetType(
+            [out, retval] enum ExchangeClientRequestType *pecrt
+            );
+
+        //Cancel the request
+        HRESULT    Cancel();
+    };
+
+    //IExchangeClientRequestCallback - callback interface that receives notification
+    //on request events
+    [
+        object,
+        uuid(D0682E7F-4976-42ec-88DC-EB34C6A28204),
+        helpstring("IExchangeClientRequestCallback Interface"),
+        pointer_default(unique)
+    ]
+    interface IExchangeClientRequestCallback : IUnknown
+    {
+        //Uninitialize is complete, the ExchangeClient interface pointer
+        //can be released 
+        HRESULT     OnShutdown();
+
+        //The specified request is posting status change
+        HRESULT     OnRequestProgress(
+            [in] IExchangeClientRequest    *pRequest,
+            [in] enum ExchangeClientRequestStatus  status
+            );
+    };
+
+    //IExchangeClientDataItemArray - array of parsed data from the exchange server
+    //Can be treated as an array with GetItemCount and GetItemAt API's
+    [
+        object,
+        uuid(32509779-AE83-42b2-B4D2-9E1BC2E7C70A),
+        helpstring("IExchangeClientDataEnumerator Interface"),
+        pointer_default(unique)
+    ]
+    interface IExchangeClientDataItemArray : IUnknown
+    {
+        //gets the number of elements in the array
+        HRESULT     GetItemCount(
+            [out, retval] UINT *pcItems
+            );
+
+        //gets the item at the specified index
+        //The IUnknown result can be QueryInterface'd for the 'real'
+        //data interface (e.g. IExchangeClientContactInformation)
+        HRESULT     GetItemAt(
+            [in]  UINT idxItem,
+            [out, retval] IUnknown **ppiItem
+            );
+    };
+
+    //IExchangeClientContactInformation - get's properties associated with a contact record
+    [
+        object,
+        uuid(4B9E0608-AA6A-4127-97E4-7892F5CFBE20),
+        helpstring("IExchangeClientContactInformation Interface"),
+        pointer_default(unique)
+    ]
+    interface IExchangeClientContactInformation : IUnknown
+    {
+        HRESULT GetDisplayName(
+            [out] WCHAR *wszNameBuffer,
+            [in]  UINT   cchNameBuffer
+            );
+
+        HRESULT GetHomePhoneNumber(
+            [out] WCHAR *wszNumberBuffer,
+            [in]  UINT   cchNumberBuffer
+            );
+
+        HRESULT GetWorkPhoneNumber(
+            [out] WCHAR *wszBuffer,
+            [in]  UINT   cchBuffer
+            );
+
+        HRESULT GetMobilePhoneNumber(
+            [out] WCHAR *wszBuffer,
+            [in]  UINT   cchBuffer
+            );
+
+        HRESULT GetEmailAddress(
+            [out] WCHAR *wszBuffer,
+            [in]  UINT   cchBuffer
+            );
+
+        HRESULT GetHomeAddress(
+            [out] WCHAR *wszBuffer,
+            [in]  UINT   cchBuffer
+            );
+
+        HRESULT GetWorkAddress(
+            [out] WCHAR *wszBuffer,
+            [in]  UINT   cchBuffer
+            );
+
+    };
+
+    //IExchangeClientGALSearchInformation - get's properties associated with a GAL search record
+    [
+        object,
+        uuid(CD5E6AE0-17EE-4c4a-9273-A7D60B59170D),
+        helpstring("IExchangeClientGALSearchInformation Interface"),
+        pointer_default(unique)
+    ]
+    interface IExchangeClientGALSearchInformation : IUnknown
+    {
+        HRESULT GetDisplayName(
+            WCHAR *wszNameBuffer, 
+            UINT  cchNameBuffer
+            );
+        
+        HRESULT GetPhoneNumber(
+            WCHAR * wszNumberBuffer, 
+            UINT cchNumberBuffer
+            );
+        
+        HRESULT GetAlias(
+            WCHAR * wszBuffer, 
+            UINT cchBuffer
+            );
+        
+        HRESULT GetOffice(
+            WCHAR * wszBuffer, 
+            UINT cchBuffer
+            );
+
+        HRESULT GetSMTPAddress(
+            WCHAR *wszBuffer,
+            UINT cchBuffer
+            );
+    };
+
+    [
+        object,
+        uuid(A4E53FD7-C940-4f87-8634-5EB97DBA0C2E),
+        helpstring("IExchangeClientFreeBusyInformation Interface"),
+        pointer_default(unique)
+    ]
+    interface IExchangeClientFreeBusyInformation : IUnknown
+    {
+        HRESULT GetEmailAddress(
+            WCHAR *wszAddressBuffer,
+            UINT   cchAddressBuffer
+            );
+            
+        HRESULT GetDisplayName(
+            WCHAR *wszNameBuffer, 
+            UINT  cchNameBuffer
+            );
+        
+        HRESULT GetFreeBusyData(
+            WCHAR * wszDataBuffer, 
+            UINT cchDataBuffer
+            );
+    };
+
+    [
+        uuid(D8AB2E1C-AF13-46B2-87A9-C731C4C4AB76),
+        version(1.0),
+        helpstring("Exchange Client 1.0 Type Library")
+    ]
+    library EXCHANGECLIENTLib
+    {
+        importlib("stdole32.tlb");
+        importlib("stdole2.tlb");
+
+        [
+            uuid(D963ECEB-B81A-4d5f-89A4-5C7C024AFEDF),
+            helpstring("ExchangeClient CoClass")
+        ]
+        coclass ExchangeClient
+        {
+            [default] interface IExchangeClient;
+        };
+    };
+
+

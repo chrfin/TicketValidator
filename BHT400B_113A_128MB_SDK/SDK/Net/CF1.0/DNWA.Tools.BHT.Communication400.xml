@@ -1,0 +1,541 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DNWA.Tools.BHT.Communication400</name>
+    </assembly>
+    <members>
+        <member name="T:DNWA.Tools.BHT.Communication.CommSerial">
+            <summary>
+            CommSerial Class
+            </summary>
+        </member>
+        <member name="T:DNWA.Tools.BHT.Communication.CommBase">
+            <summary>
+            Fundamental communication function
+            </summary>
+        </member>
+        <member name="M:DNWA.Tools.BHT.Communication.CommBase.Finalize">
+            <summary>
+            Destructor
+            </summary>
+        </member>
+        <member name="F:DNWA.Tools.BHT.Communication.CommBase.hPort">
+            <summary>
+            Handle to the communications device
+            </summary>
+        </member>
+        <member name="P:DNWA.Tools.BHT.Communication.CommBase.Port">
+            <summary>
+            Port number
+            </summary>
+        </member>
+        <member name="T:DNWA.Tools.BHT.Communication.CommBase.EN_BAUD">
+            <summary>
+            Type of transmission rate
+            </summary>
+        </member>
+        <member name="F:DNWA.Tools.BHT.Communication.CommBase.EN_BAUD.BPS110">
+            <summary>
+            110bps
+            </summary>
+        </member>
+        <member name="F:DNWA.Tools.BHT.Communication.CommBase.EN_BAUD.BPS300">
+            <summary>
+            300bps
+            </summary>
+        </member>
+        <member name="F:DNWA.Tools.BHT.Communication.CommBase.EN_BAUD.BPS600">
+            <summary>
+            600bps
+            </summary>
+        </member>
+        <member name="F:DNWA.Tools.BHT.Communication.CommBase.EN_BAUD.BPS1200">
+            <summary>
+            1200bps
+            </summary>
+        </member>
+        <member name="F:DNWA.Tools.BHT.Communication.CommBase.EN_BAUD.BPS2400">
+            <summary>
+            2400bps
+            </summary>
+        </member>
+        <member name="F:DNWA.Tools.BHT.Communication.CommBase.EN_BAUD.BPS4800">
+            <summary>
+            4800bps
+            </summary>
+        </member>
+        <member name="F:DNWA.Tools.BHT.Communication.CommBase.EN_BAUD.BPS9600">
+            <summary>
+            9600bps
+            </summary>
+        </member>
+        <member name="F:DNWA.Tools.BHT.Communication.CommBase.EN_BAUD.BPS14400">
+            <summary>
+            14400bps
+            </summary>
+        </member>
+        <member name="F:DNWA.Tools.BHT.Communication.CommBase.EN_BAUD.BPS19200">
+            <summary>
+            19200bps
+            </summary>
+        </member>
+        <member name="F:DNWA.Tools.BHT.Communication.CommBase.EN_BAUD.BPS38400">
+            <summary>
+            38400bps
+            </summary>
+        </member>
+        <member name="F:DNWA.Tools.BHT.Communication.CommBase.EN_BAUD.BPS56000">
+            <summary>
+            56000bps
+            </summary>
+        </member>
+        <member name="F:DNWA.Tools.BHT.Communication.CommBase.EN_BAUD.BPS57600">
+            <summary>
+            57600bps
+            </summary>
+        </member>
+        <member name="F:DNWA.Tools.BHT.Communication.CommBase.EN_BAUD.BPS115200">
+            <summary>
+            115200bps
+            </summary>
+        </member>
+        <member name="F:DNWA.Tools.BHT.Communication.CommBase.EN_BAUD.BPS128000">
+            <summary>
+            12800bps
+            </summary>
+        </member>
+        <member name="F:DNWA.Tools.BHT.Communication.CommBase.EN_BAUD.BPS256000">
+            <summary>
+            256000bps
+            </summary>
+        </member>
+        <member name="M:DNWA.Tools.BHT.Communication.CommSerial.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:DNWA.Tools.BHT.Communication.CommSerial.Finalize">
+            <summary>
+            Destructor
+            </summary>
+        </member>
+        <member name="M:DNWA.Tools.BHT.Communication.CommSerial.Dispose">
+            <summary>
+            Release the resource.
+            </summary>
+        </member>
+        <member name="M:DNWA.Tools.BHT.Communication.CommSerial.Input(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Reads data from the receive buffer.
+            </summary>
+            <param name="targetBuffer">Receiving data storing place buffer</param>
+            <param name="offset">Receiving data storing start offset</param>
+            <param name="bytesToRead">Number of bytes to be read</param>
+            <returns>Number of bytes read</returns>
+        </member>
+        <member name="M:DNWA.Tools.BHT.Communication.CommSerial.Output(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Writes data into the send buffer.
+            </summary>
+            <param name="buffer">Transmitting data storing buffer</param>
+            <param name="offset">Transmitting data storing start offset</param>
+            <param name="len">Number of bytes to write </param>
+        </member>
+        <member name="E:DNWA.Tools.BHT.Communication.CommSerial.OnDone">
+            <summary>
+            Communication event handler
+            </summary>
+        </member>
+        <member name="P:DNWA.Tools.BHT.Communication.CommSerial.WaitEvent">
+            <summary>
+            Specifies a wait event.
+            </summary>
+        </member>
+        <member name="P:DNWA.Tools.BHT.Communication.CommSerial.SignaledEvent">
+            <summary>
+            Event that has occurred.
+            </summary>
+        </member>
+        <member name="P:DNWA.Tools.BHT.Communication.CommSerial.PortOpen">
+            <summary>
+            Open/close of a COM port
+            </summary>
+        </member>
+        <member name="P:DNWA.Tools.BHT.Communication.CommSerial.InBufferCount">
+            <summary>
+            The number of bytes left behind to the receiving buffer
+            </summary>
+        </member>
+        <member name="P:DNWA.Tools.BHT.Communication.CommSerial.OutBufferCount">
+            <summary>
+            The number of bytes left behind to the sending buffer
+            </summary>
+        </member>
+        <member name="P:DNWA.Tools.BHT.Communication.CommSerial.Params">
+            <summary>
+            Communication parameter(format:"BBBB,P,D,S")
+            </summary>
+        </member>
+        <member name="T:DNWA.Tools.BHT.Communication.CommSerial.EN_EVENT">
+            <summary>
+            Type of communication event
+            </summary>
+        </member>
+        <member name="F:DNWA.Tools.BHT.Communication.CommSerial.EN_EVENT.NONE">
+            <summary>
+            Nothing
+            </summary>
+        </member>
+        <member name="F:DNWA.Tools.BHT.Communication.CommSerial.EN_EVENT.RECEIVE">
+            <summary>
+            Receive
+            </summary>
+        </member>
+        <member name="M:DNWA.Tools.BHT.Communication.CommSerialProtocol.Finalize">
+            <summary>
+            Destructor
+            </summary>
+        </member>
+        <member name="T:DNWA.Tools.BHT.Communication.FileTransfer">
+            <summary>
+            File transfer class
+            </summary>
+        </member>
+        <member name="M:DNWA.Tools.BHT.Communication.FileTransfer.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:DNWA.Tools.BHT.Communication.FileTransfer.Finalize">
+            <summary>
+            Destructor
+            </summary>
+        </member>
+        <member name="F:DNWA.Tools.BHT.Communication.FileTransfer.DEFAULT_PORT">
+            <summary>
+            Default value of the port number of the COM port to be used
+            </summary>
+        </member>
+        <member name="F:DNWA.Tools.BHT.Communication.FileTransfer.DEFAULT_BAUD">
+            <summary>
+            Default value of the transmission rate
+            </summary>
+        </member>
+        <member name="F:DNWA.Tools.BHT.Communication.FileTransfer.MAX_PATH_FILE_NAME">
+            <summary>
+            Max length of total of the Path property and file name
+            </summary>
+        </member>
+        <member name="F:DNWA.Tools.BHT.Communication.FileTransfer.MAX_PATH_NAME">
+            <summary>
+            Max length of the Path property
+            </summary>
+        </member>
+        <member name="M:DNWA.Tools.BHT.Communication.FileTransfer.AddFile(System.String)">
+            <summary>
+            Add a file to be transmitted.
+            </summary>
+            <param name="fileName">File name</param>
+        </member>
+        <member name="M:DNWA.Tools.BHT.Communication.FileTransfer.ClearFile">
+            <summary>
+            Clear a file added by AddFile.
+            </summary>
+        </member>
+        <member name="M:DNWA.Tools.BHT.Communication.FileTransfer.Input">
+            <summary>
+            Receive a file.
+            </summary>
+        </member>
+        <member name="M:DNWA.Tools.BHT.Communication.FileTransfer.Output">
+            <summary>
+            Transmit a file specified by AddFile.
+            </summary>
+        </member>
+        <member name="M:DNWA.Tools.BHT.Communication.FileTransfer.Abort">
+            <summary>
+            Abort the current file transmission process.
+            </summary>
+        </member>
+        <member name="M:DNWA.Tools.BHT.Communication.FileTransfer.Dispose">
+            <summary>
+            Release the resource.
+            </summary>
+        </member>
+        <member name="E:DNWA.Tools.BHT.Communication.FileTransfer.OnDone">
+            <summary>
+            Completion event of transmission
+            </summary>
+        </member>
+        <member name="E:DNWA.Tools.BHT.Communication.FileTransfer.OnTransferring">
+            <summary>
+            Information on the file is stored during the transfer.
+            </summary>
+        </member>
+        <member name="P:DNWA.Tools.BHT.Communication.FileTransfer.Port">
+            <summary>
+            Port number of the COM port to be used
+            </summary>
+        </member>
+        <member name="P:DNWA.Tools.BHT.Communication.FileTransfer.Baud">
+            <summary>
+            Transmission rate
+            </summary>
+        </member>
+        <member name="P:DNWA.Tools.BHT.Communication.FileTransfer.Parity">
+            <summary>
+            Parity scheme
+            </summary>
+        </member>
+        <member name="P:DNWA.Tools.BHT.Communication.FileTransfer.StopBits">
+            <summary>
+            Stop bits
+            </summary>
+        </member>
+        <member name="P:DNWA.Tools.BHT.Communication.FileTransfer.Path">
+            <summary>
+            Folder in which the send/receive file is located
+            </summary>
+        </member>
+        <member name="P:DNWA.Tools.BHT.Communication.FileTransfer.TransferringEventInterval">
+            <summary>
+            Interval of transferring events
+            </summary>
+        </member>
+        <member name="P:DNWA.Tools.BHT.Communication.FileTransfer.Status">
+            <summary>
+            Status of the transferring
+            </summary>
+        </member>
+        <member name="P:DNWA.Tools.BHT.Communication.FileTransfer.FileCount">
+            <summary>
+            File number under transmission
+            </summary>
+        </member>
+        <member name="T:DNWA.Tools.BHT.Communication.FileTransfer.EN_BAUD">
+            <summary>
+            Type of transmission rate
+            </summary>
+        </member>
+        <member name="F:DNWA.Tools.BHT.Communication.FileTransfer.EN_BAUD.BPS110">
+            <summary>
+            110bps
+            </summary>
+        </member>
+        <member name="F:DNWA.Tools.BHT.Communication.FileTransfer.EN_BAUD.BPS300">
+            <summary>
+            300bps
+            </summary>
+        </member>
+        <member name="F:DNWA.Tools.BHT.Communication.FileTransfer.EN_BAUD.BPS600">
+            <summary>
+            600bps
+            </summary>
+        </member>
+        <member name="F:DNWA.Tools.BHT.Communication.FileTransfer.EN_BAUD.BPS1200">
+            <summary>
+            1200bps
+            </summary>
+        </member>
+        <member name="F:DNWA.Tools.BHT.Communication.FileTransfer.EN_BAUD.BPS2400">
+            <summary>
+            2400bps
+            </summary>
+        </member>
+        <member name="F:DNWA.Tools.BHT.Communication.FileTransfer.EN_BAUD.BPS4800">
+            <summary>
+            4800bps
+            </summary>
+        </member>
+        <member name="F:DNWA.Tools.BHT.Communication.FileTransfer.EN_BAUD.BPS9600">
+            <summary>
+            9600bps
+            </summary>
+        </member>
+        <member name="F:DNWA.Tools.BHT.Communication.FileTransfer.EN_BAUD.BPS14400">
+            <summary>
+            14400bps
+            </summary>
+        </member>
+        <member name="F:DNWA.Tools.BHT.Communication.FileTransfer.EN_BAUD.BPS19200">
+            <summary>
+            19200bps
+            </summary>
+        </member>
+        <member name="F:DNWA.Tools.BHT.Communication.FileTransfer.EN_BAUD.BPS38400">
+            <summary>
+            38400bps
+            </summary>
+        </member>
+        <member name="F:DNWA.Tools.BHT.Communication.FileTransfer.EN_BAUD.BPS56000">
+            <summary>
+            56000bps
+            </summary>
+        </member>
+        <member name="F:DNWA.Tools.BHT.Communication.FileTransfer.EN_BAUD.BPS57600">
+            <summary>
+            57600bps
+            </summary>
+        </member>
+        <member name="F:DNWA.Tools.BHT.Communication.FileTransfer.EN_BAUD.BPS115200">
+            <summary>
+            115200bps
+            </summary>
+        </member>
+        <member name="F:DNWA.Tools.BHT.Communication.FileTransfer.EN_BAUD.BPS128000">
+            <summary>
+            128000bps
+            </summary>
+        </member>
+        <member name="F:DNWA.Tools.BHT.Communication.FileTransfer.EN_BAUD.BPS256000">
+            <summary>
+            256000bps
+            </summary>
+        </member>
+        <member name="T:DNWA.Tools.BHT.Communication.FileTransfer.EN_PARITY">
+            <summary>
+            Type of parity scheme
+            </summary>
+        </member>
+        <member name="F:DNWA.Tools.BHT.Communication.FileTransfer.EN_PARITY.NOPARITY">
+            <summary>
+            No parity
+            </summary>
+        </member>
+        <member name="F:DNWA.Tools.BHT.Communication.FileTransfer.EN_PARITY.ODDPARITY">
+            <summary>
+            Odd
+            </summary>
+        </member>
+        <member name="F:DNWA.Tools.BHT.Communication.FileTransfer.EN_PARITY.EVENPARITY">
+            <summary>
+            Even
+            </summary>
+        </member>
+        <member name="T:DNWA.Tools.BHT.Communication.FileTransfer.EN_STOPBITS">
+            <summary>
+            Type of stop bits
+            </summary>
+        </member>
+        <member name="F:DNWA.Tools.BHT.Communication.FileTransfer.EN_STOPBITS.ONEBIT">
+            <summary>
+            1 stop bit
+            </summary>
+        </member>
+        <member name="F:DNWA.Tools.BHT.Communication.FileTransfer.EN_STOPBITS.TWOBITS">
+            <summary>
+            2 stop bits
+            </summary>
+        </member>
+        <member name="T:DNWA.Tools.BHT.Communication.FileTransfer.EN_STATUS">
+            <summary>
+            Status of file transfer
+            </summary>
+        </member>
+        <member name="F:DNWA.Tools.BHT.Communication.FileTransfer.EN_STATUS.READY">
+            <summary>
+            Idle
+            </summary>
+        </member>
+        <member name="F:DNWA.Tools.BHT.Communication.FileTransfer.EN_STATUS.RECEIVE">
+            <summary>
+            Receiving
+            </summary>
+        </member>
+        <member name="F:DNWA.Tools.BHT.Communication.FileTransfer.EN_STATUS.SEND">
+            <summary>
+            Sending
+            </summary>
+        </member>
+        <member name="T:DNWA.Tools.BHT.Communication.FileTransfer.EN_RESULT">
+            <summary>
+            Result of transfer processing
+            </summary>
+        </member>
+        <member name="F:DNWA.Tools.BHT.Communication.FileTransfer.EN_RESULT.SUCCESS">
+            <summary>
+            Success
+            </summary>
+        </member>
+        <member name="F:DNWA.Tools.BHT.Communication.FileTransfer.EN_RESULT.TIME_OUT">
+            <summary>
+            Time out
+            </summary>
+        </member>
+        <member name="F:DNWA.Tools.BHT.Communication.FileTransfer.EN_RESULT.OPERATION_ABORTED">
+            <summary>
+            Operation is aborted
+            </summary>
+        </member>
+        <member name="F:DNWA.Tools.BHT.Communication.FileTransfer.EN_RESULT.OPEN_FAILED">
+            <summary>
+            Can not open file
+            </summary>
+        </member>
+        <member name="F:DNWA.Tools.BHT.Communication.FileTransfer.EN_RESULT.INVALID_DATA">
+            <summary>
+            Incorrect data is received
+            </summary>
+        </member>
+        <member name="F:DNWA.Tools.BHT.Communication.FileTransfer.EN_RESULT.DISK_FULL">
+            <summary>
+            Out of memory
+            </summary>
+        </member>
+        <member name="F:DNWA.Tools.BHT.Communication.FileTransfer.EN_RESULT.PATH_TOO_LONG">
+            <summary>
+            File name is invalid
+            </summary>
+        </member>
+        <member name="T:DNWA.Tools.BHT.Communication.FileTransfer.TransferredEventHandler">
+            <summary>
+            Delegate for completion event of transmission
+            </summary>
+        </member>
+        <member name="T:DNWA.Tools.BHT.Communication.FileTransfer.TransferringEventHandler">
+            <summary>
+            Delegate for information on the file is stored during the transfer.
+            </summary>
+        </member>
+        <member name="T:DNWA.Tools.BHT.Communication.FileTransfer.TransferredEventArgs">
+            <summary>
+            Event which occurs when transfer processing has been completed.
+            </summary>
+        </member>
+        <member name="F:DNWA.Tools.BHT.Communication.FileTransfer.TransferredEventArgs.Result">
+            <summary>
+            Kind of event
+            </summary>
+        </member>
+        <member name="T:DNWA.Tools.BHT.Communication.FileTransfer.TransferringEventArgs">
+            <summary>
+            Information on the file is stored during the transfer.
+            </summary>
+        </member>
+        <member name="F:DNWA.Tools.BHT.Communication.FileTransfer.TransferringEventArgs.FileName">
+            <summary>
+            File name
+            </summary>
+        </member>
+        <member name="F:DNWA.Tools.BHT.Communication.FileTransfer.TransferringEventArgs.TotalSize">
+            <summary>
+            File size
+            </summary>
+        </member>
+        <member name="F:DNWA.Tools.BHT.Communication.FileTransfer.TransferringEventArgs.TransferredSize">
+            <summary>
+            Size of the completion of transmission
+            </summary>
+        </member>
+        <member name="M:DNWA.Tools.BHT.Communication.YModem.Finalize">
+            <summary>
+            Destructor
+            </summary>
+        </member>
+        <member name="M:DNWA.Tools.BHT.Communication.YModemThread.Finalize">
+            <summary>
+            Destructor
+            </summary>
+        </member>
+    </members>
+</doc>
