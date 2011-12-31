@@ -13,7 +13,12 @@ namespace TicketValidator
         [MTAThread]
         static void Main()
         {
-            Application.Run(new mainForm());
+            mainForm form = new mainForm();
+            try
+            {
+                Application.Run(form);
+            }
+            finally { form.CloseOpenConnections(); }
         }
     }
 }
