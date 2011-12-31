@@ -19,6 +19,10 @@
     <FormFactorID>
     </FormFactorID>
     <ApplicationIcon>Icon.ico</ApplicationIcon>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -46,31 +50,27 @@
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DNWA.BHT400CL, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8a074bce35249107, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\Christoph\Desktop\BHT400B_113A_128MB_SDK\SDK\Net\CF2.0\DNWA.BHT400CL.dll</HintPath>
-    </Reference>
-    <Reference Include="DNWA.Exception, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b4100463e211486c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\Christoph\Desktop\BHT400B_113A_128MB_SDK\SDK\Net\CF2.0\DNWA.Exception.dll</HintPath>
-    </Reference>
-    <Reference Include="DNWA.Tools.BHT.Communication400, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\Christoph\Desktop\BHT400B_113A_128MB_SDK\SDK\Net\CF2.0\DNWA.Tools.BHT.Communication400.dll</HintPath>
-    </Reference>
     <Reference Include="mscorlib" />
+    <Reference Include="protobuf-net, Version=1.0.0.282, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\3rdParty\protobuf-net\CF35\protobuf-net.dll</HintPath>
+    </Reference>
+    <Reference Include="protobuf-net.Extensions, Version=1.0.0.282, Culture=neutral, PublicKeyToken=257b51d87d2e4d67, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\3rdParty\protobuf-net\CF35\protobuf-net.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="Symbol, Version=2.5.0.3, Culture=neutral, PublicKeyToken=68ec8db391f150ca, processorArchitecture=MSIL" />
+    <Reference Include="Symbol.Barcode2, Version=2.5.0.6, Culture=neutral, PublicKeyToken=68ec8db391f150ca, processorArchitecture=MSIL" />
+    <Reference Include="Symbol.Notification, Version=2.5.0.3, Culture=neutral, PublicKeyToken=68ec8db391f150ca, processorArchitecture=MSIL" />
+    <Reference Include="Symbol.WPAN, Version=2.5.0.2, Culture=neutral, PublicKeyToken=68ec8db391f150ca, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.SqlServerCe, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3be235df1c8d2ad3, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Card.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -92,8 +92,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="SqlCE.cs" />
-    <Compile Include="TicketShop.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Database.sql" />
@@ -102,6 +100,12 @@
     <Content Include="Icon.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TicketValidator.Common\TicketValidator.Common.csproj">
+      <Project>{E97A6A94-84A3-4D7A-A6C2-736CFFE7395F}</Project>
+      <Name>TicketValidator.Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CompactFramework.CSharp.targets" />
   <ProjectExtensions>
