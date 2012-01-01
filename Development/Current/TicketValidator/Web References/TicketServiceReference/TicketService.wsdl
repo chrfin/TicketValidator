@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:i0="http://schemas.microsoft.com/ws/2005/02/mex/bindings" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" name="TicketService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:import namespace="http://schemas.microsoft.com/ws/2005/02/mex/bindings" location="http://192.168.0.130:8880/tickets?wsdl=wsdl0" />
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://192.168.0.130:8880/tickets?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://192.168.0.130:8880/tickets?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://192.168.0.130:8880/tickets?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/TicketService" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ITicketService_GetTicket_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTicket" />
+  </wsdl:message>
+  <wsdl:message name="ITicketService_GetTicket_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTicketResponse" />
+  </wsdl:message>
+  <wsdl:message name="ITicketService_RedeemTicket_InputMessage">
+    <wsdl:part name="parameters" element="tns:RedeemTicket" />
+  </wsdl:message>
+  <wsdl:message name="ITicketService_RedeemTicket_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RedeemTicketResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ITicketService">
+    <wsdl:operation name="GetTicket">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITicketService/GetTicket" message="tns:ITicketService_GetTicket_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITicketService/GetTicketResponse" message="tns:ITicketService_GetTicket_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RedeemTicket">
+      <wsdl:input wsaw:Action="http://tempuri.org/ITicketService/RedeemTicket" message="tns:ITicketService_RedeemTicket_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ITicketService/RedeemTicketResponse" message="tns:ITicketService_RedeemTicket_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_ITicketService" type="tns:ITicketService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetTicket">
+      <soap:operation soapAction="http://tempuri.org/ITicketService/GetTicket" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RedeemTicket">
+      <soap:operation soapAction="http://tempuri.org/ITicketService/RedeemTicket" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="TicketService">
+    <wsdl:port name="BasicHttpBinding_ITicketService" binding="tns:BasicHttpBinding_ITicketService">
+      <soap:address location="http://192.168.0.130:8880/tickets/ws" />
+    </wsdl:port>
+    <wsdl:port name="MetadataExchangeHttpBinding_ITicketService" binding="i0:MetadataExchangeHttpBinding_ITicketService">
+      <soap12:address location="http://192.168.0.130:8880/tickets/mex" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>http://192.168.0.130:8880/tickets/mex</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

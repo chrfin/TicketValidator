@@ -10,6 +10,7 @@ namespace TicketValidator.Common
     /// Represents a ticket.
     /// </summary>
     [ProtoContract]
+    [Serializable]
     public class Ticket
     {
         /// <summary>
@@ -21,12 +22,28 @@ namespace TicketValidator.Common
         [ProtoMember(1)]
         public int Id { get; set; }
         /// <summary>
+        /// Gets or sets a value indicating whether this ticket is a online ticket.
+        /// </summary>
+        /// <value>
+        /// 	<c>true</c> if this is a online ticket; otherwise, <c>false</c>.
+        /// </value>
+        [ProtoMember(2)]
+        public bool IsOnlineTicket { get; set; }
+        /// <summary>
+        /// Gets or sets the type.
+        /// </summary>
+        /// <value>
+        /// The type.
+        /// </value>
+        [ProtoMember(3)]
+        public CardType Type { get; set; }
+        /// <summary>
         /// Gets or sets the code.
         /// </summary>
         /// <value>
         /// The code.
         /// </value>
-        [ProtoMember(2)]
+        [ProtoMember(4)]
         public string Code { get; set; }
         /// <summary>
         /// Gets or sets the name.
@@ -34,7 +51,7 @@ namespace TicketValidator.Common
         /// <value>
         /// The name.
         /// </value>
-        [ProtoMember(3)]
+        [ProtoMember(5)]
         public string Name { get; set; }
         /// <summary>
         /// Gets or sets the address.
@@ -42,7 +59,7 @@ namespace TicketValidator.Common
         /// <value>
         /// The address.
         /// </value>
-        [ProtoMember(4)]
+        [ProtoMember(6)]
         public string Address { get; set; }
         /// <summary>
         /// Gets or sets the zip.
@@ -50,7 +67,7 @@ namespace TicketValidator.Common
         /// <value>
         /// The zip.
         /// </value>
-        [ProtoMember(5)]
+        [ProtoMember(7)]
         public string Zip { get; set; }
         /// <summary>
         /// Gets or sets the city.
@@ -58,7 +75,7 @@ namespace TicketValidator.Common
         /// <value>
         /// The city.
         /// </value>
-        [ProtoMember(6)]
+        [ProtoMember(8)]
         public string City { get; set; }
         /// <summary>
         /// Gets or sets the phone.
@@ -66,7 +83,7 @@ namespace TicketValidator.Common
         /// <value>
         /// The phone.
         /// </value>
-        [ProtoMember(7)]
+        [ProtoMember(9)]
         public string Phone { get; set; }
         /// <summary>
         /// Gets or sets the E mail.
@@ -74,7 +91,7 @@ namespace TicketValidator.Common
         /// <value>
         /// The E mail.
         /// </value>
-        [ProtoMember(8)]
+        [ProtoMember(10)]
         public string EMail { get; set; }
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="Ticket"/> is redeemed.
@@ -82,15 +99,15 @@ namespace TicketValidator.Common
         /// <value>
         ///   <c>true</c> if redeemed; otherwise, <c>false</c>.
         /// </value>
-        [ProtoMember(9)]
-        public bool Redeemed { get; set; }
+        [ProtoMember(11)]
+        public bool IsRedeemed { get; set; }
         /// <summary>
         /// Gets or sets the redeem date.
         /// </summary>
         /// <value>
         /// The redeem date.
         /// </value>
-        [ProtoMember(10)]
+        [ProtoMember(12)]
         public DateTime RedeemDate { get; set; }
 
         /// <summary>
