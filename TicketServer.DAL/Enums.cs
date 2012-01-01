@@ -3,7 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 
-namespace TicketService
+namespace TicketServer.DAL
 {
     /// <summary>
     /// Defines the type of the card.

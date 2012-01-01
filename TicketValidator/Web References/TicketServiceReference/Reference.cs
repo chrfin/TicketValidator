@@ -80,7 +80,7 @@ namespace TicketValidator.TicketServiceReference {
     /// <remarks/>
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/TicketService")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/TicketServer.Service")]
     public partial class Ticket {
         
         private string addressField;
@@ -301,7 +301,7 @@ namespace TicketValidator.TicketServiceReference {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/TicketService")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/TicketServer.DAL")]
     public enum CardType {
         
         /// <remarks/>

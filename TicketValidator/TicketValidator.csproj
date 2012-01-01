@@ -123,10 +123,10 @@
     <None Include="Web References\TicketServiceReference\Ticket.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
-    <None Include="Web References\TicketServiceReference\tickets.wsdl" />
     <None Include="Web References\TicketServiceReference\tickets.xsd" />
     <None Include="Web References\TicketServiceReference\tickets0.xsd" />
     <None Include="Web References\TicketServiceReference\tickets1.xsd" />
+    <None Include="Web References\TicketServiceReference\tickets2.xsd" />
     <None Include="Web References\TicketServiceReference\TicketService.wsdl" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CompactFramework.CSharp.targets" />

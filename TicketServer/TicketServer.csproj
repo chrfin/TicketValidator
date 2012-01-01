@@ -102,9 +102,13 @@
     <None Include="Resources\Database.sql" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TicketService\TicketService.csproj">
+    <ProjectReference Include="..\TicketServer.DAL\TicketServer.DAL.csproj">
+      <Project>{D9B8258A-38E8-43F8-A9D0-A3A130C8FD32}</Project>
+      <Name>TicketServer.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TicketServer.Service\TicketServer.Service.csproj">
       <Project>{7854300B-F4E2-4CFB-8EBD-1A51F9740B1B}</Project>
-      <Name>TicketService</Name>
+      <Name>TicketServer.Service</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
