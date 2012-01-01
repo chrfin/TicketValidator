@@ -6,16 +6,14 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using System.Reflection;
+using System.Threading;
 
 using TicketValidator.Properties;
 
 using Symbol.Barcode2;
 using Symbol.Notification;
 using Symbol.WPAN.Bluetooth;
-using System.Net.Sockets;
-using System.Threading;
-using TicketValidator.Common;
-using ProtoBuf;
+using TicketValidator.TicketServiceReference;
 
 namespace TicketValidator
 {
@@ -24,7 +22,7 @@ namespace TicketValidator
         Beeper beep;
         Barcode2 scanner;
 
-        TcpClient serverClient;
+        TicketService service;
 
         /// <summary>
         /// Gets the startup path.
@@ -47,7 +45,7 @@ namespace TicketValidator
 
             try
             {
-                serverClient = new TcpClient("192.168.0.130", 7880);
+                service = new TicketService();
 
                 scanner = new Barcode2(Symbol.Barcode2.Devices.SupportedDevices[0]);
                 scanner.Config.Reader.ReaderSpecific.LaserSpecific.AimType = AIM_TYPE.AIM_TYPE_TRIGGER;
@@ -82,24 +80,36 @@ namespace TicketValidator
         {
             labelCodeInfo.Invoke((Action)delegate()
             {
-                Stream str = serverClient.GetStream();
-                byte[] data = System.Text.Encoding.UTF8.GetBytes(scancollection.GetFirst.Text);
-                str.Write(data, 0, data.Length);
+                labelCodeInfo.Text = "Code: " + scancollection.GetFirst.Text + Environment.NewLine;
+            });
 
-                while (serverClient.Client.Available <= 0)
-                    Thread.Sleep(100);
-                Thread.Sleep(100);
+            Ticket ticket = service.GetTicket(scancollection.GetFirst.Text);
 
-                byte[] buffer = new byte[serverClient.Client.Available];
-                serverClient.Client.Receive(buffer);
+            string type = string.Empty;
 
-                MemoryStream ms = new MemoryStream(buffer);
-                ms.Flush();
-                ms.Seek(0, SeekOrigin.Begin);
+            switch (ticket.Type)
+            {
+                case CardType.Free:
+                    type = "Gratis";
+                    break;
+                case CardType.Normal:
+                    type = "Normale";
+                    break;
+                default:
+                    type = "UNKNOWN";
+                    break;
+            }
 
-                Ticket ticket = Serializer.Deserialize<Ticket>(ms);
+            type += " " + (ticket.IsOnlineTicket ? "Onlinekarte" : "Karte");
 
-                labelCodeInfo.Text = "Code: " + ticket.Code + Environment.NewLine + "Name: " + ticket.Name;
+            labelCodeInfo.Invoke((Action)delegate()
+            {
+                labelCodeInfo.Text += "Typ: " + type + Environment.NewLine;
+                labelCodeInfo.Text += ticket.Name + Environment.NewLine;
+                labelCodeInfo.Text += ticket.Address + Environment.NewLine;
+                labelCodeInfo.Text += ticket.Zip + " " + ticket.City + Environment.NewLine;
+                labelCodeInfo.Text += ticket.Phone + Environment.NewLine;
+                labelCodeInfo.Text += ticket.EMail + Environment.NewLine;
             });
             scanner.Scan();
         }
