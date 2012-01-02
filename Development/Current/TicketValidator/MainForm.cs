@@ -23,6 +23,7 @@ namespace TicketValidator
         Barcode2 scanner;
 
         TicketService service;
+        Ticket currentTicket;
 
         /// <summary>
         /// Gets the startup path.
@@ -46,6 +47,12 @@ namespace TicketValidator
             try
             {
                 service = new TicketService();
+
+                bool specified;
+                ServiceStatus status;
+                service.GetServiceState(out status, out specified);
+                if (status != ServiceStatus.Running)
+                    MessageBox.Show("Service is not running!", "Error connecting to service", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
 
                 scanner = new Barcode2(Symbol.Barcode2.Devices.SupportedDevices[0]);
                 scanner.Config.Reader.ReaderSpecific.LaserSpecific.AimType = AIM_TYPE.AIM_TYPE_TRIGGER;
@@ -78,16 +85,21 @@ namespace TicketValidator
         /// <param name="scancollection">The scancollection.</param>
         protected void scanner_OnScan(ScanDataCollection scancollection)
         {
+            if (currentTicket != null)
+                RedeemCurrentTicket();
+
             labelCodeInfo.Invoke((Action)delegate()
             {
                 labelCodeInfo.Text = "Code: " + scancollection.GetFirst.Text + Environment.NewLine;
+                buttonRedeem.Enabled = true;
+                buttonCancel.Enabled = true;
             });
 
-            Ticket ticket = service.GetTicket(scancollection.GetFirst.Text);
+            currentTicket = service.GetTicket(scancollection.GetFirst.Text);
 
             string type = string.Empty;
 
-            switch (ticket.Type)
+            switch (currentTicket.Type)
             {
                 case CardType.Free:
                     type = "Gratis";
@@ -100,18 +112,61 @@ namespace TicketValidator
                     break;
             }
 
-            type += " " + (ticket.IsOnlineTicket ? "Onlinekarte" : "Karte");
+            type += " " + (currentTicket.IsOnlineTicket ? "Onlinekarte" : "Karte");
 
             labelCodeInfo.Invoke((Action)delegate()
             {
                 labelCodeInfo.Text += "Typ: " + type + Environment.NewLine;
-                labelCodeInfo.Text += ticket.Name + Environment.NewLine;
-                labelCodeInfo.Text += ticket.Address + Environment.NewLine;
-                labelCodeInfo.Text += ticket.Zip + " " + ticket.City + Environment.NewLine;
-                labelCodeInfo.Text += ticket.Phone + Environment.NewLine;
-                labelCodeInfo.Text += ticket.EMail + Environment.NewLine;
+                labelCodeInfo.Text += currentTicket.Name + Environment.NewLine;
+                labelCodeInfo.Text += currentTicket.Address + Environment.NewLine;
+                labelCodeInfo.Text += currentTicket.Zip + " " + currentTicket.City + Environment.NewLine;
+                labelCodeInfo.Text += currentTicket.Phone + Environment.NewLine;
+                labelCodeInfo.Text += currentTicket.EMail + Environment.NewLine;
             });
             scanner.Scan();
+        }
+
+        /// <summary>
+        /// Redeems the current ticket.
+        /// </summary>
+        private void RedeemCurrentTicket()
+        {
+            ResetUI();
+            service.RedeemTicket(currentTicket.Id, true);
+        }
+
+        /// <summary>
+        /// Resets the UI.
+        /// </summary>
+        private void ResetUI()
+        {
+            buttonRedeem.Invoke((Action)delegate()
+            {
+                labelCodeInfo.Text = string.Empty;
+                buttonRedeem.Enabled = false;
+                buttonCancel.Enabled = false;
+            });
+        }
+
+        /// <summary>
+        /// Handles the Click event of the buttonRedeem control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        private void buttonRedeem_Click(object sender, EventArgs e)
+        {
+            RedeemCurrentTicket();
+        }
+
+        /// <summary>
+        /// Handles the Click event of the buttonCancel control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        private void buttonCancel_Click(object sender, EventArgs e)
+        {
+            currentTicket = null;
+            ResetUI();
         }
 
         /// <summary>

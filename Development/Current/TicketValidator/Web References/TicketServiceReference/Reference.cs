@@ -32,6 +32,26 @@ namespace TicketValidator.TicketServiceReference {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ITicketService/GetServiceState", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void GetServiceState(out ServiceStatus GetServiceStateResult, [System.Xml.Serialization.XmlIgnoreAttribute()] out bool GetServiceStateResultSpecified) {
+            object[] results = this.Invoke("GetServiceState", new object[0]);
+            GetServiceStateResult = ((ServiceStatus)(results[0]));
+            GetServiceStateResultSpecified = ((bool)(results[1]));
+        }
+        
+        /// <remarks/>
+        public System.IAsyncResult BeginGetServiceState(System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("GetServiceState", new object[0], callback, asyncState);
+        }
+        
+        /// <remarks/>
+        public void EndGetServiceState(System.IAsyncResult asyncResult, out ServiceStatus GetServiceStateResult, out bool GetServiceStateResultSpecified) {
+            object[] results = this.EndInvoke(asyncResult);
+            GetServiceStateResult = ((ServiceStatus)(results[0]));
+            GetServiceStateResultSpecified = ((bool)(results[1]));
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ITicketService/GetTicket", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
         public Ticket GetTicket([System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string code) {
@@ -54,12 +74,12 @@ namespace TicketValidator.TicketServiceReference {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ITicketService/RedeemTicket", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void RedeemTicket(int id, [System.Xml.Serialization.XmlIgnoreAttribute()] bool idSpecified, out bool RedeemTicketResult, [System.Xml.Serialization.XmlIgnoreAttribute()] out bool RedeemTicketResultSpecified) {
+        [return: System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public RedeemResult RedeemTicket(int id, [System.Xml.Serialization.XmlIgnoreAttribute()] bool idSpecified) {
             object[] results = this.Invoke("RedeemTicket", new object[] {
                         id,
                         idSpecified});
-            RedeemTicketResult = ((bool)(results[0]));
-            RedeemTicketResultSpecified = ((bool)(results[1]));
+            return ((RedeemResult)(results[0]));
         }
         
         /// <remarks/>
@@ -70,11 +90,24 @@ namespace TicketValidator.TicketServiceReference {
         }
         
         /// <remarks/>
-        public void EndRedeemTicket(System.IAsyncResult asyncResult, out bool RedeemTicketResult, out bool RedeemTicketResultSpecified) {
+        public RedeemResult EndRedeemTicket(System.IAsyncResult asyncResult) {
             object[] results = this.EndInvoke(asyncResult);
-            RedeemTicketResult = ((bool)(results[0]));
-            RedeemTicketResultSpecified = ((bool)(results[1]));
+            return ((RedeemResult)(results[0]));
         }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/TicketServer.Interfaces.Enums")]
+    public enum ServiceStatus {
+        
+        /// <remarks/>
+        Running,
+        
+        /// <remarks/>
+        NotReady,
+        
+        /// <remarks/>
+        Error,
     }
     
     /// <remarks/>
@@ -301,7 +334,7 @@ namespace TicketValidator.TicketServiceReference {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/TicketServer.DAL")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/TicketServer.Interfaces.Enums")]
     public enum CardType {
         
         /// <remarks/>
@@ -309,5 +342,64 @@ namespace TicketValidator.TicketServiceReference {
         
         /// <remarks/>
         Normal,
+    }
+    
+    /// <remarks/>
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/TicketServer.Service")]
+    public partial class RedeemResult {
+        
+        private string errorField;
+        
+        private RedeemResultType typeField;
+        
+        private bool typeFieldSpecified;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Error {
+            get {
+                return this.errorField;
+            }
+            set {
+                this.errorField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public RedeemResultType Type {
+            get {
+                return this.typeField;
+            }
+            set {
+                this.typeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool TypeSpecified {
+            get {
+                return this.typeFieldSpecified;
+            }
+            set {
+                this.typeFieldSpecified = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/TicketServer.Interfaces.Enums")]
+    public enum RedeemResultType {
+        
+        /// <remarks/>
+        Redeemed,
+        
+        /// <remarks/>
+        AlreadyRedeemed,
+        
+        /// <remarks/>
+        NotRedeemed,
     }
 }

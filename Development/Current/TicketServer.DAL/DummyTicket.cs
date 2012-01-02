@@ -4,6 +4,8 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using TicketServer.DAL;
+using TicketServer.Interfaces;
+using TicketServer.Interfaces.Enums;
 
 namespace TicketServer.DAL
 {
