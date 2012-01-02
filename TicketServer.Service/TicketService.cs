@@ -5,6 +5,10 @@ using System.Text;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using TicketServer.DAL;
+using TicketServer.Common;
+using TicketServer.Interfaces.DAL;
+using TicketServer.Interfaces.Enums;
+using TicketServer.Interfaces.BusinessLayer;
 
 namespace TicketServer.Service
 {
@@ -21,6 +25,19 @@ namespace TicketServer.Service
 		/// The ticket source.
 		/// </value>
 		public ITicketDataSource TicketSource { get; set; }
+
+		/// <summary>
+		/// Gets the client.
+		/// </summary>
+		protected RemoteEndpointMessageProperty Client
+		{
+			get
+			{
+				OperationContext context = OperationContext.Current;
+				MessageProperties prop = context.IncomingMessageProperties;
+				return prop[RemoteEndpointMessageProperty.Name] as RemoteEndpointMessageProperty;
+			}
+		}
 
 		/// <summary>
 		/// Occurs when a ticket is requested.
@@ -62,6 +79,15 @@ namespace TicketServer.Service
 		#region ITicketService Members
 
 		/// <summary>
+		/// Gets the state of the service.
+		/// </summary>
+		/// <returns></returns>
+		public ServiceStatus GetServiceState()
+		{
+			return ServiceStatus.Running;
+		}
+
+		/// <summary>
 		/// Gets the ticket with the specific code.
 		/// </summary>
 		/// <param name="code">The code.</param>
@@ -69,12 +95,8 @@ namespace TicketServer.Service
 		public Ticket GetTicket(string code)
 		{
 			Ticket ticket = new Ticket(TicketSource.GetTicket(code));
-
-			OperationContext context = OperationContext.Current;
-			MessageProperties prop = context.IncomingMessageProperties;
-			RemoteEndpointMessageProperty endpoint = prop[RemoteEndpointMessageProperty.Name] as RemoteEndpointMessageProperty;
-
-			OnTicketRequested(new TicketEventArgs(ticket, endpoint.Address));
+			
+			AsyncHelper.FireAsync(TicketRequested, this, new TicketEventArgs(ticket, Client.Address));
 
 			return ticket;
 		}
@@ -84,9 +106,11 @@ namespace TicketServer.Service
 		/// </summary>
 		/// <param name="id">The id.</param>
 		/// <returns></returns>
-		public bool RedeemTicket(int id)
+		public RedeemResult RedeemTicket(int id)
 		{
-			return TicketSource.RedeemTicket(id);
+			AsyncHelper.FireAsync(TicketRedeemed, this, new TicketEventArgs(id, TicketSource, Client.Address));
+
+			return new RedeemResult(TicketSource.RedeemTicket(id));
 		}
 
 		#endregion

@@ -19,6 +19,7 @@ using System.ServiceModel.Description;
 
 using TicketServer.Service;
 using TicketServer.DAL;
+using TicketServer.Common;
 
 namespace TicketServer
 {
@@ -51,11 +52,25 @@ namespace TicketServer
 			{
 				service = new TicketService(new DummyTicketDataSource());
 				service.TicketRequested += new EventHandler(service_TicketRequested);
+				service.TicketRedeemed += new EventHandler(service_TicketRedeemed);
 
 				host = new ServiceHost(service);
 				host.Open();
 			}));
 			hostThread.Start();
+		}
+
+		/// <summary>
+		/// Handles the TicketRedeemed event of the service control.
+		/// </summary>
+		/// <param name="sender">The source of the event.</param>
+		/// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+		void service_TicketRedeemed(object sender, EventArgs e)
+		{
+			textBoxLog.Dispatcher.Invoke((Action)delegate()
+			{
+				textBoxLog.Text += string.Format("Ticket redeemed ({0}): {1}", (e as TicketEventArgs).Client, (e as TicketEventArgs).Ticket.Code) + Environment.NewLine;
+			});
 		}
 
 		/// <summary>

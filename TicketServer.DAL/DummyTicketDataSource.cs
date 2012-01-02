@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using TicketServer.Interfaces.DAL;
+using TicketServer.Interfaces;
+using TicketServer.Interfaces.Enums;
+using TicketServer.Interfaces.BusinessLayer;
 
 namespace TicketServer.DAL
 {
@@ -42,6 +46,7 @@ namespace TicketServer.DAL
 		{
 			DummyTicket ticket = new DummyTicket();
 
+			ticket.Id = 1234;
 			ticket.Code = code;
 			ticket.IsOnlineTicket = true;
 			ticket.Name = "TESTER TEST";
@@ -59,9 +64,9 @@ namespace TicketServer.DAL
 		/// </summary>
 		/// <param name="id">The id.</param>
 		/// <returns></returns>
-		public bool RedeemTicket(int id)
+		public IRedeemResult RedeemTicket(int id)
 		{
-			return true;
+			return new DummyRedeemResult();
 		}
 
 		#endregion

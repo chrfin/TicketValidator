@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using TicketServer.Interfaces.Enums;
+using TicketServer.Interfaces.BusinessLayer;
 
-namespace TicketServer.DAL
+namespace TicketServer.Interfaces.DAL
 {
 	/// <summary>
 	/// Interface to represent a ticket data source.
@@ -28,6 +30,6 @@ namespace TicketServer.DAL
 		/// </summary>
 		/// <param name="id">The id.</param>
 		/// <returns></returns>
-		bool RedeemTicket(int id);
+		IRedeemResult RedeemTicket(int id);
 	}
 }

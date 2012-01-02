@@ -3,12 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.ServiceModel;
+using TicketServer.Interfaces.Enums;
 
 namespace TicketServer.Service
 {
 	[ServiceContract]
 	public interface ITicketService
 	{
+		/// <summary>
+		/// Gets the state of the service.
+		/// </summary>
+		/// <returns></returns>
+		[OperationContract]
+		ServiceStatus GetServiceState();
+
 		/// <summary>
 		/// Gets the ticket with the specific code.
 		/// </summary>
@@ -23,6 +31,6 @@ namespace TicketServer.Service
 		/// <param name="id">The id.</param>
 		/// <returns></returns>
 		[OperationContract]
-		bool RedeemTicket(int id);
+		RedeemResult RedeemTicket(int id);
 	}
 }

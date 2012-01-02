@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using TicketServer.Interfaces.Enums;
 
-namespace TicketServer.DAL
+namespace TicketServer.Interfaces
 {
 	/// <summary>
 	/// Interface to represent a ticket.

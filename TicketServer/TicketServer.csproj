@@ -102,9 +102,17 @@
     <None Include="Resources\Database.sql" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TicketServer.Common\TicketServer.Common.csproj">
+      <Project>{3D13D078-398B-4DA3-96BF-482F412FE8A3}</Project>
+      <Name>TicketServer.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TicketServer.DAL\TicketServer.DAL.csproj">
       <Project>{D9B8258A-38E8-43F8-A9D0-A3A130C8FD32}</Project>
       <Name>TicketServer.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TicketServer.Interfaces\TicketServer.Interfaces.csproj">
+      <Project>{4A928EB3-CDE9-4803-B6CF-2255064CD64A}</Project>
+      <Name>TicketServer.Interfaces</Name>
     </ProjectReference>
     <ProjectReference Include="..\TicketServer.Service\TicketServer.Service.csproj">
       <Project>{7854300B-F4E2-4CFB-8EBD-1A51F9740B1B}</Project>

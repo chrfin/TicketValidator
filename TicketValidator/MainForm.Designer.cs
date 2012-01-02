@@ -40,11 +40,13 @@
             // buttonCancel
             // 
             this.buttonCancel.BackColor = System.Drawing.Color.Pink;
+            this.buttonCancel.Enabled = false;
             this.buttonCancel.Location = new System.Drawing.Point(7, 210);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(224, 27);
             this.buttonCancel.TabIndex = 7;
             this.buttonCancel.Text = "Abbrechen";
+            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // buttonRedeem
             // 
@@ -56,6 +58,7 @@
             this.buttonRedeem.Size = new System.Drawing.Size(224, 39);
             this.buttonRedeem.TabIndex = 6;
             this.buttonRedeem.Text = "Einlösen";
+            this.buttonRedeem.Click += new System.EventHandler(this.buttonRedeem_Click);
             // 
             // labelCodeInfo
             // 
