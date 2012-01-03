@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using TicketServer.Interfaces.BusinessLayer;
 using System.Runtime.Serialization;
+using TicketServer.Interfaces.Enums;
 
 namespace TicketServer.Service
 {
@@ -21,8 +22,8 @@ namespace TicketServer.Service
 		/// <value>
 		/// The type.
 		/// </value>
-		[DataMember]
-		public Interfaces.Enums.RedeemResultType Type { get; set; }
+		[DataMember(IsRequired = true)]
+		public RedeemResultType Type { get; set; }
 
 		/// <summary>
 		/// Gets or sets the error.

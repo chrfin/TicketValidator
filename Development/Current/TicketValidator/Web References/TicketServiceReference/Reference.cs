@@ -126,15 +126,9 @@ namespace TicketValidator.TicketServiceReference {
         
         private int idField;
         
-        private bool idFieldSpecified;
-        
         private bool isOnlineTicketField;
         
-        private bool isOnlineTicketFieldSpecified;
-        
         private bool isRedeemedField;
-        
-        private bool isRedeemedFieldSpecified;
         
         private string nameField;
         
@@ -145,8 +139,6 @@ namespace TicketValidator.TicketServiceReference {
         private bool redeemDateFieldSpecified;
         
         private CardType typeField;
-        
-        private bool typeFieldSpecified;
         
         private string zipField;
         
@@ -205,17 +197,6 @@ namespace TicketValidator.TicketServiceReference {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IdSpecified {
-            get {
-                return this.idFieldSpecified;
-            }
-            set {
-                this.idFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
         public bool IsOnlineTicket {
             get {
                 return this.isOnlineTicketField;
@@ -226,34 +207,12 @@ namespace TicketValidator.TicketServiceReference {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IsOnlineTicketSpecified {
-            get {
-                return this.isOnlineTicketFieldSpecified;
-            }
-            set {
-                this.isOnlineTicketFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
         public bool IsRedeemed {
             get {
                 return this.isRedeemedField;
             }
             set {
                 this.isRedeemedField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool IsRedeemedSpecified {
-            get {
-                return this.isRedeemedFieldSpecified;
-            }
-            set {
-                this.isRedeemedFieldSpecified = value;
             }
         }
         
@@ -311,17 +270,6 @@ namespace TicketValidator.TicketServiceReference {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool TypeSpecified {
-            get {
-                return this.typeFieldSpecified;
-            }
-            set {
-                this.typeFieldSpecified = value;
-            }
-        }
-        
-        /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
         public string Zip {
             get {
@@ -354,8 +302,6 @@ namespace TicketValidator.TicketServiceReference {
         
         private RedeemResultType typeField;
         
-        private bool typeFieldSpecified;
-        
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
         public string Error {
@@ -374,17 +320,6 @@ namespace TicketValidator.TicketServiceReference {
             }
             set {
                 this.typeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public bool TypeSpecified {
-            get {
-                return this.typeFieldSpecified;
-            }
-            set {
-                this.typeFieldSpecified = value;
             }
         }
     }

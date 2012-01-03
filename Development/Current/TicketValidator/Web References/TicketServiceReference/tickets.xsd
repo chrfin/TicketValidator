@@ -5,15 +5,15 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="City" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Code" nillable="true" type="xs:string" />
+      <xs:element name="Code" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="EMail" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Id" type="xs:int" />
-      <xs:element minOccurs="0" name="IsOnlineTicket" type="xs:boolean" />
-      <xs:element minOccurs="0" name="IsRedeemed" type="xs:boolean" />
+      <xs:element name="Id" type="xs:int" />
+      <xs:element name="IsOnlineTicket" type="xs:boolean" />
+      <xs:element name="IsRedeemed" type="xs:boolean" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Phone" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="RedeemDate" type="xs:dateTime" />
-      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/TicketServer.Interfaces.Enums" minOccurs="0" name="Type" type="q1:CardType" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/TicketServer.Interfaces.Enums" name="Type" type="q1:CardType" />
       <xs:element minOccurs="0" name="Zip" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
@@ -21,7 +21,7 @@
   <xs:complexType name="RedeemResult">
     <xs:sequence>
       <xs:element minOccurs="0" name="Error" nillable="true" type="xs:string" />
-      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/TicketServer.Interfaces.Enums" minOccurs="0" name="Type" type="q2:RedeemResultType" />
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/TicketServer.Interfaces.Enums" name="Type" type="q2:RedeemResultType" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="RedeemResult" nillable="true" type="tns:RedeemResult" />

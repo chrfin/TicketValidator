@@ -56,5 +56,194 @@ namespace TicketValidator.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TICKET ALREADY REDEEMED!.
+        /// </summary>
+        internal static string AlreadyRedeemed {
+            get {
+                return ResourceManager.GetString("AlreadyRedeemed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Free.
+        /// </summary>
+        internal static string CardType_Free {
+            get {
+                return ResourceManager.GetString("CardType_Free", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Normal.
+        /// </summary>
+        internal static string CardType_Normal {
+            get {
+                return ResourceManager.GetString("CardType_Normal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UNKNOWN.
+        /// </summary>
+        internal static string CardType_Unknown {
+            get {
+                return ResourceManager.GetString("CardType_Unknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ticket.
+        /// </summary>
+        internal static string CardVersion_Offline {
+            get {
+                return ResourceManager.GetString("CardVersion_Offline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Online-Ticket.
+        /// </summary>
+        internal static string CardVersion_Online {
+            get {
+                return ResourceManager.GetString("CardVersion_Online", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Code.
+        /// </summary>
+        internal static string Code {
+            get {
+                return ResourceManager.GetString("Code", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connecting....
+        /// </summary>
+        internal static string Connecting {
+            get {
+                return ResourceManager.GetString("Connecting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not connect to service!.
+        /// </summary>
+        internal static string ConnectionError_Failed {
+            get {
+                return ResourceManager.GetString("ConnectionError_Failed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connection Timeout while connecting to service!.
+        /// </summary>
+        internal static string ConnectionError_Timeout {
+            get {
+                return ResourceManager.GetString("ConnectionError_Timeout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unknown connection error:.
+        /// </summary>
+        internal static string ConnectionError_Unknown {
+            get {
+                return ResourceManager.GetString("ConnectionError_Unknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connection to ticket service lost! Please select a new connection.\n\rStatus:.
+        /// </summary>
+        internal static string ConnectionLost_Content {
+            get {
+                return ResourceManager.GetString("ConnectionLost_Content", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connection lost.
+        /// </summary>
+        internal static string ConnectionLost_Title {
+            get {
+                return ResourceManager.GetString("ConnectionLost_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connection to ticket service could not be established!.
+        /// </summary>
+        internal static string InitialConnectionFaild_Content {
+            get {
+                return ResourceManager.GetString("InitialConnectionFaild_Content", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error connecting to service.
+        /// </summary>
+        internal static string InitialConnectionFaild_Title {
+            get {
+                return ResourceManager.GetString("InitialConnectionFaild_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not connected.
+        /// </summary>
+        internal static string NotConnected {
+            get {
+                return ResourceManager.GetString("NotConnected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Redeem.
+        /// </summary>
+        internal static string Redeem {
+            get {
+                return ResourceManager.GetString("Redeem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Redeemed.
+        /// </summary>
+        internal static string Redeemed {
+            get {
+                return ResourceManager.GetString("Redeemed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Redeem ({0}).
+        /// </summary>
+        internal static string RedeemTime {
+            get {
+                return ResourceManager.GetString("RedeemTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connected and ready....
+        /// </summary>
+        internal static string ServiceConnected {
+            get {
+                return ResourceManager.GetString("ServiceConnected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type.
+        /// </summary>
+        internal static string Type {
+            get {
+                return ResourceManager.GetString("Type", resourceCulture);
+            }
+        }
     }
 }

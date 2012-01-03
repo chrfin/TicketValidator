@@ -18,7 +18,7 @@ namespace TicketValidator
             {
                 Application.Run(form);
             }
-            finally { form.CloseOpenConnections(); }
+            finally { form.CloseOpenConnections(true); }
         }
     }
 }

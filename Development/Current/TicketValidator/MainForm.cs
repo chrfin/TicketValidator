@@ -14,6 +14,7 @@ using Symbol.Barcode2;
 using Symbol.Notification;
 using Symbol.WPAN.Bluetooth;
 using TicketValidator.TicketServiceReference;
+using System.Net;
 
 namespace TicketValidator
 {
@@ -24,6 +25,9 @@ namespace TicketValidator
 
         TicketService service;
         Ticket currentTicket;
+
+        int timeToAutoRedeem;
+        Thread autoRedeemThread;
 
         /// <summary>
         /// Gets the startup path.
@@ -44,16 +48,12 @@ namespace TicketValidator
         {
             InitializeComponent();
 
+            if (!SelectService())
+                return;
+            labelCodeInfo.Invoke((Action)delegate() { labelCodeInfo.Text = Resources.ServiceConnected; });
+
             try
             {
-                service = new TicketService();
-
-                bool specified;
-                ServiceStatus status;
-                service.GetServiceState(out status, out specified);
-                if (status != ServiceStatus.Running)
-                    MessageBox.Show("Service is not running!", "Error connecting to service", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
-
                 scanner = new Barcode2(Symbol.Barcode2.Devices.SupportedDevices[0]);
                 scanner.Config.Reader.ReaderSpecific.LaserSpecific.AimType = AIM_TYPE.AIM_TYPE_TRIGGER;
                 scanner.Config.Reader.Set();
@@ -61,11 +61,79 @@ namespace TicketValidator
                 scanner.Scan();
 
                 beep = new Beeper(Symbol.Notification.Device.AvailableDevices.First(d => d.ObjectType == NotifyType.BEEPER));
-                beep.Duration = 1000;
-                beep.Frequency = 6000;
-                beep.Volume = 100;
+                beep.Duration = 500;
+                beep.Frequency = 3000;
+                beep.Volume = 5;
+                beep.State = NotifyState.OFF;
             }
             catch (Exception e) { labelCodeInfo.Text = e.ToString(); }
+        }
+
+        /// <summary>
+        /// Starts the auto redeem timer.
+        /// </summary>
+        private void StartAutoRedeemTimer()
+        {
+            timeToAutoRedeem = 5;
+            autoRedeemThread = new Thread(new ThreadStart(delegate()
+            {
+                while (timeToAutoRedeem > 0)
+                {
+                    Thread.Sleep(1000);
+                    timeToAutoRedeem--;
+                    buttonRedeem.Invoke((Action)delegate() { buttonRedeem.Text = string.Format(Resources.RedeemTime, timeToAutoRedeem); });
+                }
+                Invoke((Action)delegate() { RedeemCurrentTicket(); });
+            }));
+            autoRedeemThread.IsBackground = true;
+            autoRedeemThread.Name = "Auto Redeem Thread";
+            autoRedeemThread.Start();
+        }
+
+        /// <summary>
+        /// Selects the service.
+        /// </summary>
+        /// <returns></returns>
+        private bool SelectService()
+        {
+            service = new TicketService();
+
+            ServiceSelection selectionForm = new ServiceSelection();
+            if (selectionForm.ShowDialog() == DialogResult.OK)
+                service.Url = selectionForm.ServiceUri;
+
+            try
+            {
+                bool specified;
+                ServiceStatus status;
+                service.GetServiceState(out status, out specified);
+                if (status != ServiceStatus.Running)
+                    MessageBox.Show(Resources.InitialConnectionFaild_Content, Resources.InitialConnectionFaild_Title,
+                        MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+            }
+            catch (WebException exp)
+            {
+                labelCodeInfo.Invoke((Action)delegate()
+                {
+                    switch (exp.Status)
+                    {
+                        case WebExceptionStatus.ConnectFailure:
+                        case WebExceptionStatus.ConnectionClosed:
+                            labelCodeInfo.Text = Resources.ConnectionError_Failed;
+                            break;
+                        case WebExceptionStatus.Timeout:
+                            labelCodeInfo.Text = Resources.ConnectionError_Timeout;
+                            break;
+                        default:
+                            labelCodeInfo.Text = Resources.ConnectionError_Unknown + exp.Status.ToString();
+                            break;
+                    }
+                });
+
+                return false;
+            }
+
+            return true;
         }
 
         /// <summary>
@@ -80,59 +148,173 @@ namespace TicketValidator
         }
 
         /// <summary>
+        /// Handles the Click event of the buttonSelectService control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        private void buttonSelectService_Click(object sender, EventArgs e) { SelectService(); }
+
+        /// <summary>
         /// Scanner_s the on scan.
         /// </summary>
         /// <param name="scancollection">The scancollection.</param>
         protected void scanner_OnScan(ScanDataCollection scancollection)
         {
+            GetTicket(scancollection.GetFirst.Text);
+
+            scanner.Scan();
+        }
+
+        /// <summary>
+        /// Gets the ticket and shows the received information.
+        /// </summary>
+        /// <param name="code">The code.</param>
+        private void GetTicket(string code)
+        {
             if (currentTicket != null)
-                RedeemCurrentTicket();
+            {
+                if (!RedeemCurrentTicket())
+                    return;
+            }
 
             labelCodeInfo.Invoke((Action)delegate()
             {
-                labelCodeInfo.Text = "Code: " + scancollection.GetFirst.Text + Environment.NewLine;
+                labelCodeInfo.Text = Resources.Code + ": " + code + Environment.NewLine;
                 buttonRedeem.Enabled = true;
                 buttonCancel.Enabled = true;
             });
 
-            currentTicket = service.GetTicket(scancollection.GetFirst.Text);
+            RequestTicket(code);
+            StartAutoRedeemTimer();
 
             string type = string.Empty;
 
             switch (currentTicket.Type)
             {
                 case CardType.Free:
-                    type = "Gratis";
+                    type = Resources.CardType_Free;
                     break;
                 case CardType.Normal:
-                    type = "Normale";
+                    type = Resources.CardType_Normal;
                     break;
                 default:
-                    type = "UNKNOWN";
+                    type = Resources.CardType_Unknown;
                     break;
             }
 
-            type += " " + (currentTicket.IsOnlineTicket ? "Onlinekarte" : "Karte");
+            type += " " + (currentTicket.IsOnlineTicket ? Resources.CardVersion_Online : Resources.CardVersion_Offline);
 
             labelCodeInfo.Invoke((Action)delegate()
             {
-                labelCodeInfo.Text += "Typ: " + type + Environment.NewLine;
+                labelCodeInfo.Text += Resources.Type + ": " + type + Environment.NewLine;
                 labelCodeInfo.Text += currentTicket.Name + Environment.NewLine;
                 labelCodeInfo.Text += currentTicket.Address + Environment.NewLine;
                 labelCodeInfo.Text += currentTicket.Zip + " " + currentTicket.City + Environment.NewLine;
                 labelCodeInfo.Text += currentTicket.Phone + Environment.NewLine;
                 labelCodeInfo.Text += currentTicket.EMail + Environment.NewLine;
+                if (currentTicket.IsRedeemed)
+                {
+                    labelCodeInfo.Text += Resources.Redeemed + ": " + currentTicket.RedeemDate.ToString("T");
+                    labelCodeInfo.ForeColor = Color.Red;
+
+                    Beep(BeepType.Error);
+                }
             });
-            scanner.Scan();
+        }
+
+        /// <summary>
+        /// Beeps the specified type.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        private void Beep(BeepType type)
+        {
+            Thread beeper = new Thread(new ThreadStart(delegate()
+                {
+                    switch (type)
+                    {
+                        case BeepType.TicketRedeemed:
+                            beep.Duration = 100;
+                            beep.Frequency = 5000;
+                            beep.Volume = 3;
+                            beep.State = NotifyState.CYCLE;
+                            Thread.Sleep(150);
+                            beep.State = NotifyState.CYCLE;
+                            break;
+                        case BeepType.Error:
+                            beep.Duration = 500;
+                            beep.Frequency = 1000;
+                            beep.Volume = 5;
+                            beep.State = NotifyState.CYCLE;
+                            break;
+                        default:
+                            beep.Duration = 1000;
+                            beep.Frequency = 3000;
+                            beep.Volume = 1;
+                            beep.State = NotifyState.CYCLE;
+                            break;
+                    }
+                }));
+            beeper.IsBackground = true;
+            beeper.Start();
+        }
+
+        /// <summary>
+        /// Gets the ticket from the ticket service.
+        /// </summary>
+        /// <param name="code">The code.</param>
+        private void RequestTicket(string code)
+        {
+            try
+            {
+                currentTicket = service.GetTicket(code);
+            }
+            catch (WebException exp)
+            {
+                MessageBox.Show(Resources.ConnectionLost_Content + exp.Status.ToString(), Resources.ConnectionLost_Title,
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+                if (SelectService())
+                    RequestTicket(code);
+                else
+                    Close();
+            }
         }
 
         /// <summary>
         /// Redeems the current ticket.
         /// </summary>
-        private void RedeemCurrentTicket()
+        private bool RedeemCurrentTicket()
         {
+            autoRedeemThread.Abort();
+            if (currentTicket == null)
+                return false;
+
             ResetUI();
-            service.RedeemTicket(currentTicket.Id, true);
+            try
+            {
+                RedeemResult result = service.RedeemTicket(currentTicket.Id);
+                currentTicket = null;
+                if (result.Type == RedeemResultType.Redeemed)
+                {
+                    Beep(BeepType.TicketRedeemed);
+                    return true;
+                }
+                else if (result.Type == RedeemResultType.AlreadyRedeemed)
+                    labelCodeInfo.Text = Resources.AlreadyRedeemed;
+                else
+                    labelCodeInfo.Text = result.Error;
+            }
+            catch (WebException exp)
+            {
+                MessageBox.Show(Resources.ConnectionLost_Content + exp.Status.ToString(), Resources.ConnectionLost_Title,
+                    MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+                if (SelectService())
+                    return RedeemCurrentTicket();
+                
+                Close();
+            }
+
+            Beep(BeepType.Error);
+            return false;
         }
 
         /// <summary>
@@ -143,6 +325,8 @@ namespace TicketValidator
             buttonRedeem.Invoke((Action)delegate()
             {
                 labelCodeInfo.Text = string.Empty;
+                labelCodeInfo.ForeColor = Color.Black;
+                buttonRedeem.Text = Resources.Redeem;
                 buttonRedeem.Enabled = false;
                 buttonCancel.Enabled = false;
             });
@@ -153,10 +337,7 @@ namespace TicketValidator
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        private void buttonRedeem_Click(object sender, EventArgs e)
-        {
-            RedeemCurrentTicket();
-        }
+        private void buttonRedeem_Click(object sender, EventArgs e) { RedeemCurrentTicket(); }
 
         /// <summary>
         /// Handles the Click event of the buttonCancel control.
@@ -174,46 +355,40 @@ namespace TicketValidator
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        private void buttonClose_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
+        private void buttonClose_Click(object sender, EventArgs e) { Close(); }
         /// <summary>
         /// Handles the Deactivate event of the mainForm control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        private void mainForm_Deactivate(object sender, EventArgs e)
-        {
-            Close();
-        }
+        private void mainForm_Deactivate(object sender, EventArgs e) { CloseOpenConnections(false); }
         /// <summary>
         /// Handles the Closing event of the mainForm control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="System.ComponentModel.CancelEventArgs"/> instance containing the event data.</param>
-        private void mainForm_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            CloseOpenConnections();
-        }
+        private void mainForm_Closing(object sender, System.ComponentModel.CancelEventArgs e) { CloseOpenConnections(true); }
         /// <summary>
         /// Handles the Closed event of the mainForm control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        private void mainForm_Closed(object sender, EventArgs e)
-        {
-            CloseOpenConnections();
-        }
+        private void mainForm_Closed(object sender, EventArgs e) { CloseOpenConnections(true); }
         /// <summary>
         /// Closes the open connections.
         /// </summary>
-        public void CloseOpenConnections()
+        /// <param name="dispose">if set to <c>true</c> the scanner is disposed.</param>
+        public void CloseOpenConnections(bool dispose)
         {
             if (scanner != null)
             {
-                scanner.ScanCancel();
-                scanner.Dispose();
+                if (scanner.IsScanPending)
+                    scanner.ScanCancel();
+                if (dispose)
+                {
+                    scanner.Dispose();
+                    scanner = null;
+                }
             }
         }
     }

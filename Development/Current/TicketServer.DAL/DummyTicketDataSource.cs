@@ -55,6 +55,8 @@ namespace TicketServer.DAL
 			ticket.City = "Testingen";
 			ticket.Phone = "+43/1234/567890";
 			ticket.EMail = "tester@butzvarruckt.at";
+			ticket.IsRedeemed = code == "1562785113133" ? true : false;
+			ticket.RedeemDate = DateTime.Now;
 
 			return ticket;
 		}
