@@ -21,7 +21,7 @@ namespace TicketServer.Service
 		/// <value>
 		/// The id.
 		/// </value>
-		[DataMember]
+		[DataMember(IsRequired = true)]
 		public int Id { get; set; }
 		/// <summary>
 		/// Gets or sets a value indicating whether this ticket is a online ticket.
@@ -29,7 +29,7 @@ namespace TicketServer.Service
 		/// <value>
 		/// 	<c>true</c> if this is a online ticket; otherwise, <c>false</c>.
 		/// </value>
-		[DataMember]
+		[DataMember(IsRequired = true)]
 		public bool IsOnlineTicket { get; set; }
 		/// <summary>
 		/// Gets or sets the type.
@@ -37,7 +37,7 @@ namespace TicketServer.Service
 		/// <value>
 		/// The type.
 		/// </value>
-		[DataMember]
+		[DataMember(IsRequired = true)]
 		public CardType Type { get; set; }
 		/// <summary>
 		/// Gets or sets the code.
@@ -45,7 +45,7 @@ namespace TicketServer.Service
 		/// <value>
 		/// The code.
 		/// </value>
-		[DataMember]
+		[DataMember(IsRequired = true)]
 		public string Code { get; set; }
 		/// <summary>
 		/// Gets or sets the name.
@@ -101,7 +101,7 @@ namespace TicketServer.Service
 		/// <value>
 		///   <c>true</c> if redeemed; otherwise, <c>false</c>.
 		/// </value>
-		[DataMember]
+		[DataMember(IsRequired = true)]
 		public bool IsRedeemed { get; set; }
 		/// <summary>
 		/// Gets or sets the redeem date.

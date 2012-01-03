@@ -118,66 +118,66 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AlreadyRedeemed" xml:space="preserve">
-    <value>TICKET ALREADY REDEEMED!</value>
+    <value>KARTE BEREITS EINGELÖST!</value>
   </data>
   <data name="CardType_Free" xml:space="preserve">
-    <value>Free</value>
+    <value>Gratis</value>
   </data>
   <data name="CardType_Normal" xml:space="preserve">
-    <value>Normal</value>
+    <value>Normale</value>
   </data>
   <data name="CardType_Unknown" xml:space="preserve">
-    <value>UNKNOWN</value>
+    <value>UNBEKANNT</value>
   </data>
   <data name="CardVersion_Offline" xml:space="preserve">
-    <value>Ticket</value>
+    <value>Karte</value>
   </data>
   <data name="CardVersion_Online" xml:space="preserve">
-    <value>Online-Ticket</value>
+    <value>Onlineticket</value>
   </data>
   <data name="Code" xml:space="preserve">
     <value>Code</value>
   </data>
   <data name="Connecting" xml:space="preserve">
-    <value>Connecting...</value>
+    <value>Verbinde...</value>
   </data>
   <data name="ConnectionError_Failed" xml:space="preserve">
-    <value>Could not connect to service!</value>
+    <value>Konnte nicht zum Server verbinden!</value>
   </data>
   <data name="ConnectionError_Timeout" xml:space="preserve">
-    <value>Connection Timeout while connecting to service!</value>
+    <value>Zeitüberschreitung bei der Verbindung!</value>
   </data>
   <data name="ConnectionError_Unknown" xml:space="preserve">
-    <value>Unknown connection error:</value>
+    <value>Unbekannter Fehler: </value>
   </data>
   <data name="ConnectionLost_Content" xml:space="preserve">
-    <value>Connection to ticket service lost! Please select a new connection.\n\rStatus:</value>
+    <value>Verbindung zum Ticket Server verloren! Bitte eine neue Verbindung auswählen.\n\rStatus:</value>
   </data>
   <data name="ConnectionLost_Title" xml:space="preserve">
-    <value>Connection lost</value>
+    <value>Verbindung verloren</value>
   </data>
   <data name="InitialConnectionFaild_Content" xml:space="preserve">
-    <value>Connection to ticket service could not be established!</value>
+    <value>Verbindung zum Ticketserver konnte nicht hergestellt werden!</value>
   </data>
   <data name="InitialConnectionFaild_Title" xml:space="preserve">
-    <value>Error connecting to service</value>
+    <value>Fehler beim Verbinden zum Server</value>
   </data>
   <data name="NotConnected" xml:space="preserve">
-    <value>Not connected</value>
+    <value>Nicht verbunden</value>
   </data>
   <data name="Redeem" xml:space="preserve">
-    <value>Redeem</value>
+    <value>Einlösen</value>
   </data>
   <data name="Redeemed" xml:space="preserve">
-    <value>Redeemed</value>
+    <value>Eingelöst</value>
   </data>
   <data name="RedeemTime" xml:space="preserve">
-    <value>Redeem ({0})</value>
+    <value>Einlösen ({0})</value>
   </data>
   <data name="ServiceConnected" xml:space="preserve">
-    <value>Connected and ready...</value>
+    <value>Verbunden und bereit...</value>
   </data>
   <data name="Type" xml:space="preserve">
-    <value>Type</value>
+    <value>Typ</value>
   </data>
 </root>

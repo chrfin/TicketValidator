@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -117,67 +117,29 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AlreadyRedeemed" xml:space="preserve">
-    <value>TICKET ALREADY REDEEMED!</value>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="buttonTest.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 20</value>
   </data>
-  <data name="CardType_Free" xml:space="preserve">
-    <value>Free</value>
+  <data name="labelTest.Location" type="System.Drawing.Point, System.Drawing">
+    <value>122, 102</value>
   </data>
-  <data name="CardType_Normal" xml:space="preserve">
-    <value>Normal</value>
+  <data name="labelTest.Size" type="System.Drawing.Size, System.Drawing">
+    <value>113, 20</value>
   </data>
-  <data name="CardType_Unknown" xml:space="preserve">
-    <value>UNKNOWN</value>
+  <data name="labelTest.Text" xml:space="preserve">
+    <value>Nicht verbunden</value>
   </data>
-  <data name="CardVersion_Offline" xml:space="preserve">
-    <value>Ticket</value>
+  <data name="labelInfo.Text" xml:space="preserve">
+    <value>Bitte gib die URI des Ticket Servers ein:</value>
   </data>
-  <data name="CardVersion_Online" xml:space="preserve">
-    <value>Online-Ticket</value>
+  <data name="labelStatus.Location" type="System.Drawing.Point, System.Drawing">
+    <value>68, 102</value>
   </data>
-  <data name="Code" xml:space="preserve">
-    <value>Code</value>
+  <data name="buttonCancel.Text" xml:space="preserve">
+    <value>Abbrechen</value>
   </data>
-  <data name="Connecting" xml:space="preserve">
-    <value>Connecting...</value>
-  </data>
-  <data name="ConnectionError_Failed" xml:space="preserve">
-    <value>Could not connect to service!</value>
-  </data>
-  <data name="ConnectionError_Timeout" xml:space="preserve">
-    <value>Connection Timeout while connecting to service!</value>
-  </data>
-  <data name="ConnectionError_Unknown" xml:space="preserve">
-    <value>Unknown connection error:</value>
-  </data>
-  <data name="ConnectionLost_Content" xml:space="preserve">
-    <value>Connection to ticket service lost! Please select a new connection.\n\rStatus:</value>
-  </data>
-  <data name="ConnectionLost_Title" xml:space="preserve">
-    <value>Connection lost</value>
-  </data>
-  <data name="InitialConnectionFaild_Content" xml:space="preserve">
-    <value>Connection to ticket service could not be established!</value>
-  </data>
-  <data name="InitialConnectionFaild_Title" xml:space="preserve">
-    <value>Error connecting to service</value>
-  </data>
-  <data name="NotConnected" xml:space="preserve">
-    <value>Not connected</value>
-  </data>
-  <data name="Redeem" xml:space="preserve">
-    <value>Redeem</value>
-  </data>
-  <data name="Redeemed" xml:space="preserve">
-    <value>Redeemed</value>
-  </data>
-  <data name="RedeemTime" xml:space="preserve">
-    <value>Redeem ({0})</value>
-  </data>
-  <data name="ServiceConnected" xml:space="preserve">
-    <value>Connected and ready...</value>
-  </data>
-  <data name="Type" xml:space="preserve">
-    <value>Type</value>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Service Auswahl</value>
   </data>
 </root>
