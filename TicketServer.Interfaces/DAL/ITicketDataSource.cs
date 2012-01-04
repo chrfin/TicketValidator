@@ -13,6 +13,22 @@ namespace TicketServer.Interfaces.DAL
 	public interface ITicketDataSource
 	{
 		/// <summary>
+		/// Gets the ticket count.
+		/// </summary>
+		int TicketCount { get; }
+		/// <summary>
+		/// Gets the redeemed count.
+		/// </summary>
+		int RedeemedCount { get; }
+
+		/// <summary>
+		/// Adds the ticket to the data source.
+		/// </summary>
+		/// <param name="ticket">The ticket.</param>
+		/// <returns></returns>
+		bool AddTicket(ITicket ticket);
+
+		/// <summary>
 		/// Gets the ticket by its id.
 		/// </summary>
 		/// <param name="id">The id.</param>
@@ -24,6 +40,11 @@ namespace TicketServer.Interfaces.DAL
 		/// <param name="code">The code.</param>
 		/// <returns></returns>
 		ITicket GetTicket(string code);
+
+		/// <summary>
+		/// Gets all the tickets.
+		/// </summary>
+		IList<ITicket> Tickets { get; }
 
 		/// <summary>
 		/// Redeems the ticket.

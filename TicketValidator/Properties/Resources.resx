@@ -151,7 +151,8 @@
     <value>Unknown connection error:</value>
   </data>
   <data name="ConnectionLost_Content" xml:space="preserve">
-    <value>Connection to ticket service lost! Please select a new connection.\n\rStatus:</value>
+    <value>Connection to ticket service lost! Please select a new connection.
+Status:</value>
   </data>
   <data name="ConnectionLost_Title" xml:space="preserve">
     <value>Connection lost</value>

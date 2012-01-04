@@ -20,6 +20,7 @@ using System.ServiceModel.Description;
 using TicketServer.Service;
 using TicketServer.DAL;
 using TicketServer.Common;
+using TicketServer.DAL.SqlCe;
 
 namespace TicketServer
 {
@@ -50,7 +51,7 @@ namespace TicketServer
 		{
 			hostThread = new Thread(new ThreadStart(delegate()
 			{
-				service = new TicketService(new DummyTicketDataSource());
+				service = new TicketService(new SqlCeTicketDataSource(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Tickets.sdf")));
 				service.TicketRequested += new EventHandler(service_TicketRequested);
 				service.TicketRedeemed += new EventHandler(service_TicketRedeemed);
 
@@ -94,6 +95,19 @@ namespace TicketServer
 		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
 		{
 			host.Close();
+		}
+
+		/// <summary>
+		/// Handles the Click event of the buttonImport control.
+		/// </summary>
+		/// <param name="sender">The source of the event.</param>
+		/// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
+		private void buttonImport_Click(object sender, RoutedEventArgs e)
+		{
+			ImportTicket ticket = new ImportTicket();
+			ticket.Id = -1;
+			ticket.Code = "1562785113133";
+			service.TicketSource.AddTicket(ticket);
 		}
 	}
 }

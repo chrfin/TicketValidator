@@ -1,32 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Serialization;
 using System.Text;
-using TicketServer.DAL;
+using Castle.ActiveRecord;
+using Castle.ActiveRecord.Framework;
 using TicketServer.Interfaces;
 using TicketServer.Interfaces.Enums;
 
-namespace TicketServer.DAL
+namespace TicketServer.DAL.ActiveRecords
 {
 	/// <summary>
-	/// A dummy ticket for testing.
+	/// This is the Active Record implementation of ITicket.
 	/// </summary>
-	public class DummyTicket : ITicket
+	[ActiveRecord("tickets")]
+	public class TicketRecord : ActiveRecordLinqBase<TicketRecord>, ITicket
 	{
+		#region ITicket Members
+
 		/// <summary>
 		/// Gets or sets the id.
 		/// </summary>
 		/// <value>
 		/// The id.
 		/// </value>
+		[PrimaryKey(Generator = PrimaryKeyType.Identity)]
 		public int Id { get; set; }
 		/// <summary>
 		/// Gets or sets a value indicating whether this ticket is a online ticket.
 		/// </summary>
 		/// <value>
-		/// 	<c>true</c> if this is a online ticket; otherwise, <c>false</c>.
+		///   <c>true</c> if this is a online ticket; otherwise, <c>false</c>.
 		/// </value>
+		[Property]
 		public bool IsOnlineTicket { get; set; }
 		/// <summary>
 		/// Gets or sets the type.
@@ -34,6 +39,7 @@ namespace TicketServer.DAL
 		/// <value>
 		/// The type.
 		/// </value>
+		[Property]
 		public CardType Type { get; set; }
 		/// <summary>
 		/// Gets or sets the code.
@@ -41,6 +47,7 @@ namespace TicketServer.DAL
 		/// <value>
 		/// The code.
 		/// </value>
+		[Property(Unique = true)]
 		public string Code { get; set; }
 		/// <summary>
 		/// Gets or sets the name.
@@ -48,6 +55,7 @@ namespace TicketServer.DAL
 		/// <value>
 		/// The name.
 		/// </value>
+		[Property]
 		public string Name { get; set; }
 		/// <summary>
 		/// Gets or sets the address.
@@ -55,6 +63,7 @@ namespace TicketServer.DAL
 		/// <value>
 		/// The address.
 		/// </value>
+		[Property]
 		public string Address { get; set; }
 		/// <summary>
 		/// Gets or sets the zip.
@@ -62,6 +71,7 @@ namespace TicketServer.DAL
 		/// <value>
 		/// The zip.
 		/// </value>
+		[Property]
 		public string Zip { get; set; }
 		/// <summary>
 		/// Gets or sets the city.
@@ -69,6 +79,7 @@ namespace TicketServer.DAL
 		/// <value>
 		/// The city.
 		/// </value>
+		[Property]
 		public string City { get; set; }
 		/// <summary>
 		/// Gets or sets the phone.
@@ -76,6 +87,7 @@ namespace TicketServer.DAL
 		/// <value>
 		/// The phone.
 		/// </value>
+		[Property]
 		public string Phone { get; set; }
 		/// <summary>
 		/// Gets or sets the E mail.
@@ -83,6 +95,7 @@ namespace TicketServer.DAL
 		/// <value>
 		/// The E mail.
 		/// </value>
+		[Property]
 		public string EMail { get; set; }
 		/// <summary>
 		/// Gets or sets a value indicating whether this <see cref="Ticket"/> is redeemed.
@@ -90,6 +103,7 @@ namespace TicketServer.DAL
 		/// <value>
 		///   <c>true</c> if redeemed; otherwise, <c>false</c>.
 		/// </value>
+		[Property]
 		public bool IsRedeemed { get; set; }
 		/// <summary>
 		/// Gets or sets the redeem date.
@@ -97,11 +111,27 @@ namespace TicketServer.DAL
 		/// <value>
 		/// The redeem date.
 		/// </value>
-		public DateTime RedeemDate { get; set; }
+		[Property("RedeemDate")]
+		public DateTime? RedeemDateNullable { get; set; }
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="Ticket"/> class.
+		/// Gets or sets the redeem date.
 		/// </summary>
-		public DummyTicket() { Id = -1; }
+		/// <value>
+		/// The redeem date.
+		/// </value>
+		public DateTime RedeemDate
+		{
+			get
+			{
+				return RedeemDateNullable.HasValue ? RedeemDateNullable.Value : new DateTime();
+			}
+			set
+			{
+				RedeemDateNullable = value.Year > 2000 ? value : (DateTime?)null;
+			}
+		}
+
+		#endregion
 	}
 }

@@ -5,9 +5,9 @@ using System.Text;
 using TicketServer.Interfaces.BusinessLayer;
 using TicketServer.Interfaces.Enums;
 
-namespace TicketServer.DAL
+namespace TicketServer.DAL.SqlCe
 {
-	class DummyRedeemResult : IRedeemResult
+	internal class SqlCeRedeemResult : IRedeemResult
 	{
 		#region IRedeemResult Members
 
@@ -18,7 +18,6 @@ namespace TicketServer.DAL
 		/// The type.
 		/// </value>
 		public RedeemResultType Type { get; set; }
-
 		/// <summary>
 		/// Gets or sets the error.
 		/// </summary>
@@ -28,15 +27,5 @@ namespace TicketServer.DAL
 		public string Error { get; set; }
 
 		#endregion
-
-		/// <summary>
-		/// Initializes a new instance of the <see cref="DummyRedeemResult"/> class.
-		/// </summary>
-		/// <param name="result">The result.</param>
-		public DummyRedeemResult(RedeemResultType type = RedeemResultType.Redeemed, string error = null)
-		{
-			Type = type;
-			Error = error;
-		}
 	}
 }
