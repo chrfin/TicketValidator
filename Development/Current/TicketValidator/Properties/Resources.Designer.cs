@@ -157,7 +157,8 @@ namespace TicketValidator.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Connection to ticket service lost! Please select a new connection.\n\rStatus:.
+        ///   Looks up a localized string similar to Connection to ticket service lost! Please select a new connection.
+        ///Status:.
         /// </summary>
         internal static string ConnectionLost_Content {
             get {

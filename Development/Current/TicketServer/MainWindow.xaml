@@ -7,6 +7,25 @@
         Closing="Window_Closing"
         Loaded="Window_Loaded">
 	<Grid>
-		<TextBox x:Name="textBoxLog" AcceptsReturn="True" />
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition />
+			<ColumnDefinition />
+		</Grid.ColumnDefinitions>
+
+		<Grid.RowDefinitions>
+			<RowDefinition />
+			<RowDefinition Height="50" />
+		</Grid.RowDefinitions>
+
+		<TextBox x:Name="textBoxLog"
+		         Grid.Row="0"
+		         Grid.Column="0"
+		         Grid.ColumnSpan="2"
+		         AcceptsReturn="True" />
+		<Button x:Name="buttonImport"
+		        Grid.Row="1"
+		        Grid.Column="0"
+		        Click="buttonImport_Click"
+		        Content="Import" />
 	</Grid>
 </Window>

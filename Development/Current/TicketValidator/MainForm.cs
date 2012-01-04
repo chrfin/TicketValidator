@@ -104,9 +104,7 @@ namespace TicketValidator
 
             try
             {
-                bool specified;
-                ServiceStatus status;
-                service.GetServiceState(out status, out specified);
+                ServiceStatus status = service.GetServiceState();
                 if (status != ServiceStatus.Running)
                     MessageBox.Show(Resources.InitialConnectionFaild_Content, Resources.InitialConnectionFaild_Title,
                         MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
@@ -160,7 +158,8 @@ namespace TicketValidator
         /// <param name="scancollection">The scancollection.</param>
         protected void scanner_OnScan(ScanDataCollection scancollection)
         {
-            GetTicket(scancollection.GetFirst.Text);
+            string code = scancollection.GetFirst.Text;
+            GetTicket(code.Contains("-") ? code : code.Substring(0, code.Length -1));
 
             scanner.Scan();
         }
@@ -324,7 +323,7 @@ namespace TicketValidator
         {
             buttonRedeem.Invoke((Action)delegate()
             {
-                labelCodeInfo.Text = string.Empty;
+                labelCodeInfo.Text = Resources.ServiceConnected;
                 labelCodeInfo.ForeColor = Color.Black;
                 buttonRedeem.Text = Resources.Redeem;
                 buttonRedeem.Enabled = false;
@@ -346,6 +345,7 @@ namespace TicketValidator
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void buttonCancel_Click(object sender, EventArgs e)
         {
+            autoRedeemThread.Abort();
             currentTicket = null;
             ResetUI();
         }
