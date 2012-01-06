@@ -7,7 +7,7 @@ using TicketServer.Interfaces.Enums;
 
 namespace TicketServer.Service
 {
-	[ServiceContract]
+	[ServiceContract(Namespace = "http://butzvarruckt.at/")]
 	public interface ITicketService
 	{
 		/// <summary>
@@ -15,7 +15,7 @@ namespace TicketServer.Service
 		/// </summary>
 		/// <returns></returns>
 		[OperationContract]
-		ServiceStatus GetServiceState();
+		ServiceStatus GetCurrentState();
 
 		/// <summary>
 		/// Gets the ticket with the specific code.

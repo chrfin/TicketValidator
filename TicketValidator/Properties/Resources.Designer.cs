@@ -239,6 +239,15 @@ namespace TicketValidator.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Unknown code - Ticket not found!.
+        /// </summary>
+        internal static string TicketNotFound {
+            get {
+                return ResourceManager.GetString("TicketNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Type.
         /// </summary>
         internal static string Type {

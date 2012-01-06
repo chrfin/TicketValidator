@@ -181,4 +181,7 @@ Status:</value>
   <data name="Type" xml:space="preserve">
     <value>Type</value>
   </data>
+  <data name="TicketNotFound" xml:space="preserve">
+    <value>Unknown code - Ticket not found!</value>
+  </data>
 </root>

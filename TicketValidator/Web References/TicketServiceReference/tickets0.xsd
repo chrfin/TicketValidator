@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema xmlns:tns="http://butzvarruckt.at/" elementFormDefault="qualified" targetNamespace="http://butzvarruckt.at/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://192.168.0.130:8880/tickets?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/TicketServer.Interfaces.Enums" />
   <xs:import schemaLocation="http://192.168.0.130:8880/tickets?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/TicketServer.Service" />
-  <xs:element name="GetServiceState">
+  <xs:element name="GetCurrentState">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetServiceStateResponse">
+  <xs:element name="GetCurrentStateResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/TicketServer.Interfaces.Enums" minOccurs="0" name="GetServiceStateResult" type="q1:ServiceStatus" />
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/TicketServer.Interfaces.Enums" minOccurs="0" name="GetCurrentStateResult" type="q1:ServiceStatus" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

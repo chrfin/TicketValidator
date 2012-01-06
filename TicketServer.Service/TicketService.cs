@@ -9,6 +9,7 @@ using TicketServer.Common;
 using TicketServer.Interfaces.DAL;
 using TicketServer.Interfaces.Enums;
 using TicketServer.Interfaces.BusinessLayer;
+using TicketServer.Interfaces;
 
 namespace TicketServer.Service
 {
@@ -75,14 +76,14 @@ namespace TicketServer.Service
 		{
 			TicketSource = ticketSource;
 		}
-
+		
 		#region ITicketService Members
 
 		/// <summary>
 		/// Gets the state of the service.
 		/// </summary>
 		/// <returns></returns>
-		public ServiceStatus GetServiceState()
+		public ServiceStatus GetCurrentState()
 		{
 			return ServiceStatus.Running;
 		}
@@ -94,7 +95,11 @@ namespace TicketServer.Service
 		/// <returns></returns>
 		public Ticket GetTicket(string code)
 		{
-			Ticket ticket = new Ticket(TicketSource.GetTicket(code));
+			ITicket sourceTicket = TicketSource.GetTicket(code);
+			if (sourceTicket == null)
+				return null;
+
+			Ticket ticket = new Ticket(sourceTicket);
 			
 			AsyncHelper.FireAsync(TicketRequested, this, new TicketEventArgs(ticket, Client.Address));
 
