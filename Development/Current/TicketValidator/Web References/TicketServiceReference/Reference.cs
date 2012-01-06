@@ -32,27 +32,27 @@ namespace TicketValidator.TicketServiceReference {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ITicketService/GetServiceState", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public void GetServiceState(out ServiceStatus GetServiceStateResult, [System.Xml.Serialization.XmlIgnoreAttribute()] out bool GetServiceStateResultSpecified) {
-            object[] results = this.Invoke("GetServiceState", new object[0]);
-            GetServiceStateResult = ((ServiceStatus)(results[0]));
-            GetServiceStateResultSpecified = ((bool)(results[1]));
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://butzvarruckt.at/ITicketService/GetCurrentState", RequestNamespace="http://butzvarruckt.at/", ResponseNamespace="http://butzvarruckt.at/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public void GetCurrentState(out ServiceStatus GetCurrentStateResult, [System.Xml.Serialization.XmlIgnoreAttribute()] out bool GetCurrentStateResultSpecified) {
+            object[] results = this.Invoke("GetCurrentState", new object[0]);
+            GetCurrentStateResult = ((ServiceStatus)(results[0]));
+            GetCurrentStateResultSpecified = ((bool)(results[1]));
         }
         
         /// <remarks/>
-        public System.IAsyncResult BeginGetServiceState(System.AsyncCallback callback, object asyncState) {
-            return this.BeginInvoke("GetServiceState", new object[0], callback, asyncState);
+        public System.IAsyncResult BeginGetCurrentState(System.AsyncCallback callback, object asyncState) {
+            return this.BeginInvoke("GetCurrentState", new object[0], callback, asyncState);
         }
         
         /// <remarks/>
-        public void EndGetServiceState(System.IAsyncResult asyncResult, out ServiceStatus GetServiceStateResult, out bool GetServiceStateResultSpecified) {
+        public void EndGetCurrentState(System.IAsyncResult asyncResult, out ServiceStatus GetCurrentStateResult, out bool GetCurrentStateResultSpecified) {
             object[] results = this.EndInvoke(asyncResult);
-            GetServiceStateResult = ((ServiceStatus)(results[0]));
-            GetServiceStateResultSpecified = ((bool)(results[1]));
+            GetCurrentStateResult = ((ServiceStatus)(results[0]));
+            GetCurrentStateResultSpecified = ((bool)(results[1]));
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ITicketService/GetTicket", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://butzvarruckt.at/ITicketService/GetTicket", RequestNamespace="http://butzvarruckt.at/", ResponseNamespace="http://butzvarruckt.at/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
         public Ticket GetTicket([System.Xml.Serialization.XmlElementAttribute(IsNullable=true)] string code) {
             object[] results = this.Invoke("GetTicket", new object[] {
@@ -73,7 +73,7 @@ namespace TicketValidator.TicketServiceReference {
         }
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://tempuri.org/ITicketService/RedeemTicket", RequestNamespace="http://tempuri.org/", ResponseNamespace="http://tempuri.org/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://butzvarruckt.at/ITicketService/RedeemTicket", RequestNamespace="http://butzvarruckt.at/", ResponseNamespace="http://butzvarruckt.at/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         [return: System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
         public RedeemResult RedeemTicket(int id, [System.Xml.Serialization.XmlIgnoreAttribute()] bool idSpecified) {
             object[] results = this.Invoke("RedeemTicket", new object[] {

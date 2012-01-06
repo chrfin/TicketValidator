@@ -147,6 +147,7 @@
     <None Include="Web References\TicketServiceReference\Ticket.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
+    <None Include="Web References\TicketServiceReference\tickets.wsdl" />
     <None Include="Web References\TicketServiceReference\tickets.xsd" />
     <None Include="Web References\TicketServiceReference\tickets0.xsd" />
     <None Include="Web References\TicketServiceReference\tickets1.xsd" />

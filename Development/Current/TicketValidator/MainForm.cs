@@ -74,7 +74,7 @@ namespace TicketValidator
         /// </summary>
         private void StartAutoRedeemTimer()
         {
-            timeToAutoRedeem = 5;
+            timeToAutoRedeem = 4;
             autoRedeemThread = new Thread(new ThreadStart(delegate()
             {
                 while (timeToAutoRedeem > 0)
@@ -88,6 +88,18 @@ namespace TicketValidator
             autoRedeemThread.IsBackground = true;
             autoRedeemThread.Name = "Auto Redeem Thread";
             autoRedeemThread.Start();
+        }
+
+        /// <summary>
+        /// Stops the auto redeem timer.
+        /// </summary>
+        private void StopAutoRedeemTimer()
+        {
+            if (autoRedeemThread == null)
+                return;
+
+            autoRedeemThread.Abort();
+            autoRedeemThread = null;
         }
 
         /// <summary>
@@ -159,7 +171,7 @@ namespace TicketValidator
         protected void scanner_OnScan(ScanDataCollection scancollection)
         {
             string code = scancollection.GetFirst.Text;
-            GetTicket(code.Contains("-") ? code : code.Substring(0, code.Length -1));
+            GetTicket(code.Contains("-") ? code : code.Substring(0, code.Length - 1));
 
             scanner.Scan();
         }
@@ -179,12 +191,21 @@ namespace TicketValidator
             labelCodeInfo.Invoke((Action)delegate()
             {
                 labelCodeInfo.Text = Resources.Code + ": " + code + Environment.NewLine;
-                buttonRedeem.Enabled = true;
-                buttonCancel.Enabled = true;
             });
 
             RequestTicket(code);
-            StartAutoRedeemTimer();
+
+            if (currentTicket == null)
+            {
+                Beep(BeepType.Error);
+                labelCodeInfo.Invoke((Action)delegate()
+                {
+                    labelCodeInfo.Text = Resources.TicketNotFound;
+                    labelCodeInfo.ForeColor = Color.Red;
+                    buttonCancel.Enabled = true;
+                });
+                return;
+            }
 
             string type = string.Empty;
 
@@ -211,12 +232,18 @@ namespace TicketValidator
                 labelCodeInfo.Text += currentTicket.Zip + " " + currentTicket.City + Environment.NewLine;
                 labelCodeInfo.Text += currentTicket.Phone + Environment.NewLine;
                 labelCodeInfo.Text += currentTicket.EMail + Environment.NewLine;
+                buttonCancel.Enabled = true;
                 if (currentTicket.IsRedeemed)
                 {
                     labelCodeInfo.Text += Resources.Redeemed + ": " + currentTicket.RedeemDate.ToString("T");
                     labelCodeInfo.ForeColor = Color.Red;
 
                     Beep(BeepType.Error);
+                }
+                else
+                {
+                    buttonRedeem.Enabled = true;
+                    StartAutoRedeemTimer();
                 }
             });
         }
@@ -283,7 +310,7 @@ namespace TicketValidator
         /// </summary>
         private bool RedeemCurrentTicket()
         {
-            autoRedeemThread.Abort();
+            StopAutoRedeemTimer();
             if (currentTicket == null)
                 return false;
 
@@ -298,9 +325,9 @@ namespace TicketValidator
                     return true;
                 }
                 else if (result.Type == RedeemResultType.AlreadyRedeemed)
-                    labelCodeInfo.Text = Resources.AlreadyRedeemed;
+                    labelCodeInfo.Invoke((Action)delegate() { labelCodeInfo.Text = Resources.AlreadyRedeemed; });
                 else
-                    labelCodeInfo.Text = result.Error;
+                    labelCodeInfo.Invoke((Action)delegate() { labelCodeInfo.Text = result.Error; });
             }
             catch (WebException exp)
             {
@@ -308,7 +335,7 @@ namespace TicketValidator
                     MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
                 if (SelectService())
                     return RedeemCurrentTicket();
-                
+
                 Close();
             }
 
@@ -345,7 +372,7 @@ namespace TicketValidator
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void buttonCancel_Click(object sender, EventArgs e)
         {
-            autoRedeemThread.Abort();
+            StopAutoRedeemTimer();
             currentTicket = null;
             ResetUI();
         }
