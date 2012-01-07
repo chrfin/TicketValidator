@@ -22,5 +22,26 @@ namespace TicketServer.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("en-US;de-DE")]
+        public string AvailableLanguages {
+            get {
+                return ((string)(this["AvailableLanguages"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("de")]
+        public string SelectedLanguage {
+            get {
+                return ((string)(this["SelectedLanguage"]));
+            }
+            set {
+                this["SelectedLanguage"] = value;
+            }
+        }
     }
 }

@@ -59,5 +59,95 @@ namespace TicketServer.Properties {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clear tickets.
+        /// </summary>
+        internal static string ButtonClear {
+            get {
+                return ResourceManager.GetString("ButtonClear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset tickets.
+        /// </summary>
+        internal static string ButtonReset {
+            get {
+                return ResourceManager.GetString("ButtonReset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exit.
+        /// </summary>
+        internal static string RibbonButtonExit {
+            get {
+                return ResourceManager.GetString("RibbonButtonExit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import CSV.
+        /// </summary>
+        internal static string RibbonButtonImportCSV {
+            get {
+                return ResourceManager.GetString("RibbonButtonImportCSV", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        internal static string RibbonButtonSettings {
+            get {
+                return ResourceManager.GetString("RibbonButtonSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Language.
+        /// </summary>
+        internal static string RibbonGroupLanguage {
+            get {
+                return ResourceManager.GetString("RibbonGroupLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filter.
+        /// </summary>
+        internal static string RibbonTabFilter {
+            get {
+                return ResourceManager.GetString("RibbonTabFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Home.
+        /// </summary>
+        internal static string RibbonTabHome {
+            get {
+                return ResourceManager.GetString("RibbonTabHome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import.
+        /// </summary>
+        internal static string RibbonTabImport {
+            get {
+                return ResourceManager.GetString("RibbonTabImport", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        internal static string RibbonTabSettings {
+            get {
+                return ResourceManager.GetString("RibbonTabSettings", resourceCulture);
+            }
+        }
     }
 }

@@ -52,5 +52,18 @@ namespace TicketServer.Interfaces.DAL
 		/// <param name="id">The id.</param>
 		/// <returns></returns>
 		IRedeemResult RedeemTicket(int id);
+
+		/// <summary>
+		/// Resets all ticket redemtions in this data source.
+		/// </summary>
+		/// <param name="createBackup">if set to <c>true</c> a backup will be created.</param>
+		/// <returns></returns>
+		bool Reset(bool createBackup = true);
+		/// <summary>
+		/// Clears this datasource from all tickets.
+		/// </summary>
+		/// <param name="createBackup">if set to <c>true</c> a backup will be created.</param>
+		/// <returns></returns>
+		bool Clear(bool createBackup = true);
 	}
 }
