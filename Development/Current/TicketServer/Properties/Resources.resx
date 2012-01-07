@@ -117,4 +117,34 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ButtonClear" xml:space="preserve">
+    <value>Clear tickets</value>
+  </data>
+  <data name="ButtonReset" xml:space="preserve">
+    <value>Reset tickets</value>
+  </data>
+  <data name="RibbonButtonExit" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="RibbonButtonImportCSV" xml:space="preserve">
+    <value>Import CSV</value>
+  </data>
+  <data name="RibbonButtonSettings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="RibbonGroupLanguage" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="RibbonTabFilter" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="RibbonTabHome" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="RibbonTabImport" xml:space="preserve">
+    <value>Import</value>
+  </data>
+  <data name="RibbonTabSettings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
 </root>

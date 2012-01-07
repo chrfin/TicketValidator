@@ -21,13 +21,18 @@ using TicketServer.Service;
 using TicketServer.DAL;
 using TicketServer.Common;
 using TicketServer.DAL.SqlCe;
+using Microsoft.Windows.Controls.Ribbon;
+using TicketServer.Properties;
+using System.Globalization;
+using RootLibrary.WPF.Localization;
+using Microsoft.WindowsAPICodePack.Dialogs;
 
 namespace TicketServer
 {
 	/// <summary>
 	/// Interaction logic for MainWindow.xaml
 	/// </summary>
-	public partial class MainWindow : Window
+	public partial class MainWindow : RibbonWindow
 	{
 		ServiceHost host;
 		Thread hostThread;
@@ -40,7 +45,59 @@ namespace TicketServer
 		public MainWindow()
 		{
 			InitializeComponent();
+
+			PrepareLocalisation();
 		}
+
+		/// <summary>
+		/// Prepares the localisation.
+		/// </summary>
+		private void PrepareLocalisation()
+		{
+			foreach (string lang in Settings.Default.AvailableLanguages.Split(';'))
+			{
+				CultureInfo culture = new CultureInfo(lang);
+				RibbonGalleryItem item = new RibbonGalleryItem();
+				item.Content = culture.Parent.NativeName + " (" + culture.Parent.EnglishName + ")";
+				item.Tag = culture;
+				item.Selected += new RoutedEventHandler(language_Selected);
+				ribbonGalleryCategoryLanguages.Items.Add(item);
+
+				if (culture.TwoLetterISOLanguageName == Settings.Default.SelectedLanguage)
+					SetUICulture(culture);
+			}
+		}
+
+		/// <summary>
+		/// Handles the Selected event of the language control.
+		/// </summary>
+		/// <param name="sender">The source of the event.</param>
+		/// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
+		private void language_Selected(object sender, RoutedEventArgs e)
+		{
+			SetUICulture((sender as RibbonGalleryItem).Tag as CultureInfo);
+		}
+
+		/// <summary>
+		/// Sets the UI culture.
+		/// </summary>
+		/// <param name="culture">The culture.</param>
+		private void SetUICulture(CultureInfo culture)
+		{
+			Thread.CurrentThread.CurrentCulture = culture;
+			Thread.CurrentThread.CurrentUICulture = culture;
+			LocalizeDictionary.Instance.Culture = culture;
+
+			foreach (RibbonGalleryItem item in ribbonGalleryCategoryLanguages.Items)
+			{
+				if (item.Tag == culture)
+					item.IsSelected = true;
+			}
+
+			Settings.Default.SelectedLanguage = culture.TwoLetterISOLanguageName;
+			Settings.Default.Save();
+		}
+
 
 		/// <summary>
 		/// Handles the Loaded event of the Window control.
@@ -51,7 +108,7 @@ namespace TicketServer
 		{
 			hostThread = new Thread(new ThreadStart(delegate()
 			{
-				service = new TicketService(new SqlCeTicketDataSource(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Tickets.sdf")));
+				service = new TicketService(new SqlCeTicketDataSource(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BV2012.tickets")));
 				service.TicketRequested += new EventHandler(service_TicketRequested);
 				service.TicketRedeemed += new EventHandler(service_TicketRedeemed);
 
@@ -83,7 +140,7 @@ namespace TicketServer
 		{
 			textBoxLog.Dispatcher.Invoke((Action)delegate()
 			{
-				textBoxLog.Text += string.Format("Ticket requested ({0}): {1}", (e as TicketEventArgs).Client ,(e as TicketEventArgs).Ticket.Code) + Environment.NewLine;
+				textBoxLog.Text += string.Format("Ticket requested ({0}): {1}", (e as TicketEventArgs).Client, (e as TicketEventArgs).Ticket.Code) + Environment.NewLine;
 			});
 		}
 
@@ -94,6 +151,29 @@ namespace TicketServer
 		/// <param name="e">The <see cref="System.ComponentModel.CancelEventArgs"/> instance containing the event data.</param>
 		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
 		{
+			//Does not work while debigging
+			//TaskDialog errorDialog = new TaskDialog();
+
+			//errorDialog.Cancelable = true;
+			//errorDialog.Icon = TaskDialogStandardIcon.None;
+
+			//errorDialog.Caption = "Caption";
+			//errorDialog.InstructionText = "IT";
+			//errorDialog.Text = "Text";
+
+			//errorDialog.DetailsExpanded = false;
+			//errorDialog.ExpansionMode = TaskDialogExpandedDetailsLocation.Hide;
+			//errorDialog.StandardButtons = TaskDialogStandardButtons.Yes;
+
+			//TaskDialogCommandLink buttonYes = new TaskDialogCommandLink("buttonClose", "T", "I");
+			//buttonYes.Click += new EventHandler(delegate(object snd, EventArgs eventArgs)
+			//{
+			//    host.Close();
+			//});
+			//errorDialog.Controls.Add(buttonYes);
+
+			//errorDialog.Show();
+
 			host.Close();
 		}
 
@@ -109,5 +189,25 @@ namespace TicketServer
 			ticket.Code = "1562785113133";
 			service.TicketSource.AddTicket(ticket);
 		}
+
+		/// <summary>
+		/// Handles the Click event of the buttonClear control.
+		/// </summary>
+		/// <param name="sender">The source of the event.</param>
+		/// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
+		private void buttonClear_Click(object sender, RoutedEventArgs e) { service.TicketSource.Clear(); }
+		/// <summary>
+		/// Handles the Click event of the buttonReset control.
+		/// </summary>
+		/// <param name="sender">The source of the event.</param>
+		/// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
+		private void buttonReset_Click(object sender, RoutedEventArgs e) { service.TicketSource.Reset(); }
+
+		/// <summary>
+		/// Handles the Click event of the buttonExit control.
+		/// </summary>
+		/// <param name="sender">The source of the event.</param>
+		/// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
+		private void buttonExit_Click(object sender, RoutedEventArgs e) { Close(); }
 	}
 }

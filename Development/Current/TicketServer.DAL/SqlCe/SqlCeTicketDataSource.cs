@@ -20,16 +20,30 @@ namespace TicketServer.DAL.SqlCe
 	public class SqlCeTicketDataSource : ITicketDataSource
 	{
 		/// <summary>
+		/// Gets the filename.
+		/// </summary>
+		public string Filename { get; private set; }
+
+		/// <summary>
 		/// Initializes a new instance of the <see cref="SqlCeTicketDataSource"/> class.
 		/// </summary>
 		/// <param name="filename">The filename wher the database is or should be created.</param>
 		public SqlCeTicketDataSource(string filename)
 		{
+			Filename = filename;
+			OpenFile();
+		}
+
+		/// <summary>
+		/// Opens the file.
+		/// </summary>
+		private void OpenFile()
+		{
 			bool createSchema = false;
-			if (!File.Exists(filename))
+			if (!File.Exists(Filename))
 			{
 				createSchema = true;
-				SqlCeEngine engine = new SqlCeEngine(SqlCE.GetConnectionString(filename));
+				SqlCeEngine engine = new SqlCeEngine(SqlCE.GetConnectionString(Filename));
 				engine.CreateDatabase();
 				engine.Dispose();
 			}
@@ -38,7 +52,7 @@ namespace TicketServer.DAL.SqlCe
 			properties.Add("connection.driver_class", "NHibernate.Driver.SqlServerCeDriver");
 			properties.Add("dialect", "NHibernate.Dialect.MsSqlCeDialect");
 			properties.Add("connection.provider", "NHibernate.Connection.DriverConnectionProvider");
-			properties.Add("connection.connection_string", SqlCE.GetConnectionString(filename));
+			properties.Add("connection.connection_string", SqlCE.GetConnectionString(Filename));
 			properties.Add("proxyfactory.factory_class", "NHibernate.ByteCode.Castle.ProxyFactoryFactory, NHibernate.ByteCode.Castle");
 
 			InPlaceConfigurationSource source = new InPlaceConfigurationSource();
@@ -56,7 +70,6 @@ namespace TicketServer.DAL.SqlCe
 		/// Gets the ticket count.
 		/// </summary>
 		public int TicketCount { get { return ActiveRecordMediator<TicketRecord>.Count(); } }
-
 		/// <summary>
 		/// Gets the redeemed count.
 		/// </summary>
@@ -160,6 +173,38 @@ namespace TicketServer.DAL.SqlCe
 			}
 
 			return result;
+		}
+
+		/// <summary>
+		/// Resets all ticket redemtions in this data source.
+		/// </summary>
+		/// <param name="createBackup">if set to <c>true</c> a backup will be created.</param>
+		/// <returns></returns>
+		public bool Reset(bool createBackup = true)
+		{
+			if (createBackup)
+				File.Copy(Filename, Filename.Replace(Path.GetExtension(Filename), "_" + DateTime.Now.ToString("yyyyMddHHmm") + Path.GetExtension(Filename)), true);
+			var tickets = TicketRecord.FindAll();
+			foreach (TicketRecord ticket in tickets)
+			{
+				ticket.IsRedeemed = false;
+				ticket.RedeemDateNullable = null;
+				ticket.Save();
+			}
+
+			return true;
+		}
+		/// <summary>
+		/// Clears this datasource from all tickets.
+		/// </summary>
+		/// <param name="createBackup">if set to <c>true</c> a backup will be created.</param>
+		/// <returns></returns>
+		public bool Clear(bool createBackup = true)
+		{
+			if (createBackup)
+				File.Copy(Filename, Filename.Replace(Path.GetExtension(Filename), "_" + DateTime.Now.ToString("yyyyMddHHmm") + Path.GetExtension(Filename)), true);
+			TicketRecord.DeleteAll();
+			return true;
 		}
 
 		#endregion
