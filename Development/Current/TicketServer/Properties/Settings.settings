@@ -8,5 +8,8 @@
     <Setting Name="SelectedLanguage" Type="System.String" Scope="User">
       <Value Profile="(Default)">de</Value>
     </Setting>
+    <Setting Name="CurrentDataFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">./BV2012.tickets</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

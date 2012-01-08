@@ -79,6 +79,15 @@ namespace TicketServer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New.
+        /// </summary>
+        internal static string ButtonNew {
+            get {
+                return ResourceManager.GetString("ButtonNew", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reset tickets.
         /// </summary>
         internal static string ButtonReset {
@@ -93,6 +102,33 @@ namespace TicketServer.Properties {
         internal static string ButtonResetTip {
             get {
                 return ResourceManager.GetString("ButtonResetTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to tickets.
+        /// </summary>
+        internal static string FileFilterExtension {
+            get {
+                return ResourceManager.GetString("FileFilterExtension", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tickets File.
+        /// </summary>
+        internal static string FileFilterText {
+            get {
+                return ResourceManager.GetString("FileFilterText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ticket Server - {0}.
+        /// </summary>
+        internal static string MainTitleFile {
+            get {
+                return ResourceManager.GetString("MainTitleFile", resourceCulture);
             }
         }
         

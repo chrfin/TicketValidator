@@ -51,6 +51,7 @@
     <Reference Include="LocalizeExtension">
       <HintPath>..\..\..\3rdParty\LocalizeExtension\LocalizeExtension.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Microsoft.WindowsAPICodePack">
       <HintPath>..\..\..\3rdParty\WindowsApiCodePack\Microsoft.WindowsAPICodePack.dll</HintPath>
     </Reference>
@@ -172,6 +173,18 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icons\Small\applix.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Large\mail_new.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Small\mail_new.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Large\fileimport.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Small\fileimport.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
