@@ -9,7 +9,8 @@
                 MinHeight="250"
                 Closing="Window_Closing"
                 Icon="App.ico"
-                Loaded="Window_Loaded">
+                Loaded="Window_Loaded"
+                WindowStartupLocation="CenterScreen">
 	<Grid>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition />
@@ -29,6 +30,17 @@
 		          Grid.ColumnSpan="3">
 			<r:Ribbon.ApplicationMenu>
 				<r:RibbonApplicationMenu SmallImageSource="Icons\Menu.png">
+					<r:RibbonApplicationMenuItem x:Name="buttonNew"
+					                             Click="buttonNew_Click"
+					                             Header="{LocText TicketServer::ButtonNew}"
+					                             ImageSource="Icons\Large\mail_new.png" />
+					<r:RibbonApplicationSplitMenuItem Click="buttonImport_Click"
+					                                  Header="{LocText TicketServer::RibbonTabImport}"
+					                                  ImageSource="Icons\Large\fileimport.png">
+						<r:RibbonApplicationMenuItem Click="buttonImport_Click"
+						                             Header="{LocText TicketServer::RibbonButtonImportCSV}"
+						                             ImageSource="Icons\Large\txt.png" />
+					</r:RibbonApplicationSplitMenuItem>
 					<r:RibbonApplicationMenu.FooterPaneContent>
 						<DockPanel LastChildFill="False">
 							<r:RibbonButton Margin="2"

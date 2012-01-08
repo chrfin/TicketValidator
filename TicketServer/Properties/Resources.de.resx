@@ -123,11 +123,17 @@
   <data name="ButtonClearTip" xml:space="preserve">
     <value>Löscht ALLE Karten!</value>
   </data>
+  <data name="ButtonNew" xml:space="preserve">
+    <value>Neu</value>
+  </data>
   <data name="ButtonReset" xml:space="preserve">
     <value>Karten zurücksetzen</value>
   </data>
   <data name="ButtonResetTip" xml:space="preserve">
     <value>Setzt alle Karten auf "nicht eingelöst" zurück.</value>
+  </data>
+  <data name="FileFilterText" xml:space="preserve">
+    <value>Karten Datei</value>
   </data>
   <data name="RibbonButtonExit" xml:space="preserve">
     <value>Beenden</value>

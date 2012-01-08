@@ -19,6 +19,8 @@ namespace TicketServer.DAL.SqlCe
 {
 	public class SqlCeTicketDataSource : ITicketDataSource
 	{
+		private static bool ActiveRecordsInitialized = false;
+
 		/// <summary>
 		/// Gets the filename.
 		/// </summary>
@@ -58,7 +60,11 @@ namespace TicketServer.DAL.SqlCe
 			InPlaceConfigurationSource source = new InPlaceConfigurationSource();
 			source.Add(typeof(ActiveRecordBase), properties);
 
-			ActiveRecordStarter.Initialize(Assembly.GetExecutingAssembly(), source);
+			if (!SqlCeTicketDataSource.ActiveRecordsInitialized)
+			{
+				ActiveRecordStarter.Initialize(Assembly.GetExecutingAssembly(), source);
+				SqlCeTicketDataSource.ActiveRecordsInitialized = true;
+			}
 
 			if (createSchema)
 				ActiveRecordStarter.CreateSchema();

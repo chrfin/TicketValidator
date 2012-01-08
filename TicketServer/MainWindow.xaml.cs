@@ -26,6 +26,7 @@ using TicketServer.Properties;
 using System.Globalization;
 using RootLibrary.WPF.Localization;
 using Microsoft.WindowsAPICodePack.Dialogs;
+using Microsoft.VisualBasic.FileIO;
 
 namespace TicketServer
 {
@@ -40,6 +41,14 @@ namespace TicketServer
 		TicketService service;
 
 		/// <summary>
+		/// Gets or sets the filename.
+		/// </summary>
+		/// <value>
+		/// The filename.
+		/// </value>
+		protected string Filename { get; set; }
+
+		/// <summary>
 		/// Initializes a new instance of the <see cref="MainWindow"/> class.
 		/// </summary>
 		public MainWindow()
@@ -47,6 +56,21 @@ namespace TicketServer
 			InitializeComponent();
 
 			PrepareLocalisation();
+
+			if (Settings.Default.CurrentDataFile.StartsWith("./"))
+				Filename = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Settings.Default.CurrentDataFile.Substring(2));
+			else
+				Filename = Settings.Default.CurrentDataFile;
+
+			UpdateTitle();
+		}
+
+		/// <summary>
+		/// Updates the title of the window.
+		/// </summary>
+		private void UpdateTitle()
+		{
+			Title = string.Format(Properties.Resources.MainTitleFile, System.IO.Path.GetFileName(Filename));
 		}
 
 		/// <summary>
@@ -97,8 +121,7 @@ namespace TicketServer
 			Settings.Default.SelectedLanguage = culture.TwoLetterISOLanguageName;
 			Settings.Default.Save();
 		}
-
-
+		
 		/// <summary>
 		/// Handles the Loaded event of the Window control.
 		/// </summary>
@@ -108,7 +131,7 @@ namespace TicketServer
 		{
 			hostThread = new Thread(new ThreadStart(delegate()
 			{
-				service = new TicketService(new SqlCeTicketDataSource(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "BV2012.tickets")));
+				service = new TicketService(new SqlCeTicketDataSource(Filename));
 				service.TicketRequested += new EventHandler(service_TicketRequested);
 				service.TicketRedeemed += new EventHandler(service_TicketRedeemed);
 
@@ -209,5 +232,29 @@ namespace TicketServer
 		/// <param name="sender">The source of the event.</param>
 		/// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
 		private void buttonExit_Click(object sender, RoutedEventArgs e) { Close(); }
+
+		/// <summary>
+		/// Handles the Click event of the buttonNew control.
+		/// </summary>
+		/// <param name="sender">The source of the event.</param>
+		/// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
+		private void buttonNew_Click(object sender, RoutedEventArgs e)
+		{
+			CommonSaveFileDialog sfd = new CommonSaveFileDialog();
+			sfd.Filters.Add(new CommonFileDialogFilter(Properties.Resources.FileFilterText, Properties.Resources.FileFilterExtension));
+			sfd.DefaultExtension = Properties.Resources.FileFilterExtension;
+			sfd.AlwaysAppendDefaultExtension = true;
+			if (sfd.ShowDialog() == CommonFileDialogResult.Ok)
+			{
+				if (System.IO.File.Exists(sfd.FileName))
+					FileSystem.DeleteFile(sfd.FileName, UIOption.OnlyErrorDialogs, RecycleOption.SendToRecycleBin);
+
+				service.TicketSource = new SqlCeTicketDataSource(sfd.FileName);
+				Filename = sfd.FileName;
+				Settings.Default.CurrentDataFile = Filename;
+				Settings.Default.Save();
+				UpdateTitle();
+			}
+		}
 	}
 }

@@ -123,11 +123,23 @@
   <data name="ButtonClearTip" xml:space="preserve">
     <value>Deletes ALL tickets!</value>
   </data>
+  <data name="ButtonNew" xml:space="preserve">
+    <value>New</value>
+  </data>
   <data name="ButtonReset" xml:space="preserve">
     <value>Reset tickets</value>
   </data>
   <data name="ButtonResetTip" xml:space="preserve">
     <value>Set all tickets back to "not redeemed".</value>
+  </data>
+  <data name="FileFilterExtension" xml:space="preserve">
+    <value>tickets</value>
+  </data>
+  <data name="FileFilterText" xml:space="preserve">
+    <value>Tickets File</value>
+  </data>
+  <data name="MainTitleFile" xml:space="preserve">
+    <value>Ticket Server - {0}</value>
   </data>
   <data name="RibbonButtonExit" xml:space="preserve">
     <value>Exit</value>

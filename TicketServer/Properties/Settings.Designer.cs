@@ -43,5 +43,17 @@ namespace TicketServer.Properties {
                 this["SelectedLanguage"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("./BV2012.tickets")]
+        public string CurrentDataFile {
+            get {
+                return ((string)(this["CurrentDataFile"]));
+            }
+            set {
+                this["CurrentDataFile"] = value;
+            }
+        }
     }
 }
