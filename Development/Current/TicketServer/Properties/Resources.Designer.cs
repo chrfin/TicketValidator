@@ -70,11 +70,29 @@ namespace TicketServer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Deletes ALL tickets!.
+        /// </summary>
+        internal static string ButtonClearTip {
+            get {
+                return ResourceManager.GetString("ButtonClearTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reset tickets.
         /// </summary>
         internal static string ButtonReset {
             get {
                 return ResourceManager.GetString("ButtonReset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set all tickets back to &quot;not redeemed&quot;..
+        /// </summary>
+        internal static string ButtonResetTip {
+            get {
+                return ResourceManager.GetString("ButtonResetTip", resourceCulture);
             }
         }
         
