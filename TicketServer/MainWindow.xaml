@@ -5,6 +5,8 @@
                 Title="Ticket Server"
                 Width="825"
                 Height="650"
+                MinWidth="350"
+                MinHeight="250"
                 Closing="Window_Closing"
                 Icon="App.ico"
                 Loaded="Window_Loaded">
@@ -48,11 +50,13 @@
 					<r:RibbonButton Click="buttonReset_Click"
 					                Label="{LocText TicketServer::ButtonReset}"
 					                LargeImageSource="Icons\Large\reload.png"
-					                SmallImageSource="Icons\Small\reload.png" />
+					                SmallImageSource="Icons\Small\reload.png"
+					                ToolTipDescription="{LocText TicketServer::ButtonResetTip}" />
 					<r:RibbonButton Click="buttonClear_Click"
 					                Label="{LocText TicketServer::ButtonClear}"
 					                LargeImageSource="Icons\Large\editdelete.png"
-					                SmallImageSource="Icons\Small\editdelete.png" />
+					                SmallImageSource="Icons\Small\editdelete.png"
+					                ToolTipDescription="{LocText TicketServer::ButtonClearTip}" />
 				</r:RibbonGroup>
 			</r:RibbonTab>
 			<r:RibbonTab Header="{LocText TicketServer::RibbonTabImport}">
@@ -60,7 +64,7 @@
 					<r:RibbonButton Click="buttonImport_Click"
 					                Label="{LocText TicketServer::RibbonButtonImportCSV}"
 					                LargeImageSource="Icons\Large\txt.png"
-									SmallImageSource="Icons\Small\applix.png" />
+					                SmallImageSource="Icons\Small\applix.png" />
 				</r:RibbonGroup>
 			</r:RibbonTab>
 			<r:RibbonTab Header="{LocText TicketServer::RibbonTabFilter}" />

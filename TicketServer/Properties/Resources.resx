@@ -120,8 +120,14 @@
   <data name="ButtonClear" xml:space="preserve">
     <value>Clear tickets</value>
   </data>
+  <data name="ButtonClearTip" xml:space="preserve">
+    <value>Deletes ALL tickets!</value>
+  </data>
   <data name="ButtonReset" xml:space="preserve">
     <value>Reset tickets</value>
+  </data>
+  <data name="ButtonResetTip" xml:space="preserve">
+    <value>Set all tickets back to "not redeemed".</value>
   </data>
   <data name="RibbonButtonExit" xml:space="preserve">
     <value>Exit</value>
