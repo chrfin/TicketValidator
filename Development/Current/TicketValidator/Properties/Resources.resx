@@ -184,4 +184,7 @@ Status:</value>
   <data name="TicketNotFound" xml:space="preserve">
     <value>Unknown code - Ticket not found!</value>
   </data>
+  <data name="CardType_Special" xml:space="preserve">
+    <value>Special</value>
+  </data>
 </root>

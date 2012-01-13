@@ -38,7 +38,7 @@ namespace TicketServer.Service
 		/// The type.
 		/// </value>
 		[DataMember(IsRequired = true)]
-		public CardType Type { get; set; }
+		public TicketType Type { get; set; }
 		/// <summary>
 		/// Gets or sets the code.
 		/// </summary>
@@ -62,7 +62,7 @@ namespace TicketServer.Service
 		/// The address.
 		/// </value>
 		[DataMember]
-		public string Address { get; set; }
+		public string Street { get; set; }
 		/// <summary>
 		/// Gets or sets the zip.
 		/// </summary>
@@ -127,7 +127,7 @@ namespace TicketServer.Service
 			Type = ticket.Type;
 			Code = ticket.Code;
 			Name = ticket.Name;
-			Address = ticket.Address;
+			Street = ticket.Street;
 			Zip = ticket.Zip;
 			City = ticket.City;
 			Phone = ticket.Phone;

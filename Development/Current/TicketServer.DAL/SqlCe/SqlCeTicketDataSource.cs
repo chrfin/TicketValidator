@@ -92,7 +92,7 @@ namespace TicketServer.DAL.SqlCe
 
 			if (ticket.Id > 0)
 				newTicket.Id = ticket.Id;
-			newTicket.Address = ticket.Address;
+			newTicket.Street = ticket.Street;
 			newTicket.City = ticket.City;
 			newTicket.Code = ticket.Code;
 			newTicket.EMail = ticket.EMail;
@@ -190,7 +190,11 @@ namespace TicketServer.DAL.SqlCe
 		{
 			if (createBackup)
 				File.Copy(Filename, Filename.Replace(Path.GetExtension(Filename), "_" + DateTime.Now.ToString("yyyyMddHHmm") + Path.GetExtension(Filename)), true);
-			var tickets = TicketRecord.FindAll();
+			
+			var tickets = from t in TicketRecord.Queryable
+						  where t.IsRedeemed
+						  select t;
+
 			foreach (TicketRecord ticket in tickets)
 			{
 				ticket.IsRedeemed = false;

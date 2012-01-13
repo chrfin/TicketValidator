@@ -85,6 +85,15 @@ namespace TicketValidator.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Special.
+        /// </summary>
+        internal static string CardType_Special {
+            get {
+                return ResourceManager.GetString("CardType_Special", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to UNKNOWN.
         /// </summary>
         internal static string CardType_Unknown {

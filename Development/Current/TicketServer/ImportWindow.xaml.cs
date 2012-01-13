@@ -13,6 +13,8 @@ using System.Windows.Shapes;
 using TicketServer.Interfaces.DAL;
 using System.IO;
 using Microsoft.WindowsAPICodePack.Dialogs;
+using TicketServer.Interfaces.Enums;
+using System.Threading;
 
 namespace TicketServer
 {
@@ -45,6 +47,17 @@ namespace TicketServer
 			ColumnBoxes.Add(comboBoxCityColumn);
 			ColumnBoxes.Add(comboBoxPhoneColumn);
 			ColumnBoxes.Add(comboBoxMailColumn);
+
+			comboBoxCodeColumn.Tag = new GridViewColumn() { Header = Properties.Resources.FieldCode };
+			comboBoxNameColumn.Tag = new GridViewColumn() { Header = Properties.Resources.FieldName };
+			comboBoxStreetColumn.Tag = new GridViewColumn() { Header = Properties.Resources.FieldStreet };
+			comboBoxZipColumn.Tag = new GridViewColumn() { Header = Properties.Resources.FieldZip };
+			comboBoxCityColumn.Tag = new GridViewColumn() { Header = Properties.Resources.FieldCity };
+			comboBoxPhoneColumn.Tag = new GridViewColumn() { Header = Properties.Resources.FieldPhone };
+			comboBoxMailColumn.Tag = new GridViewColumn() { Header = Properties.Resources.FieldMail };
+
+			listViewPreview.View = new GridView();
+			ColumnBoxes.ForEach(cb => (listViewPreview.View as GridView).Columns.Add(cb.Tag as GridViewColumn));
 		}
 
 		/// <summary>
@@ -55,6 +68,7 @@ namespace TicketServer
 		{
 			comboBoxSeparator.IsEnabled = enable;
 			ColumnBoxes.ForEach(cb => cb.IsEnabled = enable);
+			buttonImport.IsEnabled = enable;
 		}
 
 		/// <summary>
@@ -72,6 +86,7 @@ namespace TicketServer
 					DemoLines = new List<string>();
 					for (int i = 0; i < 5; ++i)
 						DemoLines.Add(reader.ReadLine());
+					reader.Close();
 
 					UpdateColumns(comboBoxSeparator.Text);
 				}
@@ -79,7 +94,6 @@ namespace TicketServer
 			else
 			{
 				listViewPreview.ItemsSource = null;
-				listViewPreview.View = null;
 				ColumnBoxes.ForEach(cb => cb.ItemsSource = null);
 			}
 		}
@@ -97,7 +111,6 @@ namespace TicketServer
 				ColumnBoxes.ForEach(cb => cb.ItemsSource = columnList);
 
 				listViewPreview.ItemsSource = null;
-				listViewPreview.View = null;
 			}
 		}
 
@@ -139,36 +152,137 @@ namespace TicketServer
 		/// <param name="e">The <see cref="System.Windows.Controls.SelectionChangedEventArgs"/> instance containing the event data.</param>
 		private void comboBoxColumn_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			GridView view = new GridView();
+			List<string[]> rows = new List<string[]>();
+			DemoLines.ForEach(l => rows.Add(SplitLine(l, comboBoxSeparator.Text).ToArray()));
+			listViewPreview.ItemsSource = rows;
+
 			ColumnBoxes.ForEach(delegate(ComboBox cb)
 			{
+				GridViewColumn column = cb.Tag as GridViewColumn;
+				column.DisplayMemberBinding = new Binding("[-1]") { TargetNullValue = string.Empty };
 				if (cb == sender)
 				{
 					if (e.AddedItems.Count > 0)
 					{
 						string item = e.AddedItems[0].ToString();
 						if (item.Length > 0)
-						{
-							int index = (cb.ItemsSource as List<string>).IndexOf(item);
-							view.Columns.Add(new GridViewColumn() { Header = item, DisplayMemberBinding = new Binding("[" + index + "]") });
-						}
+							column.DisplayMemberBinding = new Binding("[" + cb.SelectedIndex + "]");
 					}
 				}
 				else
 				{
 					if (cb.Text.Length > 0)
-					{
-						int index = (cb.ItemsSource as List<string>).IndexOf(cb.Text);
-						view.Columns.Add(new GridViewColumn() { Header = cb.Text, DisplayMemberBinding = new Binding("[" + index + "]") });
-					}
+						column.DisplayMemberBinding = new Binding("[" + cb.SelectedIndex + "]");
 				}
+
+				if (double.IsNaN(column.Width))
+					column.Width = column.ActualWidth;
+				column.Width = double.NaN;
 			});
-			listViewPreview.View = view;
-			
-			List<string[]> rows = new List<string[]>();
-			foreach (string row in DemoLines)
-				rows.Add(row.Split(new string[] { comboBoxSeparator.Text == "\\t" ? "\t" : comboBoxSeparator.Text }, StringSplitOptions.None));
-			listViewPreview.ItemsSource = rows;
 		}
+
+		/// <summary>
+		/// Splits the line into its columns.
+		/// </summary>
+		/// <param name="row">The row.</param>
+		/// <returns></returns>
+		private List<string> SplitLine(string row, string separator)
+		{
+			List<string> rowValues = new List<string>();
+			List<string> parts = new List<string>(row.Split(new string[] { separator == "\\t" ? "\t" : separator },
+				StringSplitOptions.None));
+			parts.ForEach(s => rowValues.Add(s.Trim(new char[] { '"' })));
+			return rowValues;
+		}
+
+		/// <summary>
+		/// Handles the Click event of the buttonImport control.
+		/// </summary>
+		/// <param name="sender">The source of the event.</param>
+		/// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
+		private void buttonImport_Click(object sender, RoutedEventArgs e)
+		{
+			string file = textBoxFile.Text;
+			bool hasHeader= checkBoxHeader.IsChecked.HasValue && checkBoxHeader.IsChecked.Value;
+			string separator = comboBoxSeparator.Text;
+			Thread importThread = new Thread(new ThreadStart(delegate()
+			{
+				Dispatcher.Invoke((Action)delegate()
+				{
+					IsEnabled = false;
+					textBlockStatus.Text = Properties.Resources.ImportStatusReadingFile;
+				});
+
+				List<string> lines;
+				using (TextReader reader = File.OpenText(file))
+				{
+					if (hasHeader)
+						reader.ReadLine();
+					string content = reader.ReadToEnd();
+					lines = new List<string>(content.Split(new string[] { content.Contains("\r\n") ? "\r\n" : "\n" }, StringSplitOptions.RemoveEmptyEntries));
+					reader.Close();
+				}
+
+				int i = 0;
+				foreach (string row in lines)
+				{
+					Dispatcher.Invoke((Action)delegate() 
+					{
+						textBlockStatus.Text = String.Format(Properties.Resources.ImportStatusImporting, ++i, lines.Count);
+					});
+					List<string> rowValues = SplitLine(row, separator);
+
+					ImportTicket ticket = new ImportTicket();
+					Dispatcher.Invoke((Action)delegate()
+					{
+						ticket.IsOnlineTicket = (comboBoxTicketMode.SelectedItem as IsOnlineComboBoxItem).IsOnlineTicket;
+						ticket.Type = (comboBoxTicketType.SelectedItem as TicketTypeComboBoxItem).TicketType;
+						ticket.Code = comboBoxCodeColumn.Text.Length > 0 ? rowValues[comboBoxCodeColumn.SelectedIndex] : null;
+						ticket.Name = comboBoxNameColumn.Text.Length > 0 ? rowValues[comboBoxNameColumn.SelectedIndex] : null;
+						ticket.Street = comboBoxStreetColumn.Text.Length > 0 ? rowValues[comboBoxStreetColumn.SelectedIndex] : null;
+						ticket.Zip = comboBoxZipColumn.Text.Length > 0 ? rowValues[comboBoxZipColumn.SelectedIndex] : null;
+						ticket.City = comboBoxCityColumn.Text.Length > 0 ? rowValues[comboBoxCityColumn.SelectedIndex] : null;
+						ticket.Phone = comboBoxPhoneColumn.Text.Length > 0 ? rowValues[comboBoxPhoneColumn.SelectedIndex] : null;
+						ticket.EMail = comboBoxMailColumn.Text.Length > 0 ? rowValues[comboBoxMailColumn.SelectedIndex] : null;
+					});
+					TicketSource.AddTicket(ticket);
+				}
+
+				Dispatcher.Invoke((Action)delegate()
+				{
+					textBlockStatus.Text = Properties.Resources.ImportStatusReady;
+					IsEnabled = true;
+				});
+			}));
+			importThread.Start();
+		}
+	}
+
+	/// <summary>
+	/// Item for "IsOnline" selection
+	/// </summary>
+	internal class IsOnlineComboBoxItem : ComboBoxItem
+	{
+		/// <summary>
+		/// Gets or sets a value indicating whether this instance is online ticket.
+		/// </summary>
+		/// <value>
+		/// 	<c>true</c> if this instance is online ticket; otherwise, <c>false</c>.
+		/// </value>
+		public bool IsOnlineTicket { get; set; }
+	}
+
+	/// <summary>
+	/// Item for "TicketType" selection.
+	/// </summary>
+	internal class TicketTypeComboBoxItem : ComboBoxItem
+	{
+		/// <summary>
+		/// Gets or sets the type of the ticket.
+		/// </summary>
+		/// <value>
+		/// The type of the ticket.
+		/// </value>
+		public TicketType TicketType { get; set; }
 	}
 }

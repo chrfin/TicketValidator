@@ -17,6 +17,10 @@ namespace TicketValidator
         /// <summary>
         /// The beep signal fo any error (e.g. ticket already redeemed).
         /// </summary>
-        Error
+        Error,
+        /// <summary>
+        /// The beep signal if the user needs to check the display.
+        /// </summary>
+        Attention
     }
 }

@@ -46,7 +46,7 @@
   <ItemGroup>
     <Compile Include="BusinessLayer\IRedeemResult.cs" />
     <Compile Include="DAL\ITicketDataSource.cs" />
-    <Compile Include="Enums\CardType.cs" />
+    <Compile Include="Enums\TicketType.cs" />
     <Compile Include="Enums\RedeemResultType.cs" />
     <Compile Include="Enums\ServiceStatus.cs" />
     <Compile Include="ITicket.cs" />
