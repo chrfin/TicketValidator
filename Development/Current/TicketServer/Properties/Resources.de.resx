@@ -117,11 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AllFilterName" xml:space="preserve">
+    <value>Alle Dateien</value>
+  </data>
   <data name="ButtonClear" xml:space="preserve">
     <value>Karten löschen</value>
   </data>
   <data name="ButtonClearTip" xml:space="preserve">
     <value>Löscht ALLE Karten!</value>
+  </data>
+  <data name="ButtonImport" xml:space="preserve">
+    <value>Importieren starten</value>
   </data>
   <data name="ButtonNew" xml:space="preserve">
     <value>Neu</value>
@@ -132,8 +138,17 @@
   <data name="ButtonResetTip" xml:space="preserve">
     <value>Setzt alle Karten auf "nicht eingelöst" zurück.</value>
   </data>
+  <data name="CsvFilterName" xml:space="preserve">
+    <value>CSV-Dateien</value>
+  </data>
   <data name="FileFilterText" xml:space="preserve">
     <value>Karten Datei</value>
+  </data>
+  <data name="ImportColumnText" xml:space="preserve">
+    <value>Bitte wähle die Spaltenzuordnung aus:</value>
+  </data>
+  <data name="ImportDescriptionText" xml:space="preserve">
+    <value>Bitte wähle die Datei aus, aus welcher importiert werden soll:</value>
   </data>
   <data name="RibbonButtonExit" xml:space="preserve">
     <value>Beenden</value>
@@ -158,5 +173,38 @@
   </data>
   <data name="RibbonTabSettings" xml:space="preserve">
     <value>Einstellungen</value>
+  </data>
+  <data name="TextBlockCityColumn" xml:space="preserve">
+    <value>Ort-Spalte:</value>
+  </data>
+  <data name="TextBlockCodeColumn" xml:space="preserve">
+    <value>Code-Spalte:</value>
+  </data>
+  <data name="TextBlockFile" xml:space="preserve">
+    <value>Datei:</value>
+  </data>
+  <data name="TextBlockMailColumn" xml:space="preserve">
+    <value>e-Mail-Spalte:</value>
+  </data>
+  <data name="TextBlockNameColumn" xml:space="preserve">
+    <value>Namens-Spalte:</value>
+  </data>
+  <data name="TextBlockPhoneColumn" xml:space="preserve">
+    <value>Telefon-Spalte:</value>
+  </data>
+  <data name="TextBlockPreview" xml:space="preserve">
+    <value>Vorschau:</value>
+  </data>
+  <data name="TextBlockSeparator" xml:space="preserve">
+    <value>Spaltentrennzeichen:</value>
+  </data>
+  <data name="TextBlockStreetColumn" xml:space="preserve">
+    <value>Straßen-Spalte:</value>
+  </data>
+  <data name="TextBlockZipColumn" xml:space="preserve">
+    <value>Plz-Spalte:</value>
+  </data>
+  <data name="WindowImportTitle" xml:space="preserve">
+    <value>Karten importieren</value>
   </data>
 </root>
