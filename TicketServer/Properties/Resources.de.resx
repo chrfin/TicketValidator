@@ -138,8 +138,32 @@
   <data name="ButtonResetTip" xml:space="preserve">
     <value>Setzt alle Karten auf "nicht eingelöst" zurück.</value>
   </data>
+  <data name="CheckBoxHasHeader" xml:space="preserve">
+    <value>Datei hat eine Zeile mit Spaltentitel</value>
+  </data>
   <data name="CsvFilterName" xml:space="preserve">
     <value>CSV-Dateien</value>
+  </data>
+  <data name="FieldCity" xml:space="preserve">
+    <value>Ort</value>
+  </data>
+  <data name="FieldCode" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="FieldMail" xml:space="preserve">
+    <value>e-Mail</value>
+  </data>
+  <data name="FieldName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="FieldPhone" xml:space="preserve">
+    <value>Telefon</value>
+  </data>
+  <data name="FieldStreet" xml:space="preserve">
+    <value>Straße</value>
+  </data>
+  <data name="FieldZip" xml:space="preserve">
+    <value>Plz</value>
   </data>
   <data name="FileFilterText" xml:space="preserve">
     <value>Karten Datei</value>
@@ -149,6 +173,33 @@
   </data>
   <data name="ImportDescriptionText" xml:space="preserve">
     <value>Bitte wähle die Datei aus, aus welcher importiert werden soll:</value>
+  </data>
+  <data name="ImportStatusImporting" xml:space="preserve">
+    <value>Importiere Karte {0}/{1}...</value>
+  </data>
+  <data name="ImportStatusReadingFile" xml:space="preserve">
+    <value>Lese Datei...</value>
+  </data>
+  <data name="ImportStatusReady" xml:space="preserve">
+    <value>Bereit...</value>
+  </data>
+  <data name="ImportTypeText" xml:space="preserve">
+    <value>Bitte wähle den Karten-Typ aus:</value>
+  </data>
+  <data name="ItemFreeTicket" xml:space="preserve">
+    <value>Gratis</value>
+  </data>
+  <data name="ItemNormalTicket" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="ItemOfflineTicket" xml:space="preserve">
+    <value>Offline</value>
+  </data>
+  <data name="ItemOnlineTicket" xml:space="preserve">
+    <value>Online</value>
+  </data>
+  <data name="ItemSpecialTicket" xml:space="preserve">
+    <value>Spezial</value>
   </data>
   <data name="RibbonButtonExit" xml:space="preserve">
     <value>Beenden</value>
@@ -200,6 +251,12 @@
   </data>
   <data name="TextBlockStreetColumn" xml:space="preserve">
     <value>Straßen-Spalte:</value>
+  </data>
+  <data name="TextBlockTicketMode" xml:space="preserve">
+    <value>Kartenart:</value>
+  </data>
+  <data name="TextBlockTicketType" xml:space="preserve">
+    <value>Kartentyp:</value>
   </data>
   <data name="TextBlockZipColumn" xml:space="preserve">
     <value>Plz-Spalte:</value>

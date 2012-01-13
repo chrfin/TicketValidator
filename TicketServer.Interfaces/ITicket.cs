@@ -31,7 +31,7 @@ namespace TicketServer.Interfaces
 		/// <value>
 		/// The type.
 		/// </value>
-		CardType Type { get; set; }
+		TicketType Type { get; set; }
 		/// <summary>
 		/// Gets or sets the code.
 		/// </summary>
@@ -52,7 +52,7 @@ namespace TicketServer.Interfaces
 		/// <value>
 		/// The address.
 		/// </value>
-		string Address { get; set; }
+		string Street { get; set; }
 		/// <summary>
 		/// Gets or sets the zip.
 		/// </summary>

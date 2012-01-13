@@ -3,7 +3,6 @@
   <xs:import schemaLocation="http://192.168.0.130:8880/tickets?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/TicketServer.Interfaces.Enums" />
   <xs:complexType name="Ticket">
     <xs:sequence>
-      <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="City" nillable="true" type="xs:string" />
       <xs:element name="Code" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="EMail" nillable="true" type="xs:string" />
@@ -13,7 +12,8 @@
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Phone" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="RedeemDate" type="xs:dateTime" />
-      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/TicketServer.Interfaces.Enums" name="Type" type="q1:CardType" />
+      <xs:element minOccurs="0" name="Street" nillable="true" type="xs:string" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/TicketServer.Interfaces.Enums" name="Type" type="q1:TicketType" />
       <xs:element minOccurs="0" name="Zip" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>

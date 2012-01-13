@@ -116,8 +116,6 @@ namespace TicketValidator.TicketServiceReference {
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/TicketServer.Service")]
     public partial class Ticket {
         
-        private string addressField;
-        
         private string cityField;
         
         private string codeField;
@@ -138,20 +136,11 @@ namespace TicketValidator.TicketServiceReference {
         
         private bool redeemDateFieldSpecified;
         
-        private CardType typeField;
+        private string streetField;
+        
+        private TicketType typeField;
         
         private string zipField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
-        public string Address {
-            get {
-                return this.addressField;
-            }
-            set {
-                this.addressField = value;
-            }
-        }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
@@ -260,7 +249,18 @@ namespace TicketValidator.TicketServiceReference {
         }
         
         /// <remarks/>
-        public CardType Type {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public string Street {
+            get {
+                return this.streetField;
+            }
+            set {
+                this.streetField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public TicketType Type {
             get {
                 return this.typeField;
             }
@@ -283,13 +283,16 @@ namespace TicketValidator.TicketServiceReference {
     
     /// <remarks/>
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://schemas.datacontract.org/2004/07/TicketServer.Interfaces.Enums")]
-    public enum CardType {
+    public enum TicketType {
         
         /// <remarks/>
         Free,
         
         /// <remarks/>
         Normal,
+        
+        /// <remarks/>
+        Special,
     }
     
     /// <remarks/>

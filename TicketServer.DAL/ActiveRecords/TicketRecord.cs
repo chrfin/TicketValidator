@@ -40,7 +40,7 @@ namespace TicketServer.DAL.ActiveRecords
 		/// The type.
 		/// </value>
 		[Property]
-		public CardType Type { get; set; }
+		public TicketType Type { get; set; }
 		/// <summary>
 		/// Gets or sets the code.
 		/// </summary>
@@ -64,7 +64,7 @@ namespace TicketServer.DAL.ActiveRecords
 		/// The address.
 		/// </value>
 		[Property]
-		public string Address { get; set; }
+		public string Street { get; set; }
 		/// <summary>
 		/// Gets or sets the zip.
 		/// </summary>

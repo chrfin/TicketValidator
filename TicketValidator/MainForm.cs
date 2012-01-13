@@ -211,11 +211,14 @@ namespace TicketValidator
 
             switch (currentTicket.Type)
             {
-                case CardType.Free:
+                case TicketType.Free:
                     type = Resources.CardType_Free;
                     break;
-                case CardType.Normal:
+                case TicketType.Normal:
                     type = Resources.CardType_Normal;
+                    break;
+                case TicketType.Special:
+                    type = Resources.CardType_Special;
                     break;
                 default:
                     type = Resources.CardType_Unknown;
@@ -228,7 +231,7 @@ namespace TicketValidator
             {
                 labelCodeInfo.Text += Resources.Type + ": " + type + Environment.NewLine;
                 labelCodeInfo.Text += currentTicket.Name + Environment.NewLine;
-                labelCodeInfo.Text += currentTicket.Address + Environment.NewLine;
+                labelCodeInfo.Text += currentTicket.Street + Environment.NewLine;
                 labelCodeInfo.Text += currentTicket.Zip + " " + currentTicket.City + Environment.NewLine;
                 labelCodeInfo.Text += currentTicket.Phone + Environment.NewLine;
                 labelCodeInfo.Text += currentTicket.EMail + Environment.NewLine;
@@ -239,6 +242,11 @@ namespace TicketValidator
                     labelCodeInfo.ForeColor = Color.Red;
 
                     Beep(BeepType.Error);
+                }
+                else if (currentTicket.Type == TicketType.Special)
+                {
+                    buttonRedeem.Enabled = true;
+                    Beep(BeepType.Attention);
                 }
                 else
                 {
@@ -271,6 +279,16 @@ namespace TicketValidator
                             beep.Frequency = 1000;
                             beep.Volume = 5;
                             beep.State = NotifyState.CYCLE;
+                            break;
+                        case BeepType.Attention:
+                            beep.Duration = 50;
+                            beep.Frequency = 7500;
+                            beep.Volume = 5;
+                            for (int i = 0; i < 10; ++i)
+                            {
+                                beep.State = NotifyState.CYCLE;
+                                Thread.Sleep(75);
+                            }
                             break;
                         default:
                             beep.Duration = 1000;
@@ -315,6 +333,12 @@ namespace TicketValidator
                 return false;
 
             ResetUI();
+
+            if (currentTicket.IsRedeemed)
+            {
+                currentTicket = null;
+                return true;
+            }
             try
             {
                 RedeemResult result = service.RedeemTicket(currentTicket.Id);

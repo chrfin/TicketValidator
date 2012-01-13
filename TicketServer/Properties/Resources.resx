@@ -138,8 +138,32 @@
   <data name="ButtonResetTip" xml:space="preserve">
     <value>Set all tickets back to "not redeemed".</value>
   </data>
+  <data name="CheckBoxHasHeader" xml:space="preserve">
+    <value>File does have a header row</value>
+  </data>
   <data name="CsvFilterName" xml:space="preserve">
     <value>CSV-Files</value>
+  </data>
+  <data name="FieldCity" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="FieldCode" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="FieldMail" xml:space="preserve">
+    <value>e-Mail</value>
+  </data>
+  <data name="FieldName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="FieldPhone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="FieldStreet" xml:space="preserve">
+    <value>Street</value>
+  </data>
+  <data name="FieldZip" xml:space="preserve">
+    <value>Zip</value>
   </data>
   <data name="FileFilterExtension" xml:space="preserve">
     <value>tickets</value>
@@ -152,6 +176,33 @@
   </data>
   <data name="ImportDescriptionText" xml:space="preserve">
     <value>Please select the file to import:</value>
+  </data>
+  <data name="ImportStatusImporting" xml:space="preserve">
+    <value>Import ticket {0}/{1}...</value>
+  </data>
+  <data name="ImportStatusReadingFile" xml:space="preserve">
+    <value>Reading file...</value>
+  </data>
+  <data name="ImportStatusReady" xml:space="preserve">
+    <value>Ready...</value>
+  </data>
+  <data name="ImportTypeText" xml:space="preserve">
+    <value>Please select the type of the tickets:</value>
+  </data>
+  <data name="ItemFreeTicket" xml:space="preserve">
+    <value>Free</value>
+  </data>
+  <data name="ItemNormalTicket" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="ItemOfflineTicket" xml:space="preserve">
+    <value>Offline</value>
+  </data>
+  <data name="ItemOnlineTicket" xml:space="preserve">
+    <value>Online</value>
+  </data>
+  <data name="ItemSpecialTicket" xml:space="preserve">
+    <value>Special</value>
   </data>
   <data name="MainTitleFile" xml:space="preserve">
     <value>Ticket Server - {0}</value>
@@ -206,6 +257,12 @@
   </data>
   <data name="TextBlockStreetColumn" xml:space="preserve">
     <value>Street-Column:</value>
+  </data>
+  <data name="TextBlockTicketMode" xml:space="preserve">
+    <value>Ticket-Mode:</value>
+  </data>
+  <data name="TextBlockTicketType" xml:space="preserve">
+    <value>Ticket-Type:</value>
   </data>
   <data name="TextBlockZipColumn" xml:space="preserve">
     <value>Zip-Column:</value>

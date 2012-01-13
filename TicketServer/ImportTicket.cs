@@ -31,7 +31,7 @@ namespace TicketServer
 		/// <value>
 		/// The type.
 		/// </value>
-		public CardType Type { get; set; }
+		public TicketType Type { get; set; }
 		/// <summary>
 		/// Gets or sets the code.
 		/// </summary>
@@ -52,7 +52,7 @@ namespace TicketServer
 		/// <value>
 		/// The address.
 		/// </value>
-		public string Address { get; set; }
+		public string Street { get; set; }
 		/// <summary>
 		/// Gets or sets the zip.
 		/// </summary>
