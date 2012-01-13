@@ -117,11 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AllFilterName" xml:space="preserve">
+    <value>All Files</value>
+  </data>
   <data name="ButtonClear" xml:space="preserve">
     <value>Clear tickets</value>
   </data>
   <data name="ButtonClearTip" xml:space="preserve">
     <value>Deletes ALL tickets!</value>
+  </data>
+  <data name="ButtonImport" xml:space="preserve">
+    <value>Start Import</value>
   </data>
   <data name="ButtonNew" xml:space="preserve">
     <value>New</value>
@@ -132,11 +138,20 @@
   <data name="ButtonResetTip" xml:space="preserve">
     <value>Set all tickets back to "not redeemed".</value>
   </data>
+  <data name="CsvFilterName" xml:space="preserve">
+    <value>CSV-Files</value>
+  </data>
   <data name="FileFilterExtension" xml:space="preserve">
     <value>tickets</value>
   </data>
   <data name="FileFilterText" xml:space="preserve">
     <value>Tickets File</value>
+  </data>
+  <data name="ImportColumnText" xml:space="preserve">
+    <value>Please choose the column mapping:</value>
+  </data>
+  <data name="ImportDescriptionText" xml:space="preserve">
+    <value>Please select the file to import:</value>
   </data>
   <data name="MainTitleFile" xml:space="preserve">
     <value>Ticket Server - {0}</value>
@@ -164,5 +179,38 @@
   </data>
   <data name="RibbonTabSettings" xml:space="preserve">
     <value>Settings</value>
+  </data>
+  <data name="TextBlockCityColumn" xml:space="preserve">
+    <value>City-Column:</value>
+  </data>
+  <data name="TextBlockCodeColumn" xml:space="preserve">
+    <value>Code-Column:</value>
+  </data>
+  <data name="TextBlockFile" xml:space="preserve">
+    <value>File:</value>
+  </data>
+  <data name="TextBlockMailColumn" xml:space="preserve">
+    <value>e-Mail-Column:</value>
+  </data>
+  <data name="TextBlockNameColumn" xml:space="preserve">
+    <value>Name-Column:</value>
+  </data>
+  <data name="TextBlockPhoneColumn" xml:space="preserve">
+    <value>Phone-Column:</value>
+  </data>
+  <data name="TextBlockPreview" xml:space="preserve">
+    <value>Preview:</value>
+  </data>
+  <data name="TextBlockSeparator" xml:space="preserve">
+    <value>Column-Separator:</value>
+  </data>
+  <data name="TextBlockStreetColumn" xml:space="preserve">
+    <value>Street-Column:</value>
+  </data>
+  <data name="TextBlockZipColumn" xml:space="preserve">
+    <value>Zip-Column:</value>
+  </data>
+  <data name="WindowImportTitle" xml:space="preserve">
+    <value>Import tickets</value>
   </data>
 </root>

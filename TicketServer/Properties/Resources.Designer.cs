@@ -61,6 +61,15 @@ namespace TicketServer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All Files.
+        /// </summary>
+        internal static string AllFilterName {
+            get {
+                return ResourceManager.GetString("AllFilterName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Clear tickets.
         /// </summary>
         internal static string ButtonClear {
@@ -75,6 +84,15 @@ namespace TicketServer.Properties {
         internal static string ButtonClearTip {
             get {
                 return ResourceManager.GetString("ButtonClearTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start Import.
+        /// </summary>
+        internal static string ButtonImport {
+            get {
+                return ResourceManager.GetString("ButtonImport", resourceCulture);
             }
         }
         
@@ -106,6 +124,15 @@ namespace TicketServer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CSV-Files.
+        /// </summary>
+        internal static string CsvFilterName {
+            get {
+                return ResourceManager.GetString("CsvFilterName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to tickets.
         /// </summary>
         internal static string FileFilterExtension {
@@ -120,6 +147,24 @@ namespace TicketServer.Properties {
         internal static string FileFilterText {
             get {
                 return ResourceManager.GetString("FileFilterText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please choose the column mapping:.
+        /// </summary>
+        internal static string ImportColumnText {
+            get {
+                return ResourceManager.GetString("ImportColumnText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please select the file to import:.
+        /// </summary>
+        internal static string ImportDescriptionText {
+            get {
+                return ResourceManager.GetString("ImportDescriptionText", resourceCulture);
             }
         }
         
@@ -201,6 +246,105 @@ namespace TicketServer.Properties {
         internal static string RibbonTabSettings {
             get {
                 return ResourceManager.GetString("RibbonTabSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to City-Column:.
+        /// </summary>
+        internal static string TextBlockCityColumn {
+            get {
+                return ResourceManager.GetString("TextBlockCityColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Code-Column:.
+        /// </summary>
+        internal static string TextBlockCodeColumn {
+            get {
+                return ResourceManager.GetString("TextBlockCodeColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File:.
+        /// </summary>
+        internal static string TextBlockFile {
+            get {
+                return ResourceManager.GetString("TextBlockFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to e-Mail-Column:.
+        /// </summary>
+        internal static string TextBlockMailColumn {
+            get {
+                return ResourceManager.GetString("TextBlockMailColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name-Column:.
+        /// </summary>
+        internal static string TextBlockNameColumn {
+            get {
+                return ResourceManager.GetString("TextBlockNameColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Phone-Column:.
+        /// </summary>
+        internal static string TextBlockPhoneColumn {
+            get {
+                return ResourceManager.GetString("TextBlockPhoneColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Preview:.
+        /// </summary>
+        internal static string TextBlockPreview {
+            get {
+                return ResourceManager.GetString("TextBlockPreview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Column-Separator:.
+        /// </summary>
+        internal static string TextBlockSeparator {
+            get {
+                return ResourceManager.GetString("TextBlockSeparator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Street-Column:.
+        /// </summary>
+        internal static string TextBlockStreetColumn {
+            get {
+                return ResourceManager.GetString("TextBlockStreetColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zip-Column:.
+        /// </summary>
+        internal static string TextBlockZipColumn {
+            get {
+                return ResourceManager.GetString("TextBlockZipColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import tickets.
+        /// </summary>
+        internal static string WindowImportTitle {
+            get {
+                return ResourceManager.GetString("WindowImportTitle", resourceCulture);
             }
         }
     }

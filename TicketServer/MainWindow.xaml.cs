@@ -207,10 +207,9 @@ namespace TicketServer
 		/// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
 		private void buttonImport_Click(object sender, RoutedEventArgs e)
 		{
-			ImportTicket ticket = new ImportTicket();
-			ticket.Id = -1;
-			ticket.Code = "1562785113133";
-			service.TicketSource.AddTicket(ticket);
+			ImportWindow import = new ImportWindow(service.TicketSource);
+			import.Owner = this;
+			import.ShowDialog();
 		}
 
 		/// <summary>
