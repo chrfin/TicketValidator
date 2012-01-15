@@ -238,7 +238,7 @@ namespace TicketValidator
                 buttonCancel.Enabled = true;
                 if (currentTicket.IsRedeemed)
                 {
-                    labelCodeInfo.Text += Resources.Redeemed + ": " + currentTicket.RedeemDate.ToString("T");
+                    labelCodeInfo.Text += Resources.Redeemed + ": " + currentTicket.RedeemDate.Value.ToString("T");
                     labelCodeInfo.ForeColor = Color.Red;
 
                     Beep(BeepType.Error);

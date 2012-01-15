@@ -126,11 +126,17 @@
   <data name="ButtonClearTip" xml:space="preserve">
     <value>Löscht ALLE Karten!</value>
   </data>
+  <data name="ButtonDelete" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
   <data name="ButtonImport" xml:space="preserve">
     <value>Importieren starten</value>
   </data>
   <data name="ButtonNew" xml:space="preserve">
-    <value>Neu</value>
+    <value>Neu...</value>
+  </data>
+  <data name="ButtonOpen" xml:space="preserve">
+    <value>Öffnen...</value>
   </data>
   <data name="ButtonReset" xml:space="preserve">
     <value>Karten zurücksetzen</value>
@@ -138,11 +144,40 @@
   <data name="ButtonResetTip" xml:space="preserve">
     <value>Setzt alle Karten auf "nicht eingelöst" zurück.</value>
   </data>
+  <data name="ButtonSave" xml:space="preserve">
+    <value>Speichern</value>
+  </data>
   <data name="CheckBoxHasHeader" xml:space="preserve">
     <value>Datei hat eine Zeile mit Spaltentitel</value>
   </data>
+  <data name="CloseWarningCaption" xml:space="preserve">
+    <value>Ticket Server wirklich beenden?</value>
+  </data>
+  <data name="CloseWarningNo" xml:space="preserve">
+    <value>Nein, Server weiter laufen lassen.</value>
+  </data>
+  <data name="CloseWarningText" xml:space="preserve">
+    <value>Soll der Ticket Server wirklich beendet werden?
+Wenn das Programm geschlossen wird, können keine Karten mehr eingelöst werden!</value>
+  </data>
+  <data name="CloseWarningYes" xml:space="preserve">
+    <value>Ja, Programm beenden.</value>
+  </data>
   <data name="CsvFilterName" xml:space="preserve">
     <value>CSV-Dateien</value>
+  </data>
+  <data name="DeleteTicketCaption" xml:space="preserve">
+    <value>Die Karte wirklich löschen?</value>
+  </data>
+  <data name="DeleteTicketNo" xml:space="preserve">
+    <value>Nein, Karte NICHT löschen.</value>
+  </data>
+  <data name="DeleteTicketText" xml:space="preserve">
+    <value>Soll die Karte wirklich gelöscht werden?
+Diese Aktion kann NICHT rückgängig gemacht werden!</value>
+  </data>
+  <data name="DeleteTicketYes" xml:space="preserve">
+    <value>Ja, Karte löschen.</value>
   </data>
   <data name="FieldCity" xml:space="preserve">
     <value>Ort</value>
@@ -168,11 +203,20 @@
   <data name="FileFilterText" xml:space="preserve">
     <value>Karten Datei</value>
   </data>
+  <data name="GroupTicketMode" xml:space="preserve">
+    <value>Kartenart</value>
+  </data>
+  <data name="GroupTicketType" xml:space="preserve">
+    <value>Kartentyp</value>
+  </data>
   <data name="ImportColumnText" xml:space="preserve">
     <value>Bitte wähle die Spaltenzuordnung aus:</value>
   </data>
   <data name="ImportDescriptionText" xml:space="preserve">
     <value>Bitte wähle die Datei aus, aus welcher importiert werden soll:</value>
+  </data>
+  <data name="ImportingTickets" xml:space="preserve">
+    <value>Importiere Karten</value>
   </data>
   <data name="ImportStatusImporting" xml:space="preserve">
     <value>Importiere Karte {0}/{1}...</value>
@@ -201,6 +245,21 @@
   <data name="ItemSpecialTicket" xml:space="preserve">
     <value>Spezial</value>
   </data>
+  <data name="MainStatusLoading" xml:space="preserve">
+    <value>Lade...</value>
+  </data>
+  <data name="MainStatusReady" xml:space="preserve">
+    <value>Bereit...</value>
+  </data>
+  <data name="MainStatusTickets" xml:space="preserve">
+    <value>Karten (eingelöst/gesamt):</value>
+  </data>
+  <data name="MainStatusTicketsValue" xml:space="preserve">
+    <value>{0}/{1}</value>
+  </data>
+  <data name="PleaseWait" xml:space="preserve">
+    <value>Bitte warten...</value>
+  </data>
   <data name="RibbonButtonExit" xml:space="preserve">
     <value>Beenden</value>
   </data>
@@ -224,6 +283,12 @@
   </data>
   <data name="RibbonTabSettings" xml:space="preserve">
     <value>Einstellungen</value>
+  </data>
+  <data name="TabDatabase" xml:space="preserve">
+    <value>Karten</value>
+  </data>
+  <data name="TabStatus" xml:space="preserve">
+    <value>Status</value>
   </data>
   <data name="TextBlockCityColumn" xml:space="preserve">
     <value>Ort-Spalte:</value>
@@ -260,6 +325,63 @@
   </data>
   <data name="TextBlockZipColumn" xml:space="preserve">
     <value>Plz-Spalte:</value>
+  </data>
+  <data name="TextCity" xml:space="preserve">
+    <value>Ort:</value>
+  </data>
+  <data name="TextCode" xml:space="preserve">
+    <value>Code:</value>
+  </data>
+  <data name="TextId" xml:space="preserve">
+    <value>Id:</value>
+  </data>
+  <data name="TextMail" xml:space="preserve">
+    <value>e-Mail:</value>
+  </data>
+  <data name="TextName" xml:space="preserve">
+    <value>Name:</value>
+  </data>
+  <data name="TextOnline" xml:space="preserve">
+    <value>Online-Karte:</value>
+  </data>
+  <data name="TextPhone" xml:space="preserve">
+    <value>Telefon:</value>
+  </data>
+  <data name="TextRedeemDate" xml:space="preserve">
+    <value>Einlösedatum:</value>
+  </data>
+  <data name="TextRedeemed" xml:space="preserve">
+    <value>Eingelöst:</value>
+  </data>
+  <data name="TextStreet" xml:space="preserve">
+    <value>Straße:</value>
+  </data>
+  <data name="TextType" xml:space="preserve">
+    <value>Typ:</value>
+  </data>
+  <data name="TextZip" xml:space="preserve">
+    <value>Plz:</value>
+  </data>
+  <data name="TicketModeAll" xml:space="preserve">
+    <value>Alle</value>
+  </data>
+  <data name="TicketModeOffline" xml:space="preserve">
+    <value>Offline</value>
+  </data>
+  <data name="TicketModeOnline" xml:space="preserve">
+    <value>Online</value>
+  </data>
+  <data name="TicketTypeAll" xml:space="preserve">
+    <value>Alle</value>
+  </data>
+  <data name="TicketTypeFree" xml:space="preserve">
+    <value>Gratis</value>
+  </data>
+  <data name="TicketTypeNormal" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="TicketTypeSpecial" xml:space="preserve">
+    <value>Spezial</value>
   </data>
   <data name="WindowImportTitle" xml:space="preserve">
     <value>Karten importieren</value>

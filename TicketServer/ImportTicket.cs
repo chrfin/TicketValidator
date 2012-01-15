@@ -94,7 +94,22 @@ namespace TicketServer
 		/// <value>
 		/// The redeem date.
 		/// </value>
-		public DateTime RedeemDate { get; set; }
+		public DateTime? RedeemDate { get; set; }
+
+		/// <summary>
+		/// Saves this ticket to the store.
+		/// </summary>
+		public void Save() { throw new NotImplementedException(); }
+		/// <summary>
+		/// Deletes this ticket.
+		/// </summary>
+		public void Delete() { throw new NotImplementedException(); }
+
+		#endregion
+
+		#region INotifyPropertyChanged Members
+
+		public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
 
 		#endregion
 	}

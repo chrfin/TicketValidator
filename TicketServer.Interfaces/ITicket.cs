@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using TicketServer.Interfaces.Enums;
+using System.ComponentModel;
 
 namespace TicketServer.Interfaces
 {
 	/// <summary>
 	/// Interface to represent a ticket.
 	/// </summary>
-	public interface ITicket
+	public interface ITicket : INotifyPropertyChanged
 	{
 		/// <summary>
 		/// Gets or sets the id.
@@ -94,6 +95,15 @@ namespace TicketServer.Interfaces
 		/// <value>
 		/// The redeem date.
 		/// </value>
-		DateTime RedeemDate { get; set; }
+		DateTime? RedeemDate { get; set; }
+
+		/// <summary>
+		/// Saves this ticket to the store.
+		/// </summary>
+		void Save();
+		/// <summary>
+		/// Deletes this ticket.
+		/// </summary>
+		void Delete();
 	}
 }

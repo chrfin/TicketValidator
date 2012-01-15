@@ -55,5 +55,17 @@ namespace TicketServer.Properties {
                 this["CurrentDataFile"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("./BV2012.tickets;")]
+        public string RecentFiles {
+            get {
+                return ((string)(this["RecentFiles"]));
+            }
+            set {
+                this["RecentFiles"] = value;
+            }
+        }
     }
 }

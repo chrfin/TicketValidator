@@ -11,7 +11,7 @@
       <xs:element name="IsRedeemed" type="xs:boolean" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Phone" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="RedeemDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="RedeemDate" nillable="true" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Street" nillable="true" type="xs:string" />
       <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/TicketServer.Interfaces.Enums" name="Type" type="q1:TicketType" />
       <xs:element minOccurs="0" name="Zip" nillable="true" type="xs:string" />

@@ -110,7 +110,7 @@ namespace TicketServer.Service
 		/// The redeem date.
 		/// </value>
 		[DataMember]
-		public DateTime RedeemDate { get; set; }
+		public DateTime? RedeemDate { get; set; }
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="Ticket"/> class.
@@ -135,5 +135,24 @@ namespace TicketServer.Service
 			IsRedeemed = ticket.IsRedeemed;
 			RedeemDate = ticket.RedeemDate;
 		}
+
+		#region ITicket Members
+		
+		/// <summary>
+		/// Saves this ticket to the store.
+		/// </summary>
+		public void Save() { throw new NotImplementedException(); }
+		/// <summary>
+		/// Deletes this ticket.
+		/// </summary>
+		public void Delete() { throw new NotImplementedException(); }
+
+		#endregion
+
+		#region INotifyPropertyChanged Members
+
+		public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+
+		#endregion
 	}
 }

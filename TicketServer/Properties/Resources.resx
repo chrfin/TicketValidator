@@ -126,11 +126,17 @@
   <data name="ButtonClearTip" xml:space="preserve">
     <value>Deletes ALL tickets!</value>
   </data>
+  <data name="ButtonDelete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
   <data name="ButtonImport" xml:space="preserve">
     <value>Start Import</value>
   </data>
   <data name="ButtonNew" xml:space="preserve">
-    <value>New</value>
+    <value>New...</value>
+  </data>
+  <data name="ButtonOpen" xml:space="preserve">
+    <value>Open...</value>
   </data>
   <data name="ButtonReset" xml:space="preserve">
     <value>Reset tickets</value>
@@ -138,11 +144,40 @@
   <data name="ButtonResetTip" xml:space="preserve">
     <value>Set all tickets back to "not redeemed".</value>
   </data>
+  <data name="ButtonSave" xml:space="preserve">
+    <value>Save</value>
+  </data>
   <data name="CheckBoxHasHeader" xml:space="preserve">
     <value>File does have a header row</value>
   </data>
+  <data name="CloseWarningCaption" xml:space="preserve">
+    <value>Really close Ticket Server?</value>
+  </data>
+  <data name="CloseWarningNo" xml:space="preserve">
+    <value>No, keep on running the server.</value>
+  </data>
+  <data name="CloseWarningText" xml:space="preserve">
+    <value>Do you really want to close the Ticket Server?
+No tickets can be redeemed anymore if you close the application!</value>
+  </data>
+  <data name="CloseWarningYes" xml:space="preserve">
+    <value>Yes, exit the application.</value>
+  </data>
   <data name="CsvFilterName" xml:space="preserve">
     <value>CSV-Files</value>
+  </data>
+  <data name="DeleteTicketCaption" xml:space="preserve">
+    <value>Really delete the ticket?</value>
+  </data>
+  <data name="DeleteTicketNo" xml:space="preserve">
+    <value>No, do NOT delete the ticket.</value>
+  </data>
+  <data name="DeleteTicketText" xml:space="preserve">
+    <value>Do you really want to delete the ticket?
+This will delete the ticket forever and without a way to restore it!</value>
+  </data>
+  <data name="DeleteTicketYes" xml:space="preserve">
+    <value>Yes, delete the ticket.</value>
   </data>
   <data name="FieldCity" xml:space="preserve">
     <value>City</value>
@@ -171,11 +206,20 @@
   <data name="FileFilterText" xml:space="preserve">
     <value>Tickets File</value>
   </data>
+  <data name="GroupTicketMode" xml:space="preserve">
+    <value>Ticket-Mode</value>
+  </data>
+  <data name="GroupTicketType" xml:space="preserve">
+    <value>Ticket-Type</value>
+  </data>
   <data name="ImportColumnText" xml:space="preserve">
     <value>Please choose the column mapping:</value>
   </data>
   <data name="ImportDescriptionText" xml:space="preserve">
     <value>Please select the file to import:</value>
+  </data>
+  <data name="ImportingTickets" xml:space="preserve">
+    <value>Importing tickets</value>
   </data>
   <data name="ImportStatusImporting" xml:space="preserve">
     <value>Import ticket {0}/{1}...</value>
@@ -204,8 +248,23 @@
   <data name="ItemSpecialTicket" xml:space="preserve">
     <value>Special</value>
   </data>
+  <data name="MainStatusLoading" xml:space="preserve">
+    <value>Loading...</value>
+  </data>
+  <data name="MainStatusReady" xml:space="preserve">
+    <value>Ready...</value>
+  </data>
+  <data name="MainStatusTickets" xml:space="preserve">
+    <value>Tickets (redeemed/total):</value>
+  </data>
+  <data name="MainStatusTicketsValue" xml:space="preserve">
+    <value>{0}/{1}</value>
+  </data>
   <data name="MainTitleFile" xml:space="preserve">
     <value>Ticket Server - {0}</value>
+  </data>
+  <data name="PleaseWait" xml:space="preserve">
+    <value>Please wait...</value>
   </data>
   <data name="RibbonButtonExit" xml:space="preserve">
     <value>Exit</value>
@@ -230,6 +289,12 @@
   </data>
   <data name="RibbonTabSettings" xml:space="preserve">
     <value>Settings</value>
+  </data>
+  <data name="TabDatabase" xml:space="preserve">
+    <value>Tickets</value>
+  </data>
+  <data name="TabStatus" xml:space="preserve">
+    <value>Status</value>
   </data>
   <data name="TextBlockCityColumn" xml:space="preserve">
     <value>City-Column:</value>
@@ -266,6 +331,63 @@
   </data>
   <data name="TextBlockZipColumn" xml:space="preserve">
     <value>Zip-Column:</value>
+  </data>
+  <data name="TextCity" xml:space="preserve">
+    <value>City:</value>
+  </data>
+  <data name="TextCode" xml:space="preserve">
+    <value>Code:</value>
+  </data>
+  <data name="TextId" xml:space="preserve">
+    <value>Id:</value>
+  </data>
+  <data name="TextMail" xml:space="preserve">
+    <value>Mail:</value>
+  </data>
+  <data name="TextName" xml:space="preserve">
+    <value>Name:</value>
+  </data>
+  <data name="TextOnline" xml:space="preserve">
+    <value>Online-Ticket:</value>
+  </data>
+  <data name="TextPhone" xml:space="preserve">
+    <value>Phone:</value>
+  </data>
+  <data name="TextRedeemDate" xml:space="preserve">
+    <value>Redeem date:</value>
+  </data>
+  <data name="TextRedeemed" xml:space="preserve">
+    <value>Redeemed:</value>
+  </data>
+  <data name="TextStreet" xml:space="preserve">
+    <value>Street:</value>
+  </data>
+  <data name="TextType" xml:space="preserve">
+    <value>Type:</value>
+  </data>
+  <data name="TextZip" xml:space="preserve">
+    <value>Zip:</value>
+  </data>
+  <data name="TicketModeAll" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="TicketModeOffline" xml:space="preserve">
+    <value>Offline</value>
+  </data>
+  <data name="TicketModeOnline" xml:space="preserve">
+    <value>Online</value>
+  </data>
+  <data name="TicketTypeAll" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="TicketTypeFree" xml:space="preserve">
+    <value>Free</value>
+  </data>
+  <data name="TicketTypeNormal" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="TicketTypeSpecial" xml:space="preserve">
+    <value>Special</value>
   </data>
   <data name="WindowImportTitle" xml:space="preserve">
     <value>Import tickets</value>

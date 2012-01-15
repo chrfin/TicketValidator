@@ -76,12 +76,22 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WPFToolkit.Extended">
+      <HintPath>..\..\..\3rdParty\WPFToolkit.Extended.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="TicketControl.xaml.cs">
+      <DependentUpon>TicketControl.xaml</DependentUpon>
+    </Compile>
+    <Page Include="DatabaseControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ImportWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -94,6 +104,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DatabaseControl.xaml.cs">
+      <DependentUpon>DatabaseControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ImportTicket.cs" />
     <Compile Include="ImportWindow.xaml.cs">
       <DependentUpon>ImportWindow.xaml</DependentUpon>
@@ -102,6 +115,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="TicketControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -192,6 +209,18 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icons\Small\fileimport.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Large\fileopen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Small\fileopen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Large\vcard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Small\vcard.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
