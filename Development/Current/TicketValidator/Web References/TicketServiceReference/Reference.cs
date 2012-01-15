@@ -132,7 +132,7 @@ namespace TicketValidator.TicketServiceReference {
         
         private string phoneField;
         
-        private System.DateTime redeemDateField;
+        private System.Nullable<System.DateTime> redeemDateField;
         
         private bool redeemDateFieldSpecified;
         
@@ -228,7 +228,8 @@ namespace TicketValidator.TicketServiceReference {
         }
         
         /// <remarks/>
-        public System.DateTime RedeemDate {
+        [System.Xml.Serialization.XmlElementAttribute(IsNullable=true)]
+        public System.Nullable<System.DateTime> RedeemDate {
             get {
                 return this.redeemDateField;
             }

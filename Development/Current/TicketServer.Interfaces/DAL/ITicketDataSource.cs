@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using TicketServer.Interfaces.Enums;
 using TicketServer.Interfaces.BusinessLayer;
+using System.Collections.ObjectModel;
+using TicketServer.Interfaces.Classes;
 
 namespace TicketServer.Interfaces.DAL
 {
@@ -44,7 +46,7 @@ namespace TicketServer.Interfaces.DAL
 		/// <summary>
 		/// Gets all the tickets.
 		/// </summary>
-		IList<ITicket> Tickets { get; }
+		SafeObservable<ITicket> Tickets { get; }
 
 		/// <summary>
 		/// Redeems the ticket.

@@ -14,6 +14,11 @@ using System.IO;
 using System.Data.SqlServerCe;
 using TicketServer.DAL.ActiveRecords;
 using TicketServer.Interfaces.Enums;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.Windows.Threading;
+using TicketServer.Common;
+using TicketServer.Interfaces.Classes;
 
 namespace TicketServer.DAL.SqlCe
 {
@@ -68,6 +73,40 @@ namespace TicketServer.DAL.SqlCe
 
 			if (createSchema)
 				ActiveRecordStarter.CreateSchema();
+
+			Tickets = new SafeObservable<ITicket>();
+			IQueryable<ITicket> list = (from t in TicketRecord.Queryable
+										select t).Cast<ITicket>();
+			list.ToList().ForEach(t => Tickets.Add(t));
+			Tickets.CollectionChanged += new NotifyCollectionChangedEventHandler(Tickets_CollectionChanged);
+		}
+
+		/// <summary>
+		/// Handles the CollectionChanged event of the Tickets control.
+		/// </summary>
+		/// <param name="sender">The source of the event.</param>
+		/// <param name="e">The <see cref="System.Collections.Specialized.NotifyCollectionChangedEventArgs"/> instance containing the event data.</param>
+		protected void Tickets_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+		{
+			switch (e.Action)
+			{
+				case NotifyCollectionChangedAction.Add:
+					if (e.NewItems.Cast<ITicket>().ToList().Find(t => !(t is TicketRecord)) != null)
+						throw new ArgumentException("Can only add TicketRecords! Please use AddTicket() to add other tickets!");
+					break;
+				case NotifyCollectionChangedAction.Move:
+					break;
+				case NotifyCollectionChangedAction.Remove:
+					foreach (ITicket ticket in e.OldItems)
+						(ticket as TicketRecord).Delete();
+					break;
+				case NotifyCollectionChangedAction.Replace:
+					throw new NotSupportedException();
+				case NotifyCollectionChangedAction.Reset:
+					throw new NotImplementedException("Please don't change the whole list at all!");
+				default:
+					throw new ArgumentException();
+			}
 		}
 
 		#region ITicketDataSource Members
@@ -75,11 +114,11 @@ namespace TicketServer.DAL.SqlCe
 		/// <summary>
 		/// Gets the ticket count.
 		/// </summary>
-		public int TicketCount { get { return ActiveRecordMediator<TicketRecord>.Count(); } }
+		public int TicketCount { get { return Tickets.Count(); } }
 		/// <summary>
 		/// Gets the redeemed count.
 		/// </summary>
-		public int RedeemedCount { get { return (from t in TicketRecord.Queryable where t.IsRedeemed select t).Count(); } }
+		public int RedeemedCount { get { return (from t in Tickets where t.IsRedeemed select t).Count(); } }
 
 		/// <summary>
 		/// Adds the ticket to the data source.
@@ -113,6 +152,8 @@ namespace TicketServer.DAL.SqlCe
 			}
 			catch { return false; }
 
+			Tickets.Add(newTicket);
+
 			return true;
 		}
 
@@ -123,7 +164,9 @@ namespace TicketServer.DAL.SqlCe
 		/// <returns></returns>
 		public ITicket GetTicket(int id)
 		{
-			return TicketRecord.Find(id);
+			return (from t in Tickets
+					where t.Id == id
+					select t).FirstOrDefault();
 		}
 		/// <summary>
 		/// Gets the ticket by its code.
@@ -132,7 +175,7 @@ namespace TicketServer.DAL.SqlCe
 		/// <returns></returns>
 		public ITicket GetTicket(string code)
 		{
-			return (from t in TicketRecord.Queryable
+			return (from t in Tickets
 					where t.Code == code
 					select t).FirstOrDefault();
 		}
@@ -140,14 +183,7 @@ namespace TicketServer.DAL.SqlCe
 		/// <summary>
 		/// Gets all the tickets.
 		/// </summary>
-		public IList<ITicket> Tickets
-		{
-			get
-			{
-				return (from t in TicketRecord.Queryable
-						select t).ToList() as IList<ITicket>;
-			}
-		}
+		public SafeObservable<ITicket> Tickets { get; private set; }
 
 		/// <summary>
 		/// Redeems the ticket.
@@ -191,14 +227,14 @@ namespace TicketServer.DAL.SqlCe
 			if (createBackup)
 				File.Copy(Filename, Filename.Replace(Path.GetExtension(Filename), "_" + DateTime.Now.ToString("yyyyMddHHmm") + Path.GetExtension(Filename)), true);
 			
-			var tickets = from t in TicketRecord.Queryable
+			var tickets = from t in Tickets
 						  where t.IsRedeemed
 						  select t;
 
 			foreach (TicketRecord ticket in tickets)
 			{
 				ticket.IsRedeemed = false;
-				ticket.RedeemDateNullable = null;
+				ticket.RedeemDate = null;
 				ticket.Save();
 			}
 
@@ -214,6 +250,10 @@ namespace TicketServer.DAL.SqlCe
 			if (createBackup)
 				File.Copy(Filename, Filename.Replace(Path.GetExtension(Filename), "_" + DateTime.Now.ToString("yyyyMddHHmm") + Path.GetExtension(Filename)), true);
 			TicketRecord.DeleteAll();
+
+			Tickets = new SafeObservable<ITicket>();
+			Tickets.CollectionChanged += new NotifyCollectionChangedEventHandler(Tickets_CollectionChanged);
+
 			return true;
 		}
 

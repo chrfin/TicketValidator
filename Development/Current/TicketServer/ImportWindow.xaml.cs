@@ -28,6 +28,12 @@ namespace TicketServer
 
 		private List<ComboBox> ColumnBoxes = new List<ComboBox>();
 
+		/// <summary>
+		/// Gets or sets the ticket source.
+		/// </summary>
+		/// <value>
+		/// The ticket source.
+		/// </value>
 		public ITicketDataSource TicketSource { get; set; }
 
 		/// <summary>
@@ -205,12 +211,15 @@ namespace TicketServer
 			string file = textBoxFile.Text;
 			bool hasHeader= checkBoxHeader.IsChecked.HasValue && checkBoxHeader.IsChecked.Value;
 			string separator = comboBoxSeparator.Text;
+			
 			Thread importThread = new Thread(new ThreadStart(delegate()
 			{
 				Dispatcher.Invoke((Action)delegate()
 				{
-					IsEnabled = false;
 					textBlockStatus.Text = Properties.Resources.ImportStatusReadingFile;
+					progressBarStatus.Value = 0;
+					progressBarStatus.Visibility = System.Windows.Visibility.Visible;
+					busyIndicator.IsBusy = true;
 				});
 
 				List<string> lines;
@@ -229,6 +238,7 @@ namespace TicketServer
 					Dispatcher.Invoke((Action)delegate() 
 					{
 						textBlockStatus.Text = String.Format(Properties.Resources.ImportStatusImporting, ++i, lines.Count);
+						progressBarStatus.Value = (i * 100.0) / lines.Count;
 					});
 					List<string> rowValues = SplitLine(row, separator);
 
@@ -251,10 +261,22 @@ namespace TicketServer
 				Dispatcher.Invoke((Action)delegate()
 				{
 					textBlockStatus.Text = Properties.Resources.ImportStatusReady;
-					IsEnabled = true;
+					progressBarStatus.Visibility = System.Windows.Visibility.Hidden;
+					busyIndicator.IsBusy = false;
 				});
 			}));
 			importThread.Start();
+		}
+
+		/// <summary>
+		/// Handles the Closing event of the Window control.
+		/// </summary>
+		/// <param name="sender">The source of the event.</param>
+		/// <param name="e">The <see cref="System.ComponentModel.CancelEventArgs"/> instance containing the event data.</param>
+		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+		{
+			if (busyIndicator.IsBusy)
+				e.Cancel = true;
 		}
 	}
 

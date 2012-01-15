@@ -88,6 +88,15 @@ namespace TicketServer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        internal static string ButtonDelete {
+            get {
+                return ResourceManager.GetString("ButtonDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Start Import.
         /// </summary>
         internal static string ButtonImport {
@@ -97,11 +106,20 @@ namespace TicketServer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to New.
+        ///   Looks up a localized string similar to New....
         /// </summary>
         internal static string ButtonNew {
             get {
                 return ResourceManager.GetString("ButtonNew", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open....
+        /// </summary>
+        internal static string ButtonOpen {
+            get {
+                return ResourceManager.GetString("ButtonOpen", resourceCulture);
             }
         }
         
@@ -124,6 +142,15 @@ namespace TicketServer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        internal static string ButtonSave {
+            get {
+                return ResourceManager.GetString("ButtonSave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to File does have a header row.
         /// </summary>
         internal static string CheckBoxHasHeader {
@@ -133,11 +160,85 @@ namespace TicketServer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Really close Ticket Server?.
+        /// </summary>
+        internal static string CloseWarningCaption {
+            get {
+                return ResourceManager.GetString("CloseWarningCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No, keep on running the server..
+        /// </summary>
+        internal static string CloseWarningNo {
+            get {
+                return ResourceManager.GetString("CloseWarningNo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you really want to close the Ticket Server?
+        ///No tickets can be redeemed anymore if you close the application!.
+        /// </summary>
+        internal static string CloseWarningText {
+            get {
+                return ResourceManager.GetString("CloseWarningText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes, exit the application..
+        /// </summary>
+        internal static string CloseWarningYes {
+            get {
+                return ResourceManager.GetString("CloseWarningYes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to CSV-Files.
         /// </summary>
         internal static string CsvFilterName {
             get {
                 return ResourceManager.GetString("CsvFilterName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Really delete the ticket?.
+        /// </summary>
+        internal static string DeleteTicketCaption {
+            get {
+                return ResourceManager.GetString("DeleteTicketCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No, do NOT delete the ticket..
+        /// </summary>
+        internal static string DeleteTicketNo {
+            get {
+                return ResourceManager.GetString("DeleteTicketNo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you really want to delete the ticket?
+        ///This will delete the ticket forever and without a way to restore it!.
+        /// </summary>
+        internal static string DeleteTicketText {
+            get {
+                return ResourceManager.GetString("DeleteTicketText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes, delete the ticket..
+        /// </summary>
+        internal static string DeleteTicketYes {
+            get {
+                return ResourceManager.GetString("DeleteTicketYes", resourceCulture);
             }
         }
         
@@ -223,6 +324,24 @@ namespace TicketServer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ticket-Mode.
+        /// </summary>
+        internal static string GroupTicketMode {
+            get {
+                return ResourceManager.GetString("GroupTicketMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ticket-Type.
+        /// </summary>
+        internal static string GroupTicketType {
+            get {
+                return ResourceManager.GetString("GroupTicketType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please choose the column mapping:.
         /// </summary>
         internal static string ImportColumnText {
@@ -237,6 +356,15 @@ namespace TicketServer.Properties {
         internal static string ImportDescriptionText {
             get {
                 return ResourceManager.GetString("ImportDescriptionText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Importing tickets.
+        /// </summary>
+        internal static string ImportingTickets {
+            get {
+                return ResourceManager.GetString("ImportingTickets", resourceCulture);
             }
         }
         
@@ -322,11 +450,56 @@ namespace TicketServer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Loading....
+        /// </summary>
+        internal static string MainStatusLoading {
+            get {
+                return ResourceManager.GetString("MainStatusLoading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ready....
+        /// </summary>
+        internal static string MainStatusReady {
+            get {
+                return ResourceManager.GetString("MainStatusReady", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tickets (redeemed/total):.
+        /// </summary>
+        internal static string MainStatusTickets {
+            get {
+                return ResourceManager.GetString("MainStatusTickets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0}/{1}.
+        /// </summary>
+        internal static string MainStatusTicketsValue {
+            get {
+                return ResourceManager.GetString("MainStatusTicketsValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ticket Server - {0}.
         /// </summary>
         internal static string MainTitleFile {
             get {
                 return ResourceManager.GetString("MainTitleFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please wait....
+        /// </summary>
+        internal static string PleaseWait {
+            get {
+                return ResourceManager.GetString("PleaseWait", resourceCulture);
             }
         }
         
@@ -399,6 +572,24 @@ namespace TicketServer.Properties {
         internal static string RibbonTabSettings {
             get {
                 return ResourceManager.GetString("RibbonTabSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tickets.
+        /// </summary>
+        internal static string TabDatabase {
+            get {
+                return ResourceManager.GetString("TabDatabase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status.
+        /// </summary>
+        internal static string TabStatus {
+            get {
+                return ResourceManager.GetString("TabStatus", resourceCulture);
             }
         }
         
@@ -507,6 +698,177 @@ namespace TicketServer.Properties {
         internal static string TextBlockZipColumn {
             get {
                 return ResourceManager.GetString("TextBlockZipColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to City:.
+        /// </summary>
+        internal static string TextCity {
+            get {
+                return ResourceManager.GetString("TextCity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Code:.
+        /// </summary>
+        internal static string TextCode {
+            get {
+                return ResourceManager.GetString("TextCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Id:.
+        /// </summary>
+        internal static string TextId {
+            get {
+                return ResourceManager.GetString("TextId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mail:.
+        /// </summary>
+        internal static string TextMail {
+            get {
+                return ResourceManager.GetString("TextMail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name:.
+        /// </summary>
+        internal static string TextName {
+            get {
+                return ResourceManager.GetString("TextName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Online-Ticket:.
+        /// </summary>
+        internal static string TextOnline {
+            get {
+                return ResourceManager.GetString("TextOnline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Phone:.
+        /// </summary>
+        internal static string TextPhone {
+            get {
+                return ResourceManager.GetString("TextPhone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Redeem date:.
+        /// </summary>
+        internal static string TextRedeemDate {
+            get {
+                return ResourceManager.GetString("TextRedeemDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Redeemed:.
+        /// </summary>
+        internal static string TextRedeemed {
+            get {
+                return ResourceManager.GetString("TextRedeemed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Street:.
+        /// </summary>
+        internal static string TextStreet {
+            get {
+                return ResourceManager.GetString("TextStreet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type:.
+        /// </summary>
+        internal static string TextType {
+            get {
+                return ResourceManager.GetString("TextType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zip:.
+        /// </summary>
+        internal static string TextZip {
+            get {
+                return ResourceManager.GetString("TextZip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All.
+        /// </summary>
+        internal static string TicketModeAll {
+            get {
+                return ResourceManager.GetString("TicketModeAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Offline.
+        /// </summary>
+        internal static string TicketModeOffline {
+            get {
+                return ResourceManager.GetString("TicketModeOffline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Online.
+        /// </summary>
+        internal static string TicketModeOnline {
+            get {
+                return ResourceManager.GetString("TicketModeOnline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All.
+        /// </summary>
+        internal static string TicketTypeAll {
+            get {
+                return ResourceManager.GetString("TicketTypeAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Free.
+        /// </summary>
+        internal static string TicketTypeFree {
+            get {
+                return ResourceManager.GetString("TicketTypeFree", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Normal.
+        /// </summary>
+        internal static string TicketTypeNormal {
+            get {
+                return ResourceManager.GetString("TicketTypeNormal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Special.
+        /// </summary>
+        internal static string TicketTypeSpecial {
+            get {
+                return ResourceManager.GetString("TicketTypeSpecial", resourceCulture);
             }
         }
         
