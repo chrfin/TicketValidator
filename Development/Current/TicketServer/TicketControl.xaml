@@ -12,6 +12,7 @@
              mc:Ignorable="d">
 	<UserControl.Resources>
 		<a:EnumToFriendlyNameConverter x:Key="enumItemsConverter" />
+		<c:Code39ValueConverter x:Key="code39Converter" />
 	</UserControl.Resources>
 	<Grid>
 		<Grid.ColumnDefinitions>
@@ -210,5 +211,16 @@
 		        Margin="5"
 		        Click="buttonSave_Click"
 		        Content="{LocText TicketServer::ButtonSave}" />
+
+		<TextBlock Grid.Row="14"
+		           Grid.Column="0"
+		           Grid.ColumnSpan="2"
+		           HorizontalAlignment="Center"
+		           VerticalAlignment="Center"
+		           FontFamily="C39HrP48DhTt"
+		           FontSize="120"
+		           SnapsToDevicePixels="True"
+		           Text="{Binding Ticket.Code,
+		                          Converter={StaticResource ResourceKey=code39Converter}}" />
 	</Grid>
 </UserControl>
