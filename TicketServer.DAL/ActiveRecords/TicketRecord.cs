@@ -6,6 +6,7 @@ using Castle.ActiveRecord;
 using Castle.ActiveRecord.Framework;
 using TicketServer.Interfaces;
 using TicketServer.Interfaces.Enums;
+using System.ComponentModel;
 
 namespace TicketServer.DAL.ActiveRecords
 {
@@ -15,6 +16,23 @@ namespace TicketServer.DAL.ActiveRecords
 	[ActiveRecord("tickets")]
 	public class TicketRecord : ActiveRecordLinqBase<TicketRecord>, ITicket
 	{
+		#region private members
+
+		private int id;
+		private bool isOnlineTicket;
+		private TicketType type;
+		private string code;
+		private string name;
+		private string street;
+		private string zip;
+		private string city;
+		private string phone;
+		private string email;
+		private bool isRedeemed;
+		private DateTime? redeemDate;
+
+		#endregion
+
 		#region ITicket Members
 
 		/// <summary>
@@ -24,7 +42,16 @@ namespace TicketServer.DAL.ActiveRecords
 		/// The id.
 		/// </value>
 		[PrimaryKey(Generator = PrimaryKeyType.Identity)]
-		public int Id { get; set; }
+		public int Id
+		{
+			get { return id; }
+			set
+			{
+				id = value; 
+				if (PropertyChanged != null)
+					PropertyChanged(this, new PropertyChangedEventArgs("Id"));
+			}
+		}
 		/// <summary>
 		/// Gets or sets a value indicating whether this ticket is a online ticket.
 		/// </summary>
@@ -32,7 +59,16 @@ namespace TicketServer.DAL.ActiveRecords
 		///   <c>true</c> if this is a online ticket; otherwise, <c>false</c>.
 		/// </value>
 		[Property]
-		public bool IsOnlineTicket { get; set; }
+		public bool IsOnlineTicket
+		{
+			get { return isOnlineTicket; }
+			set
+			{
+				isOnlineTicket = value;
+				if (PropertyChanged != null)
+					PropertyChanged(this, new PropertyChangedEventArgs("IsOnlineTicket"));
+			}
+		}
 		/// <summary>
 		/// Gets or sets the type.
 		/// </summary>
@@ -40,7 +76,16 @@ namespace TicketServer.DAL.ActiveRecords
 		/// The type.
 		/// </value>
 		[Property]
-		public TicketType Type { get; set; }
+		public TicketType Type
+		{
+			get { return type; }
+			set
+			{
+				type = value;
+				if (PropertyChanged != null)
+					PropertyChanged(this, new PropertyChangedEventArgs("Type"));
+			}
+		}
 		/// <summary>
 		/// Gets or sets the code.
 		/// </summary>
@@ -48,7 +93,16 @@ namespace TicketServer.DAL.ActiveRecords
 		/// The code.
 		/// </value>
 		[Property(Unique = true)]
-		public string Code { get; set; }
+		public string Code
+		{
+			get { return code; }
+			set
+			{
+				code = value;
+				if (PropertyChanged != null)
+					PropertyChanged(this, new PropertyChangedEventArgs("Code"));
+			}
+		}
 		/// <summary>
 		/// Gets or sets the name.
 		/// </summary>
@@ -56,7 +110,16 @@ namespace TicketServer.DAL.ActiveRecords
 		/// The name.
 		/// </value>
 		[Property]
-		public string Name { get; set; }
+		public string Name
+		{
+			get { return name; }
+			set
+			{
+				name = value;
+				if (PropertyChanged != null)
+					PropertyChanged(this, new PropertyChangedEventArgs("Name"));
+			}
+		}
 		/// <summary>
 		/// Gets or sets the address.
 		/// </summary>
@@ -64,7 +127,16 @@ namespace TicketServer.DAL.ActiveRecords
 		/// The address.
 		/// </value>
 		[Property]
-		public string Street { get; set; }
+		public string Street
+		{
+			get { return street; }
+			set
+			{
+				street = value;
+				if (PropertyChanged != null)
+					PropertyChanged(this, new PropertyChangedEventArgs("Street"));
+			}
+		}
 		/// <summary>
 		/// Gets or sets the zip.
 		/// </summary>
@@ -72,7 +144,16 @@ namespace TicketServer.DAL.ActiveRecords
 		/// The zip.
 		/// </value>
 		[Property]
-		public string Zip { get; set; }
+		public string Zip
+		{
+			get { return zip; }
+			set
+			{
+				zip = value;
+				if (PropertyChanged != null)
+					PropertyChanged(this, new PropertyChangedEventArgs("Zip"));
+			}
+		}
 		/// <summary>
 		/// Gets or sets the city.
 		/// </summary>
@@ -80,7 +161,16 @@ namespace TicketServer.DAL.ActiveRecords
 		/// The city.
 		/// </value>
 		[Property]
-		public string City { get; set; }
+		public string City
+		{
+			get { return city; }
+			set
+			{
+				city = value;
+				if (PropertyChanged != null)
+					PropertyChanged(this, new PropertyChangedEventArgs("City"));
+			}
+		}
 		/// <summary>
 		/// Gets or sets the phone.
 		/// </summary>
@@ -88,7 +178,16 @@ namespace TicketServer.DAL.ActiveRecords
 		/// The phone.
 		/// </value>
 		[Property]
-		public string Phone { get; set; }
+		public string Phone
+		{
+			get { return phone; }
+			set
+			{
+				phone = value;
+				if (PropertyChanged != null)
+					PropertyChanged(this, new PropertyChangedEventArgs("Phone"));
+			}
+		}
 		/// <summary>
 		/// Gets or sets the E mail.
 		/// </summary>
@@ -96,7 +195,16 @@ namespace TicketServer.DAL.ActiveRecords
 		/// The E mail.
 		/// </value>
 		[Property]
-		public string EMail { get; set; }
+		public string EMail
+		{
+			get { return email; }
+			set
+			{
+				email = value;
+				if (PropertyChanged != null)
+					PropertyChanged(this, new PropertyChangedEventArgs("EMail"));
+			}
+		}
 		/// <summary>
 		/// Gets or sets a value indicating whether this <see cref="Ticket"/> is redeemed.
 		/// </summary>
@@ -104,33 +212,39 @@ namespace TicketServer.DAL.ActiveRecords
 		///   <c>true</c> if redeemed; otherwise, <c>false</c>.
 		/// </value>
 		[Property]
-		public bool IsRedeemed { get; set; }
-		/// <summary>
-		/// Gets or sets the redeem date.
-		/// </summary>
-		/// <value>
-		/// The redeem date.
-		/// </value>
-		[Property("RedeemDate")]
-		public DateTime? RedeemDateNullable { get; set; }
-
-		/// <summary>
-		/// Gets or sets the redeem date.
-		/// </summary>
-		/// <value>
-		/// The redeem date.
-		/// </value>
-		public DateTime RedeemDate
+		public bool IsRedeemed
 		{
-			get
-			{
-				return RedeemDateNullable.HasValue ? RedeemDateNullable.Value : new DateTime();
-			}
+			get { return isRedeemed; }
 			set
 			{
-				RedeemDateNullable = value.Year > 2000 ? value : (DateTime?)null;
+				isRedeemed = value;
+				if (PropertyChanged != null)
+					PropertyChanged(this, new PropertyChangedEventArgs("IsRedeemed"));
 			}
 		}
+		/// <summary>
+		/// Gets or sets the redeem date.
+		/// </summary>
+		/// <value>
+		/// The redeem date.
+		/// </value>
+		[Property]
+		public DateTime? RedeemDate
+		{
+			get { return redeemDate; }
+			set
+			{
+				redeemDate = value;
+				if (PropertyChanged != null)
+					PropertyChanged(this, new PropertyChangedEventArgs("RedeemDate"));
+			}
+		}
+
+		#endregion
+
+		#region INotifyPropertyChanged Members
+
+		public event PropertyChangedEventHandler PropertyChanged;
 
 		#endregion
 	}
