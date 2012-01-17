@@ -1,6 +1,7 @@
 ﻿<r:RibbonWindow x:Class="TicketServer.MainWindow"
                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:c="clr-namespace:TicketServer.Common;assembly=TicketServer.Common"
                 xmlns:eT="clr-namespace:Microsoft.Windows.Controls;assembly=WPFToolkit.Extended"
                 xmlns:r="clr-namespace:Microsoft.Windows.Controls.Ribbon;assembly=RibbonControlsLibrary"
                 xmlns:t="clr-namespace:TicketServer"
@@ -13,6 +14,9 @@
                 Icon="App.ico"
                 Loaded="Window_Loaded"
                 WindowStartupLocation="CenterScreen">
+	<r:RibbonWindow.Resources>
+		<c:PathToFileNameConverter x:Key="pathConverter" />
+	</r:RibbonWindow.Resources>
 	<eT:BusyIndicator x:Name="busyIndicator" BusyContent="{LocText TicketServer::PleaseWait}">
 		<Grid>
 			<Grid.ColumnDefinitions>
@@ -51,9 +55,11 @@
 								<ItemsControl.ItemTemplate>
 									<DataTemplate>
 										<r:RibbonApplicationMenuItem Click="ribbonApplicationMenuItemRecentFile_Click"
-										                             Header="{Binding .}"
+										                             Header="{Binding .,
+										                                              Converter={StaticResource ResourceKey=pathConverter}}"
 										                             ImageSource="Icons\Large\vcard.png"
-										                             Tag="{Binding .}" />
+										                             Tag="{Binding .}"
+										                             ToolTip="{Binding .}" />
 									</DataTemplate>
 								</ItemsControl.ItemTemplate>
 							</ItemsControl>
