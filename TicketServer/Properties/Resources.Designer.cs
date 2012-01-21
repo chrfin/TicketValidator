@@ -151,6 +151,33 @@ namespace TicketServer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Visitors per unit.
+        /// </summary>
+        internal static string ChartStatisticSeriesPerUnit {
+            get {
+                return ResourceManager.GetString("ChartStatisticSeriesPerUnit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total Visitors.
+        /// </summary>
+        internal static string ChartStatisticSeriesTotal {
+            get {
+                return ResourceManager.GetString("ChartStatisticSeriesTotal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Visitors.
+        /// </summary>
+        internal static string ChartStatisticTitle {
+            get {
+                return ResourceManager.GetString("ChartStatisticTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to File does have a header row.
         /// </summary>
         internal static string CheckBoxHasHeader {
@@ -193,6 +220,15 @@ namespace TicketServer.Properties {
         internal static string CloseWarningYes {
             get {
                 return ResourceManager.GetString("CloseWarningYes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resolution:.
+        /// </summary>
+        internal static string comboBoxResolution {
+            get {
+                return ResourceManager.GetString("comboBoxResolution", resourceCulture);
             }
         }
         
@@ -329,6 +365,15 @@ namespace TicketServer.Properties {
         internal static string GroupTicketMode {
             get {
                 return ResourceManager.GetString("GroupTicketMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Redeemed.
+        /// </summary>
+        internal static string GroupTicketRedeemed {
+            get {
+                return ResourceManager.GetString("GroupTicketRedeemed", resourceCulture);
             }
         }
         
@@ -504,6 +549,42 @@ namespace TicketServer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 15 Minutes.
+        /// </summary>
+        internal static string Resolution15Minutes {
+            get {
+                return ResourceManager.GetString("Resolution15Minutes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 30 Minutes.
+        /// </summary>
+        internal static string Resolution30Minutes {
+            get {
+                return ResourceManager.GetString("Resolution30Minutes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 5 Minutes.
+        /// </summary>
+        internal static string Resolution5Minutes {
+            get {
+                return ResourceManager.GetString("Resolution5Minutes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 Hour.
+        /// </summary>
+        internal static string Resolution60Minutes {
+            get {
+                return ResourceManager.GetString("Resolution60Minutes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Exit.
         /// </summary>
         internal static string RibbonButtonExit {
@@ -599,6 +680,15 @@ namespace TicketServer.Properties {
         internal static string TabDatabase {
             get {
                 return ResourceManager.GetString("TabDatabase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Statistics.
+        /// </summary>
+        internal static string TabStatistic {
+            get {
+                return ResourceManager.GetString("TabStatistic", resourceCulture);
             }
         }
         
@@ -851,6 +941,33 @@ namespace TicketServer.Properties {
         internal static string TicketModeOnline {
             get {
                 return ResourceManager.GetString("TicketModeOnline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All.
+        /// </summary>
+        internal static string TicketRedeemedAll {
+            get {
+                return ResourceManager.GetString("TicketRedeemedAll", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Available.
+        /// </summary>
+        internal static string TicketRedeemedNo {
+            get {
+                return ResourceManager.GetString("TicketRedeemedNo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Redeemed.
+        /// </summary>
+        internal static string TicketRedeemedYes {
+            get {
+                return ResourceManager.GetString("TicketRedeemedYes", resourceCulture);
             }
         }
         
