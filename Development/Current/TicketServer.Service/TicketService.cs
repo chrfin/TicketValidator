@@ -10,6 +10,7 @@ using TicketServer.Interfaces.DAL;
 using TicketServer.Interfaces.Enums;
 using TicketServer.Interfaces.BusinessLayer;
 using TicketServer.Interfaces;
+using System.ComponentModel;
 
 namespace TicketServer.Service
 {
@@ -17,15 +18,25 @@ namespace TicketServer.Service
 	/// The ticket service.
 	/// </summary>
 	[ServiceBehavior(InstanceContextMode=InstanceContextMode.Single, UseSynchronizationContext=false)]
-	public class TicketService : ITicketService
+	public class TicketService : ITicketService, INotifyPropertyChanged
 	{
+		private ITicketDataSource ticketSource;
 		/// <summary>
 		/// Gets or sets the ticket source.
 		/// </summary>
 		/// <value>
 		/// The ticket source.
 		/// </value>
-		public ITicketDataSource TicketSource { get; set; }
+		public ITicketDataSource TicketSource
+		{
+			get { return ticketSource; }
+			set
+			{
+				ticketSource = value;
+				if (PropertyChanged != null)
+					PropertyChanged(this, new PropertyChangedEventArgs("TicketSource"));
+			}
+		}
 
 		/// <summary>
 		/// Gets the client.
@@ -117,6 +128,12 @@ namespace TicketServer.Service
 
 			return new RedeemResult(TicketSource.RedeemTicket(id));
 		}
+
+		#endregion
+
+		#region INotifyPropertyChanged Members
+
+		public event PropertyChangedEventHandler PropertyChanged;
 
 		#endregion
 	}

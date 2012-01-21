@@ -386,4 +386,10 @@ Diese Aktion kann NICHT rückgängig gemacht werden!</value>
   <data name="WindowImportTitle" xml:space="preserve">
     <value>Karten importieren</value>
   </data>
+  <data name="StatusClient" xml:space="preserve">
+    <value>Scanner:</value>
+  </data>
+  <data name="StatusTime" xml:space="preserve">
+    <value>Zeit:</value>
+  </data>
 </root>

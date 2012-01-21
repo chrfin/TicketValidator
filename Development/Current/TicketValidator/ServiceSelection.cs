@@ -10,6 +10,7 @@ using TicketValidator.TicketServiceReference;
 using System.Net;
 using System.Threading;
 using TicketValidator.Properties;
+using System.IO;
 
 namespace TicketValidator
 {
@@ -42,6 +43,14 @@ namespace TicketValidator
         public ServiceSelection()
         {
             InitializeComponent();
+
+            string uriPath = Path.Combine(mainForm.StartupPath, "lastService.uri");
+            if(File.Exists(uriPath))
+            {
+                StreamReader reader = File.OpenText(uriPath);
+                ServiceUri = reader.ReadToEnd();
+                reader.Close();
+            }
         }
 
         /// <summary>
@@ -75,6 +84,11 @@ namespace TicketValidator
         private void buttonOk_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.OK;
+
+            StreamWriter writer = new StreamWriter(File.Open(Path.Combine(mainForm.StartupPath, "lastService.uri"), FileMode.Create));
+            writer.Write(ServiceUri);
+            writer.Close();
+
             Close();
         }
 

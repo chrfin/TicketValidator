@@ -576,6 +576,24 @@ namespace TicketServer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Client:.
+        /// </summary>
+        internal static string StatusClient {
+            get {
+                return ResourceManager.GetString("StatusClient", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time:.
+        /// </summary>
+        internal static string StatusTime {
+            get {
+                return ResourceManager.GetString("StatusTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tickets.
         /// </summary>
         internal static string TabDatabase {

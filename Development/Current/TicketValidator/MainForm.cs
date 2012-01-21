@@ -32,7 +32,7 @@ namespace TicketValidator
         /// <summary>
         /// Gets the startup path.
         /// </summary>
-        public string StartupPath
+        public static string StartupPath
         {
             get
             {

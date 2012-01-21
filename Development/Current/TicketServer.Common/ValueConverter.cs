@@ -4,6 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Data;
 using System.Windows;
+using System.Windows.Media;
+using TicketServer.Interfaces;
+using TicketServer.Interfaces.Enums;
 
 namespace TicketServer.Common
 {
@@ -49,6 +52,52 @@ namespace TicketServer.Common
 
 		#endregion
 	}
+
+	/// <summary>
+	/// Converts a ticket status to the appropriate color.
+	/// </summary>
+	public class TicketToStatusColorConverter : IValueConverter
+	{
+		#region IValueConverter Members
+
+		/// <summary>
+		/// Converts a value.
+		/// </summary>
+		/// <param name="value">The value produced by the binding source.</param>
+		/// <param name="targetType">The type of the binding target property.</param>
+		/// <param name="parameter">The converter parameter to use.</param>
+		/// <param name="culture">The culture to use in the converter.</param>
+		/// <returns>
+		/// A converted value. If the method returns null, the valid null value is used.
+		/// </returns>
+		public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+		{
+			ITicket ticket = value as ITicket;
+
+			if (ticket == null)
+				throw new ArgumentException();
+
+			return ticket.IsRedeemed ? Brushes.Green : (ticket.Type == TicketType.Special ? Brushes.Orange : Brushes.Red);
+		}
+
+		/// <summary>
+		/// Converts a value.
+		/// </summary>
+		/// <param name="value">The value that is produced by the binding target.</param>
+		/// <param name="targetType">The type to convert to.</param>
+		/// <param name="parameter">The converter parameter to use.</param>
+		/// <param name="culture">The culture to use in the converter.</param>
+		/// <returns>
+		/// A converted value. If the method returns null, the valid null value is used.
+		/// </returns>
+		public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+		{
+			throw new NotImplementedException();
+		}
+
+		#endregion
+	}
+
 
 	/// <summary>
 	/// Adds the leading and trailing *

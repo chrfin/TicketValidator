@@ -1,9 +1,11 @@
 ﻿<r:RibbonWindow x:Class="TicketServer.MainWindow"
                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:a="clr-namespace:TicketServer.Interfaces.Attributes;assembly=TicketServer.Interfaces"
                 xmlns:c="clr-namespace:TicketServer.Common;assembly=TicketServer.Common"
                 xmlns:eT="clr-namespace:Microsoft.Windows.Controls;assembly=WPFToolkit.Extended"
                 xmlns:r="clr-namespace:Microsoft.Windows.Controls.Ribbon;assembly=RibbonControlsLibrary"
+                xmlns:sys="clr-namespace:System;assembly=mscorlib"
                 xmlns:t="clr-namespace:TicketServer"
                 Title="Ticket Server"
                 Width="825"
@@ -11,11 +13,13 @@
                 MinWidth="450"
                 MinHeight="600"
                 Closing="Window_Closing"
+                DataContext="{Binding RelativeSource={RelativeSource Self}}"
                 Icon="App.ico"
                 Loaded="Window_Loaded"
                 WindowStartupLocation="CenterScreen">
 	<r:RibbonWindow.Resources>
 		<c:PathToFileNameConverter x:Key="pathConverter" />
+		<c:TicketToStatusColorConverter x:Key="ticketColorConverter" />
 	</r:RibbonWindow.Resources>
 	<eT:BusyIndicator x:Name="busyIndicator" BusyContent="{LocText TicketServer::PleaseWait}">
 		<Grid>
@@ -168,10 +172,29 @@
 			            SelectionChanged="tabControlMain_SelectionChanged"
 			            TabStripPlacement="Bottom">
 				<TabItem x:Name="tabStatus" Header="{LocText TicketServer::TabStatus}">
-					<TextBox x:Name="textBoxLog"
-					         Grid.Row="1"
-					         Grid.Column="0"
-					         AcceptsReturn="True" />
+					<ListBox x:Name="listBoxStatus"
+					         MouseDoubleClick="listBoxStatus_MouseDoubleClick"
+					         ScrollViewer.CanContentScroll="False">
+						<ListBox.ItemTemplate>
+							<DataTemplate>
+								<StackPanel>
+									<StackPanel Orientation="Horizontal">
+										<TextBlock Text="{LocText TicketServer::StatusClient}" />
+										<TextBlock Text="{Binding Client}" Margin="5 0 5 0" />
+										<TextBlock Text="{LocText TicketServer::StatusTime}" />
+										<TextBlock Text="{Binding Created, StringFormat='{}{0:hh:mm:ss}'}" Margin="5 0 5 0" />
+									</StackPanel>
+									<t:TicketStatusControl Margin="5"
+									                       Background="{Binding Ticket,
+									                                            Converter={StaticResource ResourceKey=ticketColorConverter}}"
+									                       DataContext="{Binding .}"
+									                       Ticket="{Binding Ticket,
+									                                        ElementName=.,
+									                                        Mode=OneWay}" />
+								</StackPanel>
+							</DataTemplate>
+						</ListBox.ItemTemplate>
+					</ListBox>
 				</TabItem>
 				<TabItem x:Name="tabDatabase" Header="{LocText TicketServer::TabDatabase}">
 					<t:DatabaseControl x:Name="databaseControlMain" />

@@ -36,6 +36,29 @@ namespace TicketServer
 		public static readonly DependencyProperty TicketSourceProperty = DependencyProperty.Register("TicketSource", typeof(ITicketDataSource), typeof(DatabaseControl));
 
 		/// <summary>
+		/// Gets or sets the selected item.
+		/// </summary>
+		/// <value>
+		/// The selected item.
+		/// </value>
+		public object SelectedItem
+		{
+			get { return listBoxTickets.SelectedItem; }
+			set
+			{
+				if (!(value is ITicket))
+					return;
+
+				ITicket ticket = (listBoxTickets.ItemsSource as IList<ITicket>).First(t => t.Id == (value as ITicket).Id);
+				if(ticket == null)
+					return;
+
+				listBoxTickets.SelectedItem = ticket;
+				listBoxTickets.ScrollIntoView(ticket);
+			}
+		}
+
+		/// <summary>
 		/// Initializes a new instance of the <see cref="DatabaseControl"/> class.
 		/// </summary>
 		public DatabaseControl()
