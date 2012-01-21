@@ -172,6 +172,8 @@ namespace TicketServer
 				IsBusy = true;
 
 				ITicketDataSource source = new SqlCeTicketDataSource(Filename);
+				source.PropertyChanged += new PropertyChangedEventHandler(source_PropertyChanged);
+
 				TicketService service = new TicketService(source);
 				service.TicketRequested += new EventHandler(service_TicketRequested);
 				service.TicketRedeemed += new EventHandler(service_TicketRedeemed);
@@ -184,22 +186,124 @@ namespace TicketServer
 				databaseControlMain.Dispatcher.Invoke((Action)delegate() { databaseControlMain.TicketSource = service.TicketSource; });
 				statusBarItemInfo.Dispatcher.Invoke((Action)delegate() { statusBarItemInfo.Text = Properties.Resources.MainStatusReady; });
 
-				UpdateStatus();
+				SafeObservable<ObservablePoint<DateTime, int>> dataTotal = BuildStatistic(StatisticMode.Total);
+				SafeObservable<ObservablePoint<DateTime, int>> dataPerUnit = BuildStatistic(StatisticMode.PerUnit);
+				lineSeriesStatisticTotal.Dispatcher.Invoke((Action)delegate()
+				{
+					lineSeriesStatisticTotal.ItemsSource = dataTotal;
+					lineSeriesStatisticTotal.IndependentValuePath = "X";
+					lineSeriesStatisticTotal.DependentValuePath = "Y";
+
+					areaSeriesStatisticPerUnit.ItemsSource = dataPerUnit;
+					areaSeriesStatisticPerUnit.IndependentValuePath = "X";
+					areaSeriesStatisticPerUnit.DependentValuePath = "Y";
+				});
+
 				IsBusy = false;
 			}));
 			hostThread.Start();
 			UpdateRecentFiles();
+
 		}
+
+		/// <summary>
+		/// Builds the statistic.
+		/// </summary>
+		/// <param name="mode">The mode.</param>
+		/// <returns></returns>
+		private SafeObservable<ObservablePoint<DateTime, int>> BuildStatistic(StatisticMode mode)
+		{
+			TicketService service = null;
+			Dispatcher.Invoke((Action)delegate() { service = Service; });
+
+			if (service == null)
+				return null;
+
+			SafeObservable<ObservablePoint<DateTime, int>> data = new SafeObservable<ObservablePoint<DateTime, int>>();
+
+			SafeObservable<ITicket> tickets = service.TicketSource.Tickets;
+
+			DateTime firstRedeemed = (from t in tickets
+									  where t.IsRedeemed && t.RedeemDate.HasValue
+									  orderby t.RedeemDate ascending
+									  select t).First().RedeemDate.Value;
+			int offset = 0;
+			int interval = 60;
+			Dispatcher.Invoke((Action)delegate() { interval = Convert.ToInt32((comboBoxStatisticResolution.SelectedItem as ComboBoxItem).Tag); });
+			DateTime time = new DateTime();
+			do
+			{
+				DateTime last = time;
+				time = (new DateTime(firstRedeemed.Year, firstRedeemed.Month, firstRedeemed.Day, firstRedeemed.Hour, 0, 0)).AddMinutes(interval * offset++);
+				int ticketsRedeemed;
+				switch (mode)
+				{
+					case StatisticMode.PerUnit:
+						ticketsRedeemed = GetRedeemdCount(tickets, last, time);
+						break;
+					case StatisticMode.Total:
+					default:
+						ticketsRedeemed = GetRedeemdCount(tickets, time);
+						break;
+				}
+				data.Add(new ObservablePoint<DateTime, int>(time, ticketsRedeemed));
+			}
+			while (time < DateTime.Now);
+
+			return data;
+		}
+
+		/// <summary>
+		/// Gets the redeemd count.
+		/// </summary>
+		/// <param name="tickets">The tickets.</param>
+		/// <param name="until">The until.</param>
+		/// <returns></returns>
+		private static int GetRedeemdCount(SafeObservable<ITicket> tickets, DateTime until)
+		{
+			return (from t in tickets
+					where t.IsRedeemed && t.RedeemDate.HasValue && t.RedeemDate.Value <= until
+					select t).Count();
+		}
+		/// <summary>
+		/// Gets the redeemd count.
+		/// </summary>
+		/// <param name="tickets">The tickets.</param>
+		/// <param name="begin">The begin.</param>
+		/// <param name="end">The end.</param>
+		/// <returns></returns>
+		private static int GetRedeemdCount(SafeObservable<ITicket> tickets, DateTime begin, DateTime end)
+		{
+			return (from t in tickets
+					where t.IsRedeemed && t.RedeemDate.HasValue && t.RedeemDate.Value > begin && t.RedeemDate.Value <= end
+					select t).Count();
+		}
+
+		/// <summary>
+		/// Handles the PropertyChanged event of the source control.
+		/// </summary>
+		/// <param name="sender">The source of the event.</param>
+		/// <param name="e">The <see cref="System.ComponentModel.PropertyChangedEventArgs"/> instance containing the event data.</param>
+		protected void source_PropertyChanged(object sender, PropertyChangedEventArgs e) { UpdateStatus(); }
 
 		/// <summary>
 		/// Updates the status bar values.
 		/// </summary>
 		private void UpdateStatus()
 		{
-			statusBarItemTicketsValue.Dispatcher.Invoke((Action)delegate()
+			Dispatcher.Invoke((Action)delegate()
 			{
-				statusBarItemTicketsValue.Text = String.Format(Properties.Resources.MainStatusTicketsValue,
-					Service.TicketSource.RedeemedCount, Service.TicketSource.TicketCount);
+				foreach (ObservablePoint<DateTime, int> point in lineSeriesStatisticTotal.ItemsSource as SafeObservable<ObservablePoint<DateTime, int>>)
+				{
+					point.Y = GetRedeemdCount(Service.TicketSource.Tickets, point.X);
+				}
+
+				DateTime last = new DateTime();
+				foreach (ObservablePoint<DateTime, int> point in areaSeriesStatisticPerUnit.ItemsSource as SafeObservable<ObservablePoint<DateTime, int>>)
+				{
+					point.Y = GetRedeemdCount(Service.TicketSource.Tickets, last, point.X);
+					last = point.X;
+				}
 			});
 		}
 
@@ -211,7 +315,6 @@ namespace TicketServer
 		protected void service_TicketRedeemed(object sender, EventArgs e)
 		{
 			(listBoxStatus.ItemsSource as SafeObservable<TicketEventArgs>).Insert(0, e as TicketEventArgs);
-			UpdateStatus();
 		}
 
 		/// <summary>
@@ -314,7 +417,7 @@ namespace TicketServer
 		/// <param name="e">The <see cref="System.Windows.Controls.SelectionChangedEventArgs"/> instance containing the event data.</param>
 		private void tabControlMain_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			tabGroupDatabase.Visibility = e.AddedItems.Contains(tabDatabase) || tabDatabase.IsSelected ? 
+			tabGroupDatabase.Visibility = e.AddedItems.Contains(tabDatabase) || tabDatabase.IsSelected ?
 				System.Windows.Visibility.Visible : System.Windows.Visibility.Hidden;
 		}
 
@@ -329,7 +432,7 @@ namespace TicketServer
 			ICollectionView view = CollectionViewSource.GetDefaultView(databaseControlMain.TicketSource.Tickets);
 			if (view != null)
 			{
-				Predicate<object> filter = 
+				Predicate<object> filter =
 					new Predicate<object>(delegate(object o)
 					{
 						if (!(o is ITicket))
@@ -338,13 +441,17 @@ namespace TicketServer
 
 						bool show = true;
 
-						show = radioButtonModeAll.IsChecked.Value ? show : 
+						show = radioButtonModeAll.IsChecked.Value ? show :
 							(radioButtonModeOnline.IsChecked.Value ? ticket.IsOnlineTicket : !ticket.IsOnlineTicket);
 
 						if (show)
 							show = radioButtonTypeAll.IsChecked.Value ? show :
 								(radioButtonTypeFree.IsChecked.Value ? ticket.Type == TicketType.Free :
 								(radioButtonTypeNormal.IsChecked.Value ? ticket.Type == TicketType.Normal : ticket.Type == TicketType.Special));
+
+						if (show)
+							show = radioButtonRedeemedAll.IsChecked.Value ? show :
+								(radioButtonRedeemedYes.IsChecked.Value ? ticket.IsRedeemed : !ticket.IsRedeemed);
 
 						return show;
 					});
@@ -353,17 +460,11 @@ namespace TicketServer
 		}
 
 		/// <summary>
-		/// Handles the Checked event of the radioButtonMode control.
+		/// Handles the Checked event of the radioButton controls.
 		/// </summary>
 		/// <param name="sender">The source of the event.</param>
 		/// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
-		private void radioButtonMode_Checked(object sender, RoutedEventArgs e) { UpdateFilter(); }
-		/// <summary>
-		/// Handles the Checked event of the radioButtonType control.
-		/// </summary>
-		/// <param name="sender">The source of the event.</param>
-		/// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
-		private void radioButtonType_Checked(object sender, RoutedEventArgs e) { UpdateFilter(); }
+		private void radioButtonFilter_Checked(object sender, RoutedEventArgs e) { UpdateFilter(); }
 
 		/// <summary>
 		/// Handles the Click event of the buttonOpen control.
@@ -432,6 +533,17 @@ namespace TicketServer
 				databaseControlMain.SelectedItem = (listBoxStatus.SelectedItem as TicketEventArgs).Ticket;
 				tabDatabase.IsSelected = true;
 			}
+		}
+
+		/// <summary>
+		/// Handles the SelectionChanged event of the comboBoxStatisticResolution control.
+		/// </summary>
+		/// <param name="sender">The source of the event.</param>
+		/// <param name="e">The <see cref="System.Windows.Controls.SelectionChangedEventArgs"/> instance containing the event data.</param>
+		private void comboBoxStatisticResolution_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			lineSeriesStatisticTotal.ItemsSource = BuildStatistic(StatisticMode.Total);
+			areaSeriesStatisticPerUnit.ItemsSource = BuildStatistic(StatisticMode.PerUnit);
 		}
 	}
 }

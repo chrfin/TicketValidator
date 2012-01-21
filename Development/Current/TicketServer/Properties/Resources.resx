@@ -392,10 +392,49 @@ This will delete the ticket forever and without a way to restore it!</value>
   <data name="WindowImportTitle" xml:space="preserve">
     <value>Import tickets</value>
   </data>
+  <data name="ChartStatisticSeriesPerUnit" xml:space="preserve">
+    <value>Visitors per unit</value>
+  </data>
+  <data name="ChartStatisticSeriesTotal" xml:space="preserve">
+    <value>Total Visitors</value>
+  </data>
+  <data name="ChartStatisticTitle" xml:space="preserve">
+    <value>Visitors</value>
+  </data>
+  <data name="comboBoxResolution" xml:space="preserve">
+    <value>Resolution:</value>
+  </data>
+  <data name="GroupTicketRedeemed" xml:space="preserve">
+    <value>Redeemed</value>
+  </data>
+  <data name="Resolution15Minutes" xml:space="preserve">
+    <value>15 Minutes</value>
+  </data>
+  <data name="Resolution30Minutes" xml:space="preserve">
+    <value>30 Minutes</value>
+  </data>
+  <data name="Resolution5Minutes" xml:space="preserve">
+    <value>5 Minutes</value>
+  </data>
+  <data name="Resolution60Minutes" xml:space="preserve">
+    <value>1 Hour</value>
+  </data>
   <data name="StatusClient" xml:space="preserve">
     <value>Client:</value>
   </data>
   <data name="StatusTime" xml:space="preserve">
     <value>Time:</value>
+  </data>
+  <data name="TabStatistic" xml:space="preserve">
+    <value>Statistics</value>
+  </data>
+  <data name="TicketRedeemedAll" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="TicketRedeemedNo" xml:space="preserve">
+    <value>Available</value>
+  </data>
+  <data name="TicketRedeemedYes" xml:space="preserve">
+    <value>Redeemed</value>
   </data>
 </root>

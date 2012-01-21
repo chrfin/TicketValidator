@@ -7,6 +7,8 @@
                 xmlns:r="clr-namespace:Microsoft.Windows.Controls.Ribbon;assembly=RibbonControlsLibrary"
                 xmlns:sys="clr-namespace:System;assembly=mscorlib"
                 xmlns:t="clr-namespace:TicketServer"
+                xmlns:tk="clr-namespace:System.Windows.Controls.DataVisualization;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+                xmlns:tkc="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
                 Title="Ticket Server"
                 Width="825"
                 Height="650"
@@ -110,37 +112,52 @@
 				<r:RibbonTab ContextualTabGroupHeader="{LocText TicketServer::TabDatabase}" Header="{LocText TicketServer::RibbonTabFilter}">
 					<r:RibbonGroup Header="{LocText TicketServer::GroupTicketMode}">
 						<r:RibbonRadioButton x:Name="radioButtonModeAll"
-						                     Checked="radioButtonMode_Checked"
+						                     Checked="radioButtonFilter_Checked"
 						                     GroupName="TicketMode"
 						                     IsChecked="True"
 						                     Label="{LocText TicketServer::TicketModeAll}" />
 						<r:RibbonRadioButton x:Name="radioButtonModeOnline"
-						                     Checked="radioButtonMode_Checked"
+						                     Checked="radioButtonFilter_Checked"
 						                     GroupName="TicketMode"
 						                     Label="{LocText TicketServer::TicketModeOnline}" />
 						<r:RibbonRadioButton x:Name="radioButtonModeOffline"
-						                     Checked="radioButtonMode_Checked"
+						                     Checked="radioButtonFilter_Checked"
 						                     GroupName="TicketMode"
 						                     Label="{LocText TicketServer::TicketModeOffline}" />
 					</r:RibbonGroup>
 					<r:RibbonGroup Header="{LocText TicketServer::GroupTicketType}">
 						<r:RibbonRadioButton x:Name="radioButtonTypeAll"
-						                     Checked="radioButtonType_Checked"
+						                     Checked="radioButtonFilter_Checked"
 						                     GroupName="TicketType"
 						                     IsChecked="True"
 						                     Label="{LocText TicketServer::TicketTypeAll}" />
 						<r:RibbonRadioButton x:Name="radioButtonTypeNormal"
-						                     Checked="radioButtonType_Checked"
+						                     Checked="radioButtonFilter_Checked"
 						                     GroupName="TicketType"
 						                     Label="{LocText TicketServer::TicketTypeNormal}" />
 						<r:RibbonRadioButton x:Name="radioButtonTypeFree"
-						                     Checked="radioButtonType_Checked"
+						                     Checked="radioButtonFilter_Checked"
 						                     GroupName="TicketType"
 						                     Label="{LocText TicketServer::TicketTypeFree}" />
 						<r:RibbonRadioButton x:Name="radioButtonTypeSpecial"
-						                     Checked="radioButtonType_Checked"
+						                     Checked="radioButtonFilter_Checked"
 						                     GroupName="TicketType"
 						                     Label="{LocText TicketServer::TicketTypeSpecial}" />
+					</r:RibbonGroup>
+					<r:RibbonGroup Header="{LocText TicketServer::GroupTicketRedeemed}">
+						<r:RibbonRadioButton x:Name="radioButtonRedeemedAll"
+						                     Checked="radioButtonFilter_Checked"
+						                     GroupName="TicketRedeemed"
+						                     IsChecked="True"
+						                     Label="{LocText TicketServer::TicketRedeemedAll}" />
+						<r:RibbonRadioButton x:Name="radioButtonRedeemedYes"
+						                     Checked="radioButtonFilter_Checked"
+						                     GroupName="TicketRedeemed"
+						                     Label="{LocText TicketServer::TicketRedeemedYes}" />
+						<r:RibbonRadioButton x:Name="radioButtonRedeemedNo"
+						                     Checked="radioButtonFilter_Checked"
+						                     GroupName="TicketRedeemed"
+						                     Label="{LocText TicketServer::TicketRedeemedNo}" />
 					</r:RibbonGroup>
 				</r:RibbonTab>
 				<r:RibbonTab Header="{LocText TicketServer::RibbonTabSettings}">
@@ -180,9 +197,9 @@
 								<StackPanel>
 									<StackPanel Orientation="Horizontal">
 										<TextBlock Text="{LocText TicketServer::StatusClient}" />
-										<TextBlock Text="{Binding Client}" Margin="5 0 5 0" />
+										<TextBlock Margin="5 0 5 0" Text="{Binding Client}" />
 										<TextBlock Text="{LocText TicketServer::StatusTime}" />
-										<TextBlock Text="{Binding Created, StringFormat='{}{0:hh:mm:ss}'}" Margin="5 0 5 0" />
+										<TextBlock Margin="5 0 5 0" Text="{Binding Created, StringFormat='{}{0:hh:mm:ss}'}" />
 									</StackPanel>
 									<t:TicketStatusControl Margin="5"
 									                       Background="{Binding Ticket,
@@ -198,6 +215,46 @@
 				</TabItem>
 				<TabItem x:Name="tabDatabase" Header="{LocText TicketServer::TabDatabase}">
 					<t:DatabaseControl x:Name="databaseControlMain" />
+				</TabItem>
+				<TabItem x:Name="tabStatistic" Header="{LocText TicketServer::TabStatistic}">
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="100" />
+							<ColumnDefinition Width="150" />
+							<ColumnDefinition />
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="*" />
+							<RowDefinition Height="34" />
+						</Grid.RowDefinitions>
+
+						<tkc:Chart x:Name="chartStatistic"
+						           Title="{LocText TicketServer::ChartStatisticTitle}"
+						           Grid.Row="0"
+						           Grid.Column="0"
+						           Grid.ColumnSpan="3">
+							<tkc:LineSeries x:Name="lineSeriesStatisticTotal" Title="{LocText TicketServer::ChartStatisticSeriesTotal}" />
+							<tkc:AreaSeries x:Name="areaSeriesStatisticPerUnit" Title="{LocText TicketServer::ChartStatisticSeriesPerUnit}" />
+						</tkc:Chart>
+
+						<TextBlock Grid.Row="1"
+						           Grid.Column="0"
+						           HorizontalAlignment="Right"
+						           VerticalAlignment="Center"
+						           Text="{LocText TicketServer::comboBoxResolution}" />
+						<ComboBox x:Name="comboBoxStatisticResolution"
+						          Grid.Row="1"
+						          Grid.Column="1"
+						          Margin="5"
+						          SelectionChanged="comboBoxStatisticResolution_SelectionChanged">
+							<ComboBoxItem Content="{LocText TicketServer::Resolution5Minutes}" Tag="5" />
+							<ComboBoxItem Content="{LocText TicketServer::Resolution15Minutes}" Tag="15" />
+							<ComboBoxItem Content="{LocText TicketServer::Resolution30Minutes}" Tag="30" />
+							<ComboBoxItem Content="{LocText TicketServer::Resolution60Minutes}"
+							              IsSelected="True"
+							              Tag="60" />
+						</ComboBox>
+					</Grid>
 				</TabItem>
 			</TabControl>
 
@@ -216,6 +273,9 @@
 								<ColumnDefinition Width="*" />
 								<ColumnDefinition Width="Auto" />
 								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="Auto" />
 							</Grid.ColumnDefinitions>
 						</Grid>
 					</ItemsPanelTemplate>
@@ -231,7 +291,19 @@
 					<TextBlock x:Name="statusBarItemTickets" Text="{LocText TicketServer::MainStatusTickets}" />
 				</StatusBarItem>
 				<StatusBarItem Grid.Column="2">
-					<TextBlock x:Name="statusBarItemTicketsValue" FontWeight="Bold" />
+					<TextBlock x:Name="statusBarItemTicketsRedeemed"
+					           FontWeight="Bold"
+					           Text="{Binding Service.TicketSource.RedeemedCount}" />
+				</StatusBarItem>
+				<StatusBarItem Grid.Column="3">
+					<TextBlock x:Name="statusBarItemTicketsSeparator"
+					           FontWeight="Bold"
+					           Text="/" />
+				</StatusBarItem>
+				<StatusBarItem Grid.Column="4">
+					<TextBlock x:Name="statusBarItemTicketsTotal"
+					           FontWeight="Bold"
+					           Text="{Binding Service.TicketSource.TicketCount}" />
 				</StatusBarItem>
 			</StatusBar>
 		</Grid>

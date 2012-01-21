@@ -6,13 +6,14 @@ using TicketServer.Interfaces.Enums;
 using TicketServer.Interfaces.BusinessLayer;
 using System.Collections.ObjectModel;
 using TicketServer.Interfaces.Classes;
+using System.ComponentModel;
 
 namespace TicketServer.Interfaces.DAL
 {
 	/// <summary>
 	/// Interface to represent a ticket data source.
 	/// </summary>
-	public interface ITicketDataSource
+	public interface ITicketDataSource : INotifyPropertyChanged
 	{
 		/// <summary>
 		/// Gets the ticket count.

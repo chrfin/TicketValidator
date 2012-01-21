@@ -386,10 +386,49 @@ Diese Aktion kann NICHT rückgängig gemacht werden!</value>
   <data name="WindowImportTitle" xml:space="preserve">
     <value>Karten importieren</value>
   </data>
+  <data name="ChartStatisticSeriesPerUnit" xml:space="preserve">
+    <value>Besucher pro Einheit</value>
+  </data>
+  <data name="ChartStatisticSeriesTotal" xml:space="preserve">
+    <value>Besucher gesamt</value>
+  </data>
+  <data name="ChartStatisticTitle" xml:space="preserve">
+    <value>Besucher</value>
+  </data>
+  <data name="comboBoxResolution" xml:space="preserve">
+    <value>Auflösung:</value>
+  </data>
+  <data name="GroupTicketRedeemed" xml:space="preserve">
+    <value>Eingelöst</value>
+  </data>
+  <data name="Resolution15Minutes" xml:space="preserve">
+    <value>15 Minuten</value>
+  </data>
+  <data name="Resolution30Minutes" xml:space="preserve">
+    <value>30 Minuten</value>
+  </data>
+  <data name="Resolution5Minutes" xml:space="preserve">
+    <value>5 Minuten</value>
+  </data>
+  <data name="Resolution60Minutes" xml:space="preserve">
+    <value>1 Stunde</value>
+  </data>
   <data name="StatusClient" xml:space="preserve">
     <value>Scanner:</value>
   </data>
   <data name="StatusTime" xml:space="preserve">
     <value>Zeit:</value>
+  </data>
+  <data name="TabStatistic" xml:space="preserve">
+    <value>Statistiken</value>
+  </data>
+  <data name="TicketRedeemedAll" xml:space="preserve">
+    <value>Alle</value>
+  </data>
+  <data name="TicketRedeemedNo" xml:space="preserve">
+    <value>Offen</value>
+  </data>
+  <data name="TicketRedeemedYes" xml:space="preserve">
+    <value>Eingelöst</value>
   </data>
 </root>

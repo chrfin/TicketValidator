@@ -20,6 +20,7 @@ using System.Windows.Threading;
 using TicketServer.Common;
 using TicketServer.Interfaces.Classes;
 using Castle.ActiveRecord.Framework.Scopes;
+using System.ComponentModel;
 
 namespace TicketServer.DAL.SqlCe
 {
@@ -59,15 +60,15 @@ namespace TicketServer.DAL.SqlCe
 
 			if (!SqlCeTicketDataSource.ActiveRecordsInitialized)
 			{
-			IDictionary<string, string> properties = new Dictionary<string, string>();
-			properties.Add("connection.driver_class", "NHibernate.Driver.SqlServerCeDriver");
-			properties.Add("dialect", "NHibernate.Dialect.MsSqlCeDialect");
-			properties.Add("connection.provider", "NHibernate.Connection.DriverConnectionProvider");
-			properties.Add("connection.connection_string", SqlCE.GetConnectionString(Filename));
-			properties.Add("proxyfactory.factory_class", "NHibernate.ByteCode.Castle.ProxyFactoryFactory, NHibernate.ByteCode.Castle");
+				IDictionary<string, string> properties = new Dictionary<string, string>();
+				properties.Add("connection.driver_class", "NHibernate.Driver.SqlServerCeDriver");
+				properties.Add("dialect", "NHibernate.Dialect.MsSqlCeDialect");
+				properties.Add("connection.provider", "NHibernate.Connection.DriverConnectionProvider");
+				properties.Add("connection.connection_string", SqlCE.GetConnectionString(Filename));
+				properties.Add("proxyfactory.factory_class", "NHibernate.ByteCode.Castle.ProxyFactoryFactory, NHibernate.ByteCode.Castle");
 
-			InPlaceConfigurationSource source = new InPlaceConfigurationSource();
-			source.Add(typeof(ActiveRecordBase), properties);
+				InPlaceConfigurationSource source = new InPlaceConfigurationSource();
+				source.Add(typeof(ActiveRecordBase), properties);
 
 				ActiveRecordStarter.Initialize(Assembly.GetExecutingAssembly(), source);
 				SqlCeTicketDataSource.ActiveRecordsInitialized = true;
@@ -85,8 +86,23 @@ namespace TicketServer.DAL.SqlCe
 			Tickets = new SafeObservable<ITicket>();
 			IQueryable<ITicket> list = (from t in TicketRecord.Queryable
 										select t).Cast<ITicket>();
-			list.ToList().ForEach(t => Tickets.Add(t));
+			list.ToList().ForEach((Action<ITicket>)delegate(ITicket t)
+			{
+				t.PropertyChanged += new PropertyChangedEventHandler(ticket_PropertyChanged);
+				Tickets.Add(t);
+			});
 			Tickets.CollectionChanged += new NotifyCollectionChangedEventHandler(Tickets_CollectionChanged);
+		}
+
+		/// <summary>
+		/// Handles the PropertyChanged event of the ticket control.
+		/// </summary>
+		/// <param name="sender">The source of the event.</param>
+		/// <param name="e">The <see cref="System.ComponentModel.PropertyChangedEventArgs"/> instance containing the event data.</param>
+		protected void ticket_PropertyChanged(object sender, PropertyChangedEventArgs e)
+		{
+			if (PropertyChanged != null)
+				PropertyChanged(this, new PropertyChangedEventArgs("RedeemedCount"));
 		}
 
 		/// <summary>
@@ -101,6 +117,9 @@ namespace TicketServer.DAL.SqlCe
 				case NotifyCollectionChangedAction.Add:
 					if (e.NewItems.Cast<ITicket>().ToList().Find(t => !(t is TicketRecord)) != null)
 						throw new ArgumentException("Can only add TicketRecords! Please use AddTicket() to add other tickets!");
+					e.NewItems.Cast<ITicket>().ToList().ForEach(t => t.PropertyChanged += new PropertyChangedEventHandler(ticket_PropertyChanged));
+					if (PropertyChanged != null)
+						PropertyChanged(this, new PropertyChangedEventArgs("TicketCount"));
 					break;
 				case NotifyCollectionChangedAction.Move:
 					break;
@@ -151,7 +170,7 @@ namespace TicketServer.DAL.SqlCe
 			newTicket.Type = ticket.Type;
 			newTicket.Zip = ticket.Zip;
 
-			try 
+			try
 			{
 				using (new SessionScope())
 				{
@@ -161,6 +180,12 @@ namespace TicketServer.DAL.SqlCe
 			catch { return false; }
 
 			Tickets.Add(newTicket);
+
+			if (PropertyChanged != null)
+			{
+				PropertyChanged(this, new PropertyChangedEventArgs("TicketCount"));
+				PropertyChanged(this, new PropertyChangedEventArgs("RedeemedCount"));
+			}
 
 			return true;
 		}
@@ -222,6 +247,9 @@ namespace TicketServer.DAL.SqlCe
 				}
 			}
 
+			if (PropertyChanged != null)
+				PropertyChanged(this, new PropertyChangedEventArgs("RedeemedCount"));
+
 			return result;
 		}
 
@@ -234,7 +262,7 @@ namespace TicketServer.DAL.SqlCe
 		{
 			if (createBackup)
 				File.Copy(Filename, Filename.Replace(Path.GetExtension(Filename), "_" + DateTime.Now.ToString("yyyyMddHHmm") + Path.GetExtension(Filename)), true);
-			
+
 			var tickets = from t in Tickets
 						  where t.IsRedeemed
 						  select t;
@@ -245,6 +273,9 @@ namespace TicketServer.DAL.SqlCe
 				ticket.RedeemDate = null;
 				ticket.Save();
 			}
+
+			if (PropertyChanged != null)
+				PropertyChanged(this, new PropertyChangedEventArgs("RedeemedCount"));
 
 			return true;
 		}
@@ -262,8 +293,21 @@ namespace TicketServer.DAL.SqlCe
 			Tickets = new SafeObservable<ITicket>();
 			Tickets.CollectionChanged += new NotifyCollectionChangedEventHandler(Tickets_CollectionChanged);
 
+			if (PropertyChanged != null)
+			{
+				PropertyChanged(this, new PropertyChangedEventArgs("Tickets"));
+				PropertyChanged(this, new PropertyChangedEventArgs("TicketCount"));
+				PropertyChanged(this, new PropertyChangedEventArgs("RedeemedCount"));
+			}
+
 			return true;
 		}
+
+		#endregion
+
+		#region INotifyPropertyChanged Members
+
+		public event PropertyChangedEventHandler PropertyChanged;
 
 		#endregion
 	}

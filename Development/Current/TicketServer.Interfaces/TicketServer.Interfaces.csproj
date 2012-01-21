@@ -50,6 +50,7 @@
     <Compile Include="Attributes\LocalizableDescriptionAttribute.cs" />
     <Compile Include="BusinessLayer\IRedeemResult.cs" />
     <Compile Include="DAL\ITicketDataSource.cs" />
+    <Compile Include="Enums\StatisticMode.cs" />
     <Compile Include="Enums\TicketType.cs" />
     <Compile Include="Enums\RedeemResultType.cs" />
     <Compile Include="Enums\ServiceStatus.cs" />
