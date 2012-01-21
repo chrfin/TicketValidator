@@ -31,6 +31,7 @@ using TicketServer.Interfaces.DAL;
 using System.ComponentModel;
 using TicketServer.Interfaces;
 using TicketServer.Interfaces.Enums;
+using TicketServer.Interfaces.Classes;
 
 namespace TicketServer
 {
@@ -42,7 +43,19 @@ namespace TicketServer
 		ServiceHost host;
 		Thread hostThread;
 
-		TicketService service;
+		/// <summary>
+		/// Gets or sets the service.
+		/// </summary>
+		/// <value>
+		/// The service.
+		/// </value>
+		public TicketService Service
+		{
+			get { return (TicketService)GetValue(ServiceProperty); }
+			set { SetValue(ServiceProperty, value); }
+		}
+		// Using a DependencyProperty as the backing store for Service.  This enables animation, styling, binding, etc...
+		public static readonly DependencyProperty ServiceProperty = DependencyProperty.Register("Service", typeof(TicketService), typeof(MainWindow));
 
 		/// <summary>
 		/// Gets or sets the filename.
@@ -51,11 +64,6 @@ namespace TicketServer
 		/// The filename.
 		/// </value>
 		protected string Filename { get; set; }
-
-		/// <summary>
-		/// Gets the ticket source.
-		/// </summary>
-		public ITicketDataSource TicketSource { get { return service.TicketSource; } }
 
 		/// <summary>
 		/// Gets or sets a value indicating whether this instance is busy.
@@ -158,13 +166,17 @@ namespace TicketServer
 		/// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
+			listBoxStatus.ItemsSource = new SafeObservable<TicketEventArgs>();
 			hostThread = new Thread(new ThreadStart(delegate()
 			{
 				IsBusy = true;
 
-				service = new TicketService(new SqlCeTicketDataSource(Filename));
+				ITicketDataSource source = new SqlCeTicketDataSource(Filename);
+				TicketService service = new TicketService(source);
 				service.TicketRequested += new EventHandler(service_TicketRequested);
 				service.TicketRedeemed += new EventHandler(service_TicketRedeemed);
+
+				Dispatcher.Invoke((Action)delegate() { Service = service; });
 
 				host = new ServiceHost(service);
 				host.Open();
@@ -186,8 +198,8 @@ namespace TicketServer
 		{
 			statusBarItemTicketsValue.Dispatcher.Invoke((Action)delegate()
 			{
-				statusBarItemTicketsValue.Text = String.Format(Properties.Resources.MainStatusTicketsValue, 
-					TicketSource.RedeemedCount, TicketSource.TicketCount);
+				statusBarItemTicketsValue.Text = String.Format(Properties.Resources.MainStatusTicketsValue,
+					Service.TicketSource.RedeemedCount, Service.TicketSource.TicketCount);
 			});
 		}
 
@@ -198,10 +210,7 @@ namespace TicketServer
 		/// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
 		protected void service_TicketRedeemed(object sender, EventArgs e)
 		{
-			textBoxLog.Dispatcher.Invoke((Action)delegate()
-			{
-				textBoxLog.Text += string.Format("Ticket redeemed ({0}): {1}", (e as TicketEventArgs).Client, (e as TicketEventArgs).Ticket.Code) + Environment.NewLine;
-			});
+			(listBoxStatus.ItemsSource as SafeObservable<TicketEventArgs>).Insert(0, e as TicketEventArgs);
 			UpdateStatus();
 		}
 
@@ -212,10 +221,7 @@ namespace TicketServer
 		/// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
 		protected void service_TicketRequested(object sender, EventArgs e)
 		{
-			textBoxLog.Dispatcher.Invoke((Action)delegate()
-			{
-				textBoxLog.Text += string.Format("Ticket requested ({0}): {1}", (e as TicketEventArgs).Client, (e as TicketEventArgs).Ticket.Code) + Environment.NewLine;
-			});
+			(listBoxStatus.ItemsSource as SafeObservable<TicketEventArgs>).Insert(0, e as TicketEventArgs);
 		}
 
 		/// <summary>
@@ -255,7 +261,7 @@ namespace TicketServer
 		/// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
 		private void buttonImport_Click(object sender, RoutedEventArgs e)
 		{
-			ImportWindow import = new ImportWindow(service.TicketSource);
+			ImportWindow import = new ImportWindow(Service.TicketSource);
 			import.Owner = this;
 			import.ShowDialog();
 			UpdateStatus();
@@ -266,13 +272,13 @@ namespace TicketServer
 		/// </summary>
 		/// <param name="sender">The source of the event.</param>
 		/// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
-		private void buttonClear_Click(object sender, RoutedEventArgs e) { service.TicketSource.Clear(); UpdateStatus(); }
+		private void buttonClear_Click(object sender, RoutedEventArgs e) { Service.TicketSource.Clear(); UpdateStatus(); }
 		/// <summary>
 		/// Handles the Click event of the buttonReset control.
 		/// </summary>
 		/// <param name="sender">The source of the event.</param>
 		/// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
-		private void buttonReset_Click(object sender, RoutedEventArgs e) { service.TicketSource.Reset(); UpdateStatus(); }
+		private void buttonReset_Click(object sender, RoutedEventArgs e) { Service.TicketSource.Reset(); UpdateStatus(); }
 
 		/// <summary>
 		/// Handles the Click event of the buttonExit control.
@@ -382,10 +388,11 @@ namespace TicketServer
 			if (filename.StartsWith("./"))
 				filename = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, filename.Substring(2));
 
-			service.TicketSource = new SqlCeTicketDataSource(filename);
+			Service.TicketSource = new SqlCeTicketDataSource(filename);
 			Filename = filename;
 			Settings.Default.CurrentDataFile = Filename;
 			Settings.Default.Save();
+			databaseControlMain.Dispatcher.Invoke((Action)delegate() { databaseControlMain.TicketSource = Service.TicketSource; });
 			UpdateTitle();
 			UpdateStatus();
 
@@ -411,9 +418,20 @@ namespace TicketServer
 		/// </summary>
 		/// <param name="sender">The source of the event.</param>
 		/// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
-		private void ribbonApplicationMenuItemRecentFile_Click(object sender, RoutedEventArgs e)
+		private void ribbonApplicationMenuItemRecentFile_Click(object sender, RoutedEventArgs e) { OpenFile((sender as RibbonApplicationMenuItem).Tag as string); }
+
+		/// <summary>
+		/// Handles the MouseDoubleClick event of the listBoxStatus control.
+		/// </summary>
+		/// <param name="sender">The source of the event.</param>
+		/// <param name="e">The <see cref="System.Windows.Input.MouseButtonEventArgs"/> instance containing the event data.</param>
+		private void listBoxStatus_MouseDoubleClick(object sender, MouseButtonEventArgs e)
 		{
-			OpenFile((sender as RibbonApplicationMenuItem).Tag as string);
+			if (listBoxStatus.SelectedItem is TicketEventArgs)
+			{
+				databaseControlMain.SelectedItem = (listBoxStatus.SelectedItem as TicketEventArgs).Ticket;
+				tabDatabase.IsSelected = true;
+			}
 		}
 	}
 }

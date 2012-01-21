@@ -58,6 +58,11 @@ namespace TicketServer.Common
 		public string Client { get; set; }
 
 		/// <summary>
+		/// Gets the date time when this instance was created.
+		/// </summary>
+		public DateTime Created { get; private set; }
+
+		/// <summary>
 		/// Initializes a new instance of the <see cref="TicketEventArgs"/> class.
 		/// </summary>
 		/// <param name="ticket">The ticket.</param>
@@ -66,6 +71,7 @@ namespace TicketServer.Common
 		{
 			this.ticket = ticket;
 			Client = client;
+			Created = DateTime.Now;
 		}
 
 		/// <summary>
@@ -78,6 +84,7 @@ namespace TicketServer.Common
 			TicketId = ticketId;
 			TicketSource = ticketSource;
 			Client = client;
+			Created = DateTime.Now;
 		}
 	}
 }

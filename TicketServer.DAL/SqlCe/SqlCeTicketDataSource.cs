@@ -19,6 +19,7 @@ using System.Collections.Specialized;
 using System.Windows.Threading;
 using TicketServer.Common;
 using TicketServer.Interfaces.Classes;
+using Castle.ActiveRecord.Framework.Scopes;
 
 namespace TicketServer.DAL.SqlCe
 {
@@ -55,6 +56,9 @@ namespace TicketServer.DAL.SqlCe
 				engine.Dispose();
 			}
 
+
+			if (!SqlCeTicketDataSource.ActiveRecordsInitialized)
+			{
 			IDictionary<string, string> properties = new Dictionary<string, string>();
 			properties.Add("connection.driver_class", "NHibernate.Driver.SqlServerCeDriver");
 			properties.Add("dialect", "NHibernate.Dialect.MsSqlCeDialect");
@@ -65,10 +69,14 @@ namespace TicketServer.DAL.SqlCe
 			InPlaceConfigurationSource source = new InPlaceConfigurationSource();
 			source.Add(typeof(ActiveRecordBase), properties);
 
-			if (!SqlCeTicketDataSource.ActiveRecordsInitialized)
-			{
 				ActiveRecordStarter.Initialize(Assembly.GetExecutingAssembly(), source);
 				SqlCeTicketDataSource.ActiveRecordsInitialized = true;
+			}
+			else
+			{
+				SqlCeConnection con = new SqlCeConnection(SqlCE.GetConnectionString(Filename));
+				con.Open();
+				DifferentDatabaseScope scope = new DifferentDatabaseScope(con);
 			}
 
 			if (createSchema)

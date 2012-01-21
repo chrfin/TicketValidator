@@ -3,15 +3,20 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketValidator", "TicketValidator\TicketValidator.csproj", "{5F1BCAA7-5AB1-4BF8-BDF4-0C40CB2DA289}"
 EndProject
+Project("{B900F1C2-3D47-4FEC-85B3-04AAF18C3634}") = "TicketValidator.Setup", "TicketValidator.Setup\TicketValidator.Setup.vddproj", "{CAFE88A3-A226-4940-BCFA-4245F8002452}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 2
+		SccNumberOfProjects = 3
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/TFS14
 		SccLocalPath0 = .
 		SccProjectUniqueName1 = TicketValidator\\TicketValidator.csproj
 		SccProjectName1 = TicketValidator
 		SccLocalPath1 = TicketValidator
+		SccProjectUniqueName2 = TicketValidator.Setup\\TicketValidator.Setup.vddproj
+		SccProjectName2 = TicketValidator.Setup
+		SccLocalPath2 = TicketValidator.Setup
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +29,8 @@ Global
 		{5F1BCAA7-5AB1-4BF8-BDF4-0C40CB2DA289}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F1BCAA7-5AB1-4BF8-BDF4-0C40CB2DA289}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5F1BCAA7-5AB1-4BF8-BDF4-0C40CB2DA289}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{CAFE88A3-A226-4940-BCFA-4245F8002452}.Debug|Any CPU.ActiveCfg = Debug
+		{CAFE88A3-A226-4940-BCFA-4245F8002452}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

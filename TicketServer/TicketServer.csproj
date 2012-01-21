@@ -88,6 +88,9 @@
     <Compile Include="TicketControl.xaml.cs">
       <DependentUpon>TicketControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TicketStatusControl.xaml.cs">
+      <DependentUpon>TicketStatusControl.xaml</DependentUpon>
+    </Compile>
     <Page Include="DatabaseControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -116,6 +119,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="TicketControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TicketStatusControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
