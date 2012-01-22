@@ -117,9 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AllFilterName" xml:space="preserve">
-    <value>Alle Dateien</value>
-  </data>
   <data name="ButtonClear" xml:space="preserve">
     <value>Karten löschen</value>
   </data>
@@ -128,9 +125,6 @@
   </data>
   <data name="ButtonDelete" xml:space="preserve">
     <value>Löschen</value>
-  </data>
-  <data name="ButtonImport" xml:space="preserve">
-    <value>Importieren starten</value>
   </data>
   <data name="ButtonNew" xml:space="preserve">
     <value>Neu...</value>
@@ -147,9 +141,6 @@
   <data name="ButtonSave" xml:space="preserve">
     <value>Speichern</value>
   </data>
-  <data name="CheckBoxHasHeader" xml:space="preserve">
-    <value>Datei hat eine Zeile mit Spaltentitel</value>
-  </data>
   <data name="CloseWarningCaption" xml:space="preserve">
     <value>Ticket Server wirklich beenden?</value>
   </data>
@@ -162,9 +153,6 @@ Wenn das Programm geschlossen wird, können keine Karten mehr eingelöst werden!
   </data>
   <data name="CloseWarningYes" xml:space="preserve">
     <value>Ja, Programm beenden.</value>
-  </data>
-  <data name="CsvFilterName" xml:space="preserve">
-    <value>CSV-Dateien</value>
   </data>
   <data name="DeleteTicketCaption" xml:space="preserve">
     <value>Die Karte wirklich löschen?</value>
@@ -179,27 +167,6 @@ Diese Aktion kann NICHT rückgängig gemacht werden!</value>
   <data name="DeleteTicketYes" xml:space="preserve">
     <value>Ja, Karte löschen.</value>
   </data>
-  <data name="FieldCity" xml:space="preserve">
-    <value>Ort</value>
-  </data>
-  <data name="FieldCode" xml:space="preserve">
-    <value>Code</value>
-  </data>
-  <data name="FieldMail" xml:space="preserve">
-    <value>e-Mail</value>
-  </data>
-  <data name="FieldName" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="FieldPhone" xml:space="preserve">
-    <value>Telefon</value>
-  </data>
-  <data name="FieldStreet" xml:space="preserve">
-    <value>Straße</value>
-  </data>
-  <data name="FieldZip" xml:space="preserve">
-    <value>Plz</value>
-  </data>
   <data name="FileFilterText" xml:space="preserve">
     <value>Karten Datei</value>
   </data>
@@ -208,42 +175,6 @@ Diese Aktion kann NICHT rückgängig gemacht werden!</value>
   </data>
   <data name="GroupTicketType" xml:space="preserve">
     <value>Kartentyp</value>
-  </data>
-  <data name="ImportColumnText" xml:space="preserve">
-    <value>Bitte wähle die Spaltenzuordnung aus:</value>
-  </data>
-  <data name="ImportDescriptionText" xml:space="preserve">
-    <value>Bitte wähle die Datei aus, aus welcher importiert werden soll:</value>
-  </data>
-  <data name="ImportingTickets" xml:space="preserve">
-    <value>Importiere Karten</value>
-  </data>
-  <data name="ImportStatusImporting" xml:space="preserve">
-    <value>Importiere Karte {0}/{1}...</value>
-  </data>
-  <data name="ImportStatusReadingFile" xml:space="preserve">
-    <value>Lese Datei...</value>
-  </data>
-  <data name="ImportStatusReady" xml:space="preserve">
-    <value>Bereit...</value>
-  </data>
-  <data name="ImportTypeText" xml:space="preserve">
-    <value>Bitte wähle den Karten-Typ aus:</value>
-  </data>
-  <data name="ItemFreeTicket" xml:space="preserve">
-    <value>Gratis</value>
-  </data>
-  <data name="ItemNormalTicket" xml:space="preserve">
-    <value>Normal</value>
-  </data>
-  <data name="ItemOfflineTicket" xml:space="preserve">
-    <value>Offline</value>
-  </data>
-  <data name="ItemOnlineTicket" xml:space="preserve">
-    <value>Online</value>
-  </data>
-  <data name="ItemSpecialTicket" xml:space="preserve">
-    <value>Spezial</value>
   </data>
   <data name="MainStatusLoading" xml:space="preserve">
     <value>Lade...</value>
@@ -290,78 +221,6 @@ Diese Aktion kann NICHT rückgängig gemacht werden!</value>
   <data name="TabStatus" xml:space="preserve">
     <value>Status</value>
   </data>
-  <data name="TextBlockCityColumn" xml:space="preserve">
-    <value>Ort-Spalte:</value>
-  </data>
-  <data name="TextBlockCodeColumn" xml:space="preserve">
-    <value>Code-Spalte:</value>
-  </data>
-  <data name="TextBlockFile" xml:space="preserve">
-    <value>Datei:</value>
-  </data>
-  <data name="TextBlockMailColumn" xml:space="preserve">
-    <value>e-Mail-Spalte:</value>
-  </data>
-  <data name="TextBlockNameColumn" xml:space="preserve">
-    <value>Namens-Spalte:</value>
-  </data>
-  <data name="TextBlockPhoneColumn" xml:space="preserve">
-    <value>Telefon-Spalte:</value>
-  </data>
-  <data name="TextBlockPreview" xml:space="preserve">
-    <value>Vorschau:</value>
-  </data>
-  <data name="TextBlockSeparator" xml:space="preserve">
-    <value>Spaltentrennzeichen:</value>
-  </data>
-  <data name="TextBlockStreetColumn" xml:space="preserve">
-    <value>Straßen-Spalte:</value>
-  </data>
-  <data name="TextBlockTicketMode" xml:space="preserve">
-    <value>Kartenart:</value>
-  </data>
-  <data name="TextBlockTicketType" xml:space="preserve">
-    <value>Kartentyp:</value>
-  </data>
-  <data name="TextBlockZipColumn" xml:space="preserve">
-    <value>Plz-Spalte:</value>
-  </data>
-  <data name="TextCity" xml:space="preserve">
-    <value>Ort:</value>
-  </data>
-  <data name="TextCode" xml:space="preserve">
-    <value>Code:</value>
-  </data>
-  <data name="TextId" xml:space="preserve">
-    <value>Id:</value>
-  </data>
-  <data name="TextMail" xml:space="preserve">
-    <value>e-Mail:</value>
-  </data>
-  <data name="TextName" xml:space="preserve">
-    <value>Name:</value>
-  </data>
-  <data name="TextOnline" xml:space="preserve">
-    <value>Online-Karte:</value>
-  </data>
-  <data name="TextPhone" xml:space="preserve">
-    <value>Telefon:</value>
-  </data>
-  <data name="TextRedeemDate" xml:space="preserve">
-    <value>Einlösedatum:</value>
-  </data>
-  <data name="TextRedeemed" xml:space="preserve">
-    <value>Eingelöst:</value>
-  </data>
-  <data name="TextStreet" xml:space="preserve">
-    <value>Straße:</value>
-  </data>
-  <data name="TextType" xml:space="preserve">
-    <value>Typ:</value>
-  </data>
-  <data name="TextZip" xml:space="preserve">
-    <value>Plz:</value>
-  </data>
   <data name="TicketModeAll" xml:space="preserve">
     <value>Alle</value>
   </data>
@@ -382,9 +241,6 @@ Diese Aktion kann NICHT rückgängig gemacht werden!</value>
   </data>
   <data name="TicketTypeSpecial" xml:space="preserve">
     <value>Spezial</value>
-  </data>
-  <data name="WindowImportTitle" xml:space="preserve">
-    <value>Karten importieren</value>
   </data>
   <data name="ChartStatisticSeriesPerUnit" xml:space="preserve">
     <value>Besucher pro Einheit</value>

@@ -61,15 +61,6 @@ namespace TicketServer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to All Files.
-        /// </summary>
-        internal static string AllFilterName {
-            get {
-                return ResourceManager.GetString("AllFilterName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Clear tickets.
         /// </summary>
         internal static string ButtonClear {
@@ -93,15 +84,6 @@ namespace TicketServer.Properties {
         internal static string ButtonDelete {
             get {
                 return ResourceManager.GetString("ButtonDelete", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Start Import.
-        /// </summary>
-        internal static string ButtonImport {
-            get {
-                return ResourceManager.GetString("ButtonImport", resourceCulture);
             }
         }
         
@@ -178,15 +160,6 @@ namespace TicketServer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to File does have a header row.
-        /// </summary>
-        internal static string CheckBoxHasHeader {
-            get {
-                return ResourceManager.GetString("CheckBoxHasHeader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Really close Ticket Server?.
         /// </summary>
         internal static string CloseWarningCaption {
@@ -233,15 +206,6 @@ namespace TicketServer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to CSV-Files.
-        /// </summary>
-        internal static string CsvFilterName {
-            get {
-                return ResourceManager.GetString("CsvFilterName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Really delete the ticket?.
         /// </summary>
         internal static string DeleteTicketCaption {
@@ -275,69 +239,6 @@ namespace TicketServer.Properties {
         internal static string DeleteTicketYes {
             get {
                 return ResourceManager.GetString("DeleteTicketYes", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to City.
-        /// </summary>
-        internal static string FieldCity {
-            get {
-                return ResourceManager.GetString("FieldCity", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Code.
-        /// </summary>
-        internal static string FieldCode {
-            get {
-                return ResourceManager.GetString("FieldCode", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to e-Mail.
-        /// </summary>
-        internal static string FieldMail {
-            get {
-                return ResourceManager.GetString("FieldMail", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Name.
-        /// </summary>
-        internal static string FieldName {
-            get {
-                return ResourceManager.GetString("FieldName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Phone.
-        /// </summary>
-        internal static string FieldPhone {
-            get {
-                return ResourceManager.GetString("FieldPhone", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Street.
-        /// </summary>
-        internal static string FieldStreet {
-            get {
-                return ResourceManager.GetString("FieldStreet", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Zip.
-        /// </summary>
-        internal static string FieldZip {
-            get {
-                return ResourceManager.GetString("FieldZip", resourceCulture);
             }
         }
         
@@ -383,114 +284,6 @@ namespace TicketServer.Properties {
         internal static string GroupTicketType {
             get {
                 return ResourceManager.GetString("GroupTicketType", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Please choose the column mapping:.
-        /// </summary>
-        internal static string ImportColumnText {
-            get {
-                return ResourceManager.GetString("ImportColumnText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Please select the file to import:.
-        /// </summary>
-        internal static string ImportDescriptionText {
-            get {
-                return ResourceManager.GetString("ImportDescriptionText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Importing tickets.
-        /// </summary>
-        internal static string ImportingTickets {
-            get {
-                return ResourceManager.GetString("ImportingTickets", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Import ticket {0}/{1}....
-        /// </summary>
-        internal static string ImportStatusImporting {
-            get {
-                return ResourceManager.GetString("ImportStatusImporting", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Reading file....
-        /// </summary>
-        internal static string ImportStatusReadingFile {
-            get {
-                return ResourceManager.GetString("ImportStatusReadingFile", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Ready....
-        /// </summary>
-        internal static string ImportStatusReady {
-            get {
-                return ResourceManager.GetString("ImportStatusReady", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Please select the type of the tickets:.
-        /// </summary>
-        internal static string ImportTypeText {
-            get {
-                return ResourceManager.GetString("ImportTypeText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Free.
-        /// </summary>
-        internal static string ItemFreeTicket {
-            get {
-                return ResourceManager.GetString("ItemFreeTicket", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Normal.
-        /// </summary>
-        internal static string ItemNormalTicket {
-            get {
-                return ResourceManager.GetString("ItemNormalTicket", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Offline.
-        /// </summary>
-        internal static string ItemOfflineTicket {
-            get {
-                return ResourceManager.GetString("ItemOfflineTicket", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Online.
-        /// </summary>
-        internal static string ItemOnlineTicket {
-            get {
-                return ResourceManager.GetString("ItemOnlineTicket", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Special.
-        /// </summary>
-        internal static string ItemSpecialTicket {
-            get {
-                return ResourceManager.GetString("ItemSpecialTicket", resourceCulture);
             }
         }
         
@@ -702,222 +495,6 @@ namespace TicketServer.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to City-Column:.
-        /// </summary>
-        internal static string TextBlockCityColumn {
-            get {
-                return ResourceManager.GetString("TextBlockCityColumn", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Code-Column:.
-        /// </summary>
-        internal static string TextBlockCodeColumn {
-            get {
-                return ResourceManager.GetString("TextBlockCodeColumn", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to File:.
-        /// </summary>
-        internal static string TextBlockFile {
-            get {
-                return ResourceManager.GetString("TextBlockFile", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to e-Mail-Column:.
-        /// </summary>
-        internal static string TextBlockMailColumn {
-            get {
-                return ResourceManager.GetString("TextBlockMailColumn", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Name-Column:.
-        /// </summary>
-        internal static string TextBlockNameColumn {
-            get {
-                return ResourceManager.GetString("TextBlockNameColumn", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Phone-Column:.
-        /// </summary>
-        internal static string TextBlockPhoneColumn {
-            get {
-                return ResourceManager.GetString("TextBlockPhoneColumn", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Preview:.
-        /// </summary>
-        internal static string TextBlockPreview {
-            get {
-                return ResourceManager.GetString("TextBlockPreview", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Column-Separator:.
-        /// </summary>
-        internal static string TextBlockSeparator {
-            get {
-                return ResourceManager.GetString("TextBlockSeparator", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Street-Column:.
-        /// </summary>
-        internal static string TextBlockStreetColumn {
-            get {
-                return ResourceManager.GetString("TextBlockStreetColumn", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Ticket-Mode:.
-        /// </summary>
-        internal static string TextBlockTicketMode {
-            get {
-                return ResourceManager.GetString("TextBlockTicketMode", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Ticket-Type:.
-        /// </summary>
-        internal static string TextBlockTicketType {
-            get {
-                return ResourceManager.GetString("TextBlockTicketType", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Zip-Column:.
-        /// </summary>
-        internal static string TextBlockZipColumn {
-            get {
-                return ResourceManager.GetString("TextBlockZipColumn", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to City:.
-        /// </summary>
-        internal static string TextCity {
-            get {
-                return ResourceManager.GetString("TextCity", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Code:.
-        /// </summary>
-        internal static string TextCode {
-            get {
-                return ResourceManager.GetString("TextCode", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Id:.
-        /// </summary>
-        internal static string TextId {
-            get {
-                return ResourceManager.GetString("TextId", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Mail:.
-        /// </summary>
-        internal static string TextMail {
-            get {
-                return ResourceManager.GetString("TextMail", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Name:.
-        /// </summary>
-        internal static string TextName {
-            get {
-                return ResourceManager.GetString("TextName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Online-Ticket:.
-        /// </summary>
-        internal static string TextOnline {
-            get {
-                return ResourceManager.GetString("TextOnline", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Phone:.
-        /// </summary>
-        internal static string TextPhone {
-            get {
-                return ResourceManager.GetString("TextPhone", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Redeem date:.
-        /// </summary>
-        internal static string TextRedeemDate {
-            get {
-                return ResourceManager.GetString("TextRedeemDate", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Redeemed:.
-        /// </summary>
-        internal static string TextRedeemed {
-            get {
-                return ResourceManager.GetString("TextRedeemed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Street:.
-        /// </summary>
-        internal static string TextStreet {
-            get {
-                return ResourceManager.GetString("TextStreet", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Type:.
-        /// </summary>
-        internal static string TextType {
-            get {
-                return ResourceManager.GetString("TextType", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Zip:.
-        /// </summary>
-        internal static string TextZip {
-            get {
-                return ResourceManager.GetString("TextZip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to All.
         /// </summary>
         internal static string TicketModeAll {
@@ -1004,15 +581,6 @@ namespace TicketServer.Properties {
         internal static string TicketTypeSpecial {
             get {
                 return ResourceManager.GetString("TicketTypeSpecial", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Import tickets.
-        /// </summary>
-        internal static string WindowImportTitle {
-            get {
-                return ResourceManager.GetString("WindowImportTitle", resourceCulture);
             }
         }
     }

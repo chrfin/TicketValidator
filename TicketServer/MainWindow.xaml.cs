@@ -545,5 +545,17 @@ namespace TicketServer
 			lineSeriesStatisticTotal.ItemsSource = BuildStatistic(StatisticMode.Total);
 			areaSeriesStatisticPerUnit.ItemsSource = BuildStatistic(StatisticMode.PerUnit);
 		}
+
+		/// <summary>
+		/// Handles the Click event of the buttonSettings control.
+		/// </summary>
+		/// <param name="sender">The source of the event.</param>
+		/// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
+		private void buttonSettings_Click(object sender, RoutedEventArgs e)
+		{
+			SettingsWindow settings = new SettingsWindow();
+			settings.Owner = this;
+			settings.ShowDialog();
+		}
 	}
 }

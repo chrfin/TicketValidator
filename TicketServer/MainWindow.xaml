@@ -78,10 +78,10 @@
 								                Label="{LocText TicketServer::RibbonButtonExit}"
 								                SmallImageSource="Icons\Small\application-exit-2.png" />
 								<r:RibbonButton Margin="2"
+								                Click="buttonSettings_Click"
 								                DockPanel.Dock="Right"
 								                Label="{LocText TicketServer::RibbonButtonSettings}"
-								                SmallImageSource="Icons\Small\Service Manager.png"
-								                Visibility="Hidden" />
+								                SmallImageSource="Icons\Small\Service Manager.png" />
 							</DockPanel>
 						</r:RibbonApplicationMenu.FooterPaneContent>
 					</r:RibbonApplicationMenu>

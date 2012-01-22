@@ -34,7 +34,7 @@
 		           Grid.Column="0"
 		           HorizontalAlignment="Right"
 		           VerticalAlignment="Center"
-		           Text="{LocText TicketServer::TextId}" />
+		           Text="{LocText TicketServer:Ticket:TextId}" />
 		<TextBlock Grid.Row="0"
 		           Grid.Column="1"
 		           Margin="3 0 0 0"
@@ -47,7 +47,7 @@
 		           Grid.Column="2"
 		           HorizontalAlignment="Right"
 		           VerticalAlignment="Center"
-		           Text="{LocText TicketServer::TextCode}" />
+		           Text="{LocText TicketServer:Ticket:TextCode}" />
 		<TextBlock Grid.Row="0"
 		           Grid.Column="3"
 		           Margin="3 0 0 0"
@@ -61,7 +61,7 @@
 		           Grid.Column="0"
 		           HorizontalAlignment="Right"
 		           VerticalAlignment="Center"
-		           Text="{LocText TicketServer::TextName}" />
+		           Text="{LocText TicketServer:Ticket:TextName}" />
 		<TextBlock Grid.Row="1"
 		           Grid.Column="1"
 		           Margin="3 0 0 0"
@@ -75,7 +75,7 @@
 		           Grid.Column="2"
 		           HorizontalAlignment="Right"
 		           VerticalAlignment="Center"
-		           Text="{LocText TicketServer::TextStreet}" />
+		           Text="{LocText TicketServer:Ticket:TextStreet}" />
 		<TextBlock Grid.Row="1"
 		           Grid.Column="3"
 		           Margin="3 0 0 0"
@@ -89,7 +89,7 @@
 		           Grid.Column="0"
 		           HorizontalAlignment="Right"
 		           VerticalAlignment="Center"
-		           Text="{LocText TicketServer::TextZip}" />
+		           Text="{LocText TicketServer:Ticket:TextZip}" />
 		<TextBlock Grid.Row="2"
 		           Grid.Column="1"
 		           Margin="3 0 0 0"
@@ -103,7 +103,7 @@
 		           Grid.Column="2"
 		           HorizontalAlignment="Right"
 		           VerticalAlignment="Center"
-		           Text="{LocText TicketServer::TextCity}" />
+		           Text="{LocText TicketServer:Ticket:TextCity}" />
 		<TextBlock Grid.Row="2"
 		           Grid.Column="3"
 		           Margin="3 0 0 0"
@@ -117,7 +117,7 @@
 		           Grid.Column="2"
 		           HorizontalAlignment="Right"
 		           VerticalAlignment="Center"
-		           Text="{LocText TicketServer::TextPhone}" />
+		           Text="{LocText TicketServer:Ticket:TextPhone}" />
 		<TextBlock Grid.Row="3"
 		           Grid.Column="3"
 		           Margin="3 0 0 0"
@@ -131,7 +131,7 @@
 		           Grid.Column="0"
 		           HorizontalAlignment="Right"
 		           VerticalAlignment="Center"
-		           Text="{LocText TicketServer::TextMail}" />
+		           Text="{LocText TicketServer:Ticket:TextMail}" />
 		<TextBlock Grid.Row="3"
 		           Grid.Column="1"
 		           Margin="3 0 0 0"
@@ -145,7 +145,7 @@
 		           Grid.Column="0"
 		           HorizontalAlignment="Right"
 		           VerticalAlignment="Center"
-		           Text="{LocText TicketServer::TextRedeemed}" />
+		           Text="{LocText TicketServer:Ticket:TextRedeemed}" />
 		<CheckBox x:Name="checkBoxRedeemed"
 		          Grid.Row="4"
 		          Grid.Column="1"
@@ -159,7 +159,7 @@
 		           Grid.Column="2"
 		           HorizontalAlignment="Right"
 		           VerticalAlignment="Center"
-		           Text="{LocText TicketServer::TextRedeemDate}" />
+		           Text="{LocText TicketServer:Ticket:TextRedeemDate}" />
 		<TextBlock Grid.Row="4"
 		           Grid.Column="3"
 		           Margin="3 0 0 0"
@@ -174,7 +174,7 @@
 		           Grid.Column="0"
 		           HorizontalAlignment="Right"
 		           VerticalAlignment="Center"
-		           Text="{LocText TicketServer::TextOnline}" />
+		           Text="{LocText TicketServer:Ticket:TextOnline}" />
 		<CheckBox x:Name="checkBoxOnline"
 		          Grid.Row="5"
 		          Grid.Column="1"
@@ -188,7 +188,7 @@
 		           Grid.Column="2"
 		           HorizontalAlignment="Right"
 		           VerticalAlignment="Center"
-		           Text="{LocText TicketServer::TextType}" />
+		           Text="{LocText TicketServer:Ticket:TextType}" />
 		<TextBlock Grid.Row="5"
 		           Grid.Column="3"
 		           Margin="3 0 0 0"

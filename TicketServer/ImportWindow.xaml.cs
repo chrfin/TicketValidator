@@ -54,13 +54,13 @@ namespace TicketServer
 			ColumnBoxes.Add(comboBoxPhoneColumn);
 			ColumnBoxes.Add(comboBoxMailColumn);
 
-			comboBoxCodeColumn.Tag = new GridViewColumn() { Header = Properties.Resources.FieldCode };
-			comboBoxNameColumn.Tag = new GridViewColumn() { Header = Properties.Resources.FieldName };
-			comboBoxStreetColumn.Tag = new GridViewColumn() { Header = Properties.Resources.FieldStreet };
-			comboBoxZipColumn.Tag = new GridViewColumn() { Header = Properties.Resources.FieldZip };
-			comboBoxCityColumn.Tag = new GridViewColumn() { Header = Properties.Resources.FieldCity };
-			comboBoxPhoneColumn.Tag = new GridViewColumn() { Header = Properties.Resources.FieldPhone };
-			comboBoxMailColumn.Tag = new GridViewColumn() { Header = Properties.Resources.FieldMail };
+			comboBoxCodeColumn.Tag = new GridViewColumn() { Header = Properties.Import.FieldCode };
+			comboBoxNameColumn.Tag = new GridViewColumn() { Header = Properties.Import.FieldName };
+			comboBoxStreetColumn.Tag = new GridViewColumn() { Header = Properties.Import.FieldStreet };
+			comboBoxZipColumn.Tag = new GridViewColumn() { Header = Properties.Import.FieldZip };
+			comboBoxCityColumn.Tag = new GridViewColumn() { Header = Properties.Import.FieldCity };
+			comboBoxPhoneColumn.Tag = new GridViewColumn() { Header = Properties.Import.FieldPhone };
+			comboBoxMailColumn.Tag = new GridViewColumn() { Header = Properties.Import.FieldMail };
 
 			listViewPreview.View = new GridView();
 			ColumnBoxes.ForEach(cb => (listViewPreview.View as GridView).Columns.Add(cb.Tag as GridViewColumn));
@@ -138,8 +138,8 @@ namespace TicketServer
 		private void buttonBrowse_Click(object sender, RoutedEventArgs e)
 		{
 			CommonOpenFileDialog ofd = new CommonOpenFileDialog();
-			ofd.Filters.Add(new CommonFileDialogFilter(Properties.Resources.CsvFilterName, "*.csv"));
-			ofd.Filters.Add(new CommonFileDialogFilter(Properties.Resources.AllFilterName, "*.*"));
+			ofd.Filters.Add(new CommonFileDialogFilter(Properties.Import.CsvFilterName, "*.csv"));
+			ofd.Filters.Add(new CommonFileDialogFilter(Properties.Import.AllFilterName, "*.*"));
 			if (ofd.ShowDialog() == CommonFileDialogResult.Ok)
 				textBoxFile.Text = ofd.FileName;
 		}
@@ -216,7 +216,7 @@ namespace TicketServer
 			{
 				Dispatcher.Invoke((Action)delegate()
 				{
-					textBlockStatus.Text = Properties.Resources.ImportStatusReadingFile;
+					textBlockStatus.Text = Properties.Import.ImportStatusReadingFile;
 					progressBarStatus.Value = 0;
 					progressBarStatus.Visibility = System.Windows.Visibility.Visible;
 					busyIndicator.IsBusy = true;
@@ -237,7 +237,7 @@ namespace TicketServer
 				{
 					Dispatcher.Invoke((Action)delegate() 
 					{
-						textBlockStatus.Text = String.Format(Properties.Resources.ImportStatusImporting, ++i, lines.Count);
+						textBlockStatus.Text = String.Format(Properties.Import.ImportStatusImporting, ++i, lines.Count);
 						progressBarStatus.Value = (i * 100.0) / lines.Count;
 					});
 					List<string> rowValues = SplitLine(row, separator);
@@ -260,7 +260,7 @@ namespace TicketServer
 
 				Dispatcher.Invoke((Action)delegate()
 				{
-					textBlockStatus.Text = Properties.Resources.ImportStatusReady;
+					textBlockStatus.Text = Properties.Import.ImportStatusReady;
 					progressBarStatus.Visibility = System.Windows.Visibility.Hidden;
 					busyIndicator.IsBusy = false;
 				});

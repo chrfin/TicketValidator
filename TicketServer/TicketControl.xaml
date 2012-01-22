@@ -42,7 +42,7 @@
 		           Grid.Column="0"
 		           HorizontalAlignment="Right"
 		           VerticalAlignment="Center"
-		           Text="{LocText TicketServer::TextId}" />
+		           Text="{LocText TicketServer:Ticket:TextId}" />
 		<TextBlock Grid.Row="0"
 		           Grid.Column="1"
 		           Margin="5 0 0 0"
@@ -55,7 +55,7 @@
 		           Grid.Column="0"
 		           HorizontalAlignment="Right"
 		           VerticalAlignment="Center"
-		           Text="{LocText TicketServer::TextCode}" />
+		           Text="{LocText TicketServer:Ticket:TextCode}" />
 		<TextBox x:Name="textBoxCode"
 		         Grid.Row="1"
 		         Grid.Column="1"
@@ -67,7 +67,7 @@
 		           Grid.Column="0"
 		           HorizontalAlignment="Right"
 		           VerticalAlignment="Center"
-		           Text="{LocText TicketServer::TextName}" />
+		           Text="{LocText TicketServer:Ticket:TextName}" />
 		<TextBox x:Name="textBoxName"
 		         Grid.Row="2"
 		         Grid.Column="1"
@@ -79,7 +79,7 @@
 		           Grid.Column="0"
 		           HorizontalAlignment="Right"
 		           VerticalAlignment="Center"
-		           Text="{LocText TicketServer::TextStreet}" />
+		           Text="{LocText TicketServer:Ticket:TextStreet}" />
 		<TextBox x:Name="textBoxStreet"
 		         Grid.Row="3"
 		         Grid.Column="1"
@@ -91,7 +91,7 @@
 		           Grid.Column="0"
 		           HorizontalAlignment="Right"
 		           VerticalAlignment="Center"
-		           Text="{LocText TicketServer::TextZip}" />
+		           Text="{LocText TicketServer:Ticket:TextZip}" />
 		<TextBox x:Name="textBoxZip"
 		         Grid.Row="4"
 		         Grid.Column="1"
@@ -103,7 +103,7 @@
 		           Grid.Column="0"
 		           HorizontalAlignment="Right"
 		           VerticalAlignment="Center"
-		           Text="{LocText TicketServer::TextCity}" />
+		           Text="{LocText TicketServer:Ticket:TextCity}" />
 		<TextBox x:Name="textBoxCity"
 		         Grid.Row="5"
 		         Grid.Column="1"
@@ -115,7 +115,7 @@
 		           Grid.Column="0"
 		           HorizontalAlignment="Right"
 		           VerticalAlignment="Center"
-		           Text="{LocText TicketServer::TextPhone}" />
+		           Text="{LocText TicketServer:Ticket:TextPhone}" />
 		<TextBox x:Name="textBoxPhone"
 		         Grid.Row="6"
 		         Grid.Column="1"
@@ -127,7 +127,7 @@
 		           Grid.Column="0"
 		           HorizontalAlignment="Right"
 		           VerticalAlignment="Center"
-		           Text="{LocText TicketServer::TextMail}" />
+		           Text="{LocText TicketServer:Ticket:TextMail}" />
 		<TextBox x:Name="textBoxMail"
 		         Grid.Row="7"
 		         Grid.Column="1"
@@ -139,7 +139,7 @@
 		           Grid.Column="0"
 		           HorizontalAlignment="Right"
 		           VerticalAlignment="Center"
-		           Text="{LocText TicketServer::TextRedeemed}" />
+		           Text="{LocText TicketServer:Ticket:TextRedeemed}" />
 		<CheckBox x:Name="checkBoxRedeemed"
 		          Grid.Row="8"
 		          Grid.Column="1"
@@ -152,7 +152,7 @@
 		           Grid.Column="0"
 		           HorizontalAlignment="Right"
 		           VerticalAlignment="Center"
-		           Text="{LocText TicketServer::TextRedeemDate}" />
+		           Text="{LocText TicketServer:Ticket:TextRedeemDate}" />
 		<DatePickerTextBox x:Name="textBoxRedeemDate"
 		                   Grid.Row="9"
 		                   Grid.Column="1"
@@ -166,7 +166,7 @@
 		           Grid.Column="0"
 		           HorizontalAlignment="Right"
 		           VerticalAlignment="Center"
-		           Text="{LocText TicketServer::TextOnline}" />
+		           Text="{LocText TicketServer:Ticket:TextOnline}" />
 		<CheckBox x:Name="checkBoxOnline"
 		          Grid.Row="10"
 		          Grid.Column="1"
@@ -179,7 +179,7 @@
 		           Grid.Column="0"
 		           HorizontalAlignment="Right"
 		           VerticalAlignment="Center"
-		           Text="{LocText TicketServer::TextType}" />
+		           Text="{LocText TicketServer:Ticket:TextType}" />
 		<ComboBox x:Name="comboBoxType"
 		          Grid.Row="11"
 		          Grid.Column="1"
