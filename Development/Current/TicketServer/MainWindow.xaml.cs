@@ -346,16 +346,9 @@ namespace TicketServer
 		/// <param name="args">The <see cref="TicketServer.Common.TicketEventArgs"/> instance containing the event data.</param>
 		private void UpdateStatusItem(TicketEventArgs args)
 		{
-			ListBoxItem item = (ListBoxItem)listBoxStatus.ItemContainerGenerator.ContainerFromItem(
-				(listBoxStatus.ItemsSource as SafeObservable<TicketEventArgs>).First(a => a.Ticket.Id == args.Ticket.Id));
-			listBoxStatus.Dispatcher.Invoke((Action)delegate
-			{
-				ContentPresenter presenter = item.FindVisualChild<ContentPresenter>();
-				DataTemplate template = presenter.ContentTemplate;
-				TicketStatusControl statusControl = (TicketStatusControl)template.FindName("statusControl", presenter);
-				statusControl.Ticket = args.Ticket;
-				statusControl.UpdateAllBindingTargets();
-			});
+			TicketEventArgs e = (listBoxStatus.ItemsSource as SafeObservable<TicketEventArgs>).First(a => a.Ticket.Id == args.Ticket.Id);
+			e.Result = args.Result;
+			return;
 		}
 
 		/// <summary>

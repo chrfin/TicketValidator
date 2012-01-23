@@ -126,7 +126,7 @@ namespace TicketServer.Service
 		{
 			RedeemResult result = new RedeemResult(TicketSource.RedeemTicket(id));
 
-			AsyncHelper.FireAsync(TicketRedeemed, this, new TicketEventArgs(id, TicketSource, Client.Address));
+			AsyncHelper.FireAsync(TicketRedeemed, this, new TicketEventArgs(id, TicketSource, Client.Address) { Result = result });
 
 			return result;
 		}

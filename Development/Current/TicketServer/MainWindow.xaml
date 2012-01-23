@@ -203,12 +203,17 @@
 									</StackPanel>
 									<t:TicketStatusControl x:Name="statusControl"
 									                       Margin="5"
-									                       Background="{Binding Ticket,
-									                                            Converter={StaticResource ResourceKey=ticketColorConverter}}"
 									                       DataContext="{Binding .}"
 									                       Ticket="{Binding Ticket,
 									                                        ElementName=.,
-									                                        Mode=OneWay}" />
+									                                        Mode=OneWay}">
+										<t:TicketStatusControl.Background>
+											<MultiBinding Converter="{StaticResource ResourceKey=ticketColorConverter}">
+												<Binding Path="Ticket" />
+												<Binding Path="Result" />
+											</MultiBinding>
+										</t:TicketStatusControl.Background>
+									</t:TicketStatusControl>
 								</StackPanel>
 							</DataTemplate>
 						</ListBox.ItemTemplate>
