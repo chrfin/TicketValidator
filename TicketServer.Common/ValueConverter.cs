@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Media;
 using TicketServer.Interfaces;
 using TicketServer.Interfaces.Enums;
+using TicketServer.Interfaces.BusinessLayer;
 
 namespace TicketServer.Common
 {
@@ -29,7 +30,7 @@ namespace TicketServer.Common
 		/// </returns>
 		public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
 		{
-			if(targetType != typeof(FontWeight))
+			if (targetType != typeof(FontWeight))
 				throw new InvalidOperationException("The target must be a FontWeight!");
 
 			return Boolean.Parse(value.ToString()) ? FontWeights.Bold : FontWeights.Normal;
@@ -56,9 +57,9 @@ namespace TicketServer.Common
 	/// <summary>
 	/// Converts a ticket status to the appropriate color.
 	/// </summary>
-	public class TicketToStatusColorConverter : IValueConverter
+	public class TicketToStatusColorConverter : IMultiValueConverter
 	{
-		#region IValueConverter Members
+		#region IMultiValueConverter Members
 
 		/// <summary>
 		/// Converts a value.
@@ -70,14 +71,22 @@ namespace TicketServer.Common
 		/// <returns>
 		/// A converted value. If the method returns null, the valid null value is used.
 		/// </returns>
-		public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+		public object Convert(object[] value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
 		{
-			ITicket ticket = value as ITicket;
+			ITicket ticket = value[0] as ITicket;
 
 			if (ticket == null)
 				throw new ArgumentException();
 
-			return ticket.IsRedeemed ? Brushes.Red : (ticket.Type == TicketType.Special ? Brushes.Blue : Brushes.LightGray);
+			if (ticket.Type == TicketType.Special)
+				return Brushes.Blue;
+			if (!ticket.IsRedeemed)
+				return Brushes.LightGray;
+
+			IRedeemResult result = value[1] as IRedeemResult;
+
+			//result == null and !IsRedeemed => rerequest of already redeemed ticket
+			return result == null || result.Type != RedeemResultType.Redeemed ? Brushes.Red : Brushes.LightGreen;
 		}
 
 		/// <summary>
@@ -90,7 +99,7 @@ namespace TicketServer.Common
 		/// <returns>
 		/// A converted value. If the method returns null, the valid null value is used.
 		/// </returns>
-		public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+		public object[] ConvertBack(object value, Type[] targetType, object parameter, System.Globalization.CultureInfo culture)
 		{
 			throw new NotImplementedException();
 		}

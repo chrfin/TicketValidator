@@ -4,13 +4,15 @@ using System.Linq;
 using System.Text;
 using TicketServer.Interfaces;
 using TicketServer.Interfaces.DAL;
+using TicketServer.Interfaces.BusinessLayer;
+using System.ComponentModel;
 
 namespace TicketServer.Common
 {
 	/// <summary>
 	/// EventArgs implementation for ticket events.
 	/// </summary>
-	public class TicketEventArgs : EventArgs
+	public class TicketEventArgs : EventArgs, INotifyPropertyChanged
 	{
 		/// <summary>
 		/// Gets or sets the ticked id.
@@ -62,6 +64,25 @@ namespace TicketServer.Common
 		/// </summary>
 		public DateTime Created { get; private set; }
 
+		private IRedeemResult result = null;
+		/// <summary>
+		/// Gets or sets the result.
+		/// NULL if it wasn't a redeem request.
+		/// </summary>
+		/// <value>
+		/// The result.
+		/// </value>
+		public IRedeemResult Result
+		{
+			get { return result; }
+			set
+			{
+				result = value;
+				if (PropertyChanged != null)
+					PropertyChanged(this, new PropertyChangedEventArgs("Result"));
+			}
+		}
+
 		/// <summary>
 		/// Initializes a new instance of the <see cref="TicketEventArgs"/> class.
 		/// </summary>
@@ -86,5 +107,11 @@ namespace TicketServer.Common
 			Client = client;
 			Created = DateTime.Now;
 		}
+
+		#region INotifyPropertyChanged Members
+
+		public event PropertyChangedEventHandler PropertyChanged;
+
+		#endregion
 	}
 }
