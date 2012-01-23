@@ -61,7 +61,7 @@
 		         Grid.Column="1"
 		         Margin="3"
 		         Text="{Binding Ticket.Code,
-		                        Mode=OneWay}" />
+		                        UpdateSourceTrigger=Explicit}" />
 
 		<TextBlock Grid.Row="2"
 		           Grid.Column="0"
@@ -73,7 +73,7 @@
 		         Grid.Column="1"
 		         Margin="3"
 		         Text="{Binding Ticket.Name,
-		                        Mode=OneWay}" />
+		                        UpdateSourceTrigger=Explicit}" />
 
 		<TextBlock Grid.Row="3"
 		           Grid.Column="0"
@@ -85,7 +85,7 @@
 		         Grid.Column="1"
 		         Margin="3"
 		         Text="{Binding Ticket.Street,
-		                        Mode=OneWay}" />
+		                        UpdateSourceTrigger=Explicit}" />
 
 		<TextBlock Grid.Row="4"
 		           Grid.Column="0"
@@ -97,7 +97,7 @@
 		         Grid.Column="1"
 		         Margin="3"
 		         Text="{Binding Ticket.Zip,
-		                        Mode=OneWay}" />
+		                        UpdateSourceTrigger=Explicit}" />
 
 		<TextBlock Grid.Row="5"
 		           Grid.Column="0"
@@ -109,7 +109,7 @@
 		         Grid.Column="1"
 		         Margin="3"
 		         Text="{Binding Ticket.City,
-		                        Mode=OneWay}" />
+		                        UpdateSourceTrigger=Explicit}" />
 
 		<TextBlock Grid.Row="6"
 		           Grid.Column="0"
@@ -121,7 +121,7 @@
 		         Grid.Column="1"
 		         Margin="3"
 		         Text="{Binding Ticket.Phone,
-		                        Mode=OneWay}" />
+		                        UpdateSourceTrigger=Explicit}" />
 
 		<TextBlock Grid.Row="7"
 		           Grid.Column="0"
@@ -133,7 +133,7 @@
 		         Grid.Column="1"
 		         Margin="3"
 		         Text="{Binding Ticket.EMail,
-		                        Mode=OneWay}" />
+		                        UpdateSourceTrigger=Explicit}" />
 
 		<TextBlock Grid.Row="8"
 		           Grid.Column="0"

@@ -22,7 +22,8 @@
 		<ListBox x:Name="listBoxPage"
 		         Grid.Row="0"
 		         Grid.Column="0"
-		         Margin="5">
+		         Margin="5"
+		         SelectionChanged="listBoxPage_SelectionChanged">
 			<ListBoxItem IsSelected="True">
 				<StackPanel Margin="0 2" Orientation="Horizontal">
 					<Image Width="24" Source="Icons\Medium\vcard.png" />
@@ -42,9 +43,11 @@
 		</ListBox>
 
 		<TabControl x:Name="tabControlSettings"
-		            Grid.Row="0" Margin="5"
-		            Grid.Column="1">
+		            Grid.Row="0"
+		            Grid.Column="1"
+		            Margin="5 3 5 5">
 			<TabItem Visibility="Collapsed">asdf</TabItem>
+			<TabItem Visibility="Collapsed">qwert</TabItem>
 		</TabControl>
 
 		<StackPanel Grid.Row="1"
