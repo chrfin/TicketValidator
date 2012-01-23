@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="AsyncHelper.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="Helper.cs" />
     <Compile Include="ObservablePoint.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TicketEventArgs.cs" />

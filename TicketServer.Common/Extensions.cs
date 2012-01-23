@@ -5,6 +5,9 @@ using System.Text;
 using System.Reflection;
 using System.ComponentModel;
 using System.Windows.Markup;
+using System.Windows;
+using System.Windows.Data;
+using System.Windows.Media;
 
 namespace TicketServer.Common
 {
@@ -141,5 +144,85 @@ namespace TicketServer.Common
 			return items.ToArray();
 		}
 		#endregion //Base class overrides
+	}
+
+	public static class CommonExtensions
+	{
+		/// <summary>
+		/// Finds the visual child.
+		/// </summary>
+		/// <typeparam name="childItem">The type of the hild item.</typeparam>
+		/// <param name="obj">The obj.</param>
+		/// <returns></returns>
+		/// <remarks>http://blogs.msdn.com/b/wpfsdk/archive/2007/04/16/how-do-i-programmatically-interact-with-template-generated-elements-part-ii.aspx</remarks>
+		public static childItem FindVisualChild<childItem>(this DependencyObject obj) where childItem : DependencyObject
+		{
+			for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj); i++)
+			{
+				DependencyObject child = VisualTreeHelper.GetChild(obj, i);
+				if (child != null && child is childItem)
+					return (childItem)child;
+				else
+				{
+					childItem childOfChild = FindVisualChild<childItem>(child);
+					if (childOfChild != null)
+						return childOfChild;
+				}
+			}
+			return null;
+		}
+
+		/// <summary>
+		/// Updates all binding targets.
+		/// </summary>
+		/// <param name="obj">The obj.</param>
+		/// <remarks>http://stackoverflow.com/questions/5150983/how-to-invoke-updatesource-for-all-bindings-on-the-form</remarks>
+		public static void UpdateAllBindingTargets(this DependencyObject obj)
+		{
+			foreach (var binding in obj.GetAllBindings().Where(b => b != null))
+				binding.UpdateTarget();
+		}
+
+		/// <summary>
+		/// Updates all binding sources.
+		/// </summary>
+		/// <param name="obj">The obj.</param>
+		/// <remarks>http://stackoverflow.com/questions/5150983/how-to-invoke-updatesource-for-all-bindings-on-the-form</remarks>
+		public static void UpdateAllBindingSources(this DependencyObject obj)
+		{
+			foreach (var binding in obj.GetAllBindings().Where(b => b != null))
+				binding.UpdateSource();
+		}
+
+		/// <summary>
+		/// Gets all bindings.
+		/// </summary>
+		/// <param name="obj">The obj.</param>
+		/// <returns></returns>
+		/// <remarks>http://stackoverflow.com/questions/5150983/how-to-invoke-updatesource-for-all-bindings-on-the-form</remarks>
+		public static IEnumerable<BindingExpression> GetAllBindings(this DependencyObject obj)
+		{
+			var stack = new Stack<DependencyObject>();
+
+			stack.Push(obj);
+
+			while (stack.Count > 0)
+			{
+				var cur = stack.Pop();
+				var lve = cur.GetLocalValueEnumerator();
+
+				while (lve.MoveNext())
+					if (BindingOperations.IsDataBound(cur, lve.Current.Property))
+						yield return lve.Current.Value as BindingExpression;
+
+				int count = VisualTreeHelper.GetChildrenCount(cur);
+				for (int i = 0; i < count; ++i)
+				{
+					var child = VisualTreeHelper.GetChild(cur, i);
+					if (child is FrameworkElement)
+						stack.Push(child);
+				}
+			}
+		}
 	}
 }

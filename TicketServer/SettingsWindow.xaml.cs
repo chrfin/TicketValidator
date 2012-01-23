@@ -44,5 +44,16 @@ namespace TicketServer
 			DialogResult = true;
 			Close();
 		}
+
+		/// <summary>
+		/// Handles the SelectionChanged event of the listBoxPage control.
+		/// </summary>
+		/// <param name="sender">The source of the event.</param>
+		/// <param name="e">The <see cref="System.Windows.Controls.SelectionChangedEventArgs"/> instance containing the event data.</param>
+		private void listBoxPage_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+			if (tabControlSettings != null && tabControlSettings.Items.Count > listBoxPage.SelectedIndex)
+				tabControlSettings.SelectedIndex = listBoxPage.SelectedIndex;
+		}
 	}
 }

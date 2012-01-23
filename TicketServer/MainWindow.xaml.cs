@@ -32,6 +32,7 @@ using System.ComponentModel;
 using TicketServer.Interfaces;
 using TicketServer.Interfaces.Enums;
 using TicketServer.Interfaces.Classes;
+using System.Windows.Interop;
 
 namespace TicketServer
 {
@@ -314,7 +315,13 @@ namespace TicketServer
 		/// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
 		protected void service_TicketRedeemed(object sender, EventArgs e)
 		{
-			(listBoxStatus.ItemsSource as SafeObservable<TicketEventArgs>).Insert(0, e as TicketEventArgs);
+			TicketEventArgs args = e as TicketEventArgs;
+			SafeObservable<TicketEventArgs> list = listBoxStatus.ItemsSource as SafeObservable<TicketEventArgs>;
+
+			if (list.FirstOrDefault(a => a.Ticket.Id == args.Ticket.Id) == null)
+				list.Insert(0, e as TicketEventArgs);
+			else
+			    UpdateStatusItem(args);
 		}
 
 		/// <summary>
@@ -324,7 +331,31 @@ namespace TicketServer
 		/// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
 		protected void service_TicketRequested(object sender, EventArgs e)
 		{
-			(listBoxStatus.ItemsSource as SafeObservable<TicketEventArgs>).Insert(0, e as TicketEventArgs);
+			TicketEventArgs args = e as TicketEventArgs;
+			SafeObservable<TicketEventArgs> list = listBoxStatus.ItemsSource as SafeObservable<TicketEventArgs>;
+
+			if (list.FirstOrDefault(a => a.Ticket.Id == args.Ticket.Id) == null)
+				list.Insert(0, e as TicketEventArgs);
+			else
+				UpdateStatusItem(args);
+		}
+
+		/// <summary>
+		/// Updates the status item.
+		/// </summary>
+		/// <param name="args">The <see cref="TicketServer.Common.TicketEventArgs"/> instance containing the event data.</param>
+		private void UpdateStatusItem(TicketEventArgs args)
+		{
+			ListBoxItem item = (ListBoxItem)listBoxStatus.ItemContainerGenerator.ContainerFromItem(
+				(listBoxStatus.ItemsSource as SafeObservable<TicketEventArgs>).First(a => a.Ticket.Id == args.Ticket.Id));
+			listBoxStatus.Dispatcher.Invoke((Action)delegate
+			{
+				ContentPresenter presenter = item.FindVisualChild<ContentPresenter>();
+				DataTemplate template = presenter.ContentTemplate;
+				TicketStatusControl statusControl = (TicketStatusControl)template.FindName("statusControl", presenter);
+				statusControl.Ticket = args.Ticket;
+				statusControl.UpdateAllBindingTargets();
+			});
 		}
 
 		/// <summary>
@@ -335,6 +366,7 @@ namespace TicketServer
 		private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
 		{
 			TaskDialog dialog = new TaskDialog();
+			dialog.OwnerWindowHandle = new WindowInteropHelper(this).Handle;
 			dialog.Cancelable = true;
 			dialog.Caption = Properties.Resources.CloseWarningCaption;
 			dialog.ExpansionMode = TaskDialogExpandedDetailsLocation.Hide;

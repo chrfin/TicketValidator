@@ -10,7 +10,7 @@
                 xmlns:tk="clr-namespace:System.Windows.Controls.DataVisualization;assembly=System.Windows.Controls.DataVisualization.Toolkit"
                 xmlns:tkc="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
                 Title="Ticket Server"
-                Width="825"
+                Width="950"
                 Height="650"
                 MinWidth="450"
                 MinHeight="600"
@@ -201,7 +201,8 @@
 										<TextBlock Text="{LocText TicketServer::StatusTime}" />
 										<TextBlock Margin="5 0 5 0" Text="{Binding Created, StringFormat='{}{0:hh:mm:ss}'}" />
 									</StackPanel>
-									<t:TicketStatusControl Margin="5"
+									<t:TicketStatusControl x:Name="statusControl"
+									                       Margin="5"
 									                       Background="{Binding Ticket,
 									                                            Converter={StaticResource ResourceKey=ticketColorConverter}}"
 									                       DataContext="{Binding .}"

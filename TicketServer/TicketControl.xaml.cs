@@ -7,12 +7,14 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using TicketServer.Interfaces;
 using Microsoft.WindowsAPICodePack.Dialogs;
+using TicketServer.Common;
+using TicketServer.Interfaces;
 using TicketServer.Interfaces.Enums;
 
 namespace TicketServer
@@ -52,6 +54,7 @@ namespace TicketServer
 		private void buttonDelete_Click(object sender, RoutedEventArgs e)
 		{
 			TaskDialog dialog = new TaskDialog();
+			dialog.OwnerWindowHandle = new WindowInteropHelper(Window.GetWindow(this)).Handle;
 			dialog.Cancelable = true;
 			dialog.Caption = Properties.Resources.DeleteTicketCaption;
 			dialog.ExpansionMode = TaskDialogExpandedDetailsLocation.Hide;
@@ -82,20 +85,21 @@ namespace TicketServer
 		/// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
 		private void buttonSave_Click(object sender, RoutedEventArgs e)
 		{
-			Ticket.Code = textBoxCode.Text;
-			Ticket.Name = textBoxName.Text;
-			Ticket.Street = textBoxStreet.Text;
-			Ticket.Zip = textBoxZip.Text;
-			Ticket.City = textBoxCity.Text;
-			Ticket.Phone = textBoxPhone.Text;
-			Ticket.EMail = textBoxMail.Text;
+			textBoxCode.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+			textBoxName.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+			textBoxStreet.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+			textBoxZip.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+			textBoxCity.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+			textBoxPhone.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+			textBoxMail.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+
 			Ticket.IsRedeemed = checkBoxRedeemed.IsChecked.Value;
 			Ticket.IsOnlineTicket = checkBoxOnline.IsChecked.Value;
 			Ticket.Type = (TicketType)comboBoxType.SelectedItem;
 
 			DateTime result;
-			Ticket.RedeemDate = textBoxRedeemDate.Text.Length < 10 ? 
-				(DateTime?)null : (DateTime.TryParse(textBoxRedeemDate.Text, out result) ? result : new DateTime());
+			Ticket.RedeemDate = textBoxRedeemDate.Text.Length < 8 ? 
+			    (DateTime?)null : (DateTime.TryParse(textBoxRedeemDate.Text, out result) ? result : new DateTime());
 
 			Ticket.Save();
 		}

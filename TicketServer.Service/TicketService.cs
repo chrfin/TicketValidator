@@ -111,8 +111,8 @@ namespace TicketServer.Service
 				return null;
 
 			Ticket ticket = new Ticket(sourceTicket);
-			
-			AsyncHelper.FireAsync(TicketRequested, this, new TicketEventArgs(ticket, Client.Address));
+
+			AsyncHelper.FireAsync(TicketRequested, this, new TicketEventArgs(sourceTicket, Client.Address));
 
 			return ticket;
 		}
@@ -124,9 +124,11 @@ namespace TicketServer.Service
 		/// <returns></returns>
 		public RedeemResult RedeemTicket(int id)
 		{
+			RedeemResult result = new RedeemResult(TicketSource.RedeemTicket(id));
+
 			AsyncHelper.FireAsync(TicketRedeemed, this, new TicketEventArgs(id, TicketSource, Client.Address));
 
-			return new RedeemResult(TicketSource.RedeemTicket(id));
+			return result;
 		}
 
 		#endregion
