@@ -287,4 +287,33 @@ Diese Aktion kann NICHT rückgängig gemacht werden!</value>
   <data name="TicketRedeemedYes" xml:space="preserve">
     <value>Eingelöst</value>
   </data>
+  <data name="ButtonClearStatus" xml:space="preserve">
+    <value>Status leeren</value>
+  </data>
+  <data name="ClearDatabaseCaption" xml:space="preserve">
+    <value>Karten wirklich löschen?</value>
+  </data>
+  <data name="ClearDatabaseNo" xml:space="preserve">
+    <value>Nein, Karten NICHT löschen.</value>
+  </data>
+  <data name="ClearDatabaseText" xml:space="preserve">
+    <value>Sollen wirklich alle Karten gelöscht werden?
+Gelöschte Karten könne NICHT wiederhergestellt werden!</value>
+  </data>
+  <data name="ClearDatabaseYes" xml:space="preserve">
+    <value>Ja, Karten löschen.</value>
+  </data>
+  <data name="ResetDatabaseCaption" xml:space="preserve">
+    <value>Karten wirklich zurücksetzen?</value>
+  </data>
+  <data name="ResetDatabaseNo" xml:space="preserve">
+    <value>Nein, Karten NICHT zurücksetzen.</value>
+  </data>
+  <data name="ResetDatabaseText" xml:space="preserve">
+    <value>Sollen wirklich alle Karten zurückgesetzt werden?
+Zurückgesetzte Karten könne NICHT zu ihrem alten Status wiederhergestellt werden!</value>
+  </data>
+  <data name="ResetDatabaseYes" xml:space="preserve">
+    <value>Ja, Karten zurücksetzen.</value>
+  </data>
 </root>

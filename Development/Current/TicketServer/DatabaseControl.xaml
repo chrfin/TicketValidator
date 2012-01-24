@@ -11,6 +11,7 @@
              mc:Ignorable="d">
 	<UserControl.Resources>
 		<c:BoolToFontWeightConverter x:Key="boolToFontWeightConveter" />
+		<c:BoolToVisibilityConverter x:Key="boolToVisibilityConverter" />
 	</UserControl.Resources>
 	<Grid>
 		<Grid.ColumnDefinitions>
@@ -25,11 +26,13 @@
 		<ListBox x:Name="listBoxTickets"
 		         Grid.Row="0"
 		         Grid.Column="0"
-		         ItemsSource="{Binding TicketSource.Tickets}">
+		         ItemsSource="{Binding TicketSource.AllTickets}">
 			<ListBox.ItemTemplate>
 				<DataTemplate>
 					<Grid>
 						<Grid.ColumnDefinitions>
+							<ColumnDefinition />
+							<ColumnDefinition />
 							<ColumnDefinition />
 							<ColumnDefinition />
 							<ColumnDefinition />
@@ -50,6 +53,18 @@
 						<TextBlock Grid.Row="0"
 						           Grid.Column="2"
 						           Text="{Binding Name}" />
+						<TextBlock Grid.Row="0"
+						           Grid.Column="3"
+						           Text=" - "
+						           Visibility="{Binding IsRedeemed,
+						                                Converter={StaticResource ResourceKey=boolToVisibilityConverter}}" />
+						<TextBlock Grid.Row="0"
+						           Grid.Column="4"
+								   FontStyle="Oblique"
+						           Text="{Binding RedeemDate,
+						                          StringFormat={}{0:yyyy-MM-dd HH:mm:ss}}"
+						           Visibility="{Binding IsRedeemed,
+						                                Converter={StaticResource ResourceKey=boolToVisibilityConverter}}" />
 					</Grid>
 				</DataTemplate>
 			</ListBox.ItemTemplate>

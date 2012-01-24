@@ -145,6 +145,8 @@
 		          Grid.Column="1"
 		          Margin="5 3 3 3"
 		          VerticalAlignment="Center"
+		          Checked="checkBoxRedeemed_Checked"
+				  Unchecked="checkBoxRedeemed_Checked"
 		          IsChecked="{Binding Ticket.IsRedeemed,
 		                              Mode=OneWay}" />
 

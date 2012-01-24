@@ -16,11 +16,11 @@ namespace TicketServer.Interfaces.DAL
 	public interface ITicketDataSource : INotifyPropertyChanged
 	{
 		/// <summary>
-		/// Gets the ticket count.
+		/// Gets the ticket count. Special tickets are not included!
 		/// </summary>
 		int TicketCount { get; }
 		/// <summary>
-		/// Gets the redeemed count.
+		/// Gets the redeemed count. Special tickets are not included!
 		/// </summary>
 		int RedeemedCount { get; }
 
@@ -45,9 +45,13 @@ namespace TicketServer.Interfaces.DAL
 		ITicket GetTicket(string code);
 
 		/// <summary>
-		/// Gets all the tickets.
+		/// Gets all the tickets including special tickets.
 		/// </summary>
-		SafeObservable<ITicket> Tickets { get; }
+		SafeObservable<ITicket> AllTickets { get; }
+		/// <summary>
+		/// Gets all the tickets except special tickets.
+		/// </summary>
+		SafeObservable<ITicket> ActiveTickets { get; }
 
 		/// <summary>
 		/// Redeems the ticket.
@@ -68,5 +72,13 @@ namespace TicketServer.Interfaces.DAL
 		/// <param name="createBackup">if set to <c>true</c> a backup will be created.</param>
 		/// <returns></returns>
 		bool Clear(bool createBackup = true);
+
+		/// <summary>
+		/// Gets or sets the string identifing special tickets.
+		/// </summary>
+		/// <value>
+		/// The special tickets string.
+		/// </value>
+		string SpecialTicketsString { get; set; }
 	}
 }

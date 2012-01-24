@@ -173,6 +173,7 @@ namespace TicketServer
 				IsBusy = true;
 
 				ITicketDataSource source = new SqlCeTicketDataSource(Filename);
+				source.SpecialTicketsString = Settings.Default.SpecialTicketsString;
 				source.PropertyChanged += new PropertyChangedEventHandler(source_PropertyChanged);
 
 				TicketService service = new TicketService(source);
@@ -222,7 +223,7 @@ namespace TicketServer
 
 			SafeObservable<ObservablePoint<DateTime, int>> data = new SafeObservable<ObservablePoint<DateTime, int>>();
 
-			SafeObservable<ITicket> tickets = service.TicketSource.Tickets;
+			SafeObservable<ITicket> tickets = service.TicketSource.ActiveTickets;
 
 			DateTime firstRedeemed = (from t in tickets
 									  where t.IsRedeemed && t.RedeemDate.HasValue
@@ -260,7 +261,7 @@ namespace TicketServer
 		/// <param name="tickets">The tickets.</param>
 		/// <param name="until">The until.</param>
 		/// <returns></returns>
-		private static int GetRedeemdCount(SafeObservable<ITicket> tickets, DateTime until)
+		private static int GetRedeemdCount(IEnumerable<ITicket> tickets, DateTime until)
 		{
 			return (from t in tickets
 					where t.IsRedeemed && t.RedeemDate.HasValue && t.RedeemDate.Value <= until
@@ -273,7 +274,7 @@ namespace TicketServer
 		/// <param name="begin">The begin.</param>
 		/// <param name="end">The end.</param>
 		/// <returns></returns>
-		private static int GetRedeemdCount(SafeObservable<ITicket> tickets, DateTime begin, DateTime end)
+		private static int GetRedeemdCount(IEnumerable<ITicket> tickets, DateTime begin, DateTime end)
 		{
 			return (from t in tickets
 					where t.IsRedeemed && t.RedeemDate.HasValue && t.RedeemDate.Value > begin && t.RedeemDate.Value <= end
@@ -296,13 +297,13 @@ namespace TicketServer
 			{
 				foreach (ObservablePoint<DateTime, int> point in lineSeriesStatisticTotal.ItemsSource as SafeObservable<ObservablePoint<DateTime, int>>)
 				{
-					point.Y = GetRedeemdCount(Service.TicketSource.Tickets, point.X);
+					point.Y = GetRedeemdCount(Service.TicketSource.ActiveTickets, point.X);
 				}
 
 				DateTime last = new DateTime();
 				foreach (ObservablePoint<DateTime, int> point in areaSeriesStatisticPerUnit.ItemsSource as SafeObservable<ObservablePoint<DateTime, int>>)
 				{
-					point.Y = GetRedeemdCount(Service.TicketSource.Tickets, last, point.X);
+					point.Y = GetRedeemdCount(Service.TicketSource.ActiveTickets, last, point.X);
 					last = point.X;
 				}
 			});
@@ -323,7 +324,6 @@ namespace TicketServer
 			else
 			    UpdateStatusItem(args);
 		}
-
 		/// <summary>
 		/// Handles the TicketRequested event of the service control.
 		/// </summary>
@@ -339,7 +339,6 @@ namespace TicketServer
 			else
 				UpdateStatusItem(args);
 		}
-
 		/// <summary>
 		/// Updates the status item.
 		/// </summary>
@@ -400,13 +399,71 @@ namespace TicketServer
 		/// </summary>
 		/// <param name="sender">The source of the event.</param>
 		/// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
-		private void buttonClear_Click(object sender, RoutedEventArgs e) { Service.TicketSource.Clear(); UpdateStatus(); }
+		private void buttonClear_Click(object sender, RoutedEventArgs e)
+		{
+			TaskDialog dialog = new TaskDialog();
+			dialog.OwnerWindowHandle = new WindowInteropHelper(Window.GetWindow(this)).Handle;
+			dialog.Cancelable = true;
+			dialog.Caption = Properties.Resources.ClearDatabaseCaption;
+			dialog.ExpansionMode = TaskDialogExpandedDetailsLocation.Hide;
+			dialog.Icon = TaskDialogStandardIcon.Warning;
+			dialog.StartupLocation = TaskDialogStartupLocation.CenterOwner;
+			dialog.Text = Properties.Resources.ClearDatabaseText;
+
+			TaskDialogCommandLink buttonYes = new TaskDialogCommandLink("buttonYes", Properties.Resources.ClearDatabaseYes);
+			buttonYes.Click += new EventHandler(delegate(object snd, EventArgs eventArgs)
+			{
+				Service.TicketSource.Clear();
+				listBoxStatus.ItemsSource = new SafeObservable<TicketEventArgs>();
+				lineSeriesStatisticTotal.ItemsSource = BuildStatistic(StatisticMode.Total);
+				areaSeriesStatisticPerUnit.ItemsSource = BuildStatistic(StatisticMode.PerUnit);
+				UpdateStatus();
+
+				dialog.Close();
+			});
+			TaskDialogCommandLink buttonNo = new TaskDialogCommandLink("buttonNo", Properties.Resources.ClearDatabaseNo);
+			buttonNo.Click += new EventHandler(delegate(object snd, EventArgs eventArgs) { dialog.Close(); });
+
+			dialog.Controls.Add(buttonYes);
+			dialog.Controls.Add(buttonNo);
+
+			dialog.Show();
+		}
 		/// <summary>
 		/// Handles the Click event of the buttonReset control.
 		/// </summary>
 		/// <param name="sender">The source of the event.</param>
 		/// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
-		private void buttonReset_Click(object sender, RoutedEventArgs e) { Service.TicketSource.Reset(); UpdateStatus(); }
+		private void buttonReset_Click(object sender, RoutedEventArgs e)
+		{
+			TaskDialog dialog = new TaskDialog();
+			dialog.OwnerWindowHandle = new WindowInteropHelper(Window.GetWindow(this)).Handle;
+			dialog.Cancelable = true;
+			dialog.Caption = Properties.Resources.ResetDatabaseCaption;
+			dialog.ExpansionMode = TaskDialogExpandedDetailsLocation.Hide;
+			dialog.Icon = TaskDialogStandardIcon.Warning;
+			dialog.StartupLocation = TaskDialogStartupLocation.CenterOwner;
+			dialog.Text = Properties.Resources.ResetDatabaseText;
+
+			TaskDialogCommandLink buttonYes = new TaskDialogCommandLink("buttonYes", Properties.Resources.ResetDatabaseYes);
+			buttonYes.Click += new EventHandler(delegate(object snd, EventArgs eventArgs)
+			{
+				Service.TicketSource.Reset();
+				listBoxStatus.ItemsSource = new SafeObservable<TicketEventArgs>();
+				lineSeriesStatisticTotal.ItemsSource = BuildStatistic(StatisticMode.Total);
+				areaSeriesStatisticPerUnit.ItemsSource = BuildStatistic(StatisticMode.PerUnit);
+				UpdateStatus();
+
+				dialog.Close();
+			});
+			TaskDialogCommandLink buttonNo = new TaskDialogCommandLink("buttonNo", Properties.Resources.ResetDatabaseNo);
+			buttonNo.Click += new EventHandler(delegate(object snd, EventArgs eventArgs) { dialog.Close(); });
+
+			dialog.Controls.Add(buttonYes);
+			dialog.Controls.Add(buttonNo);
+
+			dialog.Show();
+		}
 
 		/// <summary>
 		/// Handles the Click event of the buttonExit control.
@@ -442,8 +499,8 @@ namespace TicketServer
 		/// <param name="e">The <see cref="System.Windows.Controls.SelectionChangedEventArgs"/> instance containing the event data.</param>
 		private void tabControlMain_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
-			tabGroupDatabase.Visibility = e.AddedItems.Contains(tabDatabase) || tabDatabase.IsSelected ?
-				System.Windows.Visibility.Visible : System.Windows.Visibility.Hidden;
+			tabGroupDatabase.Visibility = e.AddedItems.Contains(tabDatabase) || tabDatabase.IsSelected ? Visibility.Visible : Visibility.Hidden;
+			ribbonGroupStatus.Visibility = e.AddedItems.Contains(tabStatus) || tabStatus.IsSelected ? Visibility.Visible : Visibility.Hidden;
 		}
 
 		/// <summary>
@@ -454,7 +511,7 @@ namespace TicketServer
 			if (databaseControlMain == null || databaseControlMain.TicketSource == null)
 				return;
 
-			ICollectionView view = CollectionViewSource.GetDefaultView(databaseControlMain.TicketSource.Tickets);
+			ICollectionView view = CollectionViewSource.GetDefaultView(databaseControlMain.TicketSource.AllTickets);
 			if (view != null)
 			{
 				Predicate<object> filter =
@@ -515,6 +572,7 @@ namespace TicketServer
 				filename = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, filename.Substring(2));
 
 			Service.TicketSource = new SqlCeTicketDataSource(filename);
+			Service.TicketSource.SpecialTicketsString = Settings.Default.SpecialTicketsString;
 			Filename = filename;
 			Settings.Default.CurrentDataFile = Filename;
 			Settings.Default.Save();
@@ -581,6 +639,18 @@ namespace TicketServer
 			SettingsWindow settings = new SettingsWindow();
 			settings.Owner = this;
 			settings.ShowDialog();
+
+			Service.TicketSource.SpecialTicketsString = Settings.Default.SpecialTicketsString;
+		}
+
+		/// <summary>
+		/// Handles the Click event of the buttonStatusClear control.
+		/// </summary>
+		/// <param name="sender">The source of the event.</param>
+		/// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
+		private void buttonStatusClear_Click(object sender, RoutedEventArgs e)
+		{
+			listBoxStatus.ItemsSource = new SafeObservable<TicketEventArgs>();
 		}
 	}
 }

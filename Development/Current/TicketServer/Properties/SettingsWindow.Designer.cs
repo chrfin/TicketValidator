@@ -88,6 +88,45 @@ namespace TicketServer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Special Tickets.
+        /// </summary>
+        internal static string groupSpecialTickets {
+            get {
+                return ResourceManager.GetString("groupSpecialTickets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Every ticket containing the string above in its 
+        ///ticket-code will be declared as a special ticket..
+        /// </summary>
+        internal static string groupSpecialTicketsFooter {
+            get {
+                return ResourceManager.GetString("groupSpecialTicketsFooter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Here you can select a group of tickets which 
+        ///will not be counted in any statistics.
+        ///This can be used e.g. for employee tickets..
+        /// </summary>
+        internal static string groupSpecialTicketsHeader {
+            get {
+                return ResourceManager.GetString("groupSpecialTicketsHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search-String:.
+        /// </summary>
+        internal static string groupSpecialTicketsString {
+            get {
+                return ResourceManager.GetString("groupSpecialTicketsString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tickets.
         /// </summary>
         internal static string Tickets {

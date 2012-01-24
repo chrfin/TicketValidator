@@ -83,15 +83,16 @@ namespace TicketServer.DAL.SqlCe
 			if (createSchema)
 				ActiveRecordStarter.CreateSchema();
 
-			Tickets = new SafeObservable<ITicket>();
+			AllTickets = new SafeObservable<ITicket>();
 			IQueryable<ITicket> list = (from t in TicketRecord.Queryable
 										select t).Cast<ITicket>();
 			list.ToList().ForEach((Action<ITicket>)delegate(ITicket t)
 			{
 				t.PropertyChanged += new PropertyChangedEventHandler(ticket_PropertyChanged);
-				Tickets.Add(t);
+				AllTickets.Add(t);
 			});
-			Tickets.CollectionChanged += new NotifyCollectionChangedEventHandler(Tickets_CollectionChanged);
+			AllTickets.CollectionChanged += new NotifyCollectionChangedEventHandler(Tickets_CollectionChanged);
+			UpdateActiveTickets();
 		}
 
 		/// <summary>
@@ -118,14 +119,25 @@ namespace TicketServer.DAL.SqlCe
 					if (e.NewItems.Cast<ITicket>().ToList().Find(t => !(t is TicketRecord)) != null)
 						throw new ArgumentException("Can only add TicketRecords! Please use AddTicket() to add other tickets!");
 					e.NewItems.Cast<ITicket>().ToList().ForEach(t => t.PropertyChanged += new PropertyChangedEventHandler(ticket_PropertyChanged));
+					UpdateActiveTickets();
 					if (PropertyChanged != null)
+					{
+						PropertyChanged(this, new PropertyChangedEventArgs("ActiveTickets"));
 						PropertyChanged(this, new PropertyChangedEventArgs("TicketCount"));
+					}
 					break;
 				case NotifyCollectionChangedAction.Move:
 					break;
 				case NotifyCollectionChangedAction.Remove:
 					foreach (ITicket ticket in e.OldItems)
 						(ticket as TicketRecord).Delete();
+					UpdateActiveTickets();
+					if (PropertyChanged != null)
+					{
+						PropertyChanged(this, new PropertyChangedEventArgs("ActiveTickets"));
+						PropertyChanged(this, new PropertyChangedEventArgs("TicketCount"));
+						PropertyChanged(this, new PropertyChangedEventArgs("RedeemedCount"));
+					}
 					break;
 				case NotifyCollectionChangedAction.Replace:
 					throw new NotSupportedException();
@@ -139,13 +151,13 @@ namespace TicketServer.DAL.SqlCe
 		#region ITicketDataSource Members
 
 		/// <summary>
-		/// Gets the ticket count.
+		/// Gets the ticket count. Special tickets are not included!
 		/// </summary>
-		public int TicketCount { get { return Tickets.Count(); } }
+		public int TicketCount { get { return ActiveTickets.Count(); } }
 		/// <summary>
-		/// Gets the redeemed count.
+		/// Gets the redeemed count. Special tickets are not included!
 		/// </summary>
-		public int RedeemedCount { get { return (from t in Tickets where t.IsRedeemed select t).Count(); } }
+		public int RedeemedCount { get { return (from t in ActiveTickets where t.IsRedeemed select t).Count(); } }
 
 		/// <summary>
 		/// Adds the ticket to the data source.
@@ -179,7 +191,7 @@ namespace TicketServer.DAL.SqlCe
 			}
 			catch { return false; }
 
-			Tickets.Add(newTicket);
+			AllTickets.Add(newTicket);
 
 			if (PropertyChanged != null)
 			{
@@ -197,7 +209,7 @@ namespace TicketServer.DAL.SqlCe
 		/// <returns></returns>
 		public ITicket GetTicket(int id)
 		{
-			return (from t in Tickets
+			return (from t in AllTickets
 					where t.Id == id
 					select t).FirstOrDefault();
 		}
@@ -208,7 +220,7 @@ namespace TicketServer.DAL.SqlCe
 		/// <returns></returns>
 		public ITicket GetTicket(string code)
 		{
-			return (from t in Tickets
+			return (from t in AllTickets
 					where t.Code == code
 					select t).FirstOrDefault();
 		}
@@ -216,7 +228,30 @@ namespace TicketServer.DAL.SqlCe
 		/// <summary>
 		/// Gets all the tickets.
 		/// </summary>
-		public SafeObservable<ITicket> Tickets { get; private set; }
+		public SafeObservable<ITicket> AllTickets { get; private set; }
+
+		private SafeObservable<ITicket> activeTickets = new SafeObservable<ITicket>();
+		/// <summary>
+		/// Gets all the tickets except special tickets.
+		/// </summary>
+		public SafeObservable<ITicket> ActiveTickets { get { return activeTickets; } }
+
+		/// <summary>
+		/// Updates the active tickets.
+		/// </summary>
+		private void UpdateActiveTickets()
+		{
+			activeTickets = new SafeObservable<ITicket>();
+
+			IEnumerable<ITicket> selection;
+			if (specialTicketsString.Length <= 0)
+				selection = AllTickets;
+			else
+				selection = AllTickets.Where(t => !t.Code.Contains(specialTicketsString));
+
+			foreach (ITicket ticket in selection)
+				activeTickets.Add(ticket);
+		}
 
 		/// <summary>
 		/// Redeems the ticket.
@@ -263,7 +298,7 @@ namespace TicketServer.DAL.SqlCe
 			if (createBackup)
 				File.Copy(Filename, Filename.Replace(Path.GetExtension(Filename), "_" + DateTime.Now.ToString("yyyyMddHHmm") + Path.GetExtension(Filename)), true);
 
-			var tickets = from t in Tickets
+			var tickets = from t in AllTickets
 						  where t.IsRedeemed
 						  select t;
 
@@ -290,17 +325,42 @@ namespace TicketServer.DAL.SqlCe
 				File.Copy(Filename, Filename.Replace(Path.GetExtension(Filename), "_" + DateTime.Now.ToString("yyyyMddHHmm") + Path.GetExtension(Filename)), true);
 			TicketRecord.DeleteAll();
 
-			Tickets = new SafeObservable<ITicket>();
-			Tickets.CollectionChanged += new NotifyCollectionChangedEventHandler(Tickets_CollectionChanged);
+			AllTickets = new SafeObservable<ITicket>();
+			AllTickets.CollectionChanged += new NotifyCollectionChangedEventHandler(Tickets_CollectionChanged);
+			UpdateActiveTickets();
 
 			if (PropertyChanged != null)
 			{
-				PropertyChanged(this, new PropertyChangedEventArgs("Tickets"));
+				PropertyChanged(this, new PropertyChangedEventArgs("AllTickets"));
+				PropertyChanged(this, new PropertyChangedEventArgs("ActiveTickets"));
 				PropertyChanged(this, new PropertyChangedEventArgs("TicketCount"));
 				PropertyChanged(this, new PropertyChangedEventArgs("RedeemedCount"));
 			}
 
 			return true;
+		}
+
+		private string specialTicketsString = String.Empty;
+		/// <summary>
+		/// Gets or sets the string identifing special tickets.
+		/// </summary>
+		/// <value>
+		/// The special tickets string.
+		/// </value>
+		public string SpecialTicketsString
+		{
+			get { return specialTicketsString; }
+			set
+			{
+				specialTicketsString = value;
+				UpdateActiveTickets();
+				if (PropertyChanged != null)
+				{
+					PropertyChanged(this, new PropertyChangedEventArgs("ActiveTickets"));
+					PropertyChanged(this, new PropertyChangedEventArgs("TicketCount"));
+					PropertyChanged(this, new PropertyChangedEventArgs("RedeemedCount"));
+				}
+			}
 		}
 
 		#endregion
