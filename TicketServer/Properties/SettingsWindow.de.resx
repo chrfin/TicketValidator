@@ -126,6 +126,21 @@
   <data name="DataSource" xml:space="preserve">
     <value>Datenquelle</value>
   </data>
+  <data name="groupSpecialTickets" xml:space="preserve">
+    <value>Spezialkarten</value>
+  </data>
+  <data name="groupSpecialTicketsFooter" xml:space="preserve">
+    <value>Jede Karte, welche diesen Text im Code enthält wird als 
+Spezial-Ticket angesehen.</value>
+  </data>
+  <data name="groupSpecialTicketsHeader" xml:space="preserve">
+    <value>Hier kann eine Gruppe von Karten angegeben werden, 
+welche in keiner Statistik berücksichtigt werden.
+Dies kann z.B. für Mitarbeiterkarten verwendet werden.</value>
+  </data>
+  <data name="groupSpecialTicketsString" xml:space="preserve">
+    <value>Such-Text:</value>
+  </data>
   <data name="Tickets" xml:space="preserve">
     <value>Karten</value>
   </data>

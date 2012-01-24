@@ -67,5 +67,17 @@ namespace TicketServer.Properties {
                 this["RecentFiles"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string SpecialTicketsString {
+            get {
+                return ((string)(this["SpecialTicketsString"]));
+            }
+            set {
+                this["SpecialTicketsString"] = value;
+            }
+        }
     }
 }

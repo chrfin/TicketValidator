@@ -126,6 +126,21 @@
   <data name="DataSource" xml:space="preserve">
     <value>Data Source</value>
   </data>
+  <data name="groupSpecialTickets" xml:space="preserve">
+    <value>Special Tickets</value>
+  </data>
+  <data name="groupSpecialTicketsFooter" xml:space="preserve">
+    <value>Every ticket containing the string above in its 
+ticket-code will be declared as a special ticket.</value>
+  </data>
+  <data name="groupSpecialTicketsHeader" xml:space="preserve">
+    <value>Here you can select a group of tickets which 
+will not be counted in any statistics.
+This can be used e.g. for employee tickets.</value>
+  </data>
+  <data name="groupSpecialTicketsString" xml:space="preserve">
+    <value>Search-String:</value>
+  </data>
   <data name="Tickets" xml:space="preserve">
     <value>Tickets</value>
   </data>

@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using TicketServer.Properties;
 
 namespace TicketServer
 {
@@ -24,6 +25,8 @@ namespace TicketServer
 		public SettingsWindow()
 		{
 			InitializeComponent();
+
+			textBoxSpecialCards.Text = Settings.Default.SpecialTicketsString;
 		}
 
 		/// <summary>
@@ -40,7 +43,9 @@ namespace TicketServer
 		/// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
 		private void buttonSave_Click(object sender, RoutedEventArgs e)
 		{
-			//SAVE
+			Settings.Default.SpecialTicketsString = textBoxSpecialCards.Text;
+			Settings.Default.Save();
+
 			DialogResult = true;
 			Close();
 		}

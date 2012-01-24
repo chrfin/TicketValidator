@@ -103,5 +103,18 @@ namespace TicketServer
 
 			Ticket.Save();
 		}
+
+		/// <summary>
+		/// Handles the Checked event of the checkBoxRedeemed control.
+		/// </summary>
+		/// <param name="sender">The source of the event.</param>
+		/// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
+		private void checkBoxRedeemed_Checked(object sender, RoutedEventArgs e)
+		{
+			if (!checkBoxRedeemed.IsChecked.Value)
+				Ticket.RedeemDate = null;
+			else if (Ticket.RedeemDate == null)
+				Ticket.RedeemDate = DateTime.Now;
+		}
 	}
 }

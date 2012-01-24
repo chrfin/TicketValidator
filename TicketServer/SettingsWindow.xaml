@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="{LocText TicketServer:SettingsWindow:WindowTitle}"
         Width="600"
-        Height="500"
+        Height="400"
         Icon="/TicketServer;component/Icons/Small/Service Manager.png"
         ResizeMode="NoResize"
         ShowInTaskbar="False"
@@ -46,7 +46,50 @@
 		            Grid.Row="0"
 		            Grid.Column="1"
 		            Margin="5 3 5 5">
-			<TabItem Visibility="Collapsed">asdf</TabItem>
+			<TabItem Visibility="Collapsed">
+				<StackPanel>
+					<GroupBox Margin="5"
+					          FontWeight="Bold"
+					          Header="{LocText TicketServer:SettingsWindow:groupSpecialTickets}">
+						<Grid Margin="3">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="100" />
+								<ColumnDefinition Width="180" />
+								<ColumnDefinition Width="*" />
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition />
+								<RowDefinition Height="32" />
+								<RowDefinition />
+							</Grid.RowDefinitions>
+
+							<TextBlock Grid.Row="0"
+							           Grid.Column="0"
+							           Grid.ColumnSpan="3"
+							           FontWeight="Normal"
+							           Text="{LocText TicketServer:SettingsWindow:groupSpecialTicketsHeader}" />
+
+							<TextBlock Grid.Row="1"
+							           Grid.Column="0"
+							           HorizontalAlignment="Right"
+							           VerticalAlignment="Center"
+							           FontWeight="Normal"
+							           Text="{LocText TicketServer:SettingsWindow:groupSpecialTicketsString}" />
+							<TextBox x:Name="textBoxSpecialCards"
+							         Grid.Row="1"
+							         Grid.Column="1"
+							         Margin="4" />
+
+							<TextBlock Grid.Row="2"
+							           Grid.Column="1"
+							           Grid.ColumnSpan="2"
+							           FontSize="10"
+							           FontWeight="Normal"
+							           Text="{LocText TicketServer:SettingsWindow:groupSpecialTicketsFooter}" />
+						</Grid>
+					</GroupBox>
+				</StackPanel>
+			</TabItem>
 			<TabItem Visibility="Collapsed">qwert</TabItem>
 		</TabControl>
 

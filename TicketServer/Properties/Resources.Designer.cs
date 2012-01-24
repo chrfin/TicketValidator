@@ -70,6 +70,15 @@ namespace TicketServer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Clear Status.
+        /// </summary>
+        internal static string ButtonClearStatus {
+            get {
+                return ResourceManager.GetString("ButtonClearStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Deletes ALL tickets!.
         /// </summary>
         internal static string ButtonClearTip {
@@ -160,6 +169,43 @@ namespace TicketServer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Really delete tickets?.
+        /// </summary>
+        internal static string ClearDatabaseCaption {
+            get {
+                return ResourceManager.GetString("ClearDatabaseCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No, do NOT delete the tickets..
+        /// </summary>
+        internal static string ClearDatabaseNo {
+            get {
+                return ResourceManager.GetString("ClearDatabaseNo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you really want to delete all tickets?
+        ///This will delete the tickets forever and without a way to restore it!.
+        /// </summary>
+        internal static string ClearDatabaseText {
+            get {
+                return ResourceManager.GetString("ClearDatabaseText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes, delete the tickets..
+        /// </summary>
+        internal static string ClearDatabaseYes {
+            get {
+                return ResourceManager.GetString("ClearDatabaseYes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Really close Ticket Server?.
         /// </summary>
         internal static string CloseWarningCaption {
@@ -202,6 +248,15 @@ namespace TicketServer.Properties {
         internal static string comboBoxResolution {
             get {
                 return ResourceManager.GetString("comboBoxResolution", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to yyyy-MM-dd HH:mm:ss.
+        /// </summary>
+        internal static string DateFormat {
+            get {
+                return ResourceManager.GetString("DateFormat", resourceCulture);
             }
         }
         
@@ -338,6 +393,43 @@ namespace TicketServer.Properties {
         internal static string PleaseWait {
             get {
                 return ResourceManager.GetString("PleaseWait", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Really reset tickets?.
+        /// </summary>
+        internal static string ResetDatabaseCaption {
+            get {
+                return ResourceManager.GetString("ResetDatabaseCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No, do NOT reset the tickets..
+        /// </summary>
+        internal static string ResetDatabaseNo {
+            get {
+                return ResourceManager.GetString("ResetDatabaseNo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you really want to reset all tickets?
+        ///This will reset the tickets without a way to restore the old state!.
+        /// </summary>
+        internal static string ResetDatabaseText {
+            get {
+                return ResourceManager.GetString("ResetDatabaseText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes, reset the tickets..
+        /// </summary>
+        internal static string ResetDatabaseYes {
+            get {
+                return ResourceManager.GetString("ResetDatabaseYes", resourceCulture);
             }
         }
         

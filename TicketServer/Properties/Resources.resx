@@ -293,4 +293,36 @@ This will delete the ticket forever and without a way to restore it!</value>
   <data name="TicketRedeemedYes" xml:space="preserve">
     <value>Redeemed</value>
   </data>
+  <data name="ButtonClearStatus" xml:space="preserve">
+    <value>Clear Status</value>
+  </data>
+  <data name="ClearDatabaseCaption" xml:space="preserve">
+    <value>Really delete tickets?</value>
+  </data>
+  <data name="ClearDatabaseNo" xml:space="preserve">
+    <value>No, do NOT delete the tickets.</value>
+  </data>
+  <data name="ClearDatabaseText" xml:space="preserve">
+    <value>Do you really want to delete all tickets?
+This will delete the tickets forever and without a way to restore it!</value>
+  </data>
+  <data name="ClearDatabaseYes" xml:space="preserve">
+    <value>Yes, delete the tickets.</value>
+  </data>
+  <data name="ResetDatabaseCaption" xml:space="preserve">
+    <value>Really reset tickets?</value>
+  </data>
+  <data name="ResetDatabaseNo" xml:space="preserve">
+    <value>No, do NOT reset the tickets.</value>
+  </data>
+  <data name="ResetDatabaseText" xml:space="preserve">
+    <value>Do you really want to reset all tickets?
+This will reset the tickets without a way to restore the old state!</value>
+  </data>
+  <data name="ResetDatabaseYes" xml:space="preserve">
+    <value>Yes, reset the tickets.</value>
+  </data>
+  <data name="DateFormat" xml:space="preserve">
+    <value>yyyy-MM-dd HH:mm:ss</value>
+  </data>
 </root>

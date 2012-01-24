@@ -100,6 +100,12 @@
 						                SmallImageSource="Icons\Small\editdelete.png"
 						                ToolTipDescription="{LocText TicketServer::ButtonClearTip}" />
 					</r:RibbonGroup>
+					<r:RibbonGroup x:Name="ribbonGroupStatus" Visibility="Hidden">
+						<r:RibbonButton Click="buttonStatusClear_Click"
+						                Label="{LocText TicketServer::ButtonClearStatus}"
+						                LargeImageSource="Icons\Large\agt_update-product.png"
+						                SmallImageSource="Icons\Small\agt_update-product.png" />
+					</r:RibbonGroup>
 				</r:RibbonTab>
 				<r:RibbonTab Header="{LocText TicketServer::RibbonTabImport}">
 					<r:RibbonGroup>
