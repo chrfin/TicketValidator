@@ -7,21 +7,17 @@ using System.Windows.Forms;
 using System.IO;
 using System.Reflection;
 using System.Threading;
-
 using TicketValidator.Properties;
-
-using Symbol.Barcode2;
-using Symbol.Notification;
-using Symbol.WPAN.Bluetooth;
 using TicketValidator.TicketServiceReference;
 using System.Net;
+using System.Diagnostics;
+using TicketValidator.Interfaces;
 
 namespace TicketValidator
 {
-    public partial class mainForm : Form
+    public partial class MainForm : Form
     {
-        Beeper beep;
-        Barcode2 scanner;
+        IScanner scanner;
 
         TicketService service;
         Ticket currentTicket;
@@ -44,29 +40,34 @@ namespace TicketValidator
         /// <summary>
         /// Initializes a new instance of the <see cref="mainForm"/> class.
         /// </summary>
-        public mainForm()
+        public MainForm(IScanner scanner)
         {
             InitializeComponent();
 
             if (!SelectService())
                 return;
             labelCodeInfo.Invoke((Action)delegate() { labelCodeInfo.Text = Resources.ServiceConnected; });
-
+            
             try
             {
-                scanner = new Barcode2(Symbol.Barcode2.Devices.SupportedDevices[0]);
-                scanner.Config.Reader.ReaderSpecific.LaserSpecific.AimType = AIM_TYPE.AIM_TYPE_TRIGGER;
-                scanner.Config.Reader.Set();
-                scanner.OnScan += new Barcode2.OnScanHandler(scanner_OnScan);
-                scanner.Scan();
-
-                beep = new Beeper(Symbol.Notification.Device.AvailableDevices.First(d => d.ObjectType == NotifyType.BEEPER));
-                beep.Duration = 500;
-                beep.Frequency = 3000;
-                beep.Volume = 5;
-                beep.State = NotifyState.OFF;
+                scanner.Init();
+                scanner.OnScan += new EventHandler(scanner_OnScan);
+                this.scanner = scanner;
             }
             catch (Exception e) { labelCodeInfo.Text = e.ToString(); }
+        }
+
+        /// <summary>
+        /// Handles the OnScan event of the scanner control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+        protected void scanner_OnScan(object sender, EventArgs e)
+        {
+            string code = (e as ScanEventArgs).Code;
+            GetTicket(code.Contains("-") ? code : code.Substring(0, code.Length - 1));
+
+            scanner.StartScan();
         }
 
         /// <summary>
@@ -153,8 +154,7 @@ namespace TicketValidator
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void mainForm_Activated(object sender, EventArgs e)
         {
-            if (scanner != null)
-                scanner.Scan();
+            scanner.StartScan();
         }
 
         /// <summary>
@@ -163,18 +163,6 @@ namespace TicketValidator
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void buttonSelectService_Click(object sender, EventArgs e) { SelectService(); }
-
-        /// <summary>
-        /// Scanner_s the on scan.
-        /// </summary>
-        /// <param name="scancollection">The scancollection.</param>
-        protected void scanner_OnScan(ScanDataCollection scancollection)
-        {
-            string code = scancollection.GetFirst.Text;
-            GetTicket(code.Contains("-") ? code : code.Substring(0, code.Length - 1));
-
-            scanner.Scan();
-        }
 
         /// <summary>
         /// Gets the ticket and shows the received information.
@@ -197,7 +185,7 @@ namespace TicketValidator
 
             if (currentTicket == null)
             {
-                Beep(BeepType.Error);
+                scanner.Beep(BeepType.Error);
                 labelCodeInfo.Invoke((Action)delegate()
                 {
                     labelCodeInfo.Text = Resources.TicketNotFound;
@@ -241,12 +229,12 @@ namespace TicketValidator
                     labelCodeInfo.Text += Resources.Redeemed + ": " + currentTicket.RedeemDate.Value.ToString("T");
                     labelCodeInfo.ForeColor = Color.Red;
 
-                    Beep(BeepType.Error);
+                    scanner.Beep(BeepType.Error);
                 }
                 else if (currentTicket.Type == TicketType.Special)
                 {
                     buttonRedeem.Enabled = true;
-                    Beep(BeepType.Attention);
+                    scanner.Beep(BeepType.Attention);
                 }
                 else
                 {
@@ -254,52 +242,6 @@ namespace TicketValidator
                     StartAutoRedeemTimer();
                 }
             });
-        }
-
-        /// <summary>
-        /// Beeps the specified type.
-        /// </summary>
-        /// <param name="type">The type.</param>
-        private void Beep(BeepType type)
-        {
-            Thread beeper = new Thread(new ThreadStart(delegate()
-                {
-                    switch (type)
-                    {
-                        case BeepType.TicketRedeemed:
-                            beep.Duration = 100;
-                            beep.Frequency = 5000;
-                            beep.Volume = 3;
-                            beep.State = NotifyState.CYCLE;
-                            Thread.Sleep(150);
-                            beep.State = NotifyState.CYCLE;
-                            break;
-                        case BeepType.Error:
-                            beep.Duration = 500;
-                            beep.Frequency = 1000;
-                            beep.Volume = 5;
-                            beep.State = NotifyState.CYCLE;
-                            break;
-                        case BeepType.Attention:
-                            beep.Duration = 50;
-                            beep.Frequency = 7500;
-                            beep.Volume = 5;
-                            for (int i = 0; i < 10; ++i)
-                            {
-                                beep.State = NotifyState.CYCLE;
-                                Thread.Sleep(75);
-                            }
-                            break;
-                        default:
-                            beep.Duration = 1000;
-                            beep.Frequency = 3000;
-                            beep.Volume = 1;
-                            beep.State = NotifyState.CYCLE;
-                            break;
-                    }
-                }));
-            beeper.IsBackground = true;
-            beeper.Start();
         }
 
         /// <summary>
@@ -345,7 +287,7 @@ namespace TicketValidator
                 currentTicket = null;
                 if (result.Type == RedeemResultType.Redeemed)
                 {
-                    Beep(BeepType.TicketRedeemed);
+                    scanner.Beep(BeepType.TicketRedeemed);
                     return true;
                 }
                 else if (result.Type == RedeemResultType.AlreadyRedeemed)
@@ -363,7 +305,7 @@ namespace TicketValidator
                 Close();
             }
 
-            Beep(BeepType.Error);
+            scanner.Beep(BeepType.Error);
             return false;
         }
 
@@ -424,7 +366,7 @@ namespace TicketValidator
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        private void mainForm_Closed(object sender, EventArgs e) { CloseOpenConnections(true); }
+        private void mainForm_Closed(object sender, EventArgs e) { CloseOpenConnections(true); Process.GetCurrentProcess().Kill(); }
         /// <summary>
         /// Closes the open connections.
         /// </summary>
@@ -433,13 +375,7 @@ namespace TicketValidator
         {
             if (scanner != null)
             {
-                if (scanner.IsScanPending)
-                    scanner.ScanCancel();
-                if (dispose)
-                {
-                    scanner.Dispose();
-                    scanner = null;
-                }
+                scanner.StopScan(dispose);
             }
         }
     }

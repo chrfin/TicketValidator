@@ -3,7 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace TicketValidator
+namespace TicketValidator.SymbolScanner
 {
     static class Program
     {
@@ -13,7 +13,7 @@ namespace TicketValidator
         [MTAThread]
         static void Main()
         {
-            mainForm form = new mainForm();
+            MainForm form = new MainForm(new SymbolScanner());
             try
             {
                 Application.Run(form);
