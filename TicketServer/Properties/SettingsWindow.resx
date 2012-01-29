@@ -131,7 +131,9 @@
   </data>
   <data name="groupSpecialTicketsFooter" xml:space="preserve">
     <value>Every ticket containing the string above in its 
-ticket-code will be declared as a special ticket.</value>
+ticket-code will be declared as a special ticket.
+You can enter more then one by seperating
+them with semicolon (group1;group2;...).</value>
   </data>
   <data name="groupSpecialTicketsHeader" xml:space="preserve">
     <value>Here you can select a group of tickets which 
@@ -146,5 +148,57 @@ This can be used e.g. for employee tickets.</value>
   </data>
   <data name="WindowTitle" xml:space="preserve">
     <value>Settings</value>
+  </data>
+  <data name="FTPTestFaildCaption" xml:space="preserve">
+    <value>Connection Test failed</value>
+  </data>
+  <data name="FTPTestFaildHeader" xml:space="preserve">
+    <value>Connection Test failed!</value>
+  </data>
+  <data name="FTPTestSuccessfullCaption" xml:space="preserve">
+    <value>Connection Test sucessfull</value>
+  </data>
+  <data name="FTPTestSuccessfullHeader" xml:space="preserve">
+    <value>Connection Test sucessfull!</value>
+  </data>
+  <data name="FTPTestSuccessfullText" xml:space="preserve">
+    <value>The connection to the FTP server could be established.</value>
+  </data>
+  <data name="groupBackup" xml:space="preserve">
+    <value>Backup</value>
+  </data>
+  <data name="groupBackupAttention" xml:space="preserve">
+    <value>ATTENTION:</value>
+  </data>
+  <data name="groupBackupAttentionText" xml:space="preserve">
+    <value>Existing files in the target location 
+will be overwritten!</value>
+  </data>
+  <data name="groupBackupFolder" xml:space="preserve">
+    <value>Backup to Folder</value>
+  </data>
+  <data name="groupBackupFTP" xml:space="preserve">
+    <value>Backup to FTP-Server</value>
+  </data>
+  <data name="groupBackupFTPTest" xml:space="preserve">
+    <value>Test Connection</value>
+  </data>
+  <data name="groupBackupInterval" xml:space="preserve">
+    <value>Interval:</value>
+  </data>
+  <data name="groupBackupMinutes" xml:space="preserve">
+    <value>Minutes</value>
+  </data>
+  <data name="groupBackupPassword" xml:space="preserve">
+    <value>Password:</value>
+  </data>
+  <data name="groupBackupServer" xml:space="preserve">
+    <value>Server:</value>
+  </data>
+  <data name="groupBackupTargetFolder" xml:space="preserve">
+    <value>Target folder:</value>
+  </data>
+  <data name="groupBackupUser" xml:space="preserve">
+    <value>User:</value>
   </data>
 </root>

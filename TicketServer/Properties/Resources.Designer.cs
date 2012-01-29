@@ -298,6 +298,42 @@ namespace TicketServer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to File Backup faild.
+        /// </summary>
+        internal static string FileBackupFailedCaption {
+            get {
+                return ResourceManager.GetString("FileBackupFailedCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The File Backup was also disabled..
+        /// </summary>
+        internal static string FileBackupFailedFooter {
+            get {
+                return ResourceManager.GetString("FileBackupFailedFooter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The File Backup faild!.
+        /// </summary>
+        internal static string FileBackupFailedHeader {
+            get {
+                return ResourceManager.GetString("FileBackupFailedHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The target folder does not exist..
+        /// </summary>
+        internal static string FileBackupFailedNoDirText {
+            get {
+                return ResourceManager.GetString("FileBackupFailedNoDirText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to tickets.
         /// </summary>
         internal static string FileFilterExtension {
@@ -312,6 +348,33 @@ namespace TicketServer.Properties {
         internal static string FileFilterText {
             get {
                 return ResourceManager.GetString("FileFilterText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FTP Backup faild.
+        /// </summary>
+        internal static string FTPBackupFailedCaption {
+            get {
+                return ResourceManager.GetString("FTPBackupFailedCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The FTP Backup was also disabled..
+        /// </summary>
+        internal static string FTPBackupFailedFooter {
+            get {
+                return ResourceManager.GetString("FTPBackupFailedFooter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The FTP Backup faild!.
+        /// </summary>
+        internal static string FTPBackupFailedHeader {
+            get {
+                return ResourceManager.GetString("FTPBackupFailedHeader", resourceCulture);
             }
         }
         
@@ -339,6 +402,24 @@ namespace TicketServer.Properties {
         internal static string GroupTicketType {
             get {
                 return ResourceManager.GetString("GroupTicketType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ticket Database backed up to &quot;{0}&quot;..
+        /// </summary>
+        internal static string MainStatusBackup {
+            get {
+                return ResourceManager.GetString("MainStatusBackup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Starting Backup....
+        /// </summary>
+        internal static string MainStatusBackupStart {
+            get {
+                return ResourceManager.GetString("MainStatusBackupStart", resourceCulture);
             }
         }
         
