@@ -325,4 +325,31 @@ This will reset the tickets without a way to restore the old state!</value>
   <data name="DateFormat" xml:space="preserve">
     <value>yyyy-MM-dd HH:mm:ss</value>
   </data>
+  <data name="FileBackupFailedCaption" xml:space="preserve">
+    <value>File Backup faild</value>
+  </data>
+  <data name="FileBackupFailedFooter" xml:space="preserve">
+    <value>The File Backup was also disabled.</value>
+  </data>
+  <data name="FileBackupFailedHeader" xml:space="preserve">
+    <value>The File Backup faild!</value>
+  </data>
+  <data name="FileBackupFailedNoDirText" xml:space="preserve">
+    <value>The target folder does not exist.</value>
+  </data>
+  <data name="FTPBackupFailedCaption" xml:space="preserve">
+    <value>FTP Backup faild</value>
+  </data>
+  <data name="FTPBackupFailedFooter" xml:space="preserve">
+    <value>The FTP Backup was also disabled.</value>
+  </data>
+  <data name="FTPBackupFailedHeader" xml:space="preserve">
+    <value>The FTP Backup faild!</value>
+  </data>
+  <data name="MainStatusBackup" xml:space="preserve">
+    <value>Ticket Database backed up to "{0}".</value>
+  </data>
+  <data name="MainStatusBackupStart" xml:space="preserve">
+    <value>Starting Backup...</value>
+  </data>
 </root>

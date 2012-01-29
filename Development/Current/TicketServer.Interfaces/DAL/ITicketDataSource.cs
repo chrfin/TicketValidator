@@ -74,7 +74,7 @@ namespace TicketServer.Interfaces.DAL
 		bool Clear(bool createBackup = true);
 
 		/// <summary>
-		/// Gets or sets the string identifing special tickets.
+		/// Gets or sets the string identifing special tickets. Seperate multiple strings with semicolon (group1;group2;...).
 		/// </summary>
 		/// <value>
 		/// The special tickets string.

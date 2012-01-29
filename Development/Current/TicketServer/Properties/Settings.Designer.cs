@@ -79,5 +79,113 @@ namespace TicketServer.Properties {
                 this["SpecialTicketsString"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool FileBackup {
+            get {
+                return ((bool)(this["FileBackup"]));
+            }
+            set {
+                this["FileBackup"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("15")]
+        public uint FileBackupInterval {
+            get {
+                return ((uint)(this["FileBackupInterval"]));
+            }
+            set {
+                this["FileBackupInterval"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string FileBackupFolder {
+            get {
+                return ((string)(this["FileBackupFolder"]));
+            }
+            set {
+                this["FileBackupFolder"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool FTPBackup {
+            get {
+                return ((bool)(this["FTPBackup"]));
+            }
+            set {
+                this["FTPBackup"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("30")]
+        public uint FTPBackupInterval {
+            get {
+                return ((uint)(this["FTPBackupInterval"]));
+            }
+            set {
+                this["FTPBackupInterval"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string FTPBackupServer {
+            get {
+                return ((string)(this["FTPBackupServer"]));
+            }
+            set {
+                this["FTPBackupServer"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string FTPBackupUser {
+            get {
+                return ((string)(this["FTPBackupUser"]));
+            }
+            set {
+                this["FTPBackupUser"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string FTPBackupPassword {
+            get {
+                return ((string)(this["FTPBackupPassword"]));
+            }
+            set {
+                this["FTPBackupPassword"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string FTPBackupFolder {
+            get {
+                return ((string)(this["FTPBackupFolder"]));
+            }
+            set {
+                this["FTPBackupFolder"] = value;
+            }
+        }
     }
 }

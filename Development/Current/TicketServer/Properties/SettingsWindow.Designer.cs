@@ -88,6 +88,160 @@ namespace TicketServer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Connection Test failed.
+        /// </summary>
+        internal static string FTPTestFaildCaption {
+            get {
+                return ResourceManager.GetString("FTPTestFaildCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connection Test failed!.
+        /// </summary>
+        internal static string FTPTestFaildHeader {
+            get {
+                return ResourceManager.GetString("FTPTestFaildHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connection Test sucessfull.
+        /// </summary>
+        internal static string FTPTestSuccessfullCaption {
+            get {
+                return ResourceManager.GetString("FTPTestSuccessfullCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connection Test sucessfull!.
+        /// </summary>
+        internal static string FTPTestSuccessfullHeader {
+            get {
+                return ResourceManager.GetString("FTPTestSuccessfullHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The connection to the FTP server could be established..
+        /// </summary>
+        internal static string FTPTestSuccessfullText {
+            get {
+                return ResourceManager.GetString("FTPTestSuccessfullText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Backup.
+        /// </summary>
+        internal static string groupBackup {
+            get {
+                return ResourceManager.GetString("groupBackup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ATTENTION:.
+        /// </summary>
+        internal static string groupBackupAttention {
+            get {
+                return ResourceManager.GetString("groupBackupAttention", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Existing files in the target location 
+        ///will be overwritten!.
+        /// </summary>
+        internal static string groupBackupAttentionText {
+            get {
+                return ResourceManager.GetString("groupBackupAttentionText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Backup to Folder.
+        /// </summary>
+        internal static string groupBackupFolder {
+            get {
+                return ResourceManager.GetString("groupBackupFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Backup to FTP-Server.
+        /// </summary>
+        internal static string groupBackupFTP {
+            get {
+                return ResourceManager.GetString("groupBackupFTP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Test Connection.
+        /// </summary>
+        internal static string groupBackupFTPTest {
+            get {
+                return ResourceManager.GetString("groupBackupFTPTest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Interval:.
+        /// </summary>
+        internal static string groupBackupInterval {
+            get {
+                return ResourceManager.GetString("groupBackupInterval", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minutes.
+        /// </summary>
+        internal static string groupBackupMinutes {
+            get {
+                return ResourceManager.GetString("groupBackupMinutes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password:.
+        /// </summary>
+        internal static string groupBackupPassword {
+            get {
+                return ResourceManager.GetString("groupBackupPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server:.
+        /// </summary>
+        internal static string groupBackupServer {
+            get {
+                return ResourceManager.GetString("groupBackupServer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Target folder:.
+        /// </summary>
+        internal static string groupBackupTargetFolder {
+            get {
+                return ResourceManager.GetString("groupBackupTargetFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User:.
+        /// </summary>
+        internal static string groupBackupUser {
+            get {
+                return ResourceManager.GetString("groupBackupUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Special Tickets.
         /// </summary>
         internal static string groupSpecialTickets {
@@ -98,7 +252,9 @@ namespace TicketServer.Properties {
         
         /// <summary>
         ///   Looks up a localized string similar to Every ticket containing the string above in its 
-        ///ticket-code will be declared as a special ticket..
+        ///ticket-code will be declared as a special ticket.
+        ///You can enter more then one by seperating
+        ///them with semicolon (group1;group2;...)..
         /// </summary>
         internal static string groupSpecialTicketsFooter {
             get {

@@ -244,10 +244,10 @@ namespace TicketServer.DAL.SqlCe
 			activeTickets = new SafeObservable<ITicket>();
 
 			IEnumerable<ITicket> selection;
-			if (specialTicketsString.Length <= 0)
+			if (specialTicketStrings.Count <= 0)
 				selection = AllTickets;
 			else
-				selection = AllTickets.Where(t => !t.Code.Contains(specialTicketsString));
+				selection = AllTickets.Where(t => specialTicketStrings.TrueForAll(s => !t.Code.Contains(s)));
 
 			foreach (ITicket ticket in selection)
 				activeTickets.Add(ticket);
@@ -340,19 +340,19 @@ namespace TicketServer.DAL.SqlCe
 			return true;
 		}
 
-		private string specialTicketsString = String.Empty;
+		private List<string> specialTicketStrings = new List<string>();
 		/// <summary>
-		/// Gets or sets the string identifing special tickets.
+		/// Gets or sets the string identifing special tickets. Seperate multiple strings with semicolon (group1;group2;...).
 		/// </summary>
 		/// <value>
 		/// The special tickets string.
 		/// </value>
 		public string SpecialTicketsString
 		{
-			get { return specialTicketsString; }
+			get { return String.Join(";", specialTicketStrings); }
 			set
 			{
-				specialTicketsString = value;
+				specialTicketStrings = new List<string>(value.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries));
 				UpdateActiveTickets();
 				if (PropertyChanged != null)
 				{

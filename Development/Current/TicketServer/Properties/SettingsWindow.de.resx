@@ -131,7 +131,9 @@
   </data>
   <data name="groupSpecialTicketsFooter" xml:space="preserve">
     <value>Jede Karte, welche diesen Text im Code enthält wird als 
-Spezial-Ticket angesehen.</value>
+Spezial-Ticket angesehen.
+Mehrere Texte können mit Strichpunkt getrennt 
+eingegeben werden (Gruppe1;Gruppe2;...).</value>
   </data>
   <data name="groupSpecialTicketsHeader" xml:space="preserve">
     <value>Hier kann eine Gruppe von Karten angegeben werden, 
@@ -146,5 +148,57 @@ Dies kann z.B. für Mitarbeiterkarten verwendet werden.</value>
   </data>
   <data name="WindowTitle" xml:space="preserve">
     <value>Einstellungen</value>
+  </data>
+  <data name="FTPTestFaildCaption" xml:space="preserve">
+    <value>Test fehlgeschlagen</value>
+  </data>
+  <data name="FTPTestFaildHeader" xml:space="preserve">
+    <value>Test fehlgeschlagen!</value>
+  </data>
+  <data name="FTPTestSuccessfullCaption" xml:space="preserve">
+    <value>Verbindungstest erfolgreich</value>
+  </data>
+  <data name="FTPTestSuccessfullHeader" xml:space="preserve">
+    <value>Verbindungstest erfolgreich!</value>
+  </data>
+  <data name="FTPTestSuccessfullText" xml:space="preserve">
+    <value>Die Verbindung zum FTP-Server konnte hergestellt werden.</value>
+  </data>
+  <data name="groupBackup" xml:space="preserve">
+    <value>Backup</value>
+  </data>
+  <data name="groupBackupAttention" xml:space="preserve">
+    <value>ACHTUNG:</value>
+  </data>
+  <data name="groupBackupAttentionText" xml:space="preserve">
+    <value>Bereits exisiterende Dateien am Zeilort 
+werden überschrieben!</value>
+  </data>
+  <data name="groupBackupFolder" xml:space="preserve">
+    <value>In Verzeichnis sichern</value>
+  </data>
+  <data name="groupBackupFTP" xml:space="preserve">
+    <value>Per FTP sichern</value>
+  </data>
+  <data name="groupBackupFTPTest" xml:space="preserve">
+    <value>Verbindung testen</value>
+  </data>
+  <data name="groupBackupInterval" xml:space="preserve">
+    <value>Interval:</value>
+  </data>
+  <data name="groupBackupMinutes" xml:space="preserve">
+    <value>Minuten</value>
+  </data>
+  <data name="groupBackupPassword" xml:space="preserve">
+    <value>Passwort:</value>
+  </data>
+  <data name="groupBackupServer" xml:space="preserve">
+    <value>Server:</value>
+  </data>
+  <data name="groupBackupTargetFolder" xml:space="preserve">
+    <value>Zielordner:</value>
+  </data>
+  <data name="groupBackupUser" xml:space="preserve">
+    <value>Benutzer:</value>
   </data>
 </root>

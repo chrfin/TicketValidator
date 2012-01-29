@@ -316,4 +316,31 @@ Zurückgesetzte Karten könne NICHT zu ihrem alten Status wiederhergestellt werd
   <data name="ResetDatabaseYes" xml:space="preserve">
     <value>Ja, Karten zurücksetzen.</value>
   </data>
+  <data name="FileBackupFailedCaption" xml:space="preserve">
+    <value>Datei-Sicherung fehlgeschlagen</value>
+  </data>
+  <data name="FileBackupFailedFooter" xml:space="preserve">
+    <value>Die Datei-Sicherung wurd deshalb abgeschaltet.</value>
+  </data>
+  <data name="FileBackupFailedHeader" xml:space="preserve">
+    <value>Die Datei-Sicherung ist fehlgeschlagen!</value>
+  </data>
+  <data name="FileBackupFailedNoDirText" xml:space="preserve">
+    <value>Das Zielverzeichnis existiert nicht.</value>
+  </data>
+  <data name="FTPBackupFailedCaption" xml:space="preserve">
+    <value>FTP Sicherung fehlgeschlagen</value>
+  </data>
+  <data name="FTPBackupFailedFooter" xml:space="preserve">
+    <value>Die FTP-Sicherung wurd deshalb abgeschaltet.</value>
+  </data>
+  <data name="FTPBackupFailedHeader" xml:space="preserve">
+    <value>FTP Sicherung fehlgeschlagen!</value>
+  </data>
+  <data name="MainStatusBackup" xml:space="preserve">
+    <value>Karten-Datenbank nach "{0}" gesichert.</value>
+  </data>
+  <data name="MainStatusBackupStart" xml:space="preserve">
+    <value>Sicherung gestartet...</value>
+  </data>
 </root>

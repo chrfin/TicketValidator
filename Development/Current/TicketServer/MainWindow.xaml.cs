@@ -1,38 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
+using System.Net.Sockets;
+using System.ServiceModel;
+using System.ServiceModel.Description;
 using System.Text;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Net.Sockets;
-using System.Threading;
-
-using System.ServiceModel;
-using System.ServiceModel.Description;
-
-using TicketServer.Service;
-using TicketServer.DAL;
-using TicketServer.Common;
-using TicketServer.DAL.SqlCe;
-using Microsoft.Windows.Controls.Ribbon;
-using TicketServer.Properties;
-using System.Globalization;
-using RootLibrary.WPF.Localization;
-using Microsoft.WindowsAPICodePack.Dialogs;
 using Microsoft.VisualBasic.FileIO;
-using TicketServer.Interfaces.DAL;
-using System.ComponentModel;
+using Microsoft.Windows.Controls.Ribbon;
+using Microsoft.WindowsAPICodePack.Dialogs;
+using RootLibrary.WPF.Localization;
+using TicketServer.Common;
+using TicketServer.DAL;
+using TicketServer.DAL.SqlCe;
 using TicketServer.Interfaces;
-using TicketServer.Interfaces.Enums;
 using TicketServer.Interfaces.Classes;
-using System.Windows.Interop;
+using TicketServer.Interfaces.DAL;
+using TicketServer.Interfaces.Enums;
+using TicketServer.Properties;
+using TicketServer.Service;
+using WinForms = System.Windows.Forms;
+using System.IO;
+using System.Net;
 
 namespace TicketServer
 {
@@ -43,6 +44,9 @@ namespace TicketServer
 	{
 		ServiceHost host;
 		Thread hostThread;
+
+		System.Timers.Timer backupTimerFile;
+		System.Timers.Timer backupTimerFTP;
 
 		/// <summary>
 		/// Gets or sets the service.
@@ -205,7 +209,7 @@ namespace TicketServer
 			}));
 			hostThread.Start();
 			UpdateRecentFiles();
-
+			UpdateTimer();
 		}
 
 		/// <summary>
@@ -226,9 +230,9 @@ namespace TicketServer
 			SafeObservable<ITicket> tickets = service.TicketSource.ActiveTickets;
 
 			ITicket ticket = (from t in tickets
-									  where t.IsRedeemed && t.RedeemDate.HasValue
-									  orderby t.RedeemDate ascending
-									  select t).FirstOrDefault();
+							  where t.IsRedeemed && t.RedeemDate.HasValue
+							  orderby t.RedeemDate ascending
+							  select t).FirstOrDefault();
 
 			DateTime firstRedeemed;
 			if (ticket == null)
@@ -329,7 +333,7 @@ namespace TicketServer
 			if (list.FirstOrDefault(a => a.Ticket.Id == args.Ticket.Id) == null)
 				list.Insert(0, e as TicketEventArgs);
 			else
-			    UpdateStatusItem(args);
+				UpdateStatusItem(args);
 		}
 		/// <summary>
 		/// Handles the TicketRequested event of the service control.
@@ -648,6 +652,7 @@ namespace TicketServer
 			settings.ShowDialog();
 
 			Service.TicketSource.SpecialTicketsString = Settings.Default.SpecialTicketsString;
+			UpdateTimer();
 		}
 
 		/// <summary>
@@ -658,6 +663,155 @@ namespace TicketServer
 		private void buttonStatusClear_Click(object sender, RoutedEventArgs e)
 		{
 			listBoxStatus.ItemsSource = new SafeObservable<TicketEventArgs>();
+		}
+
+		/// <summary>
+		/// Updates the timer (Backup).
+		/// </summary>
+		protected void UpdateTimer()
+		{
+			if (backupTimerFile == null)
+			{
+				backupTimerFile = new System.Timers.Timer();
+				backupTimerFile.Elapsed += new System.Timers.ElapsedEventHandler(backupTimerFile_Elapsed);
+			}
+			if (backupTimerFTP == null)
+			{
+				backupTimerFTP = new System.Timers.Timer();
+				backupTimerFTP.Elapsed += new System.Timers.ElapsedEventHandler(backupTimerFTP_Elapsed);
+			}
+
+			backupTimerFile.Enabled = Settings.Default.FileBackup;
+			backupTimerFile.Interval = Settings.Default.FileBackupInterval * 60 * 1000; //Setting = Minutes
+
+			backupTimerFTP.Enabled = Settings.Default.FTPBackup;
+			backupTimerFTP.Interval = Settings.Default.FTPBackupInterval * 60 * 1000;
+		}
+		/// <summary>
+		/// Handles the Elapsed event of the backupTimerFile control.
+		/// </summary>
+		/// <param name="sender">The source of the event.</param>
+		/// <param name="e">The <see cref="System.Timers.ElapsedEventArgs"/> instance containing the event data.</param>
+		protected void backupTimerFile_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+		{
+			if (!Directory.Exists(Settings.Default.FileBackupFolder))
+			{
+				backupTimerFile.Enabled = false;
+				Settings.Default.FileBackup = false;
+				Settings.Default.Save();
+
+				Dispatcher.Invoke((Action)delegate()
+				{
+					TaskDialog dialog = new TaskDialog();
+					dialog.Caption = Properties.Resources.FileBackupFailedCaption;
+					dialog.ExpansionMode = TaskDialogExpandedDetailsLocation.ExpandFooter;
+					dialog.FooterText = Properties.Resources.FileBackupFailedFooter;
+					dialog.Icon = TaskDialogStandardIcon.Error;
+					dialog.OwnerWindowHandle = new WindowInteropHelper(this).Handle;
+					dialog.StandardButtons = TaskDialogStandardButtons.Ok;
+					dialog.StartupLocation = TaskDialogStartupLocation.CenterOwner;
+					dialog.InstructionText = Properties.Resources.FileBackupFailedHeader;
+					dialog.Text = Properties.Resources.FileBackupFailedNoDirText;
+					dialog.Show();
+				});
+
+				return;
+			}
+
+			try
+			{
+				statusBarItemInfo.Dispatcher.Invoke((Action)delegate()
+				{
+					statusBarItemInfo.Text = Properties.Resources.MainStatusBackupStart;
+				});
+
+				File.Copy(Filename, System.IO.Path.Combine(Settings.Default.FileBackupFolder, System.IO.Path.GetFileName(Filename)), true);
+
+				statusBarItemInfo.Dispatcher.Invoke((Action)delegate()
+				{
+					statusBarItemInfo.Text = String.Format(Properties.Resources.MainStatusBackup, Settings.Default.FileBackupFolder);
+				});
+			}
+			catch (Exception exp)
+			{
+				backupTimerFile.Enabled = false;
+				Settings.Default.FileBackup = false;
+				Settings.Default.Save();
+
+				Dispatcher.Invoke((Action)delegate()
+				{
+					TaskDialog dialog = new TaskDialog();
+					dialog.Caption = Properties.Resources.FileBackupFailedCaption;
+					dialog.ExpansionMode = TaskDialogExpandedDetailsLocation.ExpandFooter;
+					dialog.FooterText = Properties.Resources.FileBackupFailedFooter;
+					dialog.Icon = TaskDialogStandardIcon.Error;
+					dialog.OwnerWindowHandle = new WindowInteropHelper(this).Handle;
+					dialog.StandardButtons = TaskDialogStandardButtons.Ok;
+					dialog.StartupLocation = TaskDialogStartupLocation.CenterOwner;
+					dialog.InstructionText = Properties.Resources.FileBackupFailedHeader;
+					dialog.Text = exp.Message;
+					dialog.Show();
+				});
+			}
+		}
+		/// <summary>
+		/// Handles the Elapsed event of the backupTimerFTP control.
+		/// </summary>
+		/// <param name="sender">The source of the event.</param>
+		/// <param name="e">The <see cref="System.Timers.ElapsedEventArgs"/> instance containing the event data.</param>
+		protected void backupTimerFTP_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
+		{
+			try
+			{
+				statusBarItemInfo.Dispatcher.Invoke((Action)delegate()
+				{
+					statusBarItemInfo.Text = Properties.Resources.MainStatusBackupStart;
+				});
+
+				string server = (Settings.Default.FTPBackupServer.StartsWith("ftp:") ? String.Empty : "ftp://") + Settings.Default.FTPBackupServer;
+				string folder = (Settings.Default.FTPBackupFolder.StartsWith("/") || server.EndsWith("/") ? String.Empty : "/")
+					+ Settings.Default.FTPBackupFolder + (Settings.Default.FTPBackupFolder.EndsWith("/") ? String.Empty : "/");
+				string file = System.IO.Path.GetFileName(Filename);
+				FtpWebRequest ftp = (FtpWebRequest)FtpWebRequest.Create(server + folder + file);
+				ftp.Method = WebRequestMethods.Ftp.UploadFile;
+				ftp.Credentials = new NetworkCredential(Settings.Default.FTPBackupUser,
+					Helper.ToInsecureString(Helper.DecryptString(Settings.Default.FTPBackupPassword)));
+				byte[] fileContents = File.ReadAllBytes(Filename);
+				ftp.ContentLength = fileContents.Length;
+
+				Stream requestStream = ftp.GetRequestStream();
+				requestStream.Write(fileContents, 0, fileContents.Length);
+				requestStream.Close();
+
+				FtpWebResponse response = (FtpWebResponse)ftp.GetResponse();
+				response.Close();
+
+				statusBarItemInfo.Dispatcher.Invoke((Action)delegate()
+				{
+					statusBarItemInfo.Text = String.Format(Properties.Resources.MainStatusBackup, Settings.Default.FTPBackupServer);
+				});
+			}
+			catch (Exception exp)
+			{
+				backupTimerFTP.Enabled = false;
+				Settings.Default.FTPBackup = false;
+				Settings.Default.Save();
+
+				Dispatcher.Invoke((Action)delegate()
+				{
+					TaskDialog dialog = new TaskDialog();
+					dialog.Caption = Properties.Resources.FTPBackupFailedCaption;
+					dialog.ExpansionMode = TaskDialogExpandedDetailsLocation.ExpandFooter;
+					dialog.FooterText = Properties.Resources.FTPBackupFailedFooter;
+					dialog.Icon = TaskDialogStandardIcon.Error;
+					dialog.OwnerWindowHandle = new WindowInteropHelper(this).Handle;
+					dialog.StandardButtons = TaskDialogStandardButtons.Ok;
+					dialog.StartupLocation = TaskDialogStartupLocation.CenterOwner;
+					dialog.InstructionText = Properties.Resources.FTPBackupFailedHeader;
+					dialog.Text = exp.Message;
+					dialog.Show();
+				});
+			}
 		}
 	}
 }
