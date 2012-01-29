@@ -3,11 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketValidator", "TicketValidator\TicketValidator.csproj", "{5F1BCAA7-5AB1-4BF8-BDF4-0C40CB2DA289}"
 EndProject
-Project("{B900F1C2-3D47-4FEC-85B3-04AAF18C3634}") = "TicketValidator.Setup", "TicketValidator.Setup\TicketValidator.Setup.vddproj", "{CAFE88A3-A226-4940-BCFA-4245F8002452}"
+Project("{B900F1C2-3D47-4FEC-85B3-04AAF18C3634}") = "TicketValidator.Symbol.Setup", "TicketValidator.Setup\TicketValidator.Setup.vddproj", "{CAFE88A3-A226-4940-BCFA-4245F8002452}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketValidator.Symbol", "TicketValidator.Symbol\TicketValidator.Symbol.csproj", "{83C59434-A221-4442-8FC6-F7A7C0A28249}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketValidator.Interfaces", "TicketValidator.Interfaces\TicketValidator.Interfaces.csproj", "{3C856EE5-5320-4611-8FB1-3FD670E3E232}"
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 3
+		SccNumberOfProjects = 5
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/TFS14
 		SccLocalPath0 = .
@@ -17,6 +21,12 @@ Global
 		SccProjectUniqueName2 = TicketValidator.Setup\\TicketValidator.Setup.vddproj
 		SccProjectName2 = TicketValidator.Setup
 		SccLocalPath2 = TicketValidator.Setup
+		SccProjectUniqueName3 = TicketValidator.Symbol\\TicketValidator.Symbol.csproj
+		SccProjectName3 = TicketValidator.Symbol
+		SccLocalPath3 = TicketValidator.Symbol
+		SccProjectUniqueName4 = TicketValidator.Interfaces\\TicketValidator.Interfaces.csproj
+		SccProjectName4 = TicketValidator.Interfaces
+		SccLocalPath4 = TicketValidator.Interfaces
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +41,16 @@ Global
 		{5F1BCAA7-5AB1-4BF8-BDF4-0C40CB2DA289}.Release|Any CPU.Deploy.0 = Release|Any CPU
 		{CAFE88A3-A226-4940-BCFA-4245F8002452}.Debug|Any CPU.ActiveCfg = Debug
 		{CAFE88A3-A226-4940-BCFA-4245F8002452}.Release|Any CPU.ActiveCfg = Release
+		{83C59434-A221-4442-8FC6-F7A7C0A28249}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{83C59434-A221-4442-8FC6-F7A7C0A28249}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{83C59434-A221-4442-8FC6-F7A7C0A28249}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{83C59434-A221-4442-8FC6-F7A7C0A28249}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{83C59434-A221-4442-8FC6-F7A7C0A28249}.Release|Any CPU.Build.0 = Release|Any CPU
+		{83C59434-A221-4442-8FC6-F7A7C0A28249}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{3C856EE5-5320-4611-8FB1-3FD670E3E232}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C856EE5-5320-4611-8FB1-3FD670E3E232}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C856EE5-5320-4611-8FB1-3FD670E3E232}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C856EE5-5320-4611-8FB1-3FD670E3E232}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

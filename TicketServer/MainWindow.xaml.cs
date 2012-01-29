@@ -225,10 +225,17 @@ namespace TicketServer
 
 			SafeObservable<ITicket> tickets = service.TicketSource.ActiveTickets;
 
-			DateTime firstRedeemed = (from t in tickets
+			ITicket ticket = (from t in tickets
 									  where t.IsRedeemed && t.RedeemDate.HasValue
 									  orderby t.RedeemDate ascending
-									  select t).First().RedeemDate.Value;
+									  select t).FirstOrDefault();
+
+			DateTime firstRedeemed;
+			if (ticket == null)
+				firstRedeemed = DateTime.Now;
+			else
+				firstRedeemed = ticket.RedeemDate.Value;
+
 			int offset = 0;
 			int interval = 60;
 			Dispatcher.Invoke((Action)delegate() { interval = Convert.ToInt32((comboBoxStatisticResolution.SelectedItem as ComboBoxItem).Tag); });

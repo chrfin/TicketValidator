@@ -1,6 +1,6 @@
 ﻿namespace TicketValidator
 {
-    partial class mainForm
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mainForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.mainMenu = new System.Windows.Forms.MainMenu();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonRedeem = new System.Windows.Forms.Button();
@@ -80,6 +80,7 @@
             this.Controls.Add(this.labelCodeInfo);
             this.Menu = this.mainMenu;
             this.Name = "mainForm";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Deactivate += new System.EventHandler(this.mainForm_Deactivate);
             this.Closed += new System.EventHandler(this.mainForm_Closed);
             this.Activated += new System.EventHandler(this.mainForm_Activated);

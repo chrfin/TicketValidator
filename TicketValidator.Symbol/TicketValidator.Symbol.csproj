@@ -4,27 +4,25 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{5F1BCAA7-5AB1-4BF8-BDF4-0C40CB2DA289}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{83C59434-A221-4442-8FC6-F7A7C0A28249}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>TicketValidator</RootNamespace>
-    <AssemblyName>TicketValidator</AssemblyName>
+    <RootNamespace>TicketValidator.SymbolScanner</RootNamespace>
+    <AssemblyName>TicketValidator.Symbol</AssemblyName>
     <ProjectTypeGuids>{4D628B5B-2FBC-4AA6-8C16-197242AEB884};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <PlatformFamilyName>WindowsCE</PlatformFamilyName>
-    <PlatformID>E2BECB1F-8C8C-41ba-B736-9BE7D946A398</PlatformID>
-    <OSVersion>5.0</OSVersion>
-    <DeployDirSuffix>TicketValidator</DeployDirSuffix>
+    <PlatformFamilyName>PocketPC</PlatformFamilyName>
+    <PlatformID>4118C335-430C-497f-BE48-11C3316B135E</PlatformID>
+    <OSVersion>5.1</OSVersion>
+    <DeployDirSuffix>TicketValidator.Symbol</DeployDirSuffix>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <NativePlatformName>Windows CE</NativePlatformName>
+    <NativePlatformName>Windows Mobile 5.0 Pocket PC SDK</NativePlatformName>
     <FormFactorID>
     </FormFactorID>
-    <ApplicationIcon>Icon.ico</ApplicationIcon>
     <SccProjectName>SAK</SccProjectName>
     <SccLocalPath>SAK</SccLocalPath>
     <SccAuxPath>SAK</SccAuxPath>
     <SccProvider>SAK</SccProvider>
-    <StartupObject>
-    </StartupObject>
+    <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -53,58 +51,32 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
+    <Reference Include="Symbol, Version=2.5.0.3, Culture=neutral, PublicKeyToken=68ec8db391f150ca, processorArchitecture=MSIL" />
+    <Reference Include="Symbol.Barcode2, Version=2.5.0.6, Culture=neutral, PublicKeyToken=68ec8db391f150ca, processorArchitecture=MSIL" />
+    <Reference Include="Symbol.Notification, Version=2.5.0.3, Culture=neutral, PublicKeyToken=68ec8db391f150ca, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="MainForm.de.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.de.resx" />
-    <EmbeddedResource Include="ServiceSelection.de.resx">
-      <DependentUpon>ServiceSelection.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ServiceSelection.resx">
-      <DependentUpon>ServiceSelection.cs</DependentUpon>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="ServiceSelection.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ServiceSelection.Designer.cs">
-      <DependentUpon>ServiceSelection.cs</DependentUpon>
-    </Compile>
-    <Compile Include="TicketService.Helper.cs" />
-    <Compile Include="Web References\TicketServiceReference\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.map</DependentUpon>
-    </Compile>
+    <Compile Include="SymbolScanner.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icon.ico">
@@ -112,48 +84,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <WebReferences Include="Web References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WebReferenceUrl Include="http://192.168.0.130:8880/tickets%3fwsdl">
-      <UrlBehavior>Static</UrlBehavior>
-      <RelPath>Web References\TicketServiceReference\</RelPath>
-      <UpdateFromURL>http://192.168.0.130:8880/tickets%3fwsdl</UpdateFromURL>
-      <ServiceLocationURL>
-      </ServiceLocationURL>
-      <CachedDynamicPropName>
-      </CachedDynamicPropName>
-      <CachedAppSettingsObjectName>
-      </CachedAppSettingsObjectName>
-      <CachedSettingsPropName>
-      </CachedSettingsPropName>
-    </WebReferenceUrl>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Web References\TicketServiceReference\RedeemResult.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\TicketServiceReference\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Web References\TicketServiceReference\ServiceStatus.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\TicketServiceReference\Ticket.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\TicketServiceReference\tickets.wsdl" />
-    <None Include="Web References\TicketServiceReference\tickets.xsd" />
-    <None Include="Web References\TicketServiceReference\tickets0.xsd" />
-    <None Include="Web References\TicketServiceReference\tickets1.xsd" />
-    <None Include="Web References\TicketServiceReference\tickets2.xsd" />
-    <None Include="Web References\TicketServiceReference\TicketService.wsdl" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\TicketValidator.Interfaces\TicketValidator.Interfaces.csproj">
       <Project>{3C856EE5-5320-4611-8FB1-3FD670E3E232}</Project>
       <Name>TicketValidator.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TicketValidator\TicketValidator.csproj">
+      <Project>{5F1BCAA7-5AB1-4BF8-BDF4-0C40CB2DA289}</Project>
+      <Name>TicketValidator</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CompactFramework.CSharp.targets" />

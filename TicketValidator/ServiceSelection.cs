@@ -44,7 +44,7 @@ namespace TicketValidator
         {
             InitializeComponent();
 
-            string uriPath = Path.Combine(mainForm.StartupPath, "lastService.uri");
+            string uriPath = Path.Combine(MainForm.StartupPath, "lastService.uri");
             if(File.Exists(uriPath))
             {
                 StreamReader reader = File.OpenText(uriPath);
@@ -85,7 +85,7 @@ namespace TicketValidator
         {
             DialogResult = DialogResult.OK;
 
-            StreamWriter writer = new StreamWriter(File.Open(Path.Combine(mainForm.StartupPath, "lastService.uri"), FileMode.Create));
+            StreamWriter writer = new StreamWriter(File.Open(Path.Combine(MainForm.StartupPath, "lastService.uri"), FileMode.Create));
             writer.Write(ServiceUri);
             writer.Close();
 
