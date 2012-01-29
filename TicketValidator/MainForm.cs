@@ -154,7 +154,8 @@ namespace TicketValidator
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
         private void mainForm_Activated(object sender, EventArgs e)
         {
-            scanner.StartScan();
+            if (scanner != null)
+                scanner.StartScan();
         }
 
         /// <summary>
@@ -366,7 +367,7 @@ namespace TicketValidator
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
-        private void mainForm_Closed(object sender, EventArgs e) { CloseOpenConnections(true); Process.GetCurrentProcess().Kill(); }
+        private void mainForm_Closed(object sender, EventArgs e) { CloseOpenConnections(true); /*Process.GetCurrentProcess().Kill();*/ }
         /// <summary>
         /// Closes the open connections.
         /// </summary>

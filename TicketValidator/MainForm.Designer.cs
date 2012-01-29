@@ -40,15 +40,15 @@
             // 
             // buttonCancel
             // 
-            resources.ApplyResources(this.buttonCancel, "buttonCancel");
             this.buttonCancel.BackColor = System.Drawing.Color.Pink;
+            resources.ApplyResources(this.buttonCancel, "buttonCancel");
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
             // buttonRedeem
             // 
-            resources.ApplyResources(this.buttonRedeem, "buttonRedeem");
             this.buttonRedeem.BackColor = System.Drawing.Color.LightGreen;
+            resources.ApplyResources(this.buttonRedeem, "buttonRedeem");
             this.buttonRedeem.Name = "buttonRedeem";
             this.buttonRedeem.Click += new System.EventHandler(this.buttonRedeem_Click);
             // 
@@ -69,17 +69,16 @@
             this.buttonSelectService.Name = "buttonSelectService";
             this.buttonSelectService.Click += new System.EventHandler(this.buttonSelectService_Click);
             // 
-            // mainForm
+            // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             resources.ApplyResources(this, "$this");
-            this.Controls.Add(this.buttonSelectService);
             this.Controls.Add(this.buttonClose);
+            this.Controls.Add(this.labelCodeInfo);
+            this.Controls.Add(this.buttonSelectService);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonRedeem);
-            this.Controls.Add(this.labelCodeInfo);
-            this.Menu = this.mainMenu;
-            this.Name = "mainForm";
+            this.Name = "MainForm";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Deactivate += new System.EventHandler(this.mainForm_Deactivate);
             this.Closed += new System.EventHandler(this.mainForm_Closed);

@@ -65,10 +65,10 @@
             // 
             // comboBoxUri
             // 
-            resources.ApplyResources(this.comboBoxUri, "comboBoxUri");
             this.comboBoxUri.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDown;
             this.comboBoxUri.Items.Add(resources.GetString("comboBoxUri.Items"));
             this.comboBoxUri.Items.Add(resources.GetString("comboBoxUri.Items1"));
+            resources.ApplyResources(this.comboBoxUri, "comboBoxUri");
             this.comboBoxUri.Name = "comboBoxUri";
             this.comboBoxUri.TextChanged += new System.EventHandler(this.comboBoxUri_TextChanged);
             // 
@@ -103,6 +103,7 @@
             this.Controls.Add(this.labelUri);
             this.Controls.Add(this.buttonTest);
             this.Name = "ServiceSelection";
+            this.TopMost = true;
             this.ResumeLayout(false);
 
         }
