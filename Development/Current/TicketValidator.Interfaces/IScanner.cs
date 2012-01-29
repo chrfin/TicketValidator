@@ -26,7 +26,7 @@ namespace TicketValidator.Interfaces
         void StopScan(bool dispose);
 
         /// <summary>
-        /// Occures when a scna was successfull.
+        /// Occures when a scan was successfull.
         /// </summary>
         event EventHandler OnScan;
 

@@ -117,220 +117,199 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="&gt;&gt;labelStatus.Name" xml:space="preserve">
-    <value>labelStatus</value>
-  </data>
+  <metadata name="mainMenu1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="labelInfo.Size" type="System.Drawing.Size, System.Drawing">
-    <value>232, 50</value>
+  <data name="buttonTest.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 102</value>
   </data>
-  <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>ServiceSelection</value>
-  </data>
-  <data name="labelInfo.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 0</value>
-  </data>
-  <data name="&gt;&gt;buttonTest.ZOrder" xml:space="preserve">
-    <value>7</value>
-  </data>
-  <data name="&gt;&gt;buttonCancel.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="comboBoxUri.Items" xml:space="preserve">
-    <value>http://192.168.0.130:8880/tickets/ws</value>
-  </data>
-  <data name="buttonCancel.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="buttonTest.Size" type="System.Drawing.Size, System.Drawing">
     <value>72, 20</value>
-  </data>
-  <data name="labelTest.Size" type="System.Drawing.Size, System.Drawing">
-    <value>103, 20</value>
-  </data>
-  <data name="&gt;&gt;labelUri.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;buttonOk.ZOrder" xml:space="preserve">
-    <value>5</value>
-  </data>
-  <data name="comboBoxUri.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 73</value>
-  </data>
-  <data name="&gt;&gt;buttonCancel.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;labelUri.ZOrder" xml:space="preserve">
-    <value>6</value>
   </data>
   <assembly alias="mscorlib" name="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="buttonTest.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
   </data>
-  <data name="&gt;&gt;labelInfo.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelTest.ZOrder" xml:space="preserve">
-    <value>4</value>
-  </data>
-  <data name="&gt;&gt;comboBoxUri.ZOrder" xml:space="preserve">
-    <value>3</value>
-  </data>
-  <data name="labelStatus.Location" type="System.Drawing.Point, System.Drawing">
-    <value>78, 102</value>
-  </data>
-  <data name="buttonOk.TabIndex" type="System.Int32, mscorlib">
-    <value>2</value>
-  </data>
-  <data name="buttonCancel.TabIndex" type="System.Int32, mscorlib">
-    <value>9</value>
-  </data>
-  <data name="labelInfo.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Tahoma, 14pt</value>
-  </data>
-  <data name="comboBoxUri.Size" type="System.Drawing.Size, System.Drawing">
-    <value>232, 23</value>
-  </data>
   <data name="buttonTest.Text" xml:space="preserve">
     <value>Test</value>
-  </data>
-  <data name="labelInfo.Text" xml:space="preserve">
-    <value>Please enter the URI of the Ticket Service:</value>
-  </data>
-  <data name="labelTest.Location" type="System.Drawing.Point, System.Drawing">
-    <value>132, 102</value>
-  </data>
-  <data name="buttonTest.Location" type="System.Drawing.Point, System.Drawing">
-    <value>3, 102</value>
-  </data>
-  <data name="$this.Text" xml:space="preserve">
-    <value>Service Selection</value>
-  </data>
-  <data name="&gt;&gt;comboBoxUri.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;labelInfo.Name" xml:space="preserve">
-    <value>labelInfo</value>
-  </data>
-  <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>122, 128</value>
-  </data>
-  <data name="comboBoxUri.Items1" xml:space="preserve">
-    <value>http://192.168.2.1:8880/tickets/ws</value>
-  </data>
-  <data name="labelStatus.Text" xml:space="preserve">
-    <value>Status:</value>
-  </data>
-  <data name="labelStatus.Size" type="System.Drawing.Size, System.Drawing">
-    <value>48, 20</value>
-  </data>
-  <data name="&gt;&gt;labelTest.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="buttonOk.Size" type="System.Drawing.Size, System.Drawing">
-    <value>72, 20</value>
-  </data>
-  <data name="&gt;&gt;$this.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="buttonOk.Location" type="System.Drawing.Point, System.Drawing">
-    <value>44, 128</value>
-  </data>
-  <data name="&gt;&gt;buttonTest.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelInfo.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;buttonOk.Parent" xml:space="preserve">
-    <value>$this</value>
-  </data>
-  <data name="&gt;&gt;buttonTest.Parent" xml:space="preserve">
-    <value>$this</value>
   </data>
   <data name="&gt;&gt;buttonTest.Name" xml:space="preserve">
     <value>buttonTest</value>
   </data>
-  <data name="&gt;&gt;buttonCancel.ZOrder" xml:space="preserve">
-    <value>0</value>
+  <data name="&gt;&gt;buttonTest.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;labelUri.Name" xml:space="preserve">
-    <value>labelUri</value>
-  </data>
-  <data name="&gt;&gt;labelStatus.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;comboBoxUri.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="buttonCancel.Text" xml:space="preserve">
-    <value>Cancel</value>
-  </data>
-  <data name="&gt;&gt;labelTest.Parent" xml:space="preserve">
+  <data name="&gt;&gt;buttonTest.Parent" xml:space="preserve">
     <value>$this</value>
+  </data>
+  <data name="&gt;&gt;buttonTest.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="labelUri.Location" type="System.Drawing.Point, System.Drawing">
+    <value>0, 50</value>
   </data>
   <data name="labelUri.Size" type="System.Drawing.Size, System.Drawing">
     <value>44, 20</value>
   </data>
-  <data name="&gt;&gt;buttonOk.Name" xml:space="preserve">
-    <value>buttonOk</value>
+  <data name="labelUri.Text" xml:space="preserve">
+    <value>URI:</value>
+  </data>
+  <data name="&gt;&gt;labelUri.Name" xml:space="preserve">
+    <value>labelUri</value>
+  </data>
+  <data name="&gt;&gt;labelUri.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelUri.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;labelUri.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="buttonOk.Location" type="System.Drawing.Point, System.Drawing">
+    <value>44, 128</value>
+  </data>
+  <data name="buttonOk.Size" type="System.Drawing.Size, System.Drawing">
+    <value>72, 20</value>
+  </data>
+  <data name="buttonOk.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
   </data>
   <data name="buttonOk.Text" xml:space="preserve">
     <value>OK</value>
   </data>
-  <data name="&gt;&gt;labelStatus.Parent" xml:space="preserve">
+  <data name="&gt;&gt;buttonOk.Name" xml:space="preserve">
+    <value>buttonOk</value>
+  </data>
+  <data name="&gt;&gt;buttonOk.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buttonOk.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;buttonOk.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <data name="labelTest.Location" type="System.Drawing.Point, System.Drawing">
+    <value>132, 102</value>
+  </data>
+  <data name="labelTest.Size" type="System.Drawing.Size, System.Drawing">
+    <value>103, 20</value>
+  </data>
+  <data name="labelTest.Text" xml:space="preserve">
+    <value>Not connected</value>
+  </data>
+  <data name="&gt;&gt;labelTest.Name" xml:space="preserve">
+    <value>labelTest</value>
+  </data>
+  <data name="&gt;&gt;labelTest.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelTest.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;labelTest.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="comboBoxUri.Items" xml:space="preserve">
+    <value>http://192.168.0.130:8880/tickets/ws</value>
+  </data>
+  <data name="comboBoxUri.Items1" xml:space="preserve">
+    <value>http://192.168.2.1:8880/tickets/ws</value>
+  </data>
+  <data name="comboBoxUri.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 73</value>
+  </data>
+  <data name="comboBoxUri.Size" type="System.Drawing.Size, System.Drawing">
+    <value>232, 23</value>
+  </data>
+  <data name="comboBoxUri.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;comboBoxUri.Name" xml:space="preserve">
+    <value>comboBoxUri</value>
+  </data>
+  <data name="&gt;&gt;comboBoxUri.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;comboBoxUri.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;comboBoxUri.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="labelInfo.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Tahoma, 14pt</value>
+  </data>
+  <data name="labelInfo.Location" type="System.Drawing.Point, System.Drawing">
+    <value>3, 0</value>
+  </data>
+  <data name="labelInfo.Size" type="System.Drawing.Size, System.Drawing">
+    <value>232, 50</value>
+  </data>
+  <data name="labelInfo.Text" xml:space="preserve">
+    <value>Please enter the URI of the Ticket Service:</value>
+  </data>
+  <data name="&gt;&gt;labelInfo.Name" xml:space="preserve">
+    <value>labelInfo</value>
+  </data>
+  <data name="&gt;&gt;labelInfo.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;labelInfo.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
   <data name="&gt;&gt;labelInfo.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
-  <data name="&gt;&gt;labelUri.Type" xml:space="preserve">
+  <data name="labelStatus.Location" type="System.Drawing.Point, System.Drawing">
+    <value>78, 102</value>
+  </data>
+  <data name="labelStatus.Size" type="System.Drawing.Size, System.Drawing">
+    <value>48, 20</value>
+  </data>
+  <data name="labelStatus.Text" xml:space="preserve">
+    <value>Status:</value>
+  </data>
+  <data name="&gt;&gt;labelStatus.Name" xml:space="preserve">
+    <value>labelStatus</value>
+  </data>
+  <data name="&gt;&gt;labelStatus.Type" xml:space="preserve">
     <value>System.Windows.Forms.Label, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="labelTest.Text" xml:space="preserve">
-    <value>Not connected</value>
-  </data>
-  <data name="$this.AutoScroll" type="System.Boolean, mscorlib">
-    <value>True</value>
-  </data>
-  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>238, 159</value>
-  </data>
-  <data name="labelUri.Text" xml:space="preserve">
-    <value>URI:</value>
-  </data>
-  <data name="comboBoxUri.TabIndex" type="System.Int32, mscorlib">
-    <value>4</value>
-  </data>
-  <data name="buttonTest.Size" type="System.Drawing.Size, System.Drawing">
-    <value>72, 20</value>
-  </data>
-  <data name="&gt;&gt;buttonOk.Type" xml:space="preserve">
-    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;labelTest.Name" xml:space="preserve">
-    <value>labelTest</value>
-  </data>
-  <data name="labelUri.Location" type="System.Drawing.Point, System.Drawing">
-    <value>0, 50</value>
+  <data name="&gt;&gt;labelStatus.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
   <data name="&gt;&gt;labelStatus.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
+  <data name="buttonCancel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>122, 128</value>
+  </data>
+  <data name="buttonCancel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>72, 20</value>
+  </data>
+  <data name="buttonCancel.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="buttonCancel.Text" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
   <data name="&gt;&gt;buttonCancel.Name" xml:space="preserve">
     <value>buttonCancel</value>
   </data>
-  <data name="&gt;&gt;mainMenu1.Name" xml:space="preserve">
-    <value>mainMenu1</value>
+  <data name="&gt;&gt;buttonCancel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;comboBoxUri.Name" xml:space="preserve">
-    <value>comboBoxUri</value>
+  <data name="&gt;&gt;buttonCancel.Parent" xml:space="preserve">
+    <value>$this</value>
   </data>
-  <data name="comboBoxUri.Text" xml:space="preserve">
-    <value>http://192.168.0.130:8880/tickets/ws</value>
+  <data name="&gt;&gt;buttonCancel.ZOrder" xml:space="preserve">
+    <value>0</value>
   </data>
-  <data name="&gt;&gt;mainMenu1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.MainMenu, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <metadata name="mainMenu1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
+  <metadata name="$this.FormFactorShadowProperty" xml:space="preserve">
+    <value>WEBPAD</value>
   </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -338,7 +317,25 @@
   <metadata name="$this.Skin" type="System.Boolean, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>False</value>
   </metadata>
-  <metadata name="$this.FormFactorShadowProperty" xml:space="preserve">
-    <value>WEBPAD</value>
-  </metadata>
+  <data name="$this.AutoScroll" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>238, 159</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>Service Selection</value>
+  </data>
+  <data name="&gt;&gt;mainMenu1.Name" xml:space="preserve">
+    <value>mainMenu1</value>
+  </data>
+  <data name="&gt;&gt;mainMenu1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.MainMenu, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>ServiceSelection</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
 </root>

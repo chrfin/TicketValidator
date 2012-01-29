@@ -16,6 +16,9 @@ namespace TicketValidator.SymbolScanner
 
         #region IScanner Members
 
+        /// <summary>
+        /// Occures when a scan was successfull.
+        /// </summary>
         public event EventHandler OnScan;
 
         /// <summary>
@@ -40,7 +43,7 @@ namespace TicketValidator.SymbolScanner
         /// Handles the on scan event.
         /// </summary>
         /// <param name="scancollection">The scancollection.</param>
-        void scanner_OnScan(ScanDataCollection scancollection)
+        protected void scanner_OnScan(ScanDataCollection scancollection)
         {
             if (OnScan != null)
                 OnScan(this, new ScanEventArgs() { Code = scancollection.GetFirst.Text });
