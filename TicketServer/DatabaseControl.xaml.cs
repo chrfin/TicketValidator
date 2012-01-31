@@ -13,6 +13,9 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TicketServer.Interfaces.DAL;
 using TicketServer.Interfaces;
+using TicketServer.Common;
+using Microsoft.WindowsAPICodePack.Dialogs;
+using System.Windows.Interop;
 
 namespace TicketServer
 {
@@ -33,7 +36,8 @@ namespace TicketServer
 			set { SetValue(TicketSourceProperty, value); }
 		}
 		// Using a DependencyProperty as the backing store for TicketSource.  This enables animation, styling, binding, etc...
-		public static readonly DependencyProperty TicketSourceProperty = DependencyProperty.Register("TicketSource", typeof(ITicketDataSource), typeof(DatabaseControl));
+		public static readonly DependencyProperty TicketSourceProperty = 
+			DependencyProperty.Register("TicketSource", typeof(ITicketDataSource), typeof(DatabaseControl));
 
 		/// <summary>
 		/// Gets or sets the selected item.
@@ -64,6 +68,59 @@ namespace TicketServer
 		public DatabaseControl()
 		{
 			InitializeComponent();
+		}
+
+		/// <summary>
+		/// Handles the Click event of the buttonAdd control.
+		/// </summary>
+		/// <param name="sender">The source of the event.</param>
+		/// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
+		private void buttonAdd_Click(object sender, RoutedEventArgs e)
+		{
+			listBoxTickets.SelectedItem = null;
+		}
+
+		/// <summary>
+		/// Handles the Click event of the buttonDelete control.
+		/// </summary>
+		/// <param name="sender">The source of the event.</param>
+		/// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
+		private void buttonDelete_Click(object sender, RoutedEventArgs e)
+		{
+			TicketSource.AllTickets.Dispatcher = Dispatcher;
+			foreach (ITicket ticket in listBoxTickets.SelectedItems.OfType<ITicket>().ToList())
+				TicketSource.AllTickets.Remove(ticket);
+		}
+
+		/// <summary>
+		/// Handles the TicketCreated event of the ticketControlView control.
+		/// </summary>
+		/// <param name="sender">The source of the event.</param>
+		/// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+		private void ticketControlView_TicketCreated(object sender, EventArgs e)
+		{
+			TicketSource.AllTickets.Dispatcher = Dispatcher;
+
+			ITicket ticket = (e as TicketEventArgs).Ticket;
+			if (TicketSource.AddTicket(ticket))
+			{
+				ticket = TicketSource.AllTickets.First(t => t.Code == ticket.Code);
+				listBoxTickets.SelectedItem = ticket;
+				listBoxTickets.ScrollIntoView(ticket);
+			}
+			else
+			{
+				TaskDialog dialog = new TaskDialog();
+				dialog.Caption = Properties.Resources.TicketAddFailedCaption;
+				dialog.ExpansionMode = TaskDialogExpandedDetailsLocation.Hide;
+				dialog.Icon = TaskDialogStandardIcon.Error;
+				dialog.OwnerWindowHandle = new WindowInteropHelper(Window.GetWindow(this)).Handle;
+				dialog.StandardButtons = TaskDialogStandardButtons.Ok;
+				dialog.StartupLocation = TaskDialogStartupLocation.CenterOwner;
+				dialog.InstructionText = Properties.Resources.TicketAddFailedHeader;
+				dialog.Text = Properties.Resources.TicketAddFailedText;
+				dialog.Show();
+			}
 		}
 	}
 }

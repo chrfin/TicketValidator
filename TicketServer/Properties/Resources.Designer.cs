@@ -61,6 +61,15 @@ namespace TicketServer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add.
+        /// </summary>
+        internal static string ButtonAdd {
+            get {
+                return ResourceManager.GetString("ButtonAdd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Clear tickets.
         /// </summary>
         internal static string ButtonClear {
@@ -664,6 +673,33 @@ namespace TicketServer.Properties {
         internal static string TabStatus {
             get {
                 return ResourceManager.GetString("TabStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Adding ticket failed.
+        /// </summary>
+        internal static string TicketAddFailedCaption {
+            get {
+                return ResourceManager.GetString("TicketAddFailedCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Adding ticket failed!.
+        /// </summary>
+        internal static string TicketAddFailedHeader {
+            get {
+                return ResourceManager.GetString("TicketAddFailedHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The ticket could not be added - maybee the code is already in use..
+        /// </summary>
+        internal static string TicketAddFailedText {
+            get {
+                return ResourceManager.GetString("TicketAddFailedText", resourceCulture);
             }
         }
         

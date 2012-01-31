@@ -316,6 +316,9 @@ Zurückgesetzte Karten könne NICHT zu ihrem alten Status wiederhergestellt werd
   <data name="ResetDatabaseYes" xml:space="preserve">
     <value>Ja, Karten zurücksetzen.</value>
   </data>
+  <data name="ButtonAdd" xml:space="preserve">
+    <value>Hinzufügen</value>
+  </data>
   <data name="FileBackupFailedCaption" xml:space="preserve">
     <value>Datei-Sicherung fehlgeschlagen</value>
   </data>
@@ -342,5 +345,14 @@ Zurückgesetzte Karten könne NICHT zu ihrem alten Status wiederhergestellt werd
   </data>
   <data name="MainStatusBackupStart" xml:space="preserve">
     <value>Sicherung gestartet...</value>
+  </data>
+  <data name="TicketAddFailedCaption" xml:space="preserve">
+    <value>Karte hinzufügen fehlgeschlagen</value>
+  </data>
+  <data name="TicketAddFailedHeader" xml:space="preserve">
+    <value>Karte hinzufügen fehlgeschlagen!</value>
+  </data>
+  <data name="TicketAddFailedText" xml:space="preserve">
+    <value>Die Karte konnte nicht hinzugefügt werden - vielleicht ist der Code bereits in Verwedung.</value>
   </data>
 </root>

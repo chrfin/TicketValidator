@@ -292,6 +292,18 @@
   <ItemGroup>
     <Resource Include="Icons\Small\agt_update-product.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Large\edit_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Medium\edit_add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Medium\editdelete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Small\edit_add.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

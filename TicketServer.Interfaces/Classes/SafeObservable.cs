@@ -18,9 +18,18 @@ namespace TicketServer.Interfaces.Classes
 	public class SafeObservable<T> : IList<T>, INotifyCollectionChanged
 	{
 		private IList<T> collection = new List<T>();
-		private Dispatcher dispatcher;
-		public event NotifyCollectionChangedEventHandler CollectionChanged;
 		private ReaderWriterLock sync = new ReaderWriterLock();
+
+		public event NotifyCollectionChangedEventHandler CollectionChanged;
+
+		private Dispatcher dispatcher;
+		/// <summary>
+		/// Gets or sets the dispatcher.
+		/// </summary>
+		/// <value>
+		/// The dispatcher.
+		/// </value>
+		public Dispatcher Dispatcher { get { return dispatcher; } set { dispatcher = value; } }
 
 		public SafeObservable()
 		{
@@ -118,8 +127,7 @@ namespace TicketServer.Interfaces.Classes
 			}
 			var result = collection.Remove(item);
 			if (result && CollectionChanged != null)
-				CollectionChanged(this, new
-					NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+				CollectionChanged(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, item, index));
 			sync.ReleaseWriterLock();
 			return result;
 		}
@@ -155,8 +163,7 @@ namespace TicketServer.Interfaces.Classes
 			sync.AcquireWriterLock(Timeout.Infinite);
 			collection.Insert(index, item);
 			if (CollectionChanged != null)
-				CollectionChanged(this,
-					new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, item, index));
+				CollectionChanged(this,	new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, item, index));
 			sync.ReleaseWriterLock();
 		}
 
@@ -176,10 +183,10 @@ namespace TicketServer.Interfaces.Classes
 				sync.ReleaseWriterLock();
 				return;
 			}
+			object item = collection[index];
 			collection.RemoveAt(index);
 			if (CollectionChanged != null)
-				CollectionChanged(this,
-					new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+				CollectionChanged(this,	new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, item, index));
 			sync.ReleaseWriterLock();
 
 		}
