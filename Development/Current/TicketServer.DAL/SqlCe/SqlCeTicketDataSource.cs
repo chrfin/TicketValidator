@@ -192,6 +192,7 @@ namespace TicketServer.DAL.SqlCe
 			catch { return false; }
 
 			AllTickets.Add(newTicket);
+			UpdateActiveTickets();
 
 			if (PropertyChanged != null)
 			{

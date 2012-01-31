@@ -16,6 +16,7 @@ using Microsoft.WindowsAPICodePack.Dialogs;
 using TicketServer.Common;
 using TicketServer.Interfaces;
 using TicketServer.Interfaces.Enums;
+using TicketServer.Interfaces.DAL;
 
 namespace TicketServer
 {
@@ -35,8 +36,21 @@ namespace TicketServer
 			get { return (ITicket)GetValue(TicketProperty); }
 			set { SetValue(TicketProperty, value); }
 		}
-		// Using a DependencyProperty as the backing store for Ticket.  This enables animation, styling, binding, etc...
 		public static readonly DependencyProperty TicketProperty = DependencyProperty.Register("Ticket", typeof(ITicket), typeof(TicketControl));
+
+		/// <summary>
+		/// Occurs when a new ticket was created.
+		/// </summary>
+		public event EventHandler TicketCreated;
+		/// <summary>
+		/// Raises the <see cref="E:TicketCreated"/> event.
+		/// </summary>
+		/// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
+		protected virtual void OnTicketCreated(EventArgs e)
+		{
+			if (TicketCreated != null)
+				TicketCreated(this, e);
+		}
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="TicketControl"/> class.
@@ -85,23 +99,45 @@ namespace TicketServer
 		/// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
 		private void buttonSave_Click(object sender, RoutedEventArgs e)
 		{
-			textBoxCode.GetBindingExpression(TextBox.TextProperty).UpdateSource();
-			textBoxName.GetBindingExpression(TextBox.TextProperty).UpdateSource();
-			textBoxStreet.GetBindingExpression(TextBox.TextProperty).UpdateSource();
-			textBoxZip.GetBindingExpression(TextBox.TextProperty).UpdateSource();
-			textBoxCity.GetBindingExpression(TextBox.TextProperty).UpdateSource();
-			textBoxPhone.GetBindingExpression(TextBox.TextProperty).UpdateSource();
-			textBoxMail.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+			if (Ticket != null)
+			{
+				textBoxCode.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+				textBoxName.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+				textBoxStreet.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+				textBoxZip.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+				textBoxCity.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+				textBoxPhone.GetBindingExpression(TextBox.TextProperty).UpdateSource();
+				textBoxMail.GetBindingExpression(TextBox.TextProperty).UpdateSource();
 
-			Ticket.IsRedeemed = checkBoxRedeemed.IsChecked.Value;
-			Ticket.IsOnlineTicket = checkBoxOnline.IsChecked.Value;
-			Ticket.Type = (TicketType)comboBoxType.SelectedItem;
+				Ticket.IsRedeemed = checkBoxRedeemed.IsChecked.Value;
+				Ticket.IsOnlineTicket = checkBoxOnline.IsChecked.Value;
+				Ticket.Type = (TicketType)comboBoxType.SelectedItem;
 
-			DateTime result;
-			Ticket.RedeemDate = textBoxRedeemDate.Text.Length < 8 ? 
-			    (DateTime?)null : (DateTime.TryParse(textBoxRedeemDate.Text, out result) ? result : new DateTime());
+				DateTime result;
+				Ticket.RedeemDate = textBoxRedeemDate.Text.Length < 8 ?
+					(DateTime?)null : (DateTime.TryParse(textBoxRedeemDate.Text, out result) ? result : new DateTime());
 
-			Ticket.Save();
+				Ticket.Save();
+			}
+			else
+			{
+				ImportTicket ticket = new ImportTicket();
+				ticket.IsOnlineTicket = checkBoxOnline.IsChecked.Value;
+				ticket.Type = comboBoxType.SelectedItem == null ? TicketType.Normal : (TicketType)comboBoxType.SelectedItem;
+				ticket.Code = textBoxCode.Text;
+				ticket.Name = textBoxName.Text;
+				ticket.Street = textBoxStreet.Text;
+				ticket.Zip = textBoxZip.Text;
+				ticket.City = textBoxCity.Text;
+				ticket.Phone = textBoxPhone.Text;
+				ticket.EMail = textBoxMail.Text;
+				ticket.IsRedeemed = checkBoxRedeemed.IsChecked.Value;
+				DateTime result;
+				ticket.RedeemDate = textBoxRedeemDate.Text.Length < 8 ?
+					 (DateTime?)null : (DateTime.TryParse(textBoxRedeemDate.Text, out result) ? result : new DateTime());
+
+				OnTicketCreated(new TicketEventArgs(ticket));
+			}
 		}
 
 		/// <summary>

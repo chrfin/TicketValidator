@@ -325,6 +325,9 @@ This will reset the tickets without a way to restore the old state!</value>
   <data name="DateFormat" xml:space="preserve">
     <value>yyyy-MM-dd HH:mm:ss</value>
   </data>
+  <data name="ButtonAdd" xml:space="preserve">
+    <value>Add</value>
+  </data>
   <data name="FileBackupFailedCaption" xml:space="preserve">
     <value>File Backup faild</value>
   </data>
@@ -351,5 +354,14 @@ This will reset the tickets without a way to restore the old state!</value>
   </data>
   <data name="MainStatusBackupStart" xml:space="preserve">
     <value>Starting Backup...</value>
+  </data>
+  <data name="TicketAddFailedCaption" xml:space="preserve">
+    <value>Adding ticket failed</value>
+  </data>
+  <data name="TicketAddFailedHeader" xml:space="preserve">
+    <value>Adding ticket failed!</value>
+  </data>
+  <data name="TicketAddFailedText" xml:space="preserve">
+    <value>The ticket could not be added - maybee the code is already in use.</value>
   </data>
 </root>
