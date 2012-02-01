@@ -79,7 +79,6 @@
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonRedeem);
             this.Name = "MainForm";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Deactivate += new System.EventHandler(this.mainForm_Deactivate);
             this.Closed += new System.EventHandler(this.mainForm_Closed);
             this.Activated += new System.EventHandler(this.mainForm_Activated);
