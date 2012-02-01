@@ -26,7 +26,6 @@ using TicketServer.Common;
 using TicketServer.DAL;
 using TicketServer.DAL.SqlCe;
 using TicketServer.Interfaces;
-using TicketServer.Interfaces.Classes;
 using TicketServer.Interfaces.DAL;
 using TicketServer.Interfaces.Enums;
 using TicketServer.Properties;
@@ -34,6 +33,7 @@ using TicketServer.Service;
 using WinForms = System.Windows.Forms;
 using System.IO;
 using System.Net;
+using System.Collections.ObjectModel;
 
 namespace TicketServer
 {
@@ -171,7 +171,7 @@ namespace TicketServer
 		/// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
 		private void Window_Loaded(object sender, RoutedEventArgs e)
 		{
-			listBoxStatus.ItemsSource = new SafeObservable<TicketEventArgs>();
+			listBoxStatus.ItemsSource = new ObservableCollection<TicketEventArgs>();
 			hostThread = new Thread(new ThreadStart(delegate()
 			{
 				IsBusy = true;
@@ -192,8 +192,8 @@ namespace TicketServer
 				databaseControlMain.Dispatcher.Invoke((Action)delegate() { databaseControlMain.TicketSource = service.TicketSource; });
 				statusBarItemInfo.Dispatcher.Invoke((Action)delegate() { statusBarItemInfo.Text = Properties.Resources.MainStatusReady; });
 
-				SafeObservable<ObservablePoint<DateTime, int>> dataTotal = BuildStatistic(StatisticMode.Total);
-				SafeObservable<ObservablePoint<DateTime, int>> dataPerUnit = BuildStatistic(StatisticMode.PerUnit);
+				ObservableCollection<ObservablePoint<DateTime, int>> dataTotal = BuildStatistic(StatisticMode.Total);
+				ObservableCollection<ObservablePoint<DateTime, int>> dataPerUnit = BuildStatistic(StatisticMode.PerUnit);
 				lineSeriesStatisticTotal.Dispatcher.Invoke((Action)delegate()
 				{
 					lineSeriesStatisticTotal.ItemsSource = dataTotal;
@@ -217,7 +217,7 @@ namespace TicketServer
 		/// </summary>
 		/// <param name="mode">The mode.</param>
 		/// <returns></returns>
-		private SafeObservable<ObservablePoint<DateTime, int>> BuildStatistic(StatisticMode mode)
+		private ObservableCollection<ObservablePoint<DateTime, int>> BuildStatistic(StatisticMode mode)
 		{
 			TicketService service = null;
 			Dispatcher.Invoke((Action)delegate() { service = Service; });
@@ -225,9 +225,9 @@ namespace TicketServer
 			if (service == null)
 				return null;
 
-			SafeObservable<ObservablePoint<DateTime, int>> data = new SafeObservable<ObservablePoint<DateTime, int>>();
+			ObservableCollection<ObservablePoint<DateTime, int>> data = new ObservableCollection<ObservablePoint<DateTime, int>>();
 
-			SafeObservable<ITicket> tickets = service.TicketSource.ActiveTickets;
+			ObservableCollection<ITicket> tickets = service.TicketSource.ActiveTickets;
 
 			ITicket ticket = (from t in tickets
 							  where t.IsRedeemed && t.RedeemDate.HasValue
@@ -306,13 +306,13 @@ namespace TicketServer
 		{
 			Dispatcher.Invoke((Action)delegate()
 			{
-				foreach (ObservablePoint<DateTime, int> point in lineSeriesStatisticTotal.ItemsSource as SafeObservable<ObservablePoint<DateTime, int>>)
+				foreach (ObservablePoint<DateTime, int> point in lineSeriesStatisticTotal.ItemsSource as ObservableCollection<ObservablePoint<DateTime, int>>)
 				{
 					point.Y = GetRedeemdCount(Service.TicketSource.ActiveTickets, point.X);
 				}
 
 				DateTime last = new DateTime();
-				foreach (ObservablePoint<DateTime, int> point in areaSeriesStatisticPerUnit.ItemsSource as SafeObservable<ObservablePoint<DateTime, int>>)
+				foreach (ObservablePoint<DateTime, int> point in areaSeriesStatisticPerUnit.ItemsSource as ObservableCollection<ObservablePoint<DateTime, int>>)
 				{
 					point.Y = GetRedeemdCount(Service.TicketSource.ActiveTickets, last, point.X);
 					last = point.X;
@@ -328,12 +328,15 @@ namespace TicketServer
 		protected void service_TicketRedeemed(object sender, EventArgs e)
 		{
 			TicketEventArgs args = e as TicketEventArgs;
-			SafeObservable<TicketEventArgs> list = listBoxStatus.ItemsSource as SafeObservable<TicketEventArgs>;
+			ObservableCollection<TicketEventArgs> list = listBoxStatus.ItemsSource as ObservableCollection<TicketEventArgs>;
 
-			if (list.FirstOrDefault(a => a.Ticket.Id == args.Ticket.Id) == null)
-				list.Insert(0, e as TicketEventArgs);
-			else
-				UpdateStatusItem(args);
+			if (args.Ticket != null)
+			{
+				if (list.FirstOrDefault(a => a.Ticket.Id == args.Ticket.Id) == null)
+					list.Insert(0, e as TicketEventArgs);
+				else
+					UpdateStatusItem(args);
+			}
 		}
 		/// <summary>
 		/// Handles the TicketRequested event of the service control.
@@ -343,10 +346,10 @@ namespace TicketServer
 		protected void service_TicketRequested(object sender, EventArgs e)
 		{
 			TicketEventArgs args = e as TicketEventArgs;
-			SafeObservable<TicketEventArgs> list = listBoxStatus.ItemsSource as SafeObservable<TicketEventArgs>;
+			ObservableCollection<TicketEventArgs> list = listBoxStatus.ItemsSource as ObservableCollection<TicketEventArgs>;
 
 			if (list.FirstOrDefault(a => a.Ticket.Id == args.Ticket.Id) == null)
-				list.Insert(0, e as TicketEventArgs);
+				Dispatcher.Invoke((Action)delegate() { list.Insert(0, e as TicketEventArgs); });
 			else
 				UpdateStatusItem(args);
 		}
@@ -356,7 +359,7 @@ namespace TicketServer
 		/// <param name="args">The <see cref="TicketServer.Common.TicketEventArgs"/> instance containing the event data.</param>
 		private void UpdateStatusItem(TicketEventArgs args)
 		{
-			TicketEventArgs e = (listBoxStatus.ItemsSource as SafeObservable<TicketEventArgs>).First(a => a.Ticket.Id == args.Ticket.Id);
+			TicketEventArgs e = (listBoxStatus.ItemsSource as ObservableCollection<TicketEventArgs>).First(a => a.Ticket.Id == args.Ticket.Id);
 			e.Result = args.Result;
 			return;
 		}
@@ -425,7 +428,7 @@ namespace TicketServer
 			buttonYes.Click += new EventHandler(delegate(object snd, EventArgs eventArgs)
 			{
 				Service.TicketSource.Clear();
-				listBoxStatus.ItemsSource = new SafeObservable<TicketEventArgs>();
+				listBoxStatus.ItemsSource = new ObservableCollection<TicketEventArgs>();
 				lineSeriesStatisticTotal.ItemsSource = BuildStatistic(StatisticMode.Total);
 				areaSeriesStatisticPerUnit.ItemsSource = BuildStatistic(StatisticMode.PerUnit);
 				UpdateStatus();
@@ -460,7 +463,7 @@ namespace TicketServer
 			buttonYes.Click += new EventHandler(delegate(object snd, EventArgs eventArgs)
 			{
 				Service.TicketSource.Reset();
-				listBoxStatus.ItemsSource = new SafeObservable<TicketEventArgs>();
+				listBoxStatus.ItemsSource = new ObservableCollection<TicketEventArgs>();
 				lineSeriesStatisticTotal.ItemsSource = BuildStatistic(StatisticMode.Total);
 				areaSeriesStatisticPerUnit.ItemsSource = BuildStatistic(StatisticMode.PerUnit);
 				UpdateStatus();
@@ -662,7 +665,7 @@ namespace TicketServer
 		/// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
 		private void buttonStatusClear_Click(object sender, RoutedEventArgs e)
 		{
-			listBoxStatus.ItemsSource = new SafeObservable<TicketEventArgs>();
+			listBoxStatus.ItemsSource = new ObservableCollection<TicketEventArgs>();
 		}
 
 		/// <summary>

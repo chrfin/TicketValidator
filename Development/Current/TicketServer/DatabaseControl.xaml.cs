@@ -16,6 +16,9 @@ using TicketServer.Interfaces;
 using TicketServer.Common;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using System.Windows.Interop;
+using System.Windows.Threading;
+using System.Threading;
+using System.Collections.ObjectModel;
 
 namespace TicketServer
 {
@@ -35,8 +38,7 @@ namespace TicketServer
 			get { return (ITicketDataSource)GetValue(TicketSourceProperty); }
 			set { SetValue(TicketSourceProperty, value); }
 		}
-		// Using a DependencyProperty as the backing store for TicketSource.  This enables animation, styling, binding, etc...
-		public static readonly DependencyProperty TicketSourceProperty = 
+		public static readonly DependencyProperty TicketSourceProperty =
 			DependencyProperty.Register("TicketSource", typeof(ITicketDataSource), typeof(DatabaseControl));
 
 		/// <summary>
@@ -54,7 +56,7 @@ namespace TicketServer
 					return;
 
 				ITicket ticket = (listBoxTickets.ItemsSource as IList<ITicket>).First(t => t.Id == (value as ITicket).Id);
-				if(ticket == null)
+				if (ticket == null)
 					return;
 
 				listBoxTickets.SelectedItem = ticket;
@@ -87,9 +89,18 @@ namespace TicketServer
 		/// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
 		private void buttonDelete_Click(object sender, RoutedEventArgs e)
 		{
-			TicketSource.AllTickets.Dispatcher = Dispatcher;
-			foreach (ITicket ticket in listBoxTickets.SelectedItems.OfType<ITicket>().ToList())
-				TicketSource.AllTickets.Remove(ticket);
+			ITicketDataSource ticketSource = TicketSource;
+			MainWindow window = Window.GetWindow(this) as MainWindow;
+			IList<ITicket> ticketsRemove = listBoxTickets.SelectedItems.OfType<ITicket>().ToList();
+
+			Thread worker = new Thread(new ThreadStart(delegate()
+			{
+				window.IsBusy = true;
+				foreach (ITicket ticket in ticketsRemove)
+					ticketSource.RemoveTicket(ticket, Dispatcher);
+				window.IsBusy = false;
+			}));
+			worker.Start();
 		}
 
 		/// <summary>
@@ -99,8 +110,6 @@ namespace TicketServer
 		/// <param name="e">The <see cref="System.EventArgs"/> instance containing the event data.</param>
 		private void ticketControlView_TicketCreated(object sender, EventArgs e)
 		{
-			TicketSource.AllTickets.Dispatcher = Dispatcher;
-
 			ITicket ticket = (e as TicketEventArgs).Ticket;
 			if (TicketSource.AddTicket(ticket))
 			{
