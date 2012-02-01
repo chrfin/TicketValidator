@@ -255,7 +255,7 @@ namespace TicketServer
 						ticket.Phone = comboBoxPhoneColumn.Text.Length > 0 ? rowValues[comboBoxPhoneColumn.SelectedIndex] : null;
 						ticket.EMail = comboBoxMailColumn.Text.Length > 0 ? rowValues[comboBoxMailColumn.SelectedIndex] : null;
 					});
-					TicketSource.AddTicket(ticket);
+					TicketSource.AddTicket(ticket, Dispatcher);
 				}
 
 				Dispatcher.Invoke((Action)delegate()

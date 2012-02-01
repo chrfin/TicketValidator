@@ -18,7 +18,6 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Windows.Threading;
 using TicketServer.Common;
-using TicketServer.Interfaces.Classes;
 using Castle.ActiveRecord.Framework.Scopes;
 using System.ComponentModel;
 
@@ -83,7 +82,7 @@ namespace TicketServer.DAL.SqlCe
 			if (createSchema)
 				ActiveRecordStarter.CreateSchema();
 
-			AllTickets = new SafeObservable<ITicket>();
+			AllTickets = new ObservableCollection<ITicket>();
 			IQueryable<ITicket> list = (from t in TicketRecord.Queryable
 										select t).Cast<ITicket>();
 			list.ToList().ForEach((Action<ITicket>)delegate(ITicket t)
@@ -129,8 +128,14 @@ namespace TicketServer.DAL.SqlCe
 				case NotifyCollectionChangedAction.Move:
 					break;
 				case NotifyCollectionChangedAction.Remove:
-					foreach (ITicket ticket in e.OldItems)
-						(ticket as TicketRecord).Delete();
+					if (!isRemovingExplicit)
+					{
+						foreach (ITicket ticket in e.OldItems)
+						{
+							if (ticket is TicketRecord)
+								(ticket as TicketRecord).Delete();
+						}
+					}
 					UpdateActiveTickets();
 					if (PropertyChanged != null)
 					{
@@ -163,8 +168,9 @@ namespace TicketServer.DAL.SqlCe
 		/// Adds the ticket to the data source.
 		/// </summary>
 		/// <param name="ticket">The ticket.</param>
+		/// <param name="dispatcher">The dispatcher to use to alter the collection.</param>
 		/// <returns></returns>
-		public bool AddTicket(ITicket ticket)
+		public bool AddTicket(ITicket ticket, Dispatcher dispatcher = null)
 		{
 			TicketRecord newTicket = new TicketRecord();
 
@@ -191,8 +197,15 @@ namespace TicketServer.DAL.SqlCe
 			}
 			catch { return false; }
 
-			AllTickets.Add(newTicket);
-			UpdateActiveTickets();
+			Action add = delegate()
+			{
+				AllTickets.Add(newTicket);
+				UpdateActiveTickets();
+			};
+			if (dispatcher == null)
+				add();
+			else
+				dispatcher.Invoke(add);
 
 			if (PropertyChanged != null)
 			{
@@ -201,6 +214,30 @@ namespace TicketServer.DAL.SqlCe
 			}
 
 			return true;
+		}
+
+		protected bool isRemovingExplicit = false;
+		/// <summary>
+		/// Removes the ticket from the data source.
+		/// </summary>
+		/// <param name="ticket">The ticket.</param>
+		/// <param name="dispatcher">The dispatcher to use to alter the collection.</param>
+		/// <returns></returns>
+		public bool RemoveTicket(ITicket ticket, Dispatcher dispatcher = null)
+		{
+			bool result = false;
+
+			if (ticket is TicketRecord)
+				(ticket as TicketRecord).Delete();
+
+			isRemovingExplicit = true;
+			if (dispatcher == null)
+				result = AllTickets.Remove(ticket);
+			else
+				dispatcher.Invoke((Action)delegate() { result = AllTickets.Remove(ticket); });
+			isRemovingExplicit = false;
+
+			return result;
 		}
 
 		/// <summary>
@@ -229,20 +266,20 @@ namespace TicketServer.DAL.SqlCe
 		/// <summary>
 		/// Gets all the tickets.
 		/// </summary>
-		public SafeObservable<ITicket> AllTickets { get; private set; }
+		public ObservableCollection<ITicket> AllTickets { get; private set; }
 
-		private SafeObservable<ITicket> activeTickets = new SafeObservable<ITicket>();
+		private ObservableCollection<ITicket> activeTickets = new ObservableCollection<ITicket>();
 		/// <summary>
 		/// Gets all the tickets except special tickets.
 		/// </summary>
-		public SafeObservable<ITicket> ActiveTickets { get { return activeTickets; } }
+		public ObservableCollection<ITicket> ActiveTickets { get { return activeTickets; } }
 
 		/// <summary>
 		/// Updates the active tickets.
 		/// </summary>
 		private void UpdateActiveTickets()
 		{
-			activeTickets = new SafeObservable<ITicket>();
+			activeTickets = new ObservableCollection<ITicket>();
 
 			IEnumerable<ITicket> selection;
 			if (specialTicketStrings.Count <= 0)
@@ -265,7 +302,12 @@ namespace TicketServer.DAL.SqlCe
 
 			TicketRecord ticket = GetTicket(id) as TicketRecord;
 
-			if (ticket.IsRedeemed)
+			if(ticket == null)
+			{
+				result.Type = RedeemResultType.NotRedeemed;
+				result.Error = "UNKNOW TICKET ID!";
+			}
+			else if (ticket.IsRedeemed)
 				result.Type = RedeemResultType.AlreadyRedeemed;
 			else
 			{
@@ -326,7 +368,7 @@ namespace TicketServer.DAL.SqlCe
 				File.Copy(Filename, Filename.Replace(Path.GetExtension(Filename), "_" + DateTime.Now.ToString("yyyyMddHHmm") + Path.GetExtension(Filename)), true);
 			TicketRecord.DeleteAll();
 
-			AllTickets = new SafeObservable<ITicket>();
+			AllTickets = new ObservableCollection<ITicket>();
 			AllTickets.CollectionChanged += new NotifyCollectionChangedEventHandler(Tickets_CollectionChanged);
 			UpdateActiveTickets();
 

@@ -5,8 +5,8 @@ using System.Text;
 using TicketServer.Interfaces.Enums;
 using TicketServer.Interfaces.BusinessLayer;
 using System.Collections.ObjectModel;
-using TicketServer.Interfaces.Classes;
 using System.ComponentModel;
+using System.Windows.Threading;
 
 namespace TicketServer.Interfaces.DAL
 {
@@ -28,8 +28,16 @@ namespace TicketServer.Interfaces.DAL
 		/// Adds the ticket to the data source.
 		/// </summary>
 		/// <param name="ticket">The ticket.</param>
+		/// <param name="dispatcher">The dispatcher to use to alter the collection.</param>
 		/// <returns></returns>
-		bool AddTicket(ITicket ticket);
+		bool AddTicket(ITicket ticket, Dispatcher dispatcher = null);
+		/// <summary>
+		/// Removes the ticket from the data source.
+		/// </summary>
+		/// <param name="ticket">The ticket.</param>
+		/// <param name="dispatcher">The dispatcher to use to alter the collection.</param>
+		/// <returns></returns>
+		bool RemoveTicket(ITicket ticket, Dispatcher dispatcher = null);
 
 		/// <summary>
 		/// Gets the ticket by its id.
@@ -47,11 +55,11 @@ namespace TicketServer.Interfaces.DAL
 		/// <summary>
 		/// Gets all the tickets including special tickets.
 		/// </summary>
-		SafeObservable<ITicket> AllTickets { get; }
+		ObservableCollection<ITicket> AllTickets { get; }
 		/// <summary>
 		/// Gets all the tickets except special tickets.
 		/// </summary>
-		SafeObservable<ITicket> ActiveTickets { get; }
+		ObservableCollection<ITicket> ActiveTickets { get; }
 
 		/// <summary>
 		/// Redeems the ticket.
