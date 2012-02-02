@@ -219,6 +219,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_ECB084685E414BF48225916757794BE1"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_ECEEDAA8F2EF4590A7BC05790F76811E"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -1006,6 +1012,26 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_ECB084685E414BF48225916757794BE1"
+            {
+            "SourcePath" = "8:..\\..\\..\\3rdParty\\Fonts\\C39HRP48DHTT.TTF"
+            "TargetName" = "8:C39HRP48DHTT.TTF"
+            "Tag" = "8:"
+            "Folder" = "8:_9076519A08C248D189577E3CBCB47BD6"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:5"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_EEFBFD491D06DC9CD8DE570EE3949770"
             {
             "AssemblyRegister" = "3:1"
@@ -1076,7 +1102,7 @@
         {
             "{3C67513D-01DD-4637-8A68-80971EB9504F}:_86F4FBCF815D4A3C9262C1EF8685F753"
             {
-            "DefaultLocation" = "8:[ProgramFiles64Folder][Manufacturer]\\[ProductName]"
+            "DefaultLocation" = "8:[ProgramFilesFolder][Manufacturer]\\[ProductName]"
             "Name" = "8:#1925"
             "AlwaysCreate" = "11:FALSE"
             "Condition" = "8:"
@@ -1093,6 +1119,17 @@
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Property" = "8:ProgramMenuFolder"
+                "Folders"
+                {
+                }
+            }
+            "{1525181F-901A-416C-8A58-119130FE478E}:_9076519A08C248D189577E3CBCB47BD6"
+            {
+            "Name" = "8:#1911"
+            "AlwaysCreate" = "11:FALSE"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Property" = "8:FontsFolder"
                 "Folders"
                 {
                 }
@@ -1136,7 +1173,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:TicketServer"
         "ProductCode" = "8:{29C0A2FA-63F4-4C7F-8C85-52DD20105BC3}"
-        "PackageCode" = "8:{D3EF79EB-3CCB-4E07-8B5D-A538FA741792}"
+        "PackageCode" = "8:{7168495F-5F46-4ED5-9DFC-0349FDE3A499}"
         "UpgradeCode" = "8:{21A87F36-E0CC-4012-BA2E-1CB1EBC3BE53}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
@@ -1157,7 +1194,7 @@
         "ARPIconIndex" = "3:0"
         "SearchPath" = "8:"
         "UseSystemSearchPath" = "11:TRUE"
-        "TargetPlatform" = "3:1"
+        "TargetPlatform" = "3:0"
         "PreBuildEvent" = "8:"
         "PostBuildEvent" = "8:"
         "RunPostBuildEvent" = "3:0"
