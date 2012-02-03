@@ -100,7 +100,7 @@ namespace TicketServer
 			PrepareLocalisation();
 
 			if (Settings.Default.CurrentDataFile.StartsWith("./"))
-				Filename = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Settings.Default.CurrentDataFile.Substring(2));
+				Filename = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), Settings.Default.CurrentDataFile.Substring(2));
 			else
 				Filename = Settings.Default.CurrentDataFile;
 
@@ -583,7 +583,7 @@ namespace TicketServer
 		private void OpenFile(string filename)
 		{
 			if (filename.StartsWith("./"))
-				filename = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, filename.Substring(2));
+				filename = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), filename.Substring(2));
 
 			Service.TicketSource = new SqlCeTicketDataSource(filename);
 			Service.TicketSource.SpecialTicketsString = Settings.Default.SpecialTicketsString;
