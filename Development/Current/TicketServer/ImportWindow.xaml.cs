@@ -247,13 +247,20 @@ namespace TicketServer
 					{
 						ticket.IsOnlineTicket = (comboBoxTicketMode.SelectedItem as IsOnlineComboBoxItem).IsOnlineTicket;
 						ticket.Type = (comboBoxTicketType.SelectedItem as TicketTypeComboBoxItem).TicketType;
-						ticket.Code = comboBoxCodeColumn.Text.Length > 0 ? rowValues[comboBoxCodeColumn.SelectedIndex] : null;
-						ticket.Name = comboBoxNameColumn.Text.Length > 0 ? rowValues[comboBoxNameColumn.SelectedIndex] : null;
-						ticket.Street = comboBoxStreetColumn.Text.Length > 0 ? rowValues[comboBoxStreetColumn.SelectedIndex] : null;
-						ticket.Zip = comboBoxZipColumn.Text.Length > 0 ? rowValues[comboBoxZipColumn.SelectedIndex] : null;
-						ticket.City = comboBoxCityColumn.Text.Length > 0 ? rowValues[comboBoxCityColumn.SelectedIndex] : null;
-						ticket.Phone = comboBoxPhoneColumn.Text.Length > 0 ? rowValues[comboBoxPhoneColumn.SelectedIndex] : null;
-						ticket.EMail = comboBoxMailColumn.Text.Length > 0 ? rowValues[comboBoxMailColumn.SelectedIndex] : null;
+						ticket.Code = comboBoxCodeColumn.Text.Length > 0 && rowValues.Count > comboBoxCodeColumn.SelectedIndex ? 
+							rowValues[comboBoxCodeColumn.SelectedIndex] : null;
+						ticket.Name = comboBoxNameColumn.Text.Length > 0 && rowValues.Count > comboBoxNameColumn.SelectedIndex ?
+							rowValues[comboBoxNameColumn.SelectedIndex] : null;
+						ticket.Street = comboBoxStreetColumn.Text.Length > 0 && rowValues.Count > comboBoxStreetColumn.SelectedIndex ? 
+							rowValues[comboBoxStreetColumn.SelectedIndex] : null;
+						ticket.Zip = comboBoxZipColumn.Text.Length > 0 && rowValues.Count > comboBoxZipColumn.SelectedIndex ?
+							rowValues[comboBoxZipColumn.SelectedIndex] : null;
+						ticket.City = comboBoxCityColumn.Text.Length > 0 && rowValues.Count > comboBoxCityColumn.SelectedIndex ?
+							rowValues[comboBoxCityColumn.SelectedIndex] : null;
+						ticket.Phone = comboBoxPhoneColumn.Text.Length > 0 && rowValues.Count > comboBoxPhoneColumn.SelectedIndex ?
+							rowValues[comboBoxPhoneColumn.SelectedIndex] : null;
+						ticket.EMail = comboBoxMailColumn.Text.Length > 0 && rowValues.Count > comboBoxMailColumn.SelectedIndex ?
+							rowValues[comboBoxMailColumn.SelectedIndex] : null;
 					});
 					TicketSource.AddTicket(ticket, Dispatcher);
 				}
