@@ -13,11 +13,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketServer.Interfaces", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketServer.Client", "TicketServer.Client\TicketServer.Client.csproj", "{43B79B6C-CAF6-481E-B646-282B21653564}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "TicketServer.Setup", "TicketServer.Setup\TicketServer.Setup.vdproj", "{23A3EC5B-AE47-4610-B835-76145EB24F01}"
-EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 8
+		SccNumberOfProjects = 7
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs14
 		SccLocalPath0 = .
@@ -39,9 +37,6 @@ Global
 		SccProjectUniqueName6 = TicketServer.Client\\TicketServer.Client.csproj
 		SccProjectName6 = TicketServer.Client
 		SccLocalPath6 = TicketServer.Client
-		SccProjectUniqueName7 = TicketServer.Setup\\TicketServer.Setup.vdproj
-		SccProjectName7 = TicketServer.Setup
-		SccLocalPath7 = TicketServer.Setup
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CD_ROM|Any CPU = CD_ROM|Any CPU
@@ -211,30 +206,6 @@ Global
 		{43B79B6C-CAF6-481E-B646-282B21653564}.SingleImage|Mixed Platforms.Build.0 = Release|x86
 		{43B79B6C-CAF6-481E-B646-282B21653564}.SingleImage|x86.ActiveCfg = Release|x86
 		{43B79B6C-CAF6-481E-B646-282B21653564}.SingleImage|x86.Build.0 = Release|x86
-		{23A3EC5B-AE47-4610-B835-76145EB24F01}.CD_ROM|Any CPU.ActiveCfg = Release
-		{23A3EC5B-AE47-4610-B835-76145EB24F01}.CD_ROM|Any CPU.Build.0 = Release
-		{23A3EC5B-AE47-4610-B835-76145EB24F01}.CD_ROM|Mixed Platforms.ActiveCfg = Release
-		{23A3EC5B-AE47-4610-B835-76145EB24F01}.CD_ROM|Mixed Platforms.Build.0 = Release
-		{23A3EC5B-AE47-4610-B835-76145EB24F01}.CD_ROM|x86.ActiveCfg = Release
-		{23A3EC5B-AE47-4610-B835-76145EB24F01}.CD_ROM|x86.Build.0 = Release
-		{23A3EC5B-AE47-4610-B835-76145EB24F01}.Debug|Any CPU.ActiveCfg = Debug
-		{23A3EC5B-AE47-4610-B835-76145EB24F01}.Debug|Mixed Platforms.ActiveCfg = Debug
-		{23A3EC5B-AE47-4610-B835-76145EB24F01}.Debug|x86.ActiveCfg = Debug
-		{23A3EC5B-AE47-4610-B835-76145EB24F01}.DVD-5|Any CPU.ActiveCfg = Debug
-		{23A3EC5B-AE47-4610-B835-76145EB24F01}.DVD-5|Any CPU.Build.0 = Debug
-		{23A3EC5B-AE47-4610-B835-76145EB24F01}.DVD-5|Mixed Platforms.ActiveCfg = Debug
-		{23A3EC5B-AE47-4610-B835-76145EB24F01}.DVD-5|Mixed Platforms.Build.0 = Debug
-		{23A3EC5B-AE47-4610-B835-76145EB24F01}.DVD-5|x86.ActiveCfg = Debug
-		{23A3EC5B-AE47-4610-B835-76145EB24F01}.DVD-5|x86.Build.0 = Debug
-		{23A3EC5B-AE47-4610-B835-76145EB24F01}.Release|Any CPU.ActiveCfg = Release
-		{23A3EC5B-AE47-4610-B835-76145EB24F01}.Release|Mixed Platforms.ActiveCfg = Release
-		{23A3EC5B-AE47-4610-B835-76145EB24F01}.Release|x86.ActiveCfg = Release
-		{23A3EC5B-AE47-4610-B835-76145EB24F01}.SingleImage|Any CPU.ActiveCfg = Release
-		{23A3EC5B-AE47-4610-B835-76145EB24F01}.SingleImage|Any CPU.Build.0 = Release
-		{23A3EC5B-AE47-4610-B835-76145EB24F01}.SingleImage|Mixed Platforms.ActiveCfg = Release
-		{23A3EC5B-AE47-4610-B835-76145EB24F01}.SingleImage|Mixed Platforms.Build.0 = Release
-		{23A3EC5B-AE47-4610-B835-76145EB24F01}.SingleImage|x86.ActiveCfg = Release
-		{23A3EC5B-AE47-4610-B835-76145EB24F01}.SingleImage|x86.Build.0 = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
