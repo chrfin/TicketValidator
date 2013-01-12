@@ -1,0 +1,323 @@
+﻿<r:RibbonWindow x:Class="TicketServer.MainWindow"
+                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:a="clr-namespace:TicketServer.Interfaces.Attributes;assembly=TicketServer.Interfaces"
+                xmlns:c="clr-namespace:TicketServer.Common;assembly=TicketServer.Common"
+                xmlns:eT="clr-namespace:Microsoft.Windows.Controls;assembly=WPFToolkit.Extended"
+                xmlns:r="clr-namespace:Microsoft.Windows.Controls.Ribbon;assembly=RibbonControlsLibrary"
+                xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                xmlns:t="clr-namespace:TicketServer"
+                xmlns:tk="clr-namespace:System.Windows.Controls.DataVisualization;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+                xmlns:tkc="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+                Title="Ticket Server"
+                Width="950"
+                Height="650"
+                MinWidth="450"
+                MinHeight="600"
+                Closing="Window_Closing"
+                DataContext="{Binding RelativeSource={RelativeSource Self}}"
+                Icon="App.ico"
+                Loaded="Window_Loaded"
+                WindowStartupLocation="CenterScreen">
+	<r:RibbonWindow.Resources>
+		<c:PathToFileNameConverter x:Key="pathConverter" />
+		<c:TicketToStatusColorConverter x:Key="ticketColorConverter" />
+	</r:RibbonWindow.Resources>
+	<eT:BusyIndicator x:Name="busyIndicator" BusyContent="{LocText TicketServer::PleaseWait}">
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition />
+			</Grid.ColumnDefinitions>
+
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition />
+				<RowDefinition Height="25" />
+			</Grid.RowDefinitions>
+
+			<r:Ribbon x:Name="ribbon"
+			          Title="TicketServer"
+			          Grid.Row="0"
+			          Grid.Column="0">
+				<r:Ribbon.ApplicationMenu>
+					<r:RibbonApplicationMenu SmallImageSource="Icons\Menu.png">
+						<r:RibbonApplicationMenuItem x:Name="buttonNew"
+						                             Click="buttonNew_Click"
+						                             Header="{LocText TicketServer::ButtonNew}"
+						                             ImageSource="Icons\Large\mail_new.png" />
+						<r:RibbonApplicationMenuItem x:Name="buttonOpen"
+						                             Click="buttonOpen_Click"
+						                             Header="{LocText TicketServer::ButtonOpen}"
+						                             ImageSource="Icons\Large\fileopen.png" />
+						<r:RibbonApplicationSplitMenuItem Click="buttonImport_Click"
+						                                  Header="{LocText TicketServer::RibbonTabImport}"
+						                                  ImageSource="Icons\Large\fileimport.png">
+							<r:RibbonApplicationMenuItem Click="buttonImport_Click"
+							                             Header="{LocText TicketServer::RibbonButtonImportCSV}"
+							                             ImageSource="Icons\Large\txt.png" />
+						</r:RibbonApplicationSplitMenuItem>
+						<r:RibbonApplicationMenu.AuxiliaryPaneContent>
+							<ItemsControl x:Name="listRecentFiles">
+								<ItemsControl.ItemTemplate>
+									<DataTemplate>
+										<r:RibbonApplicationMenuItem Click="ribbonApplicationMenuItemRecentFile_Click"
+										                             Header="{Binding .,
+										                                              Converter={StaticResource ResourceKey=pathConverter}}"
+										                             ImageSource="Icons\Large\vcard.png"
+										                             Tag="{Binding .}"
+										                             ToolTip="{Binding .}" />
+									</DataTemplate>
+								</ItemsControl.ItemTemplate>
+							</ItemsControl>
+						</r:RibbonApplicationMenu.AuxiliaryPaneContent>
+						<r:RibbonApplicationMenu.FooterPaneContent>
+							<DockPanel LastChildFill="False">
+								<r:RibbonButton Margin="2"
+								                Click="buttonExit_Click"
+								                DockPanel.Dock="Right"
+								                Label="{LocText TicketServer::RibbonButtonExit}"
+								                SmallImageSource="Icons\Small\application-exit-2.png" />
+								<r:RibbonButton Margin="2"
+								                Click="buttonSettings_Click"
+								                DockPanel.Dock="Right"
+								                Label="{LocText TicketServer::RibbonButtonSettings}"
+								                SmallImageSource="Icons\Small\Service Manager.png" />
+							</DockPanel>
+						</r:RibbonApplicationMenu.FooterPaneContent>
+					</r:RibbonApplicationMenu>
+				</r:Ribbon.ApplicationMenu>
+
+				<r:RibbonTab Header="{LocText TicketServer::RibbonTabHome}">
+					<r:RibbonGroup>
+						<r:RibbonButton Click="buttonReset_Click"
+						                Label="{LocText TicketServer::ButtonReset}"
+						                LargeImageSource="Icons\Large\reload.png"
+						                SmallImageSource="Icons\Small\reload.png"
+						                ToolTipDescription="{LocText TicketServer::ButtonResetTip}" />
+						<r:RibbonButton Click="buttonClear_Click"
+						                Label="{LocText TicketServer::ButtonClear}"
+						                LargeImageSource="Icons\Large\editdelete.png"
+						                SmallImageSource="Icons\Small\editdelete.png"
+						                ToolTipDescription="{LocText TicketServer::ButtonClearTip}" />
+					</r:RibbonGroup>
+					<r:RibbonGroup x:Name="ribbonGroupStatus" Visibility="Hidden">
+						<r:RibbonButton Click="buttonStatusClear_Click"
+						                Label="{LocText TicketServer::ButtonClearStatus}"
+						                LargeImageSource="Icons\Large\agt_update-product.png"
+						                SmallImageSource="Icons\Small\agt_update-product.png" />
+					</r:RibbonGroup>
+				</r:RibbonTab>
+				<r:RibbonTab Header="{LocText TicketServer::RibbonTabImport}">
+					<r:RibbonGroup>
+						<r:RibbonButton Click="buttonImport_Click"
+						                Label="{LocText TicketServer::RibbonButtonImportCSV}"
+						                LargeImageSource="Icons\Large\txt.png"
+						                SmallImageSource="Icons\Small\applix.png" />
+					</r:RibbonGroup>
+				</r:RibbonTab>
+				<r:RibbonTab ContextualTabGroupHeader="{LocText TicketServer::TabDatabase}" Header="{LocText TicketServer::RibbonTabFilter}">
+					<r:RibbonGroup Header="{LocText TicketServer::GroupTicketMode}">
+						<r:RibbonRadioButton x:Name="radioButtonModeAll"
+						                     Checked="radioButtonFilter_Checked"
+						                     GroupName="TicketMode"
+						                     IsChecked="True"
+						                     Label="{LocText TicketServer::TicketModeAll}" />
+						<r:RibbonRadioButton x:Name="radioButtonModeOnline"
+						                     Checked="radioButtonFilter_Checked"
+						                     GroupName="TicketMode"
+						                     Label="{LocText TicketServer::TicketModeOnline}" />
+						<r:RibbonRadioButton x:Name="radioButtonModeOffline"
+						                     Checked="radioButtonFilter_Checked"
+						                     GroupName="TicketMode"
+						                     Label="{LocText TicketServer::TicketModeOffline}" />
+					</r:RibbonGroup>
+					<r:RibbonGroup Header="{LocText TicketServer::GroupTicketType}">
+						<r:RibbonRadioButton x:Name="radioButtonTypeAll"
+						                     Checked="radioButtonFilter_Checked"
+						                     GroupName="TicketType"
+						                     IsChecked="True"
+						                     Label="{LocText TicketServer::TicketTypeAll}" />
+						<r:RibbonRadioButton x:Name="radioButtonTypeNormal"
+						                     Checked="radioButtonFilter_Checked"
+						                     GroupName="TicketType"
+						                     Label="{LocText TicketServer::TicketTypeNormal}" />
+						<r:RibbonRadioButton x:Name="radioButtonTypeFree"
+						                     Checked="radioButtonFilter_Checked"
+						                     GroupName="TicketType"
+						                     Label="{LocText TicketServer::TicketTypeFree}" />
+						<r:RibbonRadioButton x:Name="radioButtonTypeSpecial"
+						                     Checked="radioButtonFilter_Checked"
+						                     GroupName="TicketType"
+						                     Label="{LocText TicketServer::TicketTypeSpecial}" />
+					</r:RibbonGroup>
+					<r:RibbonGroup Header="{LocText TicketServer::GroupTicketRedeemed}">
+						<r:RibbonRadioButton x:Name="radioButtonRedeemedAll"
+						                     Checked="radioButtonFilter_Checked"
+						                     GroupName="TicketRedeemed"
+						                     IsChecked="True"
+						                     Label="{LocText TicketServer::TicketRedeemedAll}" />
+						<r:RibbonRadioButton x:Name="radioButtonRedeemedYes"
+						                     Checked="radioButtonFilter_Checked"
+						                     GroupName="TicketRedeemed"
+						                     Label="{LocText TicketServer::TicketRedeemedYes}" />
+						<r:RibbonRadioButton x:Name="radioButtonRedeemedNo"
+						                     Checked="radioButtonFilter_Checked"
+						                     GroupName="TicketRedeemed"
+						                     Label="{LocText TicketServer::TicketRedeemedNo}" />
+					</r:RibbonGroup>
+				</r:RibbonTab>
+				<r:RibbonTab Header="{LocText TicketServer::RibbonTabSettings}">
+					<r:RibbonGroup Header="{LocText TicketServer::RibbonGroupLanguage}">
+						<r:RibbonMenuButton x:Name="ribbonComboBoxLanguage"
+						                    Width="150"
+						                    Label="{LocText TicketServer::RibbonGroupLanguage}">
+							<r:RibbonGallery x:Name="ribbonGalleryLanguages"
+							                 Width="150"
+							                 MaxColumnCount="1"
+							                 SelectedValuePath="Content">
+								<r:RibbonGalleryCategory x:Name="ribbonGalleryCategoryLanguages" />
+							</r:RibbonGallery>
+						</r:RibbonMenuButton>
+					</r:RibbonGroup>
+				</r:RibbonTab>
+
+				<r:Ribbon.ContextualTabGroups>
+					<r:RibbonContextualTabGroup x:Name="tabGroupDatabase"
+					                            Background="BlueViolet"
+					                            Header="{LocText TicketServer::TabDatabase}"
+					                            Visibility="Hidden" />
+				</r:Ribbon.ContextualTabGroups>
+			</r:Ribbon>
+
+			<TabControl x:Name="tabControlMain"
+			            Grid.Row="1"
+			            Grid.Column="0"
+			            SelectionChanged="tabControlMain_SelectionChanged"
+			            TabStripPlacement="Bottom">
+				<TabItem x:Name="tabStatus" Header="{LocText TicketServer::TabStatus}">
+					<ListBox x:Name="listBoxStatus"
+					         MouseDoubleClick="listBoxStatus_MouseDoubleClick"
+					         ScrollViewer.CanContentScroll="False">
+						<ListBox.ItemTemplate>
+							<DataTemplate>
+								<StackPanel>
+									<StackPanel Orientation="Horizontal">
+										<TextBlock Text="{LocText TicketServer::StatusClient}" />
+										<TextBlock Margin="5 0 5 0" Text="{Binding Client}" />
+										<TextBlock Text="{LocText TicketServer::StatusTime}" />
+										<TextBlock Margin="5 0 5 0" Text="{Binding Created, StringFormat='{}{0:hh:mm:ss}'}" />
+									</StackPanel>
+									<t:TicketStatusControl x:Name="statusControl"
+									                       Margin="5"
+									                       DataContext="{Binding .}"
+									                       Ticket="{Binding Ticket,
+									                                        ElementName=.,
+									                                        Mode=OneWay}">
+										<t:TicketStatusControl.Background>
+											<MultiBinding Converter="{StaticResource ResourceKey=ticketColorConverter}">
+												<Binding Path="Ticket" />
+												<Binding Path="Result" />
+											</MultiBinding>
+										</t:TicketStatusControl.Background>
+									</t:TicketStatusControl>
+								</StackPanel>
+							</DataTemplate>
+						</ListBox.ItemTemplate>
+					</ListBox>
+				</TabItem>
+				<TabItem x:Name="tabDatabase" Header="{LocText TicketServer::TabDatabase}">
+					<t:DatabaseControl x:Name="databaseControlMain" />
+				</TabItem>
+				<TabItem x:Name="tabStatistic" Header="{LocText TicketServer::TabStatistic}">
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="100" />
+							<ColumnDefinition Width="150" />
+							<ColumnDefinition />
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="*" />
+							<RowDefinition Height="34" />
+						</Grid.RowDefinitions>
+
+						<tkc:Chart x:Name="chartStatistic"
+						           Title="{LocText TicketServer::ChartStatisticTitle}"
+						           Grid.Row="0"
+						           Grid.Column="0"
+						           Grid.ColumnSpan="3">
+							<tkc:LineSeries x:Name="lineSeriesStatisticTotal" Title="{LocText TicketServer::ChartStatisticSeriesTotal}" />
+							<tkc:AreaSeries x:Name="areaSeriesStatisticPerUnit" Title="{LocText TicketServer::ChartStatisticSeriesPerUnit}" />
+						</tkc:Chart>
+
+						<TextBlock Grid.Row="1"
+						           Grid.Column="0"
+						           HorizontalAlignment="Right"
+						           VerticalAlignment="Center"
+						           Text="{LocText TicketServer::comboBoxResolution}" />
+						<ComboBox x:Name="comboBoxStatisticResolution"
+						          Grid.Row="1"
+						          Grid.Column="1"
+						          Margin="5"
+						          SelectionChanged="comboBoxStatisticResolution_SelectionChanged">
+							<ComboBoxItem Content="{LocText TicketServer::Resolution5Minutes}" Tag="5" />
+							<ComboBoxItem Content="{LocText TicketServer::Resolution15Minutes}" Tag="15" />
+							<ComboBoxItem Content="{LocText TicketServer::Resolution30Minutes}" Tag="30" />
+							<ComboBoxItem Content="{LocText TicketServer::Resolution60Minutes}"
+							              IsSelected="True"
+							              Tag="60" />
+						</ComboBox>
+					</Grid>
+				</TabItem>
+			</TabControl>
+
+			<StatusBar Grid.Row="2"
+			           Grid.Column="0"
+			           Margin="0 2 0 0"
+			           BorderBrush="Gray"
+			           BorderThickness="0 1 0 0">
+				<StatusBar.ItemsPanel>
+					<ItemsPanelTemplate>
+						<Grid Margin="0">
+							<Grid.RowDefinitions>
+								<RowDefinition Height="*" />
+							</Grid.RowDefinitions>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*" />
+								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="Auto" />
+							</Grid.ColumnDefinitions>
+						</Grid>
+					</ItemsPanelTemplate>
+				</StatusBar.ItemsPanel>
+
+				<StatusBarItem>
+					<TextBlock x:Name="statusBarItemInfo"
+					           Width="Auto"
+					           Margin="5 0 5 0"
+					           Text="{LocText TicketServer::MainStatusLoading}" />
+				</StatusBarItem>
+				<StatusBarItem Grid.Column="1">
+					<TextBlock x:Name="statusBarItemTickets" Text="{LocText TicketServer::MainStatusTickets}" />
+				</StatusBarItem>
+				<StatusBarItem Grid.Column="2">
+					<TextBlock x:Name="statusBarItemTicketsRedeemed"
+					           FontWeight="Bold"
+					           Text="{Binding Service.TicketSource.RedeemedCount}" />
+				</StatusBarItem>
+				<StatusBarItem Grid.Column="3">
+					<TextBlock x:Name="statusBarItemTicketsSeparator"
+					           FontWeight="Bold"
+					           Text="/" />
+				</StatusBarItem>
+				<StatusBarItem Grid.Column="4">
+					<TextBlock x:Name="statusBarItemTicketsTotal"
+					           FontWeight="Bold"
+					           Text="{Binding Service.TicketSource.TicketCount}" />
+				</StatusBarItem>
+			</StatusBar>
+		</Grid>
+	</eT:BusyIndicator>
+</r:RibbonWindow>
