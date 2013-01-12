@@ -176,6 +176,9 @@ namespace TicketServer
 			{
 				IsBusy = true;
 
+				if (!File.Exists(Filename))
+					Filename = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), Settings.Default.DefaultFileName);
+
 				ITicketDataSource source = new SqlCeTicketDataSource(Filename);
 				source.SpecialTicketsString = Settings.Default.SpecialTicketsString;
 				source.PropertyChanged += new PropertyChangedEventHandler(source_PropertyChanged);
@@ -567,7 +570,12 @@ namespace TicketServer
 		/// </summary>
 		/// <param name="sender">The source of the event.</param>
 		/// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
-		private void buttonOpen_Click(object sender, RoutedEventArgs e)
+		private void buttonOpen_Click(object sender, RoutedEventArgs e) { OpenFile(); }
+
+		/// <summary>
+		/// Opens the file.
+		/// </summary>
+		private void OpenFile()
 		{
 			CommonOpenFileDialog ofd = new CommonOpenFileDialog();
 			ofd.Filters.Add(new CommonFileDialogFilter(Properties.Resources.FileFilterText, Properties.Resources.FileFilterExtension));

@@ -11,6 +11,7 @@ using TicketServer.Interfaces.Enums;
 using TicketServer.Interfaces.BusinessLayer;
 using TicketServer.Interfaces;
 using System.ComponentModel;
+using System.Diagnostics;
 
 namespace TicketServer.Service
 {
@@ -106,6 +107,8 @@ namespace TicketServer.Service
 		/// <returns></returns>
 		public Ticket GetTicket(string code)
 		{
+			Trace.WriteLine("Ticket requested: " + code);
+
 			ITicket sourceTicket = TicketSource.GetTicket(code);
 			if (sourceTicket == null)
 				return null;
