@@ -10,8 +10,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TicketServer.Client</RootNamespace>
     <AssemblyName>TicketServer.Client</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -29,6 +30,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -38,6 +40,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.WindowsAPICodePack">
@@ -221,6 +224,26 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icons\Small\reload.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Medium\application-exit-2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Large\application-exit-2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TicketServer.Common\TicketServer.Common.csproj">
+      <Project>{3d13d078-398b-4da3-96bf-482f412fe8a3}</Project>
+      <Name>TicketServer.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TicketServer.Controls\TicketServer.Controls.csproj">
+      <Project>{756006ad-9f72-4394-a91c-3e1ee445e35b}</Project>
+      <Name>TicketServer.Controls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TicketServer.Interfaces\TicketServer.Interfaces.csproj">
+      <Project>{4a928eb3-cde9-4803-b6cf-2255064cd64a}</Project>
+      <Name>TicketServer.Interfaces</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

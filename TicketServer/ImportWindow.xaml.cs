@@ -15,6 +15,7 @@ using System.IO;
 using Microsoft.WindowsAPICodePack.Dialogs;
 using TicketServer.Interfaces.Enums;
 using System.Threading;
+using TicketServer.Common;
 
 namespace TicketServer
 {
@@ -242,7 +243,7 @@ namespace TicketServer
 					});
 					List<string> rowValues = SplitLine(row, separator);
 
-					ImportTicket ticket = new ImportTicket();
+					MemoryTicket ticket = new MemoryTicket();
 					Dispatcher.Invoke((Action)delegate()
 					{
 						ticket.IsOnlineTicket = (comboBoxTicketMode.SelectedItem as IsOnlineComboBoxItem).IsOnlineTicket;

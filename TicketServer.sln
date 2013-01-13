@@ -15,9 +15,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketServer.Client", "Tick
 EndProject
 Project("{6141683F-8A12-4E36-9623-2EB02B2C2303}") = "TicketServer.Setup", "TicketServer.Setup\TicketServer.Setup.isproj", "{008960D5-B947-492D-8EF4-1E3ED5C41A6A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicketServer.Controls", "TicketServer.Controls\TicketServer.Controls.csproj", "{756006AD-9F72-4394-A91C-3E1EE445E35B}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 8
+		SccNumberOfProjects = 9
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = https://tfs.codeplex.com/tfs/tfs14
 		SccLocalPath0 = .
@@ -42,6 +44,9 @@ Global
 		SccProjectUniqueName7 = TicketServer.Setup\\TicketServer.Setup.isproj
 		SccProjectName7 = TicketServer.Setup
 		SccLocalPath7 = TicketServer.Setup
+		SccProjectUniqueName8 = TicketServer.Controls\\TicketServer.Controls.csproj
+		SccProjectName8 = TicketServer.Controls
+		SccLocalPath8 = TicketServer.Controls
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		All|Any CPU = All|Any CPU
@@ -280,6 +285,36 @@ Global
 		{008960D5-B947-492D-8EF4-1E3ED5C41A6A}.SingleImage|Mixed Platforms.Build.0 = SingleImage
 		{008960D5-B947-492D-8EF4-1E3ED5C41A6A}.SingleImage|x86.ActiveCfg = SingleImage
 		{008960D5-B947-492D-8EF4-1E3ED5C41A6A}.SingleImage|x86.Build.0 = SingleImage
+		{756006AD-9F72-4394-A91C-3E1EE445E35B}.All|Any CPU.ActiveCfg = Release|Any CPU
+		{756006AD-9F72-4394-A91C-3E1EE445E35B}.All|Any CPU.Build.0 = Release|Any CPU
+		{756006AD-9F72-4394-A91C-3E1EE445E35B}.All|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{756006AD-9F72-4394-A91C-3E1EE445E35B}.All|Mixed Platforms.Build.0 = Release|Any CPU
+		{756006AD-9F72-4394-A91C-3E1EE445E35B}.All|x86.ActiveCfg = Release|Any CPU
+		{756006AD-9F72-4394-A91C-3E1EE445E35B}.CD_ROM|Any CPU.ActiveCfg = Release|Any CPU
+		{756006AD-9F72-4394-A91C-3E1EE445E35B}.CD_ROM|Any CPU.Build.0 = Release|Any CPU
+		{756006AD-9F72-4394-A91C-3E1EE445E35B}.CD_ROM|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{756006AD-9F72-4394-A91C-3E1EE445E35B}.CD_ROM|Mixed Platforms.Build.0 = Release|Any CPU
+		{756006AD-9F72-4394-A91C-3E1EE445E35B}.CD_ROM|x86.ActiveCfg = Release|Any CPU
+		{756006AD-9F72-4394-A91C-3E1EE445E35B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{756006AD-9F72-4394-A91C-3E1EE445E35B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{756006AD-9F72-4394-A91C-3E1EE445E35B}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{756006AD-9F72-4394-A91C-3E1EE445E35B}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{756006AD-9F72-4394-A91C-3E1EE445E35B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{756006AD-9F72-4394-A91C-3E1EE445E35B}.DVD-5|Any CPU.ActiveCfg = Debug|Any CPU
+		{756006AD-9F72-4394-A91C-3E1EE445E35B}.DVD-5|Any CPU.Build.0 = Debug|Any CPU
+		{756006AD-9F72-4394-A91C-3E1EE445E35B}.DVD-5|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{756006AD-9F72-4394-A91C-3E1EE445E35B}.DVD-5|Mixed Platforms.Build.0 = Debug|Any CPU
+		{756006AD-9F72-4394-A91C-3E1EE445E35B}.DVD-5|x86.ActiveCfg = Debug|Any CPU
+		{756006AD-9F72-4394-A91C-3E1EE445E35B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{756006AD-9F72-4394-A91C-3E1EE445E35B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{756006AD-9F72-4394-A91C-3E1EE445E35B}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{756006AD-9F72-4394-A91C-3E1EE445E35B}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{756006AD-9F72-4394-A91C-3E1EE445E35B}.Release|x86.ActiveCfg = Release|Any CPU
+		{756006AD-9F72-4394-A91C-3E1EE445E35B}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
+		{756006AD-9F72-4394-A91C-3E1EE445E35B}.SingleImage|Any CPU.Build.0 = Release|Any CPU
+		{756006AD-9F72-4394-A91C-3E1EE445E35B}.SingleImage|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{756006AD-9F72-4394-A91C-3E1EE445E35B}.SingleImage|Mixed Platforms.Build.0 = Release|Any CPU
+		{756006AD-9F72-4394-A91C-3E1EE445E35B}.SingleImage|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

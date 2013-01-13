@@ -135,6 +135,9 @@
   <data name="Redeemed" xml:space="preserve">
     <value>Eingelöst</value>
   </data>
+  <data name="RedeemTicket" xml:space="preserve">
+    <value>Ticket einlösen</value>
+  </data>
   <data name="RibbonGroupLanguage" xml:space="preserve">
     <value>Sprache</value>
   </data>

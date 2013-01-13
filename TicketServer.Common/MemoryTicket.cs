@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using TicketServer.Interfaces;
 using TicketServer.Interfaces.Enums;
 
-namespace TicketServer
+namespace TicketServer.Common
 {
-	internal class ImportTicket : ITicket
+	/// <summary>
+	/// ITicket implementation which holds a ticket in memory e.g. for import purpose.
+	/// </summary>
+	public class MemoryTicket : ITicket, INotifyPropertyChanged
 	{
 		#region ITicket Members
 

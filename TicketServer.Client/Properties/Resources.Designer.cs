@@ -115,6 +115,15 @@ namespace TicketServer.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Redeem Ticket.
+        /// </summary>
+        internal static string RedeemTicket {
+            get {
+                return ResourceManager.GetString("RedeemTicket", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Language.
         /// </summary>
         internal static string RibbonGroupLanguage {

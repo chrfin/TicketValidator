@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -13,12 +14,12 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TicketServer.Interfaces;
 
-namespace TicketServer
+namespace TicketServer.Controls
 {
 	/// <summary>
-	/// Interaction logic for TicketStatusControl.xaml
+	/// Interaction logic for TicketStatus.xaml
 	/// </summary>
-	public partial class TicketStatusControl : UserControl
+	public partial class TicketStatus : UserControl
 	{
 		/// <summary>
 		/// Gets or sets the ticket.
@@ -32,12 +33,12 @@ namespace TicketServer
 			set { SetValue(TicketProperty, value); }
 		}
 		// Using a DependencyProperty as the backing store for Ticket.  This enables animation, styling, binding, etc...
-		public static readonly DependencyProperty TicketProperty = DependencyProperty.Register("Ticket", typeof(ITicket), typeof(TicketStatusControl));
+		public static readonly DependencyProperty TicketProperty = DependencyProperty.Register("Ticket", typeof(ITicket), typeof(TicketStatus));
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="TicketStatusControl"/> class.
+		/// Initializes a new instance of the <see cref="TicketStatus" /> class.
 		/// </summary>
-		public TicketStatusControl()
+		public TicketStatus()
 		{
 			InitializeComponent();
 		}
