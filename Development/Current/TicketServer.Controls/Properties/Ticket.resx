@@ -117,54 +117,40 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Cancel" xml:space="preserve">
-    <value>Cancel</value>
+  <data name="TextCity" xml:space="preserve">
+    <value>City:</value>
   </data>
-  <data name="CheckTicket" xml:space="preserve">
-    <value>Check Ticket</value>
+  <data name="TextCode" xml:space="preserve">
+    <value>Code:</value>
   </data>
-  <data name="ExitButton" xml:space="preserve">
-    <value>Exit</value>
+  <data name="TextId" xml:space="preserve">
+    <value>Id:</value>
   </data>
-  <data name="File" xml:space="preserve">
-    <value>File</value>
+  <data name="TextMail" xml:space="preserve">
+    <value>Mail:</value>
   </data>
-  <data name="Reconnect" xml:space="preserve">
-    <value>Reconnect</value>
+  <data name="TextName" xml:space="preserve">
+    <value>Name:</value>
   </data>
-  <data name="Redeemed" xml:space="preserve">
-    <value>Redeemed</value>
+  <data name="TextOnline" xml:space="preserve">
+    <value>Online-Ticket:</value>
   </data>
-  <data name="RedeemTicket" xml:space="preserve">
-    <value>Redeem Ticket</value>
+  <data name="TextPhone" xml:space="preserve">
+    <value>Phone:</value>
   </data>
-  <data name="RibbonGroupLanguage" xml:space="preserve">
-    <value>Language</value>
+  <data name="TextRedeemDate" xml:space="preserve">
+    <value>Redeem date:</value>
   </data>
-  <data name="RibbonTabHome" xml:space="preserve">
-    <value>Home</value>
+  <data name="TextRedeemed" xml:space="preserve">
+    <value>Redeemed:</value>
   </data>
-  <data name="RibbonTabSettings" xml:space="preserve">
-    <value>Settings</value>
+  <data name="TextStreet" xml:space="preserve">
+    <value>Street:</value>
   </data>
-  <data name="Save" xml:space="preserve">
-    <value>Save</value>
+  <data name="TextType" xml:space="preserve">
+    <value>Type:</value>
   </data>
-  <data name="Server" xml:space="preserve">
-    <value>Server</value>
-  </data>
-  <data name="ServiceURI" xml:space="preserve">
-    <value>Service URI:</value>
-  </data>
-  <data name="ServiceURIDesciption" xml:space="preserve">
-    <value>This is the base URI where
-the service is reachable.
-For example: localhost:8008</value>
-  </data>
-  <data name="Settings" xml:space="preserve">
-    <value>Settings</value>
-  </data>
-  <data name="Ticket" xml:space="preserve">
-    <value>Ticket:</value>
+  <data name="TextZip" xml:space="preserve">
+    <value>Zip:</value>
   </data>
 </root>

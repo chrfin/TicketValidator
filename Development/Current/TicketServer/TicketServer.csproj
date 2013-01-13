@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>TicketServer</RootNamespace>
     <AssemblyName>TicketServer</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -46,6 +46,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <UseVSHostingProcess>false</UseVSHostingProcess>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <PlatformTarget>x86</PlatformTarget>
@@ -55,6 +56,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>App.ico</ApplicationIcon>
@@ -64,9 +66,6 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="LocalizeExtension">
-      <HintPath>..\..\..\3rdParty\LocalizeExtension\LocalizeExtension.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="Microsoft.WindowsAPICodePack">
       <HintPath>..\..\..\3rdParty\WindowsApiCodePack\Microsoft.WindowsAPICodePack.dll</HintPath>
@@ -97,8 +96,14 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WPFLocalizeExtension">
+      <HintPath>..\packages\WpfLocalizeExtension.2.1.2\lib\net35\WPFLocalizeExtension.dll</HintPath>
+    </Reference>
     <Reference Include="WPFToolkit.Extended">
       <HintPath>..\..\..\3rdParty\WPFToolkit.Extended.dll</HintPath>
+    </Reference>
+    <Reference Include="XAMLMarkupExtensions">
+      <HintPath>..\packages\XAMLMarkupExtensions.1.1.5\lib\net40\XAMLMarkupExtensions.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -127,9 +132,6 @@
     <Compile Include="TicketControl.xaml.cs">
       <DependentUpon>TicketControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TicketStatusControl.xaml.cs">
-      <DependentUpon>TicketStatusControl.xaml</DependentUpon>
-    </Compile>
     <Page Include="DatabaseControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -149,7 +151,6 @@
     <Compile Include="DatabaseControl.xaml.cs">
       <DependentUpon>DatabaseControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ImportTicket.cs" />
     <Compile Include="ImportWindow.xaml.cs">
       <DependentUpon>ImportWindow.xaml</DependentUpon>
     </Compile>
@@ -162,10 +163,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TicketControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="TicketStatusControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -206,6 +203,7 @@
     <EmbeddedResource Include="Properties\Ticket.de.resx" />
     <None Include="App.config" />
     <None Include="app.manifest" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -216,6 +214,10 @@
     <ProjectReference Include="..\TicketServer.Common\TicketServer.Common.csproj">
       <Project>{3D13D078-398B-4DA3-96BF-482F412FE8A3}</Project>
       <Name>TicketServer.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TicketServer.Controls\TicketServer.Controls.csproj">
+      <Project>{756006ad-9f72-4394-a91c-3e1ee445e35b}</Project>
+      <Name>TicketServer.Controls</Name>
     </ProjectReference>
     <ProjectReference Include="..\TicketServer.DAL\TicketServer.DAL.csproj">
       <Project>{D9B8258A-38E8-43F8-A9D0-A3A130C8FD32}</Project>
@@ -346,6 +348,18 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Large\Service Manager.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Medium\application-exit-2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Large\application-exit-2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\XLarge\application-exit-2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

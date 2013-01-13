@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
@@ -18,6 +19,9 @@ using System.Windows.Shapes;
 using Microsoft.Windows.Controls.Ribbon;
 using TicketServer.Client.Properties;
 using TicketServer.Client.TicketService;
+using TicketServer.Common;
+using TicketServer.Controls;
+using TicketServer.Interfaces;
 using WPFLocalizeExtension.Engine;
 
 namespace TicketServer.Client
@@ -99,6 +103,7 @@ namespace TicketServer.Client
 		/// <param name="e">The <see cref="RoutedEventArgs" /> instance containing the event data.</param>
 		private void RibbonWindow_Loaded(object sender, RoutedEventArgs e)
 		{
+			listBoxStatus.ItemsSource = new ObservableCollection<TicketEventArgs>();
 			ReplaceRibbonApplicationMenuButtonContent(Ribbon.ApplicationMenu);
 		}
 
@@ -229,7 +234,27 @@ namespace TicketServer.Client
 
 				currentTicket = service.GetTicket(textBoxCode.Text);
 				if (currentTicket != null)
+				{
 					textBoxCode.Text = String.Empty;
+
+					ITicket ticket = new MemoryTicket();					
+					ticket.Id = currentTicket.Id;
+					ticket.Street = currentTicket.Street;
+					ticket.City = currentTicket.City;
+					ticket.Code = currentTicket.Code;
+					ticket.EMail = currentTicket.EMail;
+					ticket.IsOnlineTicket = currentTicket.IsOnlineTicket;
+					ticket.IsRedeemed = currentTicket.IsRedeemed;
+					ticket.Name = currentTicket.Name;
+					ticket.Phone = currentTicket.Phone;
+					ticket.RedeemDate = currentTicket.RedeemDate;
+					ticket.Type = (Interfaces.Enums.TicketType)Enum.Parse(typeof(Interfaces.Enums.TicketType), currentTicket.Type.ToString());
+					ticket.Zip = currentTicket.Zip;
+
+					TicketEventArgs args = new TicketEventArgs(ticket);
+					ObservableCollection<TicketEventArgs> list = listBoxStatus.ItemsSource as ObservableCollection<TicketEventArgs>;
+					Dispatcher.Invoke((Action)delegate() { list.Insert(0, args); });
+				}
 			}
 			catch
 			{

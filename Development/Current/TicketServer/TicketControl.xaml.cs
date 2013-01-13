@@ -121,7 +121,7 @@ namespace TicketServer
 			}
 			else
 			{
-				ImportTicket ticket = new ImportTicket();
+				MemoryTicket ticket = new MemoryTicket();
 				ticket.IsOnlineTicket = checkBoxOnline.IsChecked.Value;
 				ticket.Type = comboBoxType.SelectedItem == null ? TicketType.Normal : (TicketType)comboBoxType.SelectedItem;
 				ticket.Code = textBoxCode.Text;

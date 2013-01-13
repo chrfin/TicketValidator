@@ -21,7 +21,6 @@ using System.Windows.Shapes;
 using Microsoft.VisualBasic.FileIO;
 using Microsoft.Windows.Controls.Ribbon;
 using Microsoft.WindowsAPICodePack.Dialogs;
-using RootLibrary.WPF.Localization;
 using TicketServer.Common;
 using TicketServer.DAL;
 using TicketServer.DAL.SqlCe;
@@ -34,6 +33,7 @@ using WinForms = System.Windows.Forms;
 using System.IO;
 using System.Net;
 using System.Collections.ObjectModel;
+using WPFLocalizeExtension.Engine;
 
 namespace TicketServer
 {
@@ -336,7 +336,7 @@ namespace TicketServer
 			if (args.Ticket != null)
 			{
 				if (list.FirstOrDefault(a => a.Ticket.Id == args.Ticket.Id) == null)
-					list.Insert(0, e as TicketEventArgs);
+					Dispatcher.Invoke((Action)delegate { list.Insert(0, e as TicketEventArgs); });
 				else
 					UpdateStatusItem(args);
 			}
