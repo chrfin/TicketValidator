@@ -40,6 +40,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.WindowsAPICodePack">
+      <HintPath>..\..\3rdParty\WindowsApiCodePack\Microsoft.WindowsAPICodePack.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization" />
@@ -57,6 +60,15 @@
     <Reference Include="PresentationFramework" />
     <Reference Include="RibbonControlsLibrary" />
     <Reference Include="Microsoft.Windows.Shell" />
+    <Reference Include="WPFLocalizeExtension">
+      <HintPath>..\packages\WpfLocalizeExtension.2.1.2\lib\net35\WPFLocalizeExtension.dll</HintPath>
+    </Reference>
+    <Reference Include="WPFToolkit.Extended">
+      <HintPath>..\..\3rdParty\WPFToolkit.Extended.dll</HintPath>
+    </Reference>
+    <Reference Include="XAMLMarkupExtensions">
+      <HintPath>..\packages\XAMLMarkupExtensions.1.1.5\lib\net40\XAMLMarkupExtensions.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -67,6 +79,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsWindow.xaml.cs">
+      <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -80,6 +95,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="SettingsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -99,7 +118,11 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="app.config" />
+    <EmbeddedResource Include="Properties\Resources.de.resx" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -130,8 +153,8 @@
     <None Include="Service References\TicketService\TicketService.wsdl" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\LargeIcon.png" />
-    <Resource Include="Images\SmallIcon.png" />
+    <Resource Include="Icons\Large\App.png" />
+    <Resource Include="Icons\Small\App.png" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
@@ -156,6 +179,48 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\App.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Small\application-exit-2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Small\vcard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Medium\vcard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Large\vcard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Icons\XLarge\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Menu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Large\settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Medium\settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Small\settings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Small\networksettings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Medium\networksettings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Large\networksettings.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Large\reload.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Small\reload.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
