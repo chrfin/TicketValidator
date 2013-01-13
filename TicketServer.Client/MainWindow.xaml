@@ -10,13 +10,13 @@
 				lex:ResxLocalizationProvider.DefaultDictionary="Resources"
 				x:Name="RibbonWindow"
 				Title="Ticket Client"
-				Width="820"
+				Width="860"
 				Height="480"
 				WindowStartupLocation="CenterScreen"
 				Icon="Icons\Small\vcard.png"
 				Loaded="RibbonWindow_Loaded">
 	<r:RibbonWindow.Resources>
-		<c:TicketToStatusColorConverter x:Key="ticketColorConverter" />
+		<c:TicketToClientStatusColorConverter x:Key="ticketColorConverter" />
 	</r:RibbonWindow.Resources>
 	
 	<Grid x:Name="LayoutRoot">
@@ -77,7 +77,7 @@
 		<Grid x:Name="ticketGrid" Grid.Row="1" Grid.Column="0">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="32" />
-				<RowDefinition Height="32" />
+				<RowDefinition Height="42" />
 				<RowDefinition />
 			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions>
@@ -107,11 +107,30 @@
 					Click="buttonGetTicket_Click"
 					Content="{lex:LocText CheckTicket}" />
 
+			<TextBlock x:Name="textBlockAutoRedeem"
+					   Grid.Row="1"
+					   Grid.Column="1"
+					   Margin="0"
+					   Padding="5 0"
+					   FontSize="36"
+					   FontWeight="ExtraBold"
+					   HorizontalAlignment="Right"
+					   VerticalAlignment="Center"/>
+			<TextBlock x:Name="textBlockError"
+					   Grid.Row="1"
+					   Grid.Column="1"
+					   Margin="0"
+					   Padding="5 0"
+					   FontSize="36"
+					   Foreground="Red"
+					   FontWeight="ExtraBold"
+					   HorizontalAlignment="Right"
+					   VerticalAlignment="Center"/>
 			<Button x:Name="buttonRedeemTicket"
 					Grid.Row="1"
 					Grid.Column="2"
 					Grid.ColumnSpan="1"
-					Margin="5"
+					Margin="5 10"
 					Click="buttonRedeemTicket_Click"
 					Content="{lex:LocText RedeemTicket}"
 					IsEnabled="False">

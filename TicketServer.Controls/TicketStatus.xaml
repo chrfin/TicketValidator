@@ -8,8 +8,8 @@
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:lex="http://wpflocalizeextension.codeplex.com"
 			 lex:LocalizeDictionary.DesignCulture="en"
-			 lex:ResxLocalizationProvider.DefaultAssembly="TicketServer.Controls.Properties"
-			 lex:ResxLocalizationProvider.DefaultDictionary="Ticket"
+			 lex:ResxLocalizationProvider.DefaultAssembly="TicketServer.Controls"
+			 lex:ResxLocalizationProvider.DefaultDictionary="Resources"
 			 d:DesignWidth="500"
 			 mc:Ignorable="d">
 	<UserControl.Resources>

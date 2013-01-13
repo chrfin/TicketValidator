@@ -36,6 +36,27 @@ namespace TicketServer
 		}
 
 		/// <summary>
+		/// Handles the Spin event of the ButtonSpinner control.
+		/// </summary>
+		/// <param name="sender">The source of the event.</param>
+		/// <param name="e">The <see cref="Microsoft.Windows.Controls.SpinEventArgs"/> instance containing the event data.</param>
+		private void ButtonSpinner_Spin(object sender, Microsoft.Windows.Controls.SpinEventArgs e)
+		{
+			ButtonSpinner spinner = (ButtonSpinner)sender;
+			TextBox txtBox = (TextBox)spinner.Content;
+			Binding binding = txtBox.GetBindingExpression(TextBox.TextProperty).ParentBinding;
+
+			int value = String.IsNullOrEmpty(txtBox.Text) ? 0 : Convert.ToInt32(txtBox.Text);
+			if (e.Direction == Microsoft.Windows.Controls.SpinDirection.Increase)
+				value++;
+			else
+				value--;
+			if (value <= 0)
+				value = 1;
+			typeof(Settings).GetProperty(binding.Path.Path).SetValue(Settings.Default, Convert.ToUInt32(value), null);
+		}
+
+		/// <summary>
 		/// Handles the Click event of the buttonCancel control.
 		/// </summary>
 		/// <param name="sender">The source of the event.</param>

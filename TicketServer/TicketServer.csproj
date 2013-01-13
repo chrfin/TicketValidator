@@ -124,11 +124,6 @@
     <Compile Include="SettingsWindow.xaml.cs">
       <DependentUpon>SettingsWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Properties\Ticket.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Ticket.resx</DependentUpon>
-    </Compile>
     <Compile Include="TicketControl.xaml.cs">
       <DependentUpon>TicketControl.xaml</DependentUpon>
     </Compile>
@@ -196,11 +191,6 @@
       <LastGenOutput>SettingsWindow.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\SettingsWindow.de.resx" />
-    <EmbeddedResource Include="Properties\Ticket.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Ticket.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Ticket.de.resx" />
     <None Include="App.config" />
     <None Include="app.manifest" />
     <None Include="packages.config" />

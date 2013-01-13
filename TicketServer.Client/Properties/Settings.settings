@@ -11,5 +11,11 @@
     <Setting Name="ServiceURI" Type="System.String" Scope="User">
       <Value Profile="(Default)">localhost:8880</Value>
     </Setting>
+    <Setting Name="SecondsToAutoRedeem" Type="System.UInt32" Scope="User">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
+    <Setting Name="AutoRedeem" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -8,7 +8,7 @@
 		lex:ResxLocalizationProvider.DefaultAssembly="TicketServer.Client"
 		lex:ResxLocalizationProvider.DefaultDictionary="Resources"
 		Title="{lex:LocText Settings}"
-		Width="420"
+		Width="450"
 		Height="280"
 		Closed="Window_Closed"
 		Icon="Icons/Small/settings.png"
@@ -33,6 +33,14 @@
 				 SelectionChanged="listBoxPage_SelectionChanged">
 			<ListBoxItem IsSelected="True">
 				<StackPanel Margin="0 2" Orientation="Horizontal">
+					<Image Width="24" Source="Icons\Medium\gear.png" />
+					<TextBlock Margin="5 0 0 0"
+							   VerticalAlignment="Center"
+							   Text="{lex:LocText General}" />
+				</StackPanel>
+			</ListBoxItem>
+			<ListBoxItem>
+				<StackPanel Margin="0 2" Orientation="Horizontal">
 					<Image Width="24" Source="Icons\Medium\networksettings.png" />
 					<TextBlock Margin="5 0 0 0"
 							   VerticalAlignment="Center"
@@ -45,6 +53,30 @@
 					Grid.Row="0"
 					Grid.Column="1"
 					Margin="5 3 5 5">
+			<TabItem Visibility="Collapsed">
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="28" />
+						<RowDefinition Height="28" />
+						<RowDefinition Height="Auto" />
+					</Grid.RowDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto" />
+						<ColumnDefinition />
+					</Grid.ColumnDefinitions>
+
+					<TextBlock Text="{lex:LocText AutoRedeem}" Grid.Column="0" Grid.Row="0" Margin="3" VerticalAlignment="Center" />
+					<CheckBox Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" Margin="3" IsChecked="{Binding AutoRedeem, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
+
+					<TextBlock Text="{lex:LocText TimeToRedeem}" Grid.Column="0" Grid.Row="1" Margin="3" VerticalAlignment="Center" />
+					<eT:ButtonSpinner Grid.Row="1"
+									  Grid.Column="1"
+									  Margin="3"
+									  Spin="ButtonSpinner_Spin">
+						<TextBox Text="{Binding SecondsToAutoRedeem, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
+					</eT:ButtonSpinner>
+				</Grid>
+			</TabItem>
 			<TabItem Visibility="Collapsed">
 				<Grid>
 					<Grid.RowDefinitions>

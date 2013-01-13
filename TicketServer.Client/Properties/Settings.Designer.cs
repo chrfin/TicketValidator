@@ -55,5 +55,29 @@ namespace TicketServer.Client.Properties {
                 this["ServiceURI"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("5")]
+        public uint SecondsToAutoRedeem {
+            get {
+                return ((uint)(this["SecondsToAutoRedeem"]));
+            }
+            set {
+                this["SecondsToAutoRedeem"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool AutoRedeem {
+            get {
+                return ((bool)(this["AutoRedeem"]));
+            }
+            set {
+                this["AutoRedeem"] = value;
+            }
+        }
     }
 }
