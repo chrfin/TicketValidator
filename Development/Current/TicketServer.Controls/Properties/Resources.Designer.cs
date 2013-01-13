@@ -9,6 +9,7 @@
 //------------------------------------------------------------------------------
 
 namespace TicketServer.Controls.Properties {
+    using System;
     
     
     /// <summary>
@@ -37,7 +38,7 @@ namespace TicketServer.Controls.Properties {
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
-                if ((resourceMan == null)) {
+                if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TicketServer.Controls.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
@@ -56,6 +57,114 @@ namespace TicketServer.Controls.Properties {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to City:.
+        /// </summary>
+        internal static string TextCity {
+            get {
+                return ResourceManager.GetString("TextCity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Code:.
+        /// </summary>
+        internal static string TextCode {
+            get {
+                return ResourceManager.GetString("TextCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Id:.
+        /// </summary>
+        internal static string TextId {
+            get {
+                return ResourceManager.GetString("TextId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mail:.
+        /// </summary>
+        internal static string TextMail {
+            get {
+                return ResourceManager.GetString("TextMail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name:.
+        /// </summary>
+        internal static string TextName {
+            get {
+                return ResourceManager.GetString("TextName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Online-Ticket:.
+        /// </summary>
+        internal static string TextOnline {
+            get {
+                return ResourceManager.GetString("TextOnline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Phone:.
+        /// </summary>
+        internal static string TextPhone {
+            get {
+                return ResourceManager.GetString("TextPhone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Redeem date:.
+        /// </summary>
+        internal static string TextRedeemDate {
+            get {
+                return ResourceManager.GetString("TextRedeemDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Redeemed:.
+        /// </summary>
+        internal static string TextRedeemed {
+            get {
+                return ResourceManager.GetString("TextRedeemed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Street:.
+        /// </summary>
+        internal static string TextStreet {
+            get {
+                return ResourceManager.GetString("TextStreet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type:.
+        /// </summary>
+        internal static string TextType {
+            get {
+                return ResourceManager.GetString("TextType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zip:.
+        /// </summary>
+        internal static string TextZip {
+            get {
+                return ResourceManager.GetString("TextZip", resourceCulture);
             }
         }
     }

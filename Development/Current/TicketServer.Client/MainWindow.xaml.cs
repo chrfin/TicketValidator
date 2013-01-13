@@ -22,6 +22,7 @@ using TicketServer.Client.TicketService;
 using TicketServer.Common;
 using TicketServer.Controls;
 using TicketServer.Interfaces;
+using TicketServer.Interfaces.BusinessLayer;
 using WPFLocalizeExtension.Engine;
 
 namespace TicketServer.Client
@@ -185,9 +186,9 @@ namespace TicketServer.Client
 		/// </summary>
 		private bool ConnectService()
 		{
-			service = new TicketServiceClient("BasicHttpBinding_ITicketService", String.Format("http://{0}/tickets/ws", Settings.Default.ServiceURI));
 			try
 			{
+				service = new TicketServiceClient("BasicHttpBinding_ITicketService", String.Format("http://{0}/tickets/ws", Settings.Default.ServiceURI));
 				var status = service.GetCurrentState();
 				statusBarItemInfo.Text = status.ToString();
 				ticketGrid.IsEnabled = true;
@@ -222,6 +223,7 @@ namespace TicketServer.Client
 		private void buttonGetTicket_Click(object sender, RoutedEventArgs e) { GetTicket(); }
 
 		Ticket currentTicket = null;
+		Thread redeemThread = null;
 		/// <summary>
 		/// Gets the ticket.
 		/// </summary>
@@ -229,13 +231,21 @@ namespace TicketServer.Client
 		{
 			try
 			{
+				if (redeemThread != null)
+				{
+					redeemThread.Abort();
+					redeemThread = null;
+				}
 				if (currentTicket != null)
 					RedeemTicket();
 
 				currentTicket = service.GetTicket(textBoxCode.Text);
+				textBoxCode.Text = String.Empty;
+
 				if (currentTicket != null)
 				{
-					textBoxCode.Text = String.Empty;
+					textBlockError.Text = String.Empty;
+					buttonRedeemTicket.IsEnabled = true;
 
 					ITicket ticket = new MemoryTicket();					
 					ticket.Id = currentTicket.Id;
@@ -254,7 +264,26 @@ namespace TicketServer.Client
 					TicketEventArgs args = new TicketEventArgs(ticket);
 					ObservableCollection<TicketEventArgs> list = listBoxStatus.ItemsSource as ObservableCollection<TicketEventArgs>;
 					Dispatcher.Invoke((Action)delegate() { list.Insert(0, args); });
+
+					if (Settings.Default.AutoRedeem && !ticket.IsRedeemed)
+					{
+						redeemThread = new Thread(new ThreadStart(delegate
+						{
+							uint timeLeft = Settings.Default.SecondsToAutoRedeem;
+							while (timeLeft > 0)
+							{
+								Dispatcher.Invoke((Action)delegate { textBlockAutoRedeem.Text = String.Format(Properties.Resources.AutoRedeemIn, timeLeft); });
+								Thread.Sleep(1000);
+								timeLeft--;
+							}
+							Dispatcher.Invoke((Action)delegate { RedeemTicket(); });
+							redeemThread = null;
+						}));
+						redeemThread.Start();
+					}
 				}
+				else
+					textBlockError.Text = Properties.Resources.TicketNotFound;
 			}
 			catch
 			{
@@ -275,20 +304,60 @@ namespace TicketServer.Client
 		/// </summary>
 		private void RedeemTicket()
 		{
-			RedeemResult result = service.RedeemTicket(currentTicket.Id);
-			currentTicket = null;
+			textBlockAutoRedeem.Text = String.Empty;
+			buttonRedeemTicket.IsEnabled = false;
+			if (currentTicket == null || currentTicket.IsRedeemed)
+				return;
 
-			switch (result.Type)
+			if (redeemThread != null)
 			{
-				case RedeemResultType.Redeemed:
-					statusBarItemInfo.Text = Properties.Resources.Redeemed;
-					break;
-				case RedeemResultType.AlreadyRedeemed:
-					break;
-				case RedeemResultType.NotRedeemed:
-				default:
-					break;
+				redeemThread.Abort();
+				redeemThread = null;
+			}
+
+			try
+			{
+				RedeemResult result = service.RedeemTicket(currentTicket.Id);
+
+				ObservableCollection<TicketEventArgs> list = listBoxStatus.ItemsSource as ObservableCollection<TicketEventArgs>;
+				var item = list.First(i => i.Ticket.Id == currentTicket.Id);
+				item.Ticket.IsRedeemed = result.Type == RedeemResultType.Redeemed;
+				item.Ticket.RedeemDate = DateTime.Now;
+				item.Result = new ClientRedeemResult() 
+				{ 
+					Type = (Interfaces.Enums.RedeemResultType)Enum.Parse(typeof(Interfaces.Enums.RedeemResultType), result.Type.ToString()),
+					Error = result.Error 
+				};
+
+				currentTicket = null;
+			}
+			catch
+			{
+				if (ConnectService())
+					RedeemTicket();
 			}
 		}
+	}
+
+	internal class ClientRedeemResult : IRedeemResult
+	{
+		#region IRedeemResult Members
+
+		/// <summary>
+		/// Gets or sets the type.
+		/// </summary>
+		/// <value>
+		/// The type.
+		/// </value>
+		public Interfaces.Enums.RedeemResultType Type { get; set; }
+		/// <summary>
+		/// Gets or sets the error.
+		/// </summary>
+		/// <value>
+		/// The error.
+		/// </value>
+		public string Error { get; set; }
+
+		#endregion
 	}
 }

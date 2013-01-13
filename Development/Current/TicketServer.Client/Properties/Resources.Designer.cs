@@ -61,6 +61,24 @@ namespace TicketServer.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Auto-Redeem:.
+        /// </summary>
+        internal static string AutoRedeem {
+            get {
+                return ResourceManager.GetString("AutoRedeem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Auto-Redeem in {0}s..
+        /// </summary>
+        internal static string AutoRedeemIn {
+            get {
+                return ResourceManager.GetString("AutoRedeemIn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         internal static string Cancel {
@@ -93,6 +111,15 @@ namespace TicketServer.Client.Properties {
         internal static string File {
             get {
                 return ResourceManager.GetString("File", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to General.
+        /// </summary>
+        internal static string General {
+            get {
+                return ResourceManager.GetString("General", resourceCulture);
             }
         }
         
@@ -203,6 +230,24 @@ namespace TicketServer.Client.Properties {
         internal static string Ticket {
             get {
                 return ResourceManager.GetString("Ticket", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ticket NOT found!.
+        /// </summary>
+        internal static string TicketNotFound {
+            get {
+                return ResourceManager.GetString("TicketNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time until Auto-Redeem (in seconds):.
+        /// </summary>
+        internal static string TimeToRedeem {
+            get {
+                return ResourceManager.GetString("TimeToRedeem", resourceCulture);
             }
         }
     }

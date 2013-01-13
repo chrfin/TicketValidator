@@ -108,6 +108,62 @@ namespace TicketServer.Common
 	}
 
 	/// <summary>
+	/// Converts a ticket status to the appropriate color for client display.
+	/// </summary>
+	public class TicketToClientStatusColorConverter : IMultiValueConverter
+	{
+		#region IMultiValueConverter Members
+
+		/// <summary>
+		/// Converts a value.
+		/// </summary>
+		/// <param name="value">The value produced by the binding source.</param>
+		/// <param name="targetType">The type of the binding target property.</param>
+		/// <param name="parameter">The converter parameter to use.</param>
+		/// <param name="culture">The culture to use in the converter.</param>
+		/// <returns>
+		/// A converted value. If the method returns null, the valid null value is used.
+		/// </returns>
+		public object Convert(object[] value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+		{
+			ITicket ticket = value[0] as ITicket;
+			IRedeemResult result = value[1] as IRedeemResult;
+
+			if (result != null && result.Type != RedeemResultType.Redeemed)
+				return Brushes.Red;
+
+			if (ticket == null)
+				throw new ArgumentException();
+
+			if (ticket.Type == TicketType.Special)
+				return Brushes.Blue;
+
+			if (!ticket.IsRedeemed)
+				return Brushes.LightGreen;
+
+			//result == null and !IsRedeemed => rerequest of already redeemed ticket
+			return result == null || result.Type != RedeemResultType.Redeemed ? Brushes.Red : Brushes.LightGray;
+		}
+
+		/// <summary>
+		/// Converts a value.
+		/// </summary>
+		/// <param name="value">The value that is produced by the binding target.</param>
+		/// <param name="targetType">The type to convert to.</param>
+		/// <param name="parameter">The converter parameter to use.</param>
+		/// <param name="culture">The culture to use in the converter.</param>
+		/// <returns>
+		/// A converted value. If the method returns null, the valid null value is used.
+		/// </returns>
+		public object[] ConvertBack(object value, Type[] targetType, object parameter, System.Globalization.CultureInfo culture)
+		{
+			throw new NotImplementedException();
+		}
+
+		#endregion
+	}
+
+	/// <summary>
 	/// Converts a bool to a visibility.
 	/// </summary>
 	public class BoolToVisibilityConverter : IValueConverter
