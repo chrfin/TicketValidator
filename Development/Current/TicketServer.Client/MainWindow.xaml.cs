@@ -337,6 +337,43 @@ namespace TicketServer.Client
 					RedeemTicket();
 			}
 		}
+
+		/// <summary>
+		/// Handles the Checked event of the checkBoxAutoFocus control.
+		/// </summary>
+		/// <param name="sender">The source of the event.</param>
+		/// <param name="e">The <see cref="RoutedEventArgs" /> instance containing the event data.</param>
+		private void checkBoxAutoFocus_Checked(object sender, RoutedEventArgs e)
+		{
+			System.Timers.Timer timer = null;
+			if (checkBoxAutoFocus.IsChecked == true)
+			{
+				if (timer != null)
+					timer.Stop();
+
+				timer = new System.Timers.Timer(Settings.Default.AutoFocusInterval * 1000);
+				timer.Elapsed += (s, arg) =>
+				{
+					Dispatcher.Invoke((Action)delegate
+					{
+						if (checkBoxAutoFocus.IsChecked != true)
+						{
+							timer.Stop();
+							timer = null;
+						}
+
+						Activate();
+						textBoxCode.Focus();
+					});
+				};
+				timer.Start();
+			}
+			else
+			{
+				timer.Stop();
+				timer = null;
+			}
+		}
 	}
 
 	internal class ClientRedeemResult : IRedeemResult

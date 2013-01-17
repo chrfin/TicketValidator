@@ -182,4 +182,10 @@ For example: localhost:8008</value>
   <data name="TimeToRedeem" xml:space="preserve">
     <value>Time until Auto-Redeem (in seconds):</value>
   </data>
+  <data name="AutoFocus" xml:space="preserve">
+    <value>Auto Focus</value>
+  </data>
+  <data name="AutoFocusInterval" xml:space="preserve">
+    <value>Auto Focus interval (in seconds):</value>
+  </data>
 </root>
