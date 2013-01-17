@@ -107,6 +107,13 @@
 					Click="buttonGetTicket_Click"
 					Content="{lex:LocText CheckTicket}" />
 
+			<CheckBox x:Name="checkBoxAutoFocus"
+					  Grid.Column="0"
+					  Grid.Row="1"
+					  Margin="5"
+					  VerticalAlignment="Center"
+					  Content="{lex:LocText AutoFocus}"
+					  Checked="checkBoxAutoFocus_Checked" />
 			<TextBlock x:Name="textBlockAutoRedeem"
 					   Grid.Row="1"
 					   Grid.Column="1"
@@ -139,6 +146,7 @@
 			<ListBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"
 					 x:Name="listBoxStatus"
 					 Margin="5"
+					 HorizontalContentAlignment="Center"
 					 ScrollViewer.CanContentScroll="False">
 				<ListBox.ItemTemplate>
 					<DataTemplate>
