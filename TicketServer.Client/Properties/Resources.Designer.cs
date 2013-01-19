@@ -97,6 +97,33 @@ namespace TicketServer.Client.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error Beep count:.
+        /// </summary>
+        internal static string BeepCount {
+            get {
+                return ResourceManager.GetString("BeepCount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error Beep duration (in milliseconds):.
+        /// </summary>
+        internal static string BeepDuration {
+            get {
+                return ResourceManager.GetString("BeepDuration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pause between beeps (in milliseconds):.
+        /// </summary>
+        internal static string BeepPause {
+            get {
+                return ResourceManager.GetString("BeepPause", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         internal static string Cancel {

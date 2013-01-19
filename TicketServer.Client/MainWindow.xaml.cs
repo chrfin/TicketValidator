@@ -247,7 +247,7 @@ namespace TicketServer.Client
 					textBlockError.Text = String.Empty;
 					buttonRedeemTicket.IsEnabled = true;
 
-					ITicket ticket = new MemoryTicket();					
+					ITicket ticket = new MemoryTicket();
 					ticket.Id = currentTicket.Id;
 					ticket.Street = currentTicket.Street;
 					ticket.City = currentTicket.City;
@@ -281,15 +281,39 @@ namespace TicketServer.Client
 						}));
 						redeemThread.Start();
 					}
+					else if (ticket.IsRedeemed)
+					{
+						ErrorBeep();
+					}
 				}
 				else
+				{
 					textBlockError.Text = Properties.Resources.TicketNotFound;
+					ErrorBeep();
+				}
 			}
 			catch
 			{
 				if (ConnectService())
 					GetTicket();
 			}
+		}
+
+		/// <summary>
+		/// Signals an error via BEEP.
+		/// </summary>
+		/// <remarks>Christoph FINK, 19.01.2013</remarks>
+		private static void ErrorBeep()
+		{
+			Thread beeper = new Thread(new ThreadStart(delegate
+			{
+				for (int i = 0; i < Settings.Default.BeepCount; ++i)
+				{
+					Console.Beep(1000, Convert.ToInt32(Settings.Default.BeepDuration));
+					Thread.Sleep(Convert.ToInt32(Settings.Default.BeepPause));
+				}
+			}));
+			beeper.Start();
 		}
 
 		/// <summary>
