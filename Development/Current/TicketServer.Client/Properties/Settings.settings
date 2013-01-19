@@ -20,5 +20,14 @@
     <Setting Name="AutoFocusInterval" Type="System.UInt32" Scope="User">
       <Value Profile="(Default)">3</Value>
     </Setting>
+    <Setting Name="BeepCount" Type="System.UInt32" Scope="User">
+      <Value Profile="(Default)">3</Value>
+    </Setting>
+    <Setting Name="BeepDuration" Type="System.UInt32" Scope="User">
+      <Value Profile="(Default)">400</Value>
+    </Setting>
+    <Setting Name="BeepPause" Type="System.UInt32" Scope="User">
+      <Value Profile="(Default)">100</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

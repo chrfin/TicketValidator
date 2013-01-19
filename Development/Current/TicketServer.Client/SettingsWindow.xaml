@@ -8,7 +8,7 @@
 		lex:ResxLocalizationProvider.DefaultAssembly="TicketServer.Client"
 		lex:ResxLocalizationProvider.DefaultDictionary="Resources"
 		Title="{lex:LocText Settings}"
-		Width="450"
+		Width="480"
 		Height="280"
 		Closed="Window_Closed"
 		Icon="Icons/Small/settings.png"
@@ -59,6 +59,9 @@
 						<RowDefinition Height="28" />
 						<RowDefinition Height="28" />
 						<RowDefinition Height="28" />
+						<RowDefinition Height="28" />
+						<RowDefinition Height="28" />
+						<RowDefinition Height="28" />
 						<RowDefinition Height="Auto" />
 					</Grid.RowDefinitions>
 					<Grid.ColumnDefinitions>
@@ -83,6 +86,30 @@
 									  Margin="3"
 									  Spin="ButtonSpinner_Spin">
 						<TextBox Text="{Binding AutoFocusInterval, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
+					</eT:ButtonSpinner>
+
+					<TextBlock Text="{lex:LocText BeepCount}" Grid.Column="0" Grid.Row="3" Margin="3" VerticalAlignment="Center" />
+					<eT:ButtonSpinner Grid.Row="3"
+									  Grid.Column="1"
+									  Margin="3"
+									  Spin="ButtonSpinner_Spin">
+						<TextBox Text="{Binding BeepCount, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
+					</eT:ButtonSpinner>
+
+					<TextBlock Text="{lex:LocText BeepDuration}" Grid.Column="0" Grid.Row="4" Margin="3" VerticalAlignment="Center" />
+					<eT:ButtonSpinner Grid.Row="4"
+									  Grid.Column="1"
+									  Margin="3"
+									  Spin="ButtonSpinner_Spin">
+						<TextBox Text="{Binding BeepDuration, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
+					</eT:ButtonSpinner>
+
+					<TextBlock Text="{lex:LocText BeepPause}" Grid.Column="0" Grid.Row="5" Margin="3" VerticalAlignment="Center" />
+					<eT:ButtonSpinner Grid.Row="5"
+									  Grid.Column="1"
+									  Margin="3"
+									  Spin="ButtonSpinner_Spin">
+						<TextBox Text="{Binding BeepPause, Source={x:Static p:Settings.Default}, Mode=TwoWay}" />
 					</eT:ButtonSpinner>
 				</Grid>
 			</TabItem>

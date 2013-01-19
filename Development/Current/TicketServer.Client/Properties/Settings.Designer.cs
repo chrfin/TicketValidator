@@ -91,5 +91,41 @@ namespace TicketServer.Client.Properties {
                 this["AutoFocusInterval"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("3")]
+        public uint BeepCount {
+            get {
+                return ((uint)(this["BeepCount"]));
+            }
+            set {
+                this["BeepCount"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("400")]
+        public uint BeepDuration {
+            get {
+                return ((uint)(this["BeepDuration"]));
+            }
+            set {
+                this["BeepDuration"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        public uint BeepPause {
+            get {
+                return ((uint)(this["BeepPause"]));
+            }
+            set {
+                this["BeepPause"] = value;
+            }
+        }
     }
 }

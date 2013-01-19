@@ -188,4 +188,13 @@ Zum Beispiel: localhost:8008</value>
   <data name="AutoFocusInterval" xml:space="preserve">
     <value>Auto Fokus Interval (in Sekunden):</value>
   </data>
+  <data name="BeepCount" xml:space="preserve">
+    <value>Fehler Beep Anzahl:</value>
+  </data>
+  <data name="BeepDuration" xml:space="preserve">
+    <value>Fehler Beep Dauer (in Millisekunden):</value>
+  </data>
+  <data name="BeepPause" xml:space="preserve">
+    <value>Pasue zwischen den Beeps (in Millisekunden):</value>
+  </data>
 </root>
