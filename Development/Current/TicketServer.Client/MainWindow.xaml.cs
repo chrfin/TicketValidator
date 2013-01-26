@@ -239,7 +239,8 @@ namespace TicketServer.Client
 				if (currentTicket != null)
 					RedeemTicket();
 
-				currentTicket = service.GetTicket(textBoxCode.Text);
+				currentTicket = service.GetTicket(textBoxCode.Text.Contains('/') || textBoxCode.Text.Contains('-') ? textBoxCode.Text : 
+					textBoxCode.Text.Substring(0, textBoxCode.Text.Length - 1));
 				textBoxCode.Text = String.Empty;
 
 				if (currentTicket != null)
