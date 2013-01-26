@@ -147,6 +147,9 @@ namespace TicketServer
 		/// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
 		private void checkBoxRedeemed_Checked(object sender, RoutedEventArgs e)
 		{
+			if (Ticket == null)
+				return;
+
 			if (!checkBoxRedeemed.IsChecked.Value)
 				Ticket.RedeemDate = null;
 			else if (Ticket.RedeemDate == null)
