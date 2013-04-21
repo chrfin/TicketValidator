@@ -48,15 +48,11 @@
   <ItemGroup>
     <Reference Include="DNWA.BHT400CL, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8a074bce35249107, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\Christoph\Desktop\BHT400B_113A_128MB_SDK\SDK\Net\CF2.0\DNWA.BHT400CL.dll</HintPath>
+      <HintPath>..\..\3rdParty\BHT400B_113A_128MB_SDK\SDK\Net\CF2.0\DNWA.BHT400CL.dll</HintPath>
     </Reference>
     <Reference Include="DNWA.Exception, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b4100463e211486c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\Christoph\Desktop\BHT400B_113A_128MB_SDK\SDK\Net\CF2.0\DNWA.Exception.dll</HintPath>
-    </Reference>
-    <Reference Include="DNWA.Tools.BHT.Communication400, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\Christoph\Desktop\BHT400B_113A_128MB_SDK\SDK\Net\CF2.0\DNWA.Tools.BHT.Communication400.dll</HintPath>
+      <HintPath>..\..\3rdParty\BHT400B_113A_128MB_SDK\SDK\Net\CF2.0\DNWA.Exception.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="System" />

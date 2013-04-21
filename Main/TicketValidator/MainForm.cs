@@ -65,7 +65,7 @@ namespace TicketValidator
         protected void scanner_OnScan(object sender, EventArgs e)
         {
             string code = (e as ScanEventArgs).Code;
-            GetTicket(code.Contains("-") ? code : code.Substring(0, code.Length - 1));
+            GetTicket(code.Contains("-") || code.Contains("/") ? code : code.Substring(0, code.Length - 1));
 
             scanner.StartScan();
         }
