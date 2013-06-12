@@ -114,7 +114,8 @@ namespace TicketServer
 			if (FirstLine != null)
 			{
 				string[] columns = FirstLine.Split(new string[] { separator == "\\t" ? "\t" : separator }, StringSplitOptions.None);
-				List<string> columnList = new List<string>(columns);
+				List<string> columnList = new List<string>();
+				columns.ToList().ForEach(c => columnList.Add(c.Trim('\"')));
 				ColumnBoxes.ForEach(cb => cb.ItemsSource = columnList);
 
 				listViewPreview.ItemsSource = null;
