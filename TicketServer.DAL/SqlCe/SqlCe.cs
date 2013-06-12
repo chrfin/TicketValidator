@@ -77,7 +77,7 @@ namespace TicketServer.DAL.SqlCe
                     SqlCeCommand cmd = command.Connection.CreateCommand();
                     cmd.CommandText = q;
                     foreach (SqlCeParameter param in command.Parameters)
-                        cmd.Parameters.Add(param.ParameterName, param.Value == null ? DBNull.Value : param.Value);
+                        cmd.Parameters.AddWithValue(param.ParameterName, param.Value == null ? DBNull.Value : param.Value);
                     count += cmd.ExecuteNonQuery();
                 }
             }
@@ -112,7 +112,7 @@ namespace TicketServer.DAL.SqlCe
                     cmd = command.Connection.CreateCommand();
                     cmd.CommandText = q;
                     foreach (SqlCeParameter param in command.Parameters)
-                        cmd.Parameters.Add(param.ParameterName, param.Value);
+                        cmd.Parameters.AddWithValue(param.ParameterName, param.Value);
                 }
                 return cmd.ExecuteReader(CommandBehavior.SequentialAccess);
             }
@@ -146,7 +146,7 @@ namespace TicketServer.DAL.SqlCe
                     cmd = command.Connection.CreateCommand();
                     cmd.CommandText = q;
                     foreach (SqlCeParameter param in command.Parameters)
-                        cmd.Parameters.Add(param.ParameterName, param.Value);
+                        cmd.Parameters.AddWithValue(param.ParameterName, param.Value);
                 }
                 return cmd.ExecuteScalar();
             }
