@@ -364,4 +364,40 @@ This will reset the tickets without a way to restore the old state!</value>
   <data name="TicketAddFailedText" xml:space="preserve">
     <value>The ticket could not be added - maybee the code is already in use.</value>
   </data>
+  <data name="TextCity" xml:space="preserve">
+    <value>City:</value>
+  </data>
+  <data name="TextCode" xml:space="preserve">
+    <value>Code:</value>
+  </data>
+  <data name="TextId" xml:space="preserve">
+    <value>Id:</value>
+  </data>
+  <data name="TextMail" xml:space="preserve">
+    <value>Mail:</value>
+  </data>
+  <data name="TextName" xml:space="preserve">
+    <value>Name:</value>
+  </data>
+  <data name="TextOnline" xml:space="preserve">
+    <value>Online-Ticket:</value>
+  </data>
+  <data name="TextPhone" xml:space="preserve">
+    <value>Phone:</value>
+  </data>
+  <data name="TextRedeemDate" xml:space="preserve">
+    <value>Redeem date:</value>
+  </data>
+  <data name="TextRedeemed" xml:space="preserve">
+    <value>Redeemed:</value>
+  </data>
+  <data name="TextStreet" xml:space="preserve">
+    <value>Street:</value>
+  </data>
+  <data name="TextType" xml:space="preserve">
+    <value>Type:</value>
+  </data>
+  <data name="TextZip" xml:space="preserve">
+    <value>Zip:</value>
+  </data>
 </root>
