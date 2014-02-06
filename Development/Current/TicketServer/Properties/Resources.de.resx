@@ -355,4 +355,40 @@ Zurückgesetzte Karten könne NICHT zu ihrem alten Status wiederhergestellt werd
   <data name="TicketAddFailedText" xml:space="preserve">
     <value>Die Karte konnte nicht hinzugefügt werden - vielleicht ist der Code bereits in Verwedung.</value>
   </data>
+  <data name="TextCity" xml:space="preserve">
+    <value>Ort:</value>
+  </data>
+  <data name="TextCode" xml:space="preserve">
+    <value>Code:</value>
+  </data>
+  <data name="TextId" xml:space="preserve">
+    <value>Id:</value>
+  </data>
+  <data name="TextMail" xml:space="preserve">
+    <value>e-Mail:</value>
+  </data>
+  <data name="TextName" xml:space="preserve">
+    <value>Name:</value>
+  </data>
+  <data name="TextOnline" xml:space="preserve">
+    <value>Online-Karte:</value>
+  </data>
+  <data name="TextPhone" xml:space="preserve">
+    <value>Telefon:</value>
+  </data>
+  <data name="TextRedeemDate" xml:space="preserve">
+    <value>Einlösedatum:</value>
+  </data>
+  <data name="TextRedeemed" xml:space="preserve">
+    <value>Eingelöst:</value>
+  </data>
+  <data name="TextStreet" xml:space="preserve">
+    <value>Straße:</value>
+  </data>
+  <data name="TextType" xml:space="preserve">
+    <value>Typ:</value>
+  </data>
+  <data name="TextZip" xml:space="preserve">
+    <value>Plz:</value>
+  </data>
 </root>
