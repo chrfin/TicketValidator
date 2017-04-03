@@ -1,0 +1,111 @@
+﻿<UserControl x:Class="TicketServer.DatabaseControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:c="clr-namespace:TicketServer.Common;assembly=TicketServer.Common"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:t="clr-namespace:TicketServer"
+             d:DesignHeight="500"
+             d:DesignWidth="600"
+             DataContext="{Binding RelativeSource={RelativeSource Self}}"
+             mc:Ignorable="d">
+	<UserControl.Resources>
+		<c:BoolToFontWeightConverter x:Key="boolToFontWeightConveter" />
+		<c:BoolToVisibilityConverter x:Key="boolToVisibilityConverter" />
+	</UserControl.Resources>
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="*" />
+			<ColumnDefinition Width="3*" />
+		</Grid.ColumnDefinitions>
+
+		<Grid.RowDefinitions>
+			<RowDefinition />
+			<RowDefinition Height="32" />
+		</Grid.RowDefinitions>
+
+		<ListBox x:Name="listBoxTickets"
+		         Grid.Row="0"
+		         Grid.Column="0"
+		         Grid.ColumnSpan="2"
+		         ItemsSource="{Binding TicketSource.AllTickets}"
+		         SelectionMode="Extended">
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition />
+							<ColumnDefinition />
+							<ColumnDefinition />
+							<ColumnDefinition />
+							<ColumnDefinition />
+						</Grid.ColumnDefinitions>
+
+						<Grid.RowDefinitions>
+							<RowDefinition />
+						</Grid.RowDefinitions>
+
+						<TextBlock Grid.Row="0"
+						           Grid.Column="0"
+						           FontWeight="{Binding IsRedeemed,
+						                                Converter={StaticResource boolToFontWeightConveter}}"
+						           Text="{Binding Code}" />
+						<TextBlock Grid.Row="0"
+						           Grid.Column="1"
+						           Text=" - " />
+						<TextBlock Grid.Row="0"
+						           Grid.Column="2"
+						           Text="{Binding Name}" />
+						<TextBlock Grid.Row="0"
+						           Grid.Column="3"
+						           Text=" - "
+						           Visibility="{Binding IsRedeemed,
+						                                Converter={StaticResource ResourceKey=boolToVisibilityConverter}}" />
+						<TextBlock Grid.Row="0"
+						           Grid.Column="4"
+						           FontStyle="Oblique"
+						           Text="{Binding RedeemDate,
+						                          StringFormat={}{0:yyyy-MM-dd HH:mm:ss}}"
+						           Visibility="{Binding IsRedeemed,
+						                                Converter={StaticResource ResourceKey=boolToVisibilityConverter}}" />
+					</Grid>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
+		<Button x:Name="buttonAdd"
+		        Grid.Row="1"
+		        Grid.Column="0"
+		        Margin="5"
+		        Click="buttonAdd_Click">
+			<Button.Content>
+				<StackPanel Orientation="Horizontal">
+					<Image Source="Icons\Medium\edit_add.png" />
+					<TextBlock Margin="5 0 0 0" Text="{LocText TicketServer::ButtonAdd}" />
+				</StackPanel>
+			</Button.Content>
+		</Button>
+		<Button x:Name="buttonDelete"
+		        Grid.Row="1"
+		        Grid.Column="1"
+		        Margin="5"
+		        Click="buttonDelete_Click">
+			<Button.Content>
+				<StackPanel Orientation="Horizontal">
+					<Image Source="Icons\Medium\editdelete.png" />
+					<TextBlock Margin="5 0 0 0" Text="{LocText TicketServer::ButtonDelete}" />
+				</StackPanel>
+			</Button.Content>
+		</Button>
+
+		<t:TicketControl x:Name="ticketControlView"
+		                 Grid.Row="0"
+		                 Grid.RowSpan="2"
+		                 Grid.Column="2"
+		                 Margin="10"
+		                 Ticket="{Binding SelectedItem,
+		                                  ElementName=listBoxTickets,
+		                                  Mode=OneWay}"
+		                 TicketCreated="ticketControlView_TicketCreated" />
+	</Grid>
+</UserControl>

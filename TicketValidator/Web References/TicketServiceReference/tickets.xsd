@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/TicketServer.Service" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/TicketServer.Service" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://192.168.0.130:8880/tickets?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/TicketServer.Interfaces.Enums" />
+  <xs:complexType name="Ticket">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="City" nillable="true" type="xs:string" />
+      <xs:element name="Code" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EMail" nillable="true" type="xs:string" />
+      <xs:element name="Id" type="xs:int" />
+      <xs:element name="IsOnlineTicket" type="xs:boolean" />
+      <xs:element name="IsRedeemed" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Phone" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RedeemDate" nillable="true" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Street" nillable="true" type="xs:string" />
+      <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/TicketServer.Interfaces.Enums" name="Type" type="q1:TicketType" />
+      <xs:element minOccurs="0" name="Zip" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Ticket" nillable="true" type="tns:Ticket" />
+  <xs:complexType name="RedeemResult">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Error" nillable="true" type="xs:string" />
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/TicketServer.Interfaces.Enums" name="Type" type="q2:RedeemResultType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RedeemResult" nillable="true" type="tns:RedeemResult" />
+</xs:schema>
